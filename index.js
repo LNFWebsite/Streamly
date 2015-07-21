@@ -65,8 +65,7 @@ function input() {
       var printTime = msConversion(videos[videoCounter]["time"]);
 
       videosTable.append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
-
-      //start function that starts video and counts time
+      
       if (videoCounter == 1) {
         loopVideo(videoCounter);
       }
