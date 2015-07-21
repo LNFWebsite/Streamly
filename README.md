@@ -12,7 +12,7 @@ For any questions or comments, please leave an Issue.
 
 ## How do I use Streamly?
 
-Go to our website! <https://streamly.us.to>
+Go to our website! <http://streamly.us.to>
 
 Or clone us into your web server...
 
