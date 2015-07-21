@@ -10,8 +10,8 @@ furnished to do so, subject to the following conditions:
 This permission notice and all text below shall be included in all copies or
 substantial portions of the Software.
 
-The Software contains no server side code. All information processed by the
-Software is entered explicitly by the user.
+The Software contains no server side scripting or databases. All information
+processed by the Software is entered explicitly by the user.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
