@@ -19,3 +19,7 @@ Go to our website! <https://streamly.us.to>
 Due to the no-API nature of Streamly, it is a little different from other YouTube streamers. This means that it will not retrieve the video's length (needed for playlists). It also will not retrieve the exact name of the video you load.
 
 But the good thing is that you control everything about the video you are playing! And there are no loose ties with YouTube's API...
+
+## License
+
+Streamly is licensed under a modified version of the MIT license (MIT).
