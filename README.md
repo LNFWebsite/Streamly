@@ -14,6 +14,8 @@ For any questions or comments, please leave an Issue.
 
 Go to our website! <https://streamly.us.to>
 
+Or clone us into your web server...
+
 ## Why does Streamly require the video's length?
 
 Due to the no-API nature of Streamly, it is a little different from other YouTube streamers. This means that it will not retrieve the video's length (needed for playlists). It also will not retrieve the exact name of the video you load.
