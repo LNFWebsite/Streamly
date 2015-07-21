@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>Streamly</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Pacifico" type="text/css" />
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+  <script src="jquery.min.js"></script>
+  <script src="index.js"></script>
+</head>
+<body>
+  <div id="main">
+    <h1>Streamly <span style="color:blue;">Beta</span></h1>
+    <h2 style="margin:0px 0px 10px 70px;"><em>It's Streamly simple!</em></h2>
+    <div id="center">
+      <form action="javascript:input();" method="get" id="searchForm">
+        <input type="textbox" id="inputBox" placeholder="Search..." autofocus>
+      </form>
+      <script>
+      $("#inputBox").on("paste", function() {
+        setTimeout(function() {
+          input();
+        }, 0);
+      });
+      </script>
+      <table id="videosTable">
+      </table>
+      <iframe id="youtube" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+</body>
+</html>
