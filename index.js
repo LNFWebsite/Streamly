@@ -59,7 +59,6 @@ function loopVideo() {
       loopVideo();
     }
   }, videos[videoIteration]["time"] + 2000);
-  timer = 0;
 }
 
 function pauseVideo() {
