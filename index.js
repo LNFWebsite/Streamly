@@ -31,6 +31,12 @@ function Timer(callback, delay) {
 
     this.resume();
 }
+function highlight(i) {
+  $("li:nth-child(" + i + ")").attr("id", "newSelected");
+  $("li.selected").removeClass("selected");
+  $("#newSelected").addClass("selected");
+  $("#newSelected").removeAttr("id");
+}
 
 function msConversion(millis) {
   var minutes = Math.floor(millis / 60000);
@@ -39,6 +45,7 @@ function msConversion(millis) {
 }
 
 function playVideo() {
+  highlight(videoIteration);
   var embedUrl = videos[videoIteration]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
   $("#youtube").attr("src", embedUrl);
   $("#pauseImg").attr("src", pauseImgSrc);
