@@ -38,16 +38,6 @@
       input();
     }, 0);
   });
-  $(document).keyup(function(e) {
-    switch (e.keyCode) {
-      case 32:
-        if (!$("#inputBox").is(":focus")) {
-          e.preventDefault();
-          pauseVideo();
-        }
-        break;
-    }
-  });
   </script>
 </body>
 </html>
