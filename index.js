@@ -2,8 +2,8 @@ var enterSearchMsg = "Search...";
 var enterUrlMsg = "Paste URL Here...";
 var enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
 
-var pauseImgSrc = "img/media-pause-4x.png";
-var playImgSrc = "img/media-play-4x.png";
+var pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
+var playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
 
 var search;
 var url;
