@@ -2,56 +2,90 @@ var enterSearchMsg = "Search...";
 var enterUrlMsg = "Paste URL Here...";
 var enterTimeMsg = "Type length of video... (ex. 2:49)";
 
+var pauseImgSrc = "img/media-pause-4x.png";
+var playImgSrc = "img/media-play-4x.png";
+
 var search;
 var url;
 var time;
 
 var videos = [];
 var videoCounter = 0;
+var videoIteration;
+var videoPaused;
+var timer;
+
+function Timer(callback, delay) {
+    var timerId, start, remaining = delay;
+
+    this.pause = function() {
+        window.clearTimeout(timerId);
+        remaining -= new Date() - start;
+    };
+
+    this.resume = function() {
+        start = new Date();
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(callback, remaining);
+    };
+
+    this.resume();
+}
 
 function msConversion(millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
-  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 }
 
-function playVideo(number) {
-  var embedUrl = videos[number]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
+function playVideo() {
+  var embedUrl = videos[videoIteration]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
   $("#youtube").attr("src", embedUrl);
+  $("#pauseImg").attr("src", pauseImgSrc);
 }
 
-function loopVideo(i) {
-  playVideo(i);
-  function loop() {
-    setTimeout(function() {
-      i++;
-      playVideo(i);
-      if (i < videoCounter) {
-        loop();
-      }
-    }, videos[i]["time"] + 2000);
+function loopVideo() {
+  playVideo();
+  timer = new Timer(function() {
+    videoIteration++;
+    playVideo();
+    if (videoIteration < videoCounter) {
+      loopVideo();
+    }
+    else {
+      timer = 0;
+    }
+  }, videos[videoIteration]["time"] + 2000);
+}
+
+function pauseVideo() {
+  if (!videoPaused) {
+    timer.pause();
+    $("#pauseImg").attr("src", playImgSrc);
+    videoPaused = true;
   }
-  loop();
+  else {
+    timer.resume();
+    $("#pauseImg").attr("src", pauseImgSrc);
+    videoPaused = false;
+  }
 }
 
 function input() {
-  var inputBox = $("#inputBox");
-  var youtube = $("#youtube");
-  var videosTable = $("#videosTable");
-
-  switch (inputBox.attr("placeholder")) {
+  switch ($("#inputBox").attr("placeholder")) {
     case enterSearchMsg:
-      search = inputBox.val();
-      var queryUrl = "https://www.youtube.com/results?search_query=" + search.replace(" ", "+");
+      search = $("#inputBox").val();
+      var queryUrl = "https://www.youtube.com/results?search_query=" + search.replace(/ /g, "+");
       window.open(queryUrl);
-      inputBox.val("").attr("placeholder", enterUrlMsg);
+      $("#inputBox").val("").attr("placeholder", enterUrlMsg);
       break;
     case enterUrlMsg:
-      url = inputBox.val();
-      inputBox.val("").attr("placeholder", enterTimeMsg);
+      url = $("#inputBox").val();
+      $("#inputBox").val("").attr("placeholder", enterTimeMsg);
       break;
     case enterTimeMsg:
-      time = inputBox.val();
+      time = $("#inputBox").val();
+      time = time.replace(/ /g, ":");
       time = time.split(":");
       time = (+time[0]) * 60 + (+time[1]);
       time = time * 1000;
@@ -64,13 +98,17 @@ function input() {
 
       var printTime = msConversion(videos[videoCounter]["time"]);
 
-      videosTable.append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
-      
+      $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
+
       if (videoCounter == 1) {
-        loopVideo(videoCounter);
+        videoIteration = 1;
+        loopVideo();
+      }
+      else if (timer == 0) {
+        loopVideo();
       }
 
-      inputBox.val("").attr("placeholder", enterSearchMsg);
+      $("#inputBox").val("").attr("placeholder", enterSearchMsg);
       break;
   }
 }
