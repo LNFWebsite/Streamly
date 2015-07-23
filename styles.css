@@ -39,6 +39,9 @@ td {
 .center {
   text-align: center;
 }
+.selected {
+  background-color: #88FF77;
+}
 #youtube, #pauseButton {
   width:100%;
   max-width: 560px;
