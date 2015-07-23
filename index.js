@@ -11,7 +11,7 @@ var time;
 
 var videos = [];
 var videoCounter = 0;
-var videoIteration;
+var videoIteration = 0;
 var videoPaused;
 var timer;
 
@@ -52,8 +52,8 @@ function playVideo() {
 }
 
 function loopVideo() {
-  playVideo();
   videoIteration++;
+  playVideo();
   timer = new Timer(function() {
     if (videoIteration < videoCounter) {
       loopVideo();
@@ -107,7 +107,6 @@ function input() {
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
 
       if (videoCounter == 1) {
-        videoIteration = 1;
         loopVideo();
       }
       else if (timer == 0) {
