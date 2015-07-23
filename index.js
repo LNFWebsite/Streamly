@@ -59,7 +59,7 @@ function loopVideo() {
       loopVideo();
     }
     else {
-      timer = 0;
+      clearTimeout(timer);
     }
   }, videos[videoIteration]["time"] + 2000);
 }
