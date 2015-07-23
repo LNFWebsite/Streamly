@@ -32,8 +32,8 @@ function Timer(callback, delay) {
   this.resume();
 }
 function highlight(i) {
-  $("li:nth-child(" + i + ")").attr("id", "newSelected");
-  $("li.selected").removeClass("selected");
+  $("tr:nth-child(" + i + ")").attr("id", "newSelected");
+  $("tr.selected").removeClass("selected");
   $("#newSelected").addClass("selected");
   $("#newSelected").removeAttr("id");
 }
