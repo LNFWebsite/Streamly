@@ -8,6 +8,9 @@ body {
 #inputBox, #footer {
   font-family: 'Roboto', sans-serif;
 }
+#inputBox {
+  padding: 5px;
+}
 h1 {
   margin: 0px;
 }
