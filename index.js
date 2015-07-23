@@ -86,7 +86,7 @@ function input() {
         window.open(queryUrl);
       }
       else {
-        search.replace(/;/g, "");
+        search.replace(/\;/g, "");
       }
       $("#inputBox").val("").attr("placeholder", enterUrlMsg);
       break;
