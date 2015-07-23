@@ -1,6 +1,6 @@
 var enterSearchMsg = "Search...";
 var enterUrlMsg = "Paste URL Here...";
-var enterTimeMsg = "Type length of video... (ex. 2:49)";
+var enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
 
 var pauseImgSrc = "img/media-pause-4x.png";
 var playImgSrc = "img/media-play-4x.png";
