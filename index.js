@@ -58,6 +58,9 @@ function loopVideo() {
     if (videoIteration < videoCounter) {
       loopVideo();
     }
+    else {
+      timer = 0;
+    }
   }, videos[videoIteration]["time"] + 2000);
 }
 
