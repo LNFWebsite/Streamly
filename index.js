@@ -81,8 +81,13 @@ function input() {
   switch ($("#inputBox").attr("placeholder")) {
     case enterSearchMsg:
       search = $("#inputBox").val();
-      var queryUrl = "https://www.youtube.com/results?search_query=" + search.replace(/ /g, "+");
-      window.open(queryUrl);
+      if (search.indexOf(";") === -1) {
+        var queryUrl = "https://www.youtube.com/results?search_query=" + search.replace(/ /g, "+");
+        window.open(queryUrl);
+      }
+      else {
+        search.replace(/;/g, "");
+      }
       $("#inputBox").val("").attr("placeholder", enterUrlMsg);
       break;
     case enterUrlMsg:
