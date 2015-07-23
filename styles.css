@@ -30,12 +30,14 @@ td {
   padding: 10px;
   background: #FFF;
 }
-#center {
+.center {
   text-align: center;
 }
-#youtube {
+#youtube, #pauseButton {
   width:100%;
   max-width: 560px;
+}
+#youtube {
   height: 315px;
 }
 #footer {
