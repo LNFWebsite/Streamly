@@ -55,7 +55,7 @@ function loopVideo() {
   playVideo();
   timer = new Timer(function() {
     videoIteration++;
-    if (videoIteration < videoCounter) {
+    if (videoIteration <= videoCounter) {
       loopVideo();
     }
     else {
