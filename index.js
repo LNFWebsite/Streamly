@@ -53,17 +53,14 @@ function playVideo() {
 
 function loopVideo() {
   playVideo();
-  timer = 0;
   timer = new Timer(function() {
     videoIteration++;
     playVideo();
     if (videoIteration < videoCounter) {
       loopVideo();
     }
-    else {
-      timer = 0;
-    }
   }, videos[videoIteration]["time"] + 2000);
+  timer = 0;
 }
 
 function pauseVideo() {
