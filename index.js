@@ -53,6 +53,7 @@ function playVideo() {
 
 function loopVideo() {
   playVideo();
+  timer = 0;
   timer = new Timer(function() {
     videoIteration++;
     playVideo();
