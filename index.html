@@ -2,41 +2,52 @@
 <html>
 <head>
   <title>Streamly</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico" type="text/css" />
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto" type="text/css" />
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Pacifico|Roboto" type="text/css" />
   <link rel="stylesheet" href="styles.css" type="text/css" />
-  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="index.js"></script>
 </head>
 <body>
   <div id="main">
     <h1>Streamly <span style="color:blue;">Beta</span></h1>
     <h2 style="margin:0px 0px 10px 70px;"><em>It's Streamly simple!</em></h2>
-    <div id="center">
+    <div class="center">
       <form action="javascript:input();" method="get" id="searchForm">
         <input type="textbox" id="inputBox" placeholder="Search..." autofocus>
       </form>
-      <script>
-      $("#inputBox").on("paste", function() {
-        setTimeout(function() {
-          input();
-        }, 0);
-      });
-      </script>
       <table id="videosTable">
       </table>
+      <button id="pauseButton" onclick="pauseVideo();"><img id="pauseImg" src="img/media-play-4x.png" /></button>
       <iframe id="youtube" src="" allowfullscreen></iframe>
       <div id="footer">
         <h2>Instructions</h2>
-        <p>First, type in the video you would like to view.</p>
-        <p>A window of YouTube with your search will open.</p>
-        <p>Right-click the video you wish to view and copy its URL.</p>
-        <p>Paste it into the Streamly prompt.</p>
-        <p>Type the length of the video you have chosen.</p>
-        <p>That's it. No API, no nonsense.</p>
-        <p>Check out our <a href="//github.com/LNFWebsite/Streamly">GitHub repo</a> for more info.</p>
+        <h3>Adding videos</h3>
+        <p>First, type in the video you would like to view. A window of YouTube with your search will open.</p>
+        <p>Right-click the video you wish to view and copy its URL. Paste it into the Streamly prompt.</p>
+        <p>Type the length of the video you have chosen. (you can use spaces instead of ":") That's it. No API, no nonsense.</p>
+        <h3>Pausing videos</h3>
+        <p>Click the YouTube video to pause it, then click the pause button on top of the video.</p>
+        <p>If you want to reverse the small time change that this causes, click the play button on top first, then click the video to play.</p>
+        <p>Check out our <a href="http://github.com/LNFWebsite/Streamly">GitHub repo</a> for more info.</p>
       </div>
     </div>
   </div>
+  <script>
+  $("#inputBox").on("paste", function() {
+    setTimeout(function() {
+      input();
+    }, 0);
+  });
+  $(document).keyup(function(e) {
+    switch (e.keyCode) {
+      case 32:
+        if (!$("#inputBox").is(":focus")) {
+          e.preventDefault();
+          pauseVideo();
+        }
+        break;
+    }
+  });
+  </script>
 </body>
 </html>
