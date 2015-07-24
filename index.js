@@ -1,19 +1,19 @@
-var enterSearchMsg = "Search...";
-var enterUrlMsg = "Paste URL Here...";
-var enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
+enterSearchMsg = "Search...";
+enterUrlMsg = "Paste URL Here...";
+enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
 
-var pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
-var playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
+pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
+playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
 
-var search;
-var url;
-var time;
+search;
+url;
+time;
 
-var videos = [];
-var videoCounter = 0;
-var videoIteration = 0;
-var videoPaused;
-var timer;
+videos = [];
+videoCounter = 0;
+videoIteration = 0;
+videoPaused;
+timer;
 
 function Timer(callback, delay) {
   var timerId, start, remaining = delay;
@@ -61,7 +61,7 @@ function loopVideo() {
     }
     else {
       timer.pause();
-      timer = 0;
+      delete timer;
       $("#youtube").attr("src", "");
     }
   }, videos[videoIteration]["time"] + 2000);
@@ -86,14 +86,14 @@ function backVideo() {
     if (typeof timer !== "undefined") {
       timer.pause();
     }
-    timer = 0;
+    delete timer;
     loopVideo();
   }
 }
 
 function forwardVideo() {
   if (videoIteration + 1 <= videoCounter) {
-    timer = 0;
+    delete timer;
     loopVideo();
   }
 }
@@ -132,7 +132,7 @@ function input() {
 
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
 
-      if (videoCounter == 1 || timer == 0) {
+      if (videoCounter == 1 || typeof timer === "undefined") {
         loopVideo();
       }
 
