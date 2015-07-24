@@ -78,6 +78,15 @@ function pauseVideo() {
   }
 }
 
+function backVideo() {
+  if (videoIteration - 2 > -1) {
+    videoIteration = videoIteration - 2;
+    timer.pause();
+    timer = 0;
+    loopVideo();
+  }
+}
+
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
     case enterSearchMsg:
