@@ -62,6 +62,7 @@ function loopVideo() {
     else {
       timer.pause();
       timer = 0;
+      $("#youtube").attr("src", "");
     }
   }, videos[videoIteration]["time"] + 2000);
 }
