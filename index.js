@@ -93,7 +93,10 @@ function backVideo() {
 
 function forwardVideo() {
   if (videoIteration + 1 <= videoCounter) {
-    delete timer;
+    if (timer != 0) {
+      timer.pause();
+    }
+    timer = 0;
     loopVideo();
   }
 }
