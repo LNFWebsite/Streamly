@@ -132,7 +132,7 @@ function input() {
 
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
 
-      if (videoCounter == 1 || timer = 0) {
+      if (videoCounter == 1 || timer == 0) {
         loopVideo();
       }
 
