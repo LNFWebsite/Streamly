@@ -83,7 +83,7 @@ function pauseVideo() {
 function backVideo() {
   if (videoIteration - 2 > -1) {
     videoIteration = videoIteration - 2;
-    if (typeof timer !== "undefined") {
+    if (timer != 0) {
       timer.pause();
     }
     timer = 0;
