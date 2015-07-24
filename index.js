@@ -13,7 +13,7 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 var videoPaused;
-timer;
+var timer;
 
 function Timer(callback, delay) {
   var timerId, start, remaining = delay;
@@ -61,7 +61,7 @@ function loopVideo() {
     }
     else {
       timer.pause();
-      delete timer;
+      timer = 0;
       $("#youtube").attr("src", "");
     }
   }, videos[videoIteration]["time"] + 2000);
@@ -86,7 +86,7 @@ function backVideo() {
     if (typeof timer !== "undefined") {
       timer.pause();
     }
-    delete timer;
+    timer = 0;
     loopVideo();
   }
 }
@@ -132,7 +132,7 @@ function input() {
 
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
 
-      if (videoCounter == 1 || typeof timer === "undefined") {
+      if (videoCounter == 1 || timer = 0) {
         loopVideo();
       }
 
