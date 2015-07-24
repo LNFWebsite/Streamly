@@ -87,6 +87,14 @@ function backVideo() {
   }
 }
 
+function forwardVideo() {
+  if (videoIteration + 1 <= videoCounter) {
+    timer.pause();
+    timer = 0;
+    loopVideo();
+  }
+}
+
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
     case enterSearchMsg:
