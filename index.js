@@ -31,6 +31,7 @@ function Timer(callback, delay) {
   
   this.resume();
 }
+
 function highlight(i) {
   $("tr:nth-child(" + i + ")").attr("id", "newSelected");
   $("tr.selected").removeClass("selected");
@@ -111,10 +112,7 @@ function input() {
 
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
 
-      if (videoCounter == 1) {
-        loopVideo();
-      }
-      else if (timer == 0) {
+      if (videoCounter == 1 || timer == 0) {
         loopVideo();
       }
 
