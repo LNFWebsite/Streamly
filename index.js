@@ -5,14 +5,14 @@ enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
 pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
 
-search;
-url;
-time;
+var search;
+var url;
+var time;
 
-videos = [];
-videoCounter = 0;
-videoIteration = 0;
-videoPaused;
+var videos = [];
+var videoCounter = 0;
+var videoIteration = 0;
+var videoPaused;
 timer;
 
 function Timer(callback, delay) {
