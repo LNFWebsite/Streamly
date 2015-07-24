@@ -60,6 +60,7 @@ function loopVideo() {
       loopVideo();
     }
     else {
+      timer.pause();
       timer = 0;
     }
   }, videos[videoIteration]["time"] + 2000);
