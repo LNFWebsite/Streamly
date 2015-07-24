@@ -38,6 +38,16 @@
       input();
     }, 0);
   });
+  $(document).keyup(function(e) {
+    switch (e.keyCode) {
+      case 37:
+        if (!$("#inputBox").is(":focus")) {
+          e.preventDefault();
+          backVideo();
+        }
+        break;
+    }
+  });
   </script>
   
   <!-- Start of StatCounter Code for Default Guide -->
