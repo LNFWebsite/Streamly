@@ -32,34 +32,17 @@ function Timer(callback, delay) {
   this.resume();
 }
 
-function highlight(i) {
-  $("tr:nth-child(" + i + ")").attr("id", "newSelected");
-  $("tr.selected").removeClass("selected");
-  $("#newSelected").addClass("selected");
-  $("#newSelected").removeAttr("id");
-}
-
 function msConversion(millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
   return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 }
 
-function Base64EncodeUrl(str){
-  str = window.btoa(str);
-  return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
-}
-
-function Base64DecodeUrl(str){
-  str = (str + '===').slice(0, str.length + (str.length % 4));
-  str = str.replace(/-/g, '+').replace(/_/g, '/');
-  return window.atob(str);
-}
-
-function setPlaylist() {
-  var playlist = JSON.stringify(videos);
-  playlist = Base64EncodeUrl(playlist);
-  window.location.hash = playlist;
+function highlight(i) {
+  $("tr:nth-child(" + i + ")").attr("id", "newSelected");
+  $("tr.selected").removeClass("selected");
+  $("#newSelected").addClass("selected");
+  $("#newSelected").removeAttr("id");
 }
 
 function playVideo() {
@@ -114,6 +97,39 @@ function forwardVideo() {
       timer.pause();
     }
     timer = 0;
+    loopVideo();
+  }
+}
+
+function Base64EncodeUrl(str){
+  str = window.btoa(str);
+  return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
+}
+
+function Base64DecodeUrl(str){
+  str = (str + '===').slice(0, str.length + (str.length % 4));
+  str = str.replace(/-/g, '+').replace(/_/g, '/');
+  return window.atob(str);
+}
+
+function setPlaylist() {
+  var playlist = JSON.stringify(videos);
+  playlist = Base64EncodeUrl(playlist);
+  window.location.hash = playlist;
+}
+
+function getPlaylist() {
+  if (window.location.hash.substr(1) !== "") {
+    var playlist = window.location.hash.substr(1);
+    playlist = Base64DecodeUrl(playlist);
+    playlist = JSON.parse(playlist);
+    videos = playlist;
+    
+    videos.forEach(function() {
+      videoCounter++;
+      var printTime = msConversion(videos[videoCounter]["time"]);
+      $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
+    });
     loopVideo();
   }
 }
