@@ -133,6 +133,7 @@ function getPlaylist() {
     loopVideo();
   }
 }
+getPlaylist();
 
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
@@ -167,12 +168,12 @@ function input() {
       var printTime = msConversion(videos[videoCounter]["time"]);
 
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
+      
+      setPlaylist();
 
       if (videoCounter == 1 || timer == 0) {
         loopVideo();
       }
-      
-      setPlaylist();
 
       $("#inputBox").val("").attr("placeholder", enterSearchMsg);
       break;
