@@ -17,6 +17,14 @@ Go to our website! <http://streamly.us.to>
 
 Or clone us into your web server...
 
+## How does Streamly work?
+
+Streamly is written in Javascript. Every aspect of Streamly is controlled by the user (it does not and cannot get its information from anywhere else).
+
+Pausing videos is operated by an external button. Going from one video to another is controlled by cycling through a Javascript object containing the user's original search, the video's URL, and the video's time.
+
+Saving playlists is done by creating a [JSON](https://json.org) string of the object containing video properties, then encoding it into [Base64](https://en.wikipedia.org/wiki/Base64), and finally running that into the hash parameter of the URL.
+
 ## Why does Streamly require the video's length?
 
 Due to the no-API nature of Streamly, it is a little different from other YouTube streamers. This means that it will not retrieve the video's length (needed for playlists). It also will not retrieve the exact name of the video you load.
