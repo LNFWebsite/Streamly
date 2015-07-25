@@ -139,7 +139,7 @@ function input() {
         loopVideo();
       }
       
-      console.log(JSON.stringify(videos[]));
+      console.log(JSON.stringify(videos));
 
       $("#inputBox").val("").attr("placeholder", enterSearchMsg);
       break;
