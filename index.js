@@ -45,6 +45,23 @@ function msConversion(millis) {
   return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 }
 
+function Base64EncodeUrl(str){
+  str = window.btoa(str);
+  return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
+}
+
+function Base64DecodeUrl(str){
+  str = (str + '===').slice(0, str.length + (str.length % 4));
+  str = str.replace(/-/g, '+').replace(/_/g, '/');
+  return window.atob(str);
+}
+
+function setPlaylist() {
+  var playlist = JSON.stringify(videos);
+  Base64EncodeUrl(playlist);
+  window.location.hash = playlist;
+}
+
 function playVideo() {
   highlight(videoIteration);
   var embedUrl = videos[videoIteration]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
@@ -139,7 +156,7 @@ function input() {
         loopVideo();
       }
       
-      console.log(JSON.stringify(videos));
+      setPlaylist();
 
       $("#inputBox").val("").attr("placeholder", enterSearchMsg);
       break;
