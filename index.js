@@ -134,7 +134,6 @@ function getPlaylist() {
     loopVideo();
   }
 }
-getPlaylist();
 
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
