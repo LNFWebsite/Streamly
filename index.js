@@ -138,6 +138,8 @@ function input() {
       if (videoCounter == 1 || timer == 0) {
         loopVideo();
       }
+      
+      alert(JSON.stringify(videos));
 
       $("#inputBox").val("").attr("placeholder", enterSearchMsg);
       break;
