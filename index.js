@@ -126,11 +126,11 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
-    videos.forEach(function() {
+    for (var key in videos) {
       videoCounter++;
       var printTime = msConversion(videos[videoCounter]["time"]);
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
-    });
+    }
     loopVideo();
   }
 }
