@@ -45,8 +45,17 @@ function highlight(i) {
   $("#newSelected").removeAttr("id");
 }
 
+function ucWords(str) {
+  str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    return letter.toUpperCase();
+  });
+  return str;
+}
+
 function playVideo() {
   highlight(videoIteration);
+  document.title = "Streamly - " + ucWords(videos[videoIteration]["name"]);
+  
   var embedUrl = videos[videoIteration]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
   $("#youtube").attr("src", embedUrl);
   $("#pauseImg").attr("src", pauseImgSrc);
@@ -63,6 +72,7 @@ function loopVideo() {
       timer.pause();
       timer = 0;
       $("#youtube").attr("src", "");
+      document.title = "Streamly";
     }
   }, videos[videoIteration]["time"] + 2000);
 }
@@ -164,9 +174,10 @@ function input() {
       videos[videoCounter]["time"] = time;
       videos[videoCounter]["url"] = url;
 
+      var printName = ucWords(videos[videoCounter]["name"]);
       var printTime = msConversion(videos[videoCounter]["time"]);
 
-      $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
+      $("#videosTable").append("<tr><td>" + printName + "</td><td>" + printTime + "</td></tr>");
       
       setPlaylist();
 
