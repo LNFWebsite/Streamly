@@ -109,6 +109,7 @@ function Base64EncodeUrl(str){
 function Base64DecodeUrl(str){
   str = (str + '===').slice(0, str.length + (str.length % 4));
   str = str.replace(/-/g, '+').replace(/_/g, '/');
+  alert(str);
   return window.atob(str);
 }
 
@@ -121,7 +122,6 @@ function setPlaylist() {
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
     var playlist = window.location.hash.substr(1);
-    alert(playlist);
     playlist = Base64DecodeUrl(playlist);
     playlist = JSON.parse(playlist);
     videos = playlist;
