@@ -46,8 +46,8 @@ function msConversion(millis) {
 }
 
 function Base64EncodeUrl(str){
-  str = window.btoa(str);
-  return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
+  return window.btoa(str);
+  //return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
 }
 
 function Base64DecodeUrl(str){
