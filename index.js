@@ -46,8 +46,8 @@ function msConversion(millis) {
 }
 
 function Base64EncodeUrl(str){
-  return window.btoa(str);
-  //return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
+  str = window.btoa(str);
+  return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
 }
 
 function Base64DecodeUrl(str){
@@ -58,7 +58,7 @@ function Base64DecodeUrl(str){
 
 function setPlaylist() {
   var playlist = JSON.stringify(videos);
-  Base64EncodeUrl(playlist);
+  playlist = Base64EncodeUrl(playlist);
   window.location.hash = playlist;
 }
 
