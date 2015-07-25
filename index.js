@@ -121,6 +121,7 @@ function setPlaylist() {
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
     var playlist = window.location.hash.substr(1);
+    alert(playlist);
     playlist = Base64DecodeUrl(playlist);
     playlist = JSON.parse(playlist);
     videos = playlist;
