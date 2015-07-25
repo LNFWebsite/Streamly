@@ -138,7 +138,7 @@ function getPlaylist() {
     for (var key in videos) {
       videoCounter++;
       var printTime = msConversion(videos[videoCounter]["time"]);
-      $("#videosTable").append("<tr><td>" + ucWords(videos[videoIteration]["name"]) + "</td><td>" + printTime + "</td></tr>");
+      $("#videosTable").append("<tr><td>" + ucWords(videos[videoCounter]["name"]) + "</td><td>" + printTime + "</td></tr>");
     }
     loopVideo();
   }
