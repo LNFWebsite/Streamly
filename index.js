@@ -9,7 +9,7 @@ var search;
 var url;
 var time;
 
-var videos = [];
+var videos = {};
 var videoCounter = 0;
 var videoIteration = 0;
 var videoPaused;
@@ -126,7 +126,7 @@ function input() {
       time = time * 1000;
 
       videoCounter++;
-      videos[videoCounter] = [];
+      videos[videoCounter] = {};
       videos[videoCounter]["name"] = search;
       videos[videoCounter]["time"] = time;
       videos[videoCounter]["url"] = url;
