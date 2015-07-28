@@ -137,9 +137,11 @@ function getPlaylist() {
   }
 }
 
-function getVideoData(url) {
+function getVideoData(e) {
+  e.preventDefault();
+  
   return $.ajax({
-    url: url,
+    url: videoUrl,
     type: 'GET',
     success: function(res) {
       var data = $(res.responseText);
@@ -184,7 +186,7 @@ function input() {
     
     case enterUrlMsg:
       videoUrl = $("#inputBox").val();
-      $.when(getVideoData(videoUrl)).done(addVideo());
+      $.when(getVideoData()).done(addVideo());
       break;
   }
 }
