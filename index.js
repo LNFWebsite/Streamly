@@ -153,7 +153,6 @@ function getVideoData() {
       }
       videoTime = videoTime[0].replace(/,"length_seconds":"/g, "").replace(/",/g, "");
       videoTime = +videoTime * 1000;
-      callback();
     }
   });
 }
@@ -186,7 +185,9 @@ function input() {
     case enterUrlMsg:
       videoUrl = $("#inputBox").val();
       getVideoData();
-      addVideo();
+      $(document).ajaxStop(function () {
+        addVideo();
+      });
       break;
   }
 }
