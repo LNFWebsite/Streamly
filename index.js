@@ -152,6 +152,7 @@ function getVideoData() {
       videoTime = videoTime[0];
       videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
       videoTime = +videoTime * 1000;
+      var data = null;
     }
   });
 }
