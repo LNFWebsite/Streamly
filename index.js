@@ -180,13 +180,11 @@ function input() {
     case enterUrlMsg:
       videoUrl = $("#inputBox").val();
       $("#inputBox").val("");
-      
       getVideoData();
-      
-      $(document).ajaxStop(function() {
-        alert("Here...");
-        addVideo();
-      });
       break;
   }
 }
+
+$(document).ajaxStop(function() {
+  addVideo();
+});
