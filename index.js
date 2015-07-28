@@ -137,9 +137,7 @@ function getPlaylist() {
   }
 }
 
-function getVideoData(e) {
-  e.preventDefault();
-  
+function getVideoData() {
   return $.ajax({
     url: videoUrl,
     type: 'GET',
