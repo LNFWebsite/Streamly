@@ -194,3 +194,11 @@ $(document).ajaxStop(function() {
   $("#inputBox").val("").attr("placeholder", enterUrlMsg);
   addVideo();
 });
+
+function onDrop(event) {
+  var data = event.dataTransfer.getData("URL");
+  event.target.textContent = data;
+  $("#inputBox").val(data);
+  input();
+  event.preventDefault();
+}
