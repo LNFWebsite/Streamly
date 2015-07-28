@@ -5,16 +5,17 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico|Roboto" type="text/css" />
   <link rel="stylesheet" href="styles.css" type="text/css" />
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="jquery.xdomainajax.js"></script>
   <script src="index.js"></script>
 </head>
 <body>
   <div id="main">
     <a href="https://github.com/LNFWebsite/Streamly" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-    <h1><a href="#" style="color:black;text-decoration:none;">Streamly <span style="color:blue;">Beta</span></a></h1>
-    <h2 style="margin:0px 0px 10px 70px;"><em>It's Streamly simple!</em></h2>
+    <h1 class="title"><a href="#" style="color:black;text-decoration:none;">Streamly <span style="color:blue;">Beta</span></a></h1>
+    <h2 class="title" style="margin:0px 0px 10px 70px;"><em>It's Streamly simple!</em></h2>
     <div class="center">
       <form action="javascript:input();" method="get" id="searchForm">
-        <input type="textbox" id="inputBox" placeholder="Search..." autofocus>
+        <input type="textbox" id="inputBox" placeholder="Drag-and-drop the video or paste its URL here..." ondrop="onDrop(event);" autofocus>
       </form>
       <table id="videosTable">
       </table>
@@ -25,9 +26,9 @@
       <div id="footer">
         <h2>Instructions</h2>
         <h3>Adding videos</h3>
-        <p>First, type in the video you would like to view. A window of YouTube with your search will open. (add a semicolon ";" to stop from searching)</p>
-        <p>Right-click the video you wish to view and copy its URL. Paste it into the Streamly prompt.</p>
-        <p>Type the length of the video you have chosen. (you can use spaces instead of colon ":") That's it. No API, no nonsense.</p>
+        <p>Hit <code>Enter</code> to open a YouTube search window.</p>
+        <p>Drag and drop the video or copy and paste its URL to add it to the playlist.</p>
+        <p>That's it! No API, no nonsense. Pure and simple.</p>
         <h3>Pausing videos</h3>
         <p>Click the YouTube video to pause it, then click the pause button on top of the video.</p>
         <p>In the same order, click the YouTube video, then click the play button on top to unpause.</p>
@@ -44,11 +45,13 @@
   </div>
   <script>
   getPlaylist();
+  
   $("#inputBox").on("paste", function() {
     setTimeout(function() {
       input();
     }, 0);
   });
+  
   $(document).keyup(function(e) {
     if (!$("#inputBox").is(":focus")) {
       switch (e.keyCode) {

@@ -1,13 +1,11 @@
-enterSearchMsg = "Search...";
-enterUrlMsg = "Paste URL Here...";
-enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
+enterUrlMsg = "Drag-and-drop the video or paste its URL here...";
 
 pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
 
-var search;
-var url;
-var time;
+var videoUrl;
+var videoName;
+var videoTime = null;
 
 var videos = {};
 var videoCounter = 0;
@@ -45,16 +43,9 @@ function highlight(i) {
   $("#newSelected").removeAttr("id");
 }
 
-function ucWords(str) {
-  str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-    return letter.toUpperCase();
-  });
-  return str;
-}
-
 function playVideo() {
   highlight(videoIteration);
-  document.title = "Streamly - " + ucWords(videos[videoIteration]["name"]);
+  document.title = "Streamly - " + videos[videoIteration]["name"];
   
   var embedUrl = videos[videoIteration]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
   $("#youtube").attr("src", embedUrl);
@@ -138,54 +129,76 @@ function getPlaylist() {
     for (var key in videos) {
       videoCounter++;
       var printTime = msConversion(videos[videoCounter]["time"]);
-      $("#videosTable").append("<tr><td>" + ucWords(videos[videoCounter]["name"]) + "</td><td>" + printTime + "</td></tr>");
+      $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
     }
+    loopVideo();
+  }
+}
+
+function getVideoData() {
+  $.ajax({
+    url: videoUrl,
+    type: 'GET',
+    success: function(res) {
+      var data = $(res.responseText);
+      videoName = data.find("span#eow-title");
+      videoName = videoName[0].textContent;
+      videoTime = null;
+      for (iteration in data) {
+        var str = data[iteration].innerHTML;
+        if (videoTime == null && typeof str != "undefined") {
+          videoTime = str.match(/,"length_seconds":"\d+",/g);
+        }
+      }
+      videoTime = videoTime[0];
+      videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
+      videoTime = +videoTime * 1000;
+    }
+  });
+}
+
+function addVideo() {
+  videoCounter++;
+  videos[videoCounter] = {};
+  videos[videoCounter]["name"] = videoName;
+  videos[videoCounter]["time"] = videoTime;
+  videos[videoCounter]["url"] = videoUrl;
+  
+  var printTime = msConversion(videos[videoCounter]["time"]);
+  
+  $("#videosTable").append("<tr><td>" + videoName + "</td><td>" + printTime + "</td></tr>");
+  
+  setPlaylist();
+  
+  if (videoCounter == 1 || timer == 0) {
     loopVideo();
   }
 }
 
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
-    case enterSearchMsg:
-      search = $("#inputBox").val();
-      if (search.indexOf(";") === -1) {
-        var queryUrl = "https://www.youtube.com/results?search_query=" + search.replace(/ /g, "+");
-        window.open(queryUrl);
+    case enterUrlMsg:
+      if ($("#inputBox").val() != "") {
+        videoUrl = $("#inputBox").val();
+        $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
+        getVideoData();
       }
       else {
-        search = search.replace(/\;/g, "");
+        window.open("https://www.youtube.com");
       }
-      $("#inputBox").val("").attr("placeholder", enterUrlMsg);
-      break;
-    case enterUrlMsg:
-      url = $("#inputBox").val();
-      $("#inputBox").val("").attr("placeholder", enterTimeMsg);
-      break;
-    case enterTimeMsg:
-      time = $("#inputBox").val();
-      time = time.replace(/ /g, ":");
-      time = time.split(":");
-      time = (+time[0]) * 60 + (+time[1]);
-      time = time * 1000;
-
-      videoCounter++;
-      videos[videoCounter] = {};
-      videos[videoCounter]["name"] = search;
-      videos[videoCounter]["time"] = time;
-      videos[videoCounter]["url"] = url;
-
-      var printName = ucWords(videos[videoCounter]["name"]);
-      var printTime = msConversion(videos[videoCounter]["time"]);
-
-      $("#videosTable").append("<tr><td>" + printName + "</td><td>" + printTime + "</td></tr>");
-      
-      setPlaylist();
-
-      if (videoCounter == 1 || timer == 0) {
-        loopVideo();
-      }
-
-      $("#inputBox").val("").attr("placeholder", enterSearchMsg);
       break;
   }
+}
+
+$(document).ajaxStop(function() {
+  $("#inputBox").val("").attr("placeholder", enterUrlMsg);
+  addVideo();
+});
+
+function onDrop(event) {
+  var data = event.dataTransfer.getData("URL");
+  event.target.textContent = data;
+  $("#inputBox").val(data);
+  input();
+  event.preventDefault();
 }
