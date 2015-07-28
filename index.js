@@ -149,7 +149,8 @@ function getVideoData() {
           videoTime = str.match(/,"length_seconds":"\d+",/g);
         }
       }
-      videoTime = videoTime[0].replace(/,"length_seconds":"/g, "").replace(/",/g, "");
+      videoTime = videoTime[0];
+      videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
       videoTime = +videoTime * 1000;
     }
   });
@@ -177,10 +178,12 @@ function input() {
   switch ($("#inputBox").attr("placeholder")) {
     case enterUrlMsg:
       videoUrl = $("#inputBox").val();
+      $("#inputBox").val("");
+      
       getVideoData();
+      
       $(document).ajaxStop(function () {
         addVideo();
-        $("#inputBox").val("");
       });
       break;
   }
