@@ -143,6 +143,7 @@ function getVideoData() {
       var data = $(res.responseText);
       videoName = data.find("span#eow-title");
       videoName = videoName[0].textContent;
+      videoTime = null;
       for (iteration in data) {
         var str = data[iteration].innerHTML;
         if (videoTime == null && typeof str != "undefined") {
@@ -152,7 +153,6 @@ function getVideoData() {
       videoTime = videoTime[0];
       videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
       videoTime = +videoTime * 1000;
-      return false;
     }
   });
 }
