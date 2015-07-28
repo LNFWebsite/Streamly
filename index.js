@@ -180,6 +180,7 @@ function input() {
       getVideoData();
       $(document).ajaxStop(function () {
         addVideo();
+        $("#inputBox").val("");
       });
       break;
   }
