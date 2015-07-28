@@ -1,4 +1,3 @@
-enterSearchMsg = "Submit to open YouTube...";
 enterUrlMsg = "Paste URL Here...";
 enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
 
@@ -177,11 +176,6 @@ function addVideo() {
 
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
-    case enterSearchMsg:
-      window.open("https://www.youtube.com/");
-      $("#inputBox").val("").attr("placeholder", enterUrlMsg);
-      break;
-    
     case enterUrlMsg:
       videoUrl = $("#inputBox").val();
       getVideoData();
