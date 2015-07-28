@@ -1,4 +1,4 @@
-enterSearchMsg = "Search...";
+enterSearchMsg = "Submit to open YouTube...";
 enterUrlMsg = "Paste URL Here...";
 enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
 
@@ -157,32 +157,34 @@ function getVideoData(url) {
   });
 }
 
+function addVideo() {
+  videoCounter++;
+  videos[videoCounter] = {};
+  videos[videoCounter]["name"] = videoName;
+  videos[videoCounter]["time"] = videoTime;
+  videos[videoCounter]["url"] = videoUrl;
+  
+  var printTime = msConversion(videos[videoCounter]["time"]);
+  
+  $("#videosTable").append("<tr><td>" + videoName + "</td><td>" + printTime + "</td></tr>");
+  
+  setPlaylist();
+  
+  if (videoCounter == 1 || timer == 0) {
+    loopVideo();
+  }
+}
+
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
     case enterSearchMsg:
       window.open("https://www.youtube.com/");
       $("#inputBox").val("").attr("placeholder", enterUrlMsg);
       break;
+    
     case enterUrlMsg:
       videoUrl = $("#inputBox").val();
-      
-      getVideoData(videoUrl);
-      
-      videoCounter++;
-      videos[videoCounter] = {};
-      videos[videoCounter]["name"] = videoName;
-      videos[videoCounter]["time"] = videoTime;
-      videos[videoCounter]["url"] = videoUrl;
-      
-      var printTime = msConversion(videos[videoCounter]["time"]);
-
-      $("#videosTable").append("<tr><td>" + videoName + "</td><td>" + printTime + "</td></tr>");
-      
-      setPlaylist();
-
-      if (videoCounter == 1 || timer == 0) {
-        loopVideo();
-      }
+      $.when(getVideoData(videoUrl)).done(addVideo());
       break;
   }
 }
