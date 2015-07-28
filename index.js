@@ -142,7 +142,7 @@ function getVideoData() {
     success: function(res) {
       var data = $(res.responseText);
       videoName = data.find("span#eow-title");
-      videoName = videoName.textContent;
+      videoName = videoName[0].textContent;
       for (iteration in data) {
         var str = data[iteration].innerHTML;
         if (videoTime == null && typeof str != "undefined") {
