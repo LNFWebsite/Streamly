@@ -138,7 +138,7 @@ function getPlaylist() {
 }
 
 function getVideoData() {
-  return $.ajax({
+  $.ajax({
     url: videoUrl,
     type: 'GET',
     success: function(res) {
@@ -153,6 +153,7 @@ function getVideoData() {
       }
       videoTime = videoTime[0].replace(/,"length_seconds":"/g, "").replace(/",/g, "");
       videoTime = +videoTime * 1000;
+      callback();
     }
   });
 }
@@ -184,7 +185,8 @@ function input() {
     
     case enterUrlMsg:
       videoUrl = $("#inputBox").val();
-      $.when(getVideoData()).done(addVideo());
+      getVideoData();
+      addVideo();
       break;
   }
 }
