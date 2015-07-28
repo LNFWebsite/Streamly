@@ -178,9 +178,14 @@ function addVideo() {
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
     case enterUrlMsg:
-      videoUrl = $("#inputBox").val();
-      $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
-      getVideoData();
+      if ($("#inputBox").val() != "") {
+        videoUrl = $("#inputBox").val();
+        $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
+        getVideoData();
+      }
+      else {
+        window.open("https://www.youtube.com");
+      }
       break;
   }
 }
