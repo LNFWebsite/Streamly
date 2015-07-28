@@ -179,12 +179,13 @@ function input() {
   switch ($("#inputBox").attr("placeholder")) {
     case enterUrlMsg:
       videoUrl = $("#inputBox").val();
-      $("#inputBox").val("");
+      $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
       getVideoData();
       break;
   }
 }
 
 $(document).ajaxStop(function() {
+  $("#inputBox").val("").attr("placeholder", enterUrlMsg);
   addVideo();
 });
