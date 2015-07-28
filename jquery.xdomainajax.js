@@ -1,6 +1,7 @@
 /**
  * jQuery.ajax mid - CROSS DOMAIN AJAX 
  * Edited for Streamly by removing script tag replacement
+ * Modified version 0.11 found at https://github.com/padolsey-archive/jquery.fn/tree/master/cross-domain-ajax
  */
 
 jQuery.ajax = (function(_ajax){
