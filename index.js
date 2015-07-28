@@ -183,7 +183,8 @@ function input() {
       
       getVideoData();
       
-      $(document).ajaxStop(function () {
+      $(document).ajaxStop(function() {
+        alert("Here...");
         addVideo();
       });
       break;
