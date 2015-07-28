@@ -1,5 +1,4 @@
-enterUrlMsg = "Paste URL Here...";
-enterTimeMsg = "Type length of video... (ex. 2:49 or 2 49)";
+enterUrlMsg = "Paste or drag-and-drop URL of video...";
 
 pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
