@@ -1,4 +1,4 @@
-enterUrlMsg = "Paste or drag-and-drop URL of video...";
+enterUrlMsg = "Drag-and-drop the video or paste its URL here...";
 
 pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
