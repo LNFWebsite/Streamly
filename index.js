@@ -138,7 +138,7 @@ function getPlaylist() {
 }
 
 function getVideoData(url) {
-  $.ajax({
+  return $.ajax({
     url: url,
     type: 'GET',
     success: function(res) {
