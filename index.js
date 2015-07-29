@@ -102,27 +102,16 @@ function forwardVideo() {
   }
 }
 
-function Base64EncodeUrl(str){
-  str = window.btoa(str);
-  return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
-}
-
-function Base64DecodeUrl(str){
-  str = (str + '===').slice(0, str.length + (str.length % 4));
-  str = str.replace(/-/g, '+').replace(/_/g, '/');
-  return window.atob(str);
-}
-
 function setPlaylist() {
   var playlist = JSON.stringify(videos);
-  playlist = Base64EncodeUrl(playlist);
+  playlist = window.btoa(playlist);
   window.location.hash = playlist;
 }
 
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
     var playlist = window.location.hash.substr(1);
-    playlist = Base64DecodeUrl(playlist);
+    playlist = window.atob(playlist);
     playlist = JSON.parse(playlist);
     videos = playlist;
     
