@@ -55,6 +55,10 @@
   $(document).keyup(function(e) {
     if (!$("#inputBox").is(":focus")) {
       switch (e.keyCode) {
+        case 13:
+          e.preventDefault();
+          $("#inputBox").val("");
+          input();
         case 37:
           e.preventDefault();
           backVideo();
