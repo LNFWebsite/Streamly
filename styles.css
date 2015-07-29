@@ -9,6 +9,7 @@ body {
 #inputBox {
   font-family: 'Roboto', sans-serif;
   padding: 5px;
+  font-size: 2em;
 }
 h1 {
   margin: 0px;
@@ -20,7 +21,6 @@ td, th, #main, #youtube {
   border: 1px solid black;
 }
 table, #inputBox {
-  font-size:2em;
   border: 2px solid black;
   width: 95%;
   margin: 0px auto;
