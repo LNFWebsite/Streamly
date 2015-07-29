@@ -11,8 +11,7 @@ This permission notice and all text below shall be included in all copies or
 substantial portions of the Software.
 
 The Software contains no server side scripting or databases. All information
-processed by the Software is entered explicitly by the user and processed on
-the client side.
+processed by the Software is processed on the client side.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
