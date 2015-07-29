@@ -181,6 +181,7 @@ function input() {
     case enterUrlMsg:
       if ($("#inputBox").val() != "") {
         videoUrl = $("#inputBox").val();
+        videoUrl = videoUrl.trim();
         $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
         getVideoData();
       }
