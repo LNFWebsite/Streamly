@@ -27,6 +27,9 @@ table, #inputBox {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+table {
+  font-size: 1.5em;
+}
 td {
   padding: 5px;
 }
