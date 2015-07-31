@@ -7,7 +7,7 @@ var videoUrl;
 var videoName;
 var videoTime = null;
 
-var videos = {};
+var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 var videoPaused;
