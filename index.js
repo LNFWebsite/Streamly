@@ -7,7 +7,7 @@ var videoUrl;
 var videoName;
 var videoTime = null;
 
-var videos = {};
+var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 var videoPaused;
@@ -117,8 +117,8 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
-    for (var key in videos) {
-      videoCounter++;
+    for (i = 1; i < videos.length; i++) {
+      videoCounter = i;
       var printTime = msConversion(videos[videoCounter]["time"]);
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
     }
@@ -151,10 +151,11 @@ function getVideoData() {
 
 function addVideo() {
   videoCounter++;
-  videos[videoCounter] = {};
-  videos[videoCounter]["name"] = videoName;
-  videos[videoCounter]["time"] = videoTime;
-  videos[videoCounter]["url"] = videoUrl;
+  var video = {};
+  video["name"] = videoName;
+  video["time"] = videoTime;
+  video["url"] = videoUrl;
+  videos[videoCounter] = video;
   
   var printTime = msConversion(videos[videoCounter]["time"]);
   
