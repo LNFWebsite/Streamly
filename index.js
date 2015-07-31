@@ -117,7 +117,7 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
-    for (i = 0; i < videos.length; ++i) {
+    for (i = 1; i < videos.length; i++) {
       videoCounter = i;
       var printTime = msConversion(videos[videoCounter]["time"]);
       $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
