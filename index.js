@@ -7,7 +7,7 @@ var videoUrl;
 var videoName;
 var videoTime = null;
 
-var videos = [];
+var videos = {};
 var videoCounter = 0;
 var videoIteration = 0;
 var videoPaused;
@@ -45,9 +45,9 @@ function highlight(i) {
 
 function playVideo() {
   highlight(videoIteration);
-  document.title = "Streamly - " + videos[videoIteration].name;
+  document.title = "Streamly - " + videos[videoIteration]["name"];
   
-  var embedUrl = videos[videoIteration].url.replace("/watch?v=", "/embed/") + "?autoplay=1";
+  var embedUrl = videos[videoIteration]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
   $("#youtube").attr("src", embedUrl);
   $("#pauseImg").attr("src", pauseImgSrc);
 }
@@ -65,7 +65,7 @@ function loopVideo() {
       $("#youtube").attr("src", "");
       document.title = "Streamly";
     }
-  }, videos[videoIteration].time + 2000);
+  }, videos[videoIteration]["time"] + 2000);
 }
 
 function pauseVideo() {
@@ -119,8 +119,8 @@ function getPlaylist() {
     
     for (var key in videos) {
       videoCounter++;
-      var printTime = msConversion(videos[videoCounter].time);
-      $("#videosTable").append("<tr><td>" + videos[videoCounter].name + "</td><td>" + printTime + "</td></tr>");
+      var printTime = msConversion(videos[videoCounter]["time"]);
+      $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
     }
     loopVideo();
   }
@@ -152,11 +152,11 @@ function getVideoData() {
 function addVideo() {
   videoCounter++;
   videos[videoCounter] = {};
-  videos[videoCounter].name = videoName;
-  videos[videoCounter].time = videoTime;
-  videos[videoCounter].url = videoUrl;
+  videos[videoCounter]["name"] = videoName;
+  videos[videoCounter]["time"] = videoTime;
+  videos[videoCounter]["url"] = videoUrl;
   
-  var printTime = msConversion(videos[videoCounter].time);
+  var printTime = msConversion(videos[videoCounter]["time"]);
   
   $("#videosTable").append("<tr><td>" + videoName + "</td><td>" + printTime + "</td></tr>");
   
