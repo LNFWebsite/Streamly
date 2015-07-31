@@ -151,10 +151,11 @@ function getVideoData() {
 
 function addVideo() {
   videoCounter++;
-  videos[videoCounter] = {};
-  videos[videoCounter]["name"] = videoName;
-  videos[videoCounter]["time"] = videoTime;
-  videos[videoCounter]["url"] = videoUrl;
+  video = {};
+  video["name"] = videoName;
+  video["time"] = videoTime;
+  video["url"] = videoUrl;
+  videos.push(video);
   
   var printTime = msConversion(videos[videoCounter]["time"]);
   
