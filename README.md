@@ -23,7 +23,7 @@ Streamly is written in Javascript. Every aspect of Streamly is controlled by the
 
 Streamly gets its video metadata by using the [YQL Console](https://developer.yahoo.com/yql/console/) developed by Yahoo to parse YouTube for the video's name and length.
 
-Pausing videos is operated by an external button. Going from one video to another is controlled by cycling through a Javascript object containing the user's original search, the video's URL, and the video's time.
+Pausing videos is operated by an external button. Going from one video to another is controlled by cycling through a Javascript array containing objects with the video's title, URL, and length (in milliseconds).
 
 Saving playlists is done by creating a [JSON](https://json.org) string of the object containing video properties, then encoding it into [Base64](https://en.wikipedia.org/wiki/Base64), and finally running that into the hash parameter of the URL.
 
