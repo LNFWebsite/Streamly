@@ -184,6 +184,7 @@ function removeVideo(which) {
   $("tr:nth-child(" + which + ")").remove();
   
   for (i = which; i <= videoCounter; i++) {
+    alert(i);
     $(".tableButton:nth-child(" + i + ")").attr("onclick", "removeVideo(" + i + ");");
   }
   
