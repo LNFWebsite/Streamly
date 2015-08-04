@@ -183,8 +183,7 @@ function removeVideo(which) {
   videos.splice(which, 1);
   $("tr:nth-child(" + which + ")").remove();
   
-  var max = $(".tableButton").length;
-  for (i = which; i <= max; i++) {
+  for (i = which; i <= videoCounter; i++) {
     $(".tableButton:nth-child(" + i + ")").attr("onclick", "removeVideo(" + i + ");");
   }
   
