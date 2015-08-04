@@ -183,6 +183,7 @@ function removeVideo(which) {
   videos.splice(which, 1);
   $("tr:nth-child("+ which +")").remove();
   if (which == videoIteration) {
+    videoIteration--;
     if (timer != 0) {
       timer.pause();
     }
