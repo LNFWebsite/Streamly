@@ -181,7 +181,7 @@ function addVideo() {
 function removeVideo(which) {
   videoCounter--;
   videos.splice(which, 1);
-  $("tr:nth-child("+ which +")").remove();
+  $("tr:nth-child(" + which + ")").remove();
   if (which == videoIteration) {
     videoIteration--;
     if (timer != 0) {
@@ -190,6 +190,15 @@ function removeVideo(which) {
     timer = 0;
     $("#youtube").attr("src", "");
     document.title = "Streamly";
+  }
+  else {
+    var max = $(".tableButton").length;
+    for (i = which + 1; i <= max; i++) {
+      var num = $(".tableButton:nth-child(" + i + ")").attr("onclick");
+      num.replace(/removeVideo\(/g, "").replace(/\);/g, "");
+      num--;
+      $(".tableButton:nth-child(" + i + ")").attr("onclick", "removeVideo(" + num + ");");
+    }
   }
   setPlaylist();
 }
