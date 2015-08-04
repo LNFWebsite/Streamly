@@ -108,10 +108,15 @@ function forwardVideo() {
 }
 
 function setPlaylist() {
-  var playlist = JSON.stringify(videos);
-  playlist = window.btoa(playlist);
-  playlist = encodeURIComponent(playlist);
-  window.location.hash = playlist;
+  if (videos.length >= 0) {
+    var playlist = JSON.stringify(videos);
+    playlist = window.btoa(playlist);
+    playlist = encodeURIComponent(playlist);
+    window.location.hash = playlist;
+  }
+  else {
+    window.location.hash = "";
+  }
 }
 
 function getPlaylist() {
@@ -177,6 +182,13 @@ function removeVideo(which) {
   videoCounter--;
   videos.splice(which, 1);
   $("tr:nth-child("+ which +")").remove();
+  if (which == videoIteration) {
+    if (timer != 0) {
+      timer.pause();
+    }
+    timer = 0;
+    $("#youtube").attr("src", "");
+  }
   setPlaylist();
 }
 
