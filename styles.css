@@ -45,9 +45,18 @@ td {
   background-color: #88FF77;
 }
 #youtube, #pauseButton {
-  width:100%;
+  width: 100%;
   max-width: 560px;
 }
 #youtube {
   height: 315px;
+}
+.tableButton {
+  background: none;
+  border: none;
+  float: right;
+  margin-top: 3px;
+}
+.tableButton img {
+  width: 20px;
 }
