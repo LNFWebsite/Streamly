@@ -1,5 +1,6 @@
 enterUrlMsg = "Drag-and-drop the video or paste its URL here...";
 
+removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
 pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
 
@@ -41,6 +42,13 @@ function highlight(i) {
   $("tr.selected").removeClass("selected");
   $("#newSelected").addClass("selected");
   $("#newSelected").removeAttr("id");
+}
+
+function addVideoToList(name, time) {
+  $("#videosTable").append("<tr>
+  <td>" + name + "<button class=\"removeButton\"><img src=\"" + removeImgSrc + "\" /></button></td>
+  <td>" + time + "</td>
+  </tr>");
 }
 
 function playVideo() {
@@ -120,7 +128,7 @@ function getPlaylist() {
     for (i = 1; i < videos.length; i++) {
       videoCounter = i;
       var printTime = msConversion(videos[videoCounter]["time"]);
-      $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
+      addVideoToList(videos[videoCounter]["name"], printTime);
     }
     loopVideo();
   }
@@ -159,7 +167,7 @@ function addVideo() {
   
   var printTime = msConversion(videos[videoCounter]["time"]);
   
-  $("#videosTable").append("<tr><td>" + videoName + "</td><td>" + printTime + "</td></tr>");
+  addVideoToList(videoName, printTime);
   
   setPlaylist();
   
