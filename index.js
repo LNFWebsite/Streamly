@@ -168,6 +168,13 @@ function addVideo() {
   }
 }
 
+function removeVideo(which) {
+  videoCounter--;
+  videos.splice(which, 1);
+  $("tr:nth-child("+ which +")").remove();
+  setPlaylist();
+}
+
 function input() {
   switch ($("#inputBox").attr("placeholder")) {
     case enterUrlMsg:
