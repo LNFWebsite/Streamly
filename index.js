@@ -189,6 +189,7 @@ function removeVideo(which) {
     }
     timer = 0;
     $("#youtube").attr("src", "");
+    document.title = "Streamly";
   }
   setPlaylist();
 }
