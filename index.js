@@ -45,7 +45,7 @@ function highlight(i) {
 }
 
 function addVideoToList(name, time) {
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"removeButton\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(" + videoCounter + ");\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
