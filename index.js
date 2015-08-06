@@ -162,6 +162,9 @@ function getVideoData() {
         videoTime = +videoTime * 1000;
       } catch(err) {
         videoTime = prompt("Please enter the length of the video", "2:49");
+        videoTime = videoTime.split(":");
+        videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
+        videoTime = videoTime * 1000;
       }
     }
   });
