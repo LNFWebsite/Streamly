@@ -156,7 +156,7 @@ function getVideoData() {
       videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
       videoTime = +videoTime * 1000;
       
-      if (videoTime !> 0 || videoName == null) {
+      if (!videoTime > 0 || videoName == null) {
         var videoName = prompt("Please enter the name of the video", "");
         var videoTime = prompt("Please enter the length of the video", "2:49");
       }
