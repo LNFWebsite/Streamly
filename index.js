@@ -146,7 +146,7 @@ function getVideoData() {
         videoName = data.find("span#eow-title");
         videoName = videoName[0].textContent;
         videoName = videoName.trim();
-      } catch {
+      } catch(err) {
         videoName = prompt("Please enter the name of the video", "");
       }
       try {
@@ -160,7 +160,7 @@ function getVideoData() {
         videoTime = videoTime[0];
         videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
         videoTime = +videoTime * 1000;
-      } catch {
+      } catch(err) {
         videoTime = prompt("Please enter the length of the video", "2:49");
       }
     }
