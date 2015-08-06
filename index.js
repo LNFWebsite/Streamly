@@ -142,23 +142,26 @@ function getVideoData() {
     type: 'GET',
     success: function(res) {
       var data = $(res.responseText);
-      videoName = data.find("span#eow-title");
-      videoName = videoName[0].textContent;
-      videoName = videoName.trim();
-      videoTime = null;
-      for (iteration in data) {
-        var str = data[iteration].innerHTML;
-        if (videoTime == null && typeof str != "undefined") {
-          videoTime = str.match(/,"length_seconds":"\d+",/g);
-        }
+      try {
+        videoName = data.find("span#eow-title");
+        videoName = videoName[0].textContent;
+        videoName = videoName.trim();
+      } catch {
+        videoName = prompt("Please enter the name of the video", "");
       }
-      videoTime = videoTime[0];
-      videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
-      videoTime = +videoTime * 1000;
-      
-      if (!videoTime > 0 || videoName == null) {
-        var videoName = prompt("Please enter the name of the video", "");
-        var videoTime = prompt("Please enter the length of the video", "2:49");
+      try {
+        videoTime = null;
+        for (iteration in data) {
+          var str = data[iteration].innerHTML;
+          if (videoTime == null && typeof str != "undefined") {
+            videoTime = str.match(/,"length_seconds":"\d+",/g);
+          }
+        }
+        videoTime = videoTime[0];
+        videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
+        videoTime = +videoTime * 1000;
+      } catch {
+        videoTime = prompt("Please enter the length of the video", "2:49");
       }
     }
   });
