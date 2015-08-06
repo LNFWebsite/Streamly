@@ -1,5 +1,6 @@
 enterUrlMsg = "Drag-and-drop the video or paste its URL here...";
 
+removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
 pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
 
@@ -41,6 +42,10 @@ function highlight(i) {
   $("tr.selected").removeClass("selected");
   $("#newSelected").addClass("selected");
   $("#newSelected").removeAttr("id");
+}
+
+function addVideoToList(name, time) {
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(" + videoCounter + ");\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
@@ -103,10 +108,15 @@ function forwardVideo() {
 }
 
 function setPlaylist() {
-  var playlist = JSON.stringify(videos);
-  playlist = window.btoa(playlist);
-  playlist = encodeURIComponent(playlist);
-  window.location.hash = playlist;
+  if (videos.length > 1) {
+    var playlist = JSON.stringify(videos);
+    playlist = window.btoa(playlist);
+    playlist = encodeURIComponent(playlist);
+    window.location.hash = playlist;
+  }
+  else {
+    window.location.hash = "";
+  }
 }
 
 function getPlaylist() {
@@ -120,7 +130,7 @@ function getPlaylist() {
     for (i = 1; i < videos.length; i++) {
       videoCounter = i;
       var printTime = msConversion(videos[videoCounter]["time"]);
-      $("#videosTable").append("<tr><td>" + videos[videoCounter]["name"] + "</td><td>" + printTime + "</td></tr>");
+      addVideoToList(videos[videoCounter]["name"], printTime);
     }
     loopVideo();
   }
@@ -132,19 +142,30 @@ function getVideoData() {
     type: 'GET',
     success: function(res) {
       var data = $(res.responseText);
-      videoName = data.find("span#eow-title");
-      videoName = videoName[0].textContent;
-      videoName = videoName.trim();
-      videoTime = null;
-      for (iteration in data) {
-        var str = data[iteration].innerHTML;
-        if (videoTime == null && typeof str != "undefined") {
-          videoTime = str.match(/,"length_seconds":"\d+",/g);
-        }
+      try {
+        videoName = data.find("span#eow-title");
+        videoName = videoName[0].textContent;
+        videoName = videoName.trim();
+      } catch(err) {
+        videoName = prompt("Please enter the name of the video", "");
       }
-      videoTime = videoTime[0];
-      videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
-      videoTime = +videoTime * 1000;
+      try {
+        videoTime = null;
+        for (iteration in data) {
+          var str = data[iteration].innerHTML;
+          if (videoTime == null && typeof str != "undefined") {
+            videoTime = str.match(/,"length_seconds":"\d+",/g);
+          }
+        }
+        videoTime = videoTime[0];
+        videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
+        videoTime = +videoTime * 1000;
+      } catch(err) {
+        videoTime = prompt("Please enter the length of the video", "3:00");
+        videoTime = videoTime.split(":");
+        videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
+        videoTime = videoTime * 1000;
+      }
     }
   });
 }
@@ -159,13 +180,34 @@ function addVideo() {
   
   var printTime = msConversion(videos[videoCounter]["time"]);
   
-  $("#videosTable").append("<tr><td>" + videoName + "</td><td>" + printTime + "</td></tr>");
+  addVideoToList(videoName, printTime);
   
   setPlaylist();
   
   if (videoCounter == 1 || timer == 0) {
     loopVideo();
   }
+}
+
+function removeVideo(which) {
+  videoCounter--;
+  videos.splice(which, 1);
+  $("tr:nth-child(" + which + ")").remove();
+  
+  for (i = which; i <= videoCounter; i++) {
+    document.getElementsByClassName("tableButton")[i - 1].setAttribute("onclick", "removeVideo(" + i + ");");
+  }
+  
+  if (which == videoIteration) {
+    videoIteration--;
+    if (timer != 0) {
+      timer.pause();
+    }
+    timer = 0;
+    $("#youtube").attr("src", "");
+    document.title = "Streamly";
+  }
+  setPlaylist();
 }
 
 function input() {
