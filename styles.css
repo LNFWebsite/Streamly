@@ -56,6 +56,16 @@ td {
   border: none;
   float: right;
   margin-top: 3px;
+  
+  display: none;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+}
+.tableButton:hover {
+  display: auto;
 }
 .tableButton img {
   width: 20px;
