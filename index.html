@@ -15,7 +15,7 @@
     <h2 class="title" style="margin:0px 0px 10px 70px;"><em>It's Streamly simple!</em></h2>
     <div class="center">
       <form action="javascript:input();" method="get" id="searchForm">
-        <input type="textbox" id="inputBox" placeholder="Drag-and-drop the video or paste its URL here..." ondrop="onDrop(event);" autofocus>
+        <input type="textbox" id="inputBox" placeholder="Drag-and-drop the video or paste its URL here..." autofocus>
       </form>
       <table id="videosTable">
       </table>
@@ -71,6 +71,9 @@
       }
     }
   });
+  
+  document.body.ondrop = "onDrop(event)";
+  document.getElementById("inputBox").ondrop = "onDrop(event)";
   </script>
   
   <!-- Start of StatCounter Code for Default Guide -->
