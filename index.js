@@ -203,9 +203,8 @@ function removeVideo(element) {
       $("#youtube").attr("src", "");
       document.title = "Streamly";
     }
-  } else if (index < videoIteration) {
-    videoIteration--;
   }
+  videoIteration--;
   videoCounter--;
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
