@@ -45,7 +45,7 @@ function highlight(i) {
 }
 
 function addVideoToList(name, time) {
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(" + videoCounter + ");\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo();\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
@@ -189,16 +189,13 @@ function addVideo() {
   }
 }
 
-function removeVideo(which) {
+function removeVideo() {
+  var index = $(".tableButton").index(this) + 1;
   videoCounter--;
-  videos.splice(which, 1);
-  $("tr:nth-child(" + which + ")").remove();
+  videos.splice(index, 1);
+  $("tr:nth-child(" + index + ")").remove();
   
-  for (i = which; i <= videoCounter; i++) {
-    document.getElementsByClassName("tableButton")[i - 1].setAttribute("onclick", "removeVideo(" + i + ");");
-  }
-  
-  if (which == videoIteration) {
+  if (index == videoIteration) {
     videoIteration--;
     if (timer != 0) {
       timer.pause();
