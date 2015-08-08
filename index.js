@@ -45,7 +45,7 @@ function highlight(i) {
 }
 
 function addVideoToList(name, time) {
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo();\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
@@ -189,8 +189,8 @@ function addVideo() {
   }
 }
 
-function removeVideo() {
-  var index = $(".tableButton").index(this) + 1;
+function removeVideo(element) {
+  var index = $(".tableButton").index(element) + 1;
   alert(index);
   videoCounter--;
   videos.splice(index, 1);
