@@ -45,7 +45,7 @@ function highlight(i) {
 }
 
 function addVideoToList(name, time) {
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(" + videoCounter + ");\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
@@ -189,24 +189,25 @@ function addVideo() {
   }
 }
 
-function removeVideo(which) {
-  videoCounter--;
-  videos.splice(which, 1);
-  $("tr:nth-child(" + which + ")").remove();
-  
-  for (i = which; i <= videoCounter; i++) {
-    document.getElementsByClassName("tableButton")[i - 1].setAttribute("onclick", "removeVideo(" + i + ");");
-  }
-  
-  if (which == videoIteration) {
-    videoIteration--;
-    if (timer != 0) {
-      timer.pause();
+function removeVideo(element) {
+  var index = $(".tableButton").index(element) + 1;
+  if (index == videoIteration) {
+    if (videoIteration + 1 <= videoCounter) {
+      forwardVideo();
     }
-    timer = 0;
-    $("#youtube").attr("src", "");
-    document.title = "Streamly";
+    else {
+      if (timer != 0) {
+        timer.pause();
+      }
+      timer = 0;
+      $("#youtube").attr("src", "");
+      document.title = "Streamly";
+    }
   }
+  videoIteration--;
+  videoCounter--;
+  videos.splice(index, 1);
+  $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
 }
 
