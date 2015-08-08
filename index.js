@@ -191,19 +191,12 @@ function addVideo() {
 
 function removeVideo(element) {
   var index = $(".tableButton").index(element) + 1;
-  alert(index);
   videoCounter--;
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
   
   if (index == videoIteration) {
-    videoIteration--;
-    if (timer != 0) {
-      timer.pause();
-    }
-    timer = 0;
-    $("#youtube").attr("src", "");
-    document.title = "Streamly";
+    forwardVideo();
   }
   setPlaylist();
 }
