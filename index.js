@@ -191,6 +191,7 @@ function addVideo() {
 
 function removeVideo() {
   var index = $(".tableButton").index(this) + 1;
+  alert(index);
   videoCounter--;
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
