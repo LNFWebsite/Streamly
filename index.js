@@ -191,16 +191,12 @@ function addVideo() {
 
 function removeVideo(element) {
   var index = $(".tableButton").index(element) + 1;
-  alert(index);
-  alert(videoIteration);
+  if (index == videoIteration) {
+    forwardVideo();
+  }
   videoCounter--;
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
-  
-  if (index == videoIteration) {
-    alert("HERE!!!");
-    forwardVideo();
-  }
   setPlaylist();
 }
 
