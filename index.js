@@ -212,6 +212,7 @@ function removeVideo(element) {
   }
   videoCounter--;
   videos.splice(index, 1);
+  index++;
   $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
 }
