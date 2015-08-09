@@ -185,7 +185,7 @@ function addVideo() {
   
   setPlaylist();
   
-  if (videoCounter == 1 || timer == 0) {
+  if (videoCounter == 0 || timer == 0) {
     loopVideo();
   }
 }
