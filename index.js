@@ -194,6 +194,7 @@ function removeVideo(element) {
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
+      videoIteration--;
     }
     else {
       if (timer != 0) {
@@ -202,9 +203,12 @@ function removeVideo(element) {
       timer = 0;
       $("#youtube").attr("src", "");
       document.title = "Streamly";
+      videoIteration--;
     }
   }
-  videoIteration--;
+  else if (index < videoIteration) {
+    videoIteration--;
+  }
   videoCounter--;
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
