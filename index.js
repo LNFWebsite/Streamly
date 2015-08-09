@@ -9,8 +9,8 @@ var videoName;
 var videoTime = null;
 
 var videos = [];
-var videoCounter = 0;
-var videoIteration = 0;
+var videoCounter = -1;
+var videoIteration = -1;
 var videoPaused;
 var timer;
 
@@ -38,6 +38,7 @@ function msConversion(millis) {
 }
 
 function highlight(i) {
+  i++;
   $("tr:nth-child(" + i + ")").attr("id", "newSelected");
   $("tr.selected").removeClass("selected");
   $("#newSelected").addClass("selected");
@@ -87,7 +88,7 @@ function pauseVideo() {
 }
 
 function backVideo() {
-  if (videoIteration - 2 > -1) {
+  if (videoIteration - 2 > -2) {
     videoIteration = videoIteration - 2;
     if (timer != 0) {
       timer.pause();
