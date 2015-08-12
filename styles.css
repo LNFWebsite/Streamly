@@ -16,13 +16,15 @@ body {
 }
 #inputBox {
   font-family: 'Roboto', sans-serif;
+  font-size: 1em;
   position: absolute;
   top: 0;
   left: 210px;
-  margin-top: 14px;
+  margin-top: 17px;
   border: 0px solid transparent;
   border-radius: 999px;
   padding: 5px;
+  width: 50%;
 }
 h1 {
   margin: 0px;
