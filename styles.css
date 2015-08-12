@@ -3,7 +3,9 @@ header {
   background-color: black;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
+  height: 60px;
 }
 body {
   background-color: #F77F00;
@@ -11,6 +13,7 @@ body {
 }
 .title {
   font-family: 'Pacifico', cursive;
+  font-color: white;
 }
 #inputBox {
   font-family: 'Roboto', sans-serif;
