@@ -14,10 +14,15 @@ body {
 .title {
   font-family: 'Pacifico', cursive;
 }
+form#searchForm {
+  position: absolute;
+  top: 0;
+  left: 210px;
+}
 #inputBox {
   font-family: 'Roboto', sans-serif;
   padding: 5px;
-  font-size: 2em;
+  font-size: 1.2em;
 }
 h1 {
   margin: 0px;
@@ -28,15 +33,13 @@ table, td, th, #main, #youtube {
 td, th, #main, #youtube {
   border: 1px solid black;
 }
-table, #inputBox {
+table {
   border: 2px solid black;
   width: 95%;
+  font-size: 1.5em;
   margin: 0px auto;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-table {
-  font-size: 1.5em;
 }
 td {
   padding: 5px;
