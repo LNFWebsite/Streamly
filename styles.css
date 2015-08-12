@@ -14,15 +14,15 @@ body {
 .title {
   font-family: 'Pacifico', cursive;
 }
-form#searchForm {
+#inputBox {
+  font-family: 'Roboto', sans-serif;
   position: absolute;
   top: 0;
   left: 210px;
-}
-#inputBox {
-  font-family: 'Roboto', sans-serif;
+  margin-top: 14px;
+  border: 0px solid transparent;
+  border-radius: 999px;
   padding: 5px;
-  font-size: 1.2em;
 }
 h1 {
   margin: 0px;
