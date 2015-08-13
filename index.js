@@ -111,6 +111,7 @@ function forwardVideo() {
 function setPlaylist() {
   if (videos.length > 0) {
     var playlist = JSON.stringify(videos);
+    playlist = encodeURIComponent(playlist);
     playlist = window.btoa(playlist);
     playlist = encodeURIComponent(playlist);
     window.location.hash = playlist;
@@ -125,6 +126,7 @@ function getPlaylist() {
     var playlist = window.location.hash.substr(1);
     playlist = decodeURIComponent(playlist);
     playlist = window.atob(playlist);
+    playlist = decodeURIComponent(playlist);
     playlist = JSON.parse(playlist);
     videos = playlist;
     
