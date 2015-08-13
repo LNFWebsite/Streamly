@@ -222,7 +222,7 @@ function removeVideo(element) {
 function urlValidate(url) {
   if (url.indexOf("http://") > -1 || url.indexOf("https://") > -1) {
     url = url.trim();
-    url = url.replace(/&list=.+/g);
+    url = url.replace(/&list=.+/g, "");
     return url;
   }
   else {
