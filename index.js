@@ -219,6 +219,17 @@ function removeVideo(element) {
   setPlaylist();
 }
 
+function urlValidate(url) {
+  if (url.indexOf("http://") > -1 || url.indexOf("https://") > -1) {
+    url = url.trim();
+    url = url.replace(/&list=.+/g);
+    return url;
+  }
+  else {
+    return false;
+  }
+}
+
 function input(type) {
   var input = $("#inputBox").val();
   if (input != "") {
@@ -228,9 +239,15 @@ function input(type) {
         $("#inputBox").val("").attr("placeholder", placeholder);
         break;
       case 1:
-        videoUrl = input.trim();
-        $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
-        getVideoData();
+        input = urlValidate(input);
+        if (input) {
+          videoUrl = input;
+          $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
+          getVideoData();
+        }
+        else {
+          alert("That video's URL seems broken\n\nTry copying it again, or drag and drop the video directly");
+        }
         break;
     }
   }
