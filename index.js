@@ -219,10 +219,10 @@ function removeVideo(element) {
   setPlaylist();
 }
 
-function input(do) {
+function input(kind) {
   var input = $("#inputBox").val();
   if (input != "") {
-    switch (do) {
+    switch (kind) {
       case 0:
         window.open("https://www.youtube.com/results?search_query=" + input.replace(/ /g, "+"));
         $("#inputBox").val("").attr("placeholder", placeholder);
