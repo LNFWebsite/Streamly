@@ -1,8 +1,8 @@
-enterUrlMsg = "Drag-and-drop the video or paste its URL here...";
+var placeholder = "Search, drag and drop video, or paste its URL...";
 
-removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
-pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
-playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
+var removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
+var pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
+var playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
 
 var videoUrl;
 var videoName;
@@ -225,6 +225,7 @@ function input(do) {
     switch (do) {
       case 0:
         window.open("https://www.youtube.com/results?search_query=" + input.replace(/ /g, "+"));
+        $("#inputBox").val("").attr("placeholder", placeholder);
         break;
       case 1:
         videoUrl = input.trim();
@@ -236,7 +237,7 @@ function input(do) {
 }
 
 $(document).ajaxStop(function() {
-  $("#inputBox").val("").attr("placeholder", enterUrlMsg);
+  $("#inputBox").val("").attr("placeholder", placeholder);
   addVideo();
 });
 
