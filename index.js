@@ -219,19 +219,19 @@ function removeVideo(element) {
   setPlaylist();
 }
 
-function input() {
-  switch ($("#inputBox").attr("placeholder")) {
-    case enterUrlMsg:
-      if ($("#inputBox").val() != "") {
-        videoUrl = $("#inputBox").val();
-        videoUrl = videoUrl.trim();
+function input(do) {
+  var input = $("#inputBox").val();
+  if (input != "") {
+    switch (do) {
+      case 0:
+        window.open("https://www.youtube.com/results?search_query=" + input.replace(/ /g, "+"));
+        break;
+      case 1:
+        videoUrl = input.trim();
         $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
         getVideoData();
-      }
-      else {
-        window.open("https://www.youtube.com");
-      }
-      break;
+        break;
+    }
   }
 }
 
@@ -244,6 +244,6 @@ function onDrop(event) {
   var data = event.dataTransfer.getData("URL");
   event.target.textContent = data;
   $("#inputBox").val(data);
-  input();
+  input(1);
   event.preventDefault();
 }
