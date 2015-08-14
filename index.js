@@ -273,13 +273,12 @@ function onDrop(event) {
 }
 
 document.addEventListener("drop", function(event) {
+  event.preventDefault();
   var data = event.dataTransfer.getData("URL");
   event.target.textContent = data;
   
   $("#inputBox").val(data);
   input(1);
-  
-  event.preventDefault();
 });
 
 document.addEventListener("dragover", function(event) {
