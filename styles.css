@@ -41,6 +41,7 @@ td, th {
   border: 1px solid black;
 }
 #main {
+  text-align: center;
   margin: 110px 150px 50px 150px;
   padding: 10px;
   background: #FFF;
@@ -54,9 +55,6 @@ table {
 }
 td {
   padding: 5px;
-}
-.center {
-  text-align: center;
 }
 .selected {
   background-color: #88FF77;
