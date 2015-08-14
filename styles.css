@@ -67,7 +67,7 @@ td {
 }
 #youtube, #pauseButton {
   display: block;
-  margin 0px auto;
+  margin: 0px auto;
   width: 100%;
   max-width: 300px;
 }
