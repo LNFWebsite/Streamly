@@ -89,6 +89,9 @@ td {
   position: absolute;
   display: block;
 }
+#youtube {
+  border: none;
+}
 #pauseOverlay {
   opacity: 0;
   z-index: 2;
