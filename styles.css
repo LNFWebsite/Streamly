@@ -65,12 +65,15 @@ td {
 .selected {
   background-color: #88FF77;
 }
-#youtube {
+#youtubeContainer {
   display: block;
   margin: 0px auto;
   width: 100%;
   max-width: 300px;
   height: 175px;
+}
+#youtube {
+  width: 100%;
 }
 .tableButton {
   background: none;
