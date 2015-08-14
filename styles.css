@@ -57,9 +57,7 @@ td, th {
 table {
   width: 95%;
   font-size: 1.2em;
-  margin: 0px auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px auto 10px auto;
 }
 td {
   padding: 5px;
@@ -68,6 +66,8 @@ td {
   background-color: #88FF77;
 }
 #youtube, #pauseButton {
+  display: block;
+  margin 0px auto;
   width: 100%;
   max-width: 300px;
 }
