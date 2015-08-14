@@ -89,11 +89,9 @@ td {
   position: absolute;
   display: block;
 }
-#youtube {
-  z-index: -1;
-}
 #pauseOverlay {
   opacity: 0;
+  z-index: 2;
 }
 .tableButton {
   background: none;
