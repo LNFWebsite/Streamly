@@ -54,7 +54,7 @@ function playVideo() {
   document.title = "Streamly - " + videos[videoIteration]["name"];
   var embedUrl = videos[videoIteration]["url"];
   if (embedUrl.search(/file:\/\//i) == -1) {
-    embedUrl = "//www.youtube.com/embed/" + videos[videoIteration]["url"] + "?autoplay=1";
+    embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + "?autoplay=1";
   }
   $("#youtube").attr("src", embedUrl);
   $("#pauseImg").attr("src", pauseImgSrc);
