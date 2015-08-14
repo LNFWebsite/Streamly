@@ -264,17 +264,9 @@ $(document).ajaxStop(function() {
   addVideo();
 });
 
-function onDrop(event) {
-  var data = event.dataTransfer.getData("URL");
-  $("#inputBox").val(data);
-  input(1);
-  event.preventDefault();
-}
-
 document.addEventListener("drop", function(event) {
   event.preventDefault();
   var data = event.dataTransfer.getData("URL");
-  //event.target.textContent = data;
   
   $("#inputBox").val(data);
   input(1);
