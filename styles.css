@@ -65,13 +65,11 @@ td {
 .selected {
   background-color: #88FF77;
 }
-#youtube, #pauseButton {
+#youtube {
   display: block;
   margin: 0px auto;
   width: 100%;
   max-width: 300px;
-}
-#youtube {
   height: 175px;
 }
 .tableButton {
