@@ -31,10 +31,13 @@ body {
   padding: 5px;
   width: 50%;
 }
-table, td, th, #main, #youtube {
+td, th, #main, #youtube {
   border-radius: 5px;
 }
-td, th, #main, #youtube {
+td, th {
+  border-bottom: 2px solid black;
+}
+#main, #youtube {
   border: 1px solid black;
 }
 #main {
@@ -43,9 +46,8 @@ td, th, #main, #youtube {
   background: #FFF;
 }
 table {
-  border: 2px solid black;
   width: 95%;
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin: 0px auto;
   margin-top: 10px;
   margin-bottom: 10px;
