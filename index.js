@@ -180,7 +180,7 @@ function addVideo() {
   var video = {};
   video["name"] = videoName;
   video["time"] = videoTime;
-  video["url"] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=$/i, "");
+  video["url"] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=/i, "");
   videos[videoCounter] = video;
   
   var printTime = msConversion(videos[videoCounter]["time"]);
