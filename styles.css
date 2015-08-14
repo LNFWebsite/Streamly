@@ -1,4 +1,7 @@
 /* Streamly Stylesheet */
+h1 {
+  margin: 0px;
+}
 header {
   background-color: black;
   position: fixed;
@@ -11,29 +14,33 @@ body {
   background-color: #F77F00;
   font-family: 'Roboto', sans-serif;
 }
-.title {
+#title {
   font-family: 'Pacifico', cursive;
+}
+#title, #searchForm {
+  display: inline;
 }
 #inputBox {
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
-  position: absolute;
-  top: 0;
-  left: 210px;
-  margin-top: 17px;
+  position: relative;
+  top: -5px;
+  left: 15px;
   border: 0px solid transparent;
   border-radius: 999px;
   padding: 5px;
   width: 50%;
-}
-h1 {
-  margin: 0px;
 }
 table, td, th, #main, #youtube {
   border-radius: 5px;
 }
 td, th, #main, #youtube {
   border: 1px solid black;
+}
+#main {
+  margin: 110px 150px 50px 150px;
+  padding: 10px;
+  background: #FFF;
 }
 table {
   border: 2px solid black;
@@ -45,11 +52,6 @@ table {
 }
 td {
   padding: 5px;
-}
-#main {
-  margin: 110px 150px 50px 150px;
-  padding: 10px;
-  background: #FFF;
 }
 .center {
   text-align: center;
