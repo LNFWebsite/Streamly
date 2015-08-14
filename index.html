@@ -17,15 +17,14 @@
     </form>
   </header>
   <div id="main">
-    <div class="center">
-      <table id="videosTable">
-      </table>
-      <button id="backButton" onclick="backVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-backward-4x.png" /></button>
-      <button id="pauseButton" onclick="pauseVideo();"><img id="pauseImg" src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png" /></button>
-      <button id="forwardButton" onclick="forwardVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-forward-4x.png" /></button>
-      <iframe id="youtube" src="" allowfullscreen></iframe>
-    </div>
+    <table id="videosTable"></table>
   </div>
+  <footer>
+    <button id="backButton" onclick="backVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-backward-4x.png" /></button>
+    <button id="pauseButton" onclick="pauseVideo();"><img id="pauseImg" src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png" /></button>
+    <button id="forwardButton" onclick="forwardVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-forward-4x.png" /></button>
+    <iframe id="youtube" src="" allowfullscreen></iframe>
+  </footer>
   <script>
   getPlaylist();
   
