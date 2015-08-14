@@ -20,12 +20,14 @@
     <table id="videosTable"></table>
   </div>
   <footer>
-    <button id="backButton" onclick="backVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-backward-4x.png" /></button>
-    <div id="youtubeContainer">
-      <div id="pauseOverlay" onclick="pauseVideo();"></div>
-      <iframe id="youtube" src="" allowfullscreen></iframe>
+    <div id="playlistInterface">
+      <button id="backButton" onclick="backVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-backward-4x.png" /></button>
+      <div id="youtubeContainer">
+        <div id="pauseOverlay" onclick="pauseVideo();"></div>
+        <iframe id="youtube" src="" allowfullscreen></iframe>
+      </div>
+      <button id="forwardButton" onclick="forwardVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-forward-4x.png" /></button>
     </div>
-    <button id="forwardButton" onclick="forwardVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-forward-4x.png" /></button>
   </footer>
   <script>
   getPlaylist();
