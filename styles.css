@@ -69,10 +69,10 @@ td {
 }
 #youtube, #pauseButton {
   width: 100%;
-  max-width: 560px;
+  max-width: 300px;
 }
 #youtube {
-  height: 315px;
+  height: 175px;
 }
 .tableButton {
   background: none;
