@@ -89,7 +89,7 @@ function pauseVideo() {
   }
   $("#pauseOverlay").css("display", "none");
   setTimeout(function(){
-    $("#pauseOverlay").css("display", "initial");
+    $("#pauseOverlay").css("display", "block");
   }, 500);
 }
 
