@@ -87,6 +87,10 @@ function pauseVideo() {
     $("#pauseImg").attr("src", pauseImgSrc);
     videoPaused = false;
   }
+  $("#pauseOverlay").css("display", "none");
+  setTimeout(function(){
+    $("#pauseOverlay").css("display", "initial");
+  }, 500);
 }
 
 function backVideo() {
