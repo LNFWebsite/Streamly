@@ -271,7 +271,14 @@ function onDrop(event) {
   event.preventDefault();
 }
 
-document.addEventListener("drop", onDrop(event));
+document.addEventListener("drop", function(event) {
+  event.preventDefault();
+  var data = event.dataTransfer.getData("URL");
+  //event.target.textContent = data;
+  
+  $("#inputBox").val(data);
+  input(1);
+});
 
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
