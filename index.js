@@ -52,8 +52,10 @@ function addVideoToList(name, time) {
 function playVideo() {
   highlight(videoIteration);
   document.title = "Streamly - " + videos[videoIteration]["name"];
-  
-  var embedUrl = videos[videoIteration]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
+  var embedUrl = videos[videoIteration]["url"];
+  if (embedUrl.search(/file:\/\//i) == -1) {
+    embedUrl = "//www.youtube.com/embed/" + videos[videoIteration]["url"] + "?autoplay=1";
+  }
   $("#youtube").attr("src", embedUrl);
   $("#pauseImg").attr("src", pauseImgSrc);
 }
@@ -178,7 +180,7 @@ function addVideo() {
   var video = {};
   video["name"] = videoName;
   video["time"] = videoTime;
-  video["url"] = videoUrl;
+  video["url"] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=$/i, "");
   videos[videoCounter] = video;
   
   var printTime = msConversion(videos[videoCounter]["time"]);
@@ -220,9 +222,13 @@ function removeVideo(element) {
 }
 
 function urlValidate(url) {
-  if (url.indexOf("http://") > -1 || url.indexOf("https://") > -1) {
-    url = url.trim();
-    url = url.replace(/&list=.+/g, "");
+  var isValidYouTube = /^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=.+$/i;
+  var isValidFile = /^file:\/\/.+$/i;
+  
+  url = url.trim();
+  url = url.replace(/&list=.+/g, "");
+  
+  if (url.search(isValidYouTube) > -1 || url.search(isValidFile) > -1) {
     return url;
   }
   else {
