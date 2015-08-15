@@ -246,7 +246,7 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox != "") {
-        window.open("https://www.youtube.com/results?search_query=" + input.replace(/ /g, "+"));
+        window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"));
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
       break;
