@@ -270,6 +270,9 @@ function input(type) {
         videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
         setPlaylist();
       }
+      else {
+        videos[0] = undefined;
+      }
       break;
   }
 }
