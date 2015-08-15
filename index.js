@@ -287,7 +287,3 @@ document.addEventListener("drop", function(event) {
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
 });
-
-$("#playlistNameBox").on("blur", function() {
-  input(2);
-});
