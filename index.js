@@ -242,25 +242,30 @@ function input(type) {
   var inputBox = $("#inputBox").val();
   var playlistNameBox = $("#playlistNameBox").val();
   switch (type) {
-    if (input != "") {
-      case 0:
+    case 0:
+      if (inputBox != "") {
         window.open("https://www.youtube.com/results?search_query=" + input.replace(/ /g, "+"));
         $("#inputBox").val("").attr("placeholder", placeholder);
-        break;
-      case 1:
-        input = urlValidate(input);
-        if (input) {
-          videoUrl = input;
+      }
+      break;
+    case 1:
+      if (inputBox != "") {
+        inputBox = urlValidate(inputBox);
+        if (inputBox) {
+          videoUrl = inputBox;
           $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
           getVideoData();
         }
         else {
           alert("That video's URL seems broken\n\nTry copying it again, or drag and drop the video directly");
         }
-        break;
-    }
+      }
+      break;
     case 2:
-      videos[0] = encodeURIComponent(playlistNameBox);
+      if (playlistNameBox != "") {
+        videos[0] = encodeURIComponent(playlistNameBox);
+      }
+      break;
   }
 }
 
