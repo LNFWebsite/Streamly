@@ -41,11 +41,8 @@ footer {
   padding: 5px;
   width: 50%;
 }
-td, th, #main, #playlistInterface {
+#main, #playlistInterface {
   border-radius: 5px;
-}
-td, th {
-  border-bottom: 2px solid black;
 }
 #main {
   text-align: center;
