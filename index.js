@@ -134,6 +134,8 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
+    $("#playlistNameBox").val(decodeURIComponent(videos[0]));
+    
     for (i = 0; i < videos.length; i++) {
       videoCounter = i;
       var printTime = msConversion(videos[videoCounter]["time"]);
@@ -263,7 +265,7 @@ function input(type) {
       break;
     case 2:
       if (playlistNameBox != "") {
-        videos[0] = encodeURIComponent(playlistNameBox);
+        videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
       }
       break;
   }
@@ -284,4 +286,8 @@ document.addEventListener("drop", function(event) {
 
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
+});
+
+$("#playlistNameBox").on("blur", function() {
+  input(2);
 });
