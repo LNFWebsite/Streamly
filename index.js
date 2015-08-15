@@ -9,8 +9,8 @@ var videoName;
 var videoTime = null;
 
 var videos = [];
-var videoCounter = -1;
-var videoIteration = -1;
+var videoCounter = 0;
+var videoIteration = 0;
 var videoPaused;
 var timer;
 
@@ -38,7 +38,6 @@ function msConversion(millis) {
 }
 
 function highlight(i) {
-  i++;
   $("tr:nth-child(" + i + ")").attr("id", "newSelected");
   $("tr.selected").removeClass("selected");
   $("#newSelected").addClass("selected");
@@ -95,7 +94,7 @@ function pauseVideo() {
 }
 
 function backVideo() {
-  if (videoIteration - 2 > -2) {
+  if (videoIteration - 2 > -1) {
     videoIteration = videoIteration - 2;
     if (timer != 0) {
       timer.pause();
@@ -116,7 +115,7 @@ function forwardVideo() {
 }
 
 function setPlaylist() {
-  if (videos.length > 0) {
+  if (videos.length > 1) {
     var playlist = JSON.stringify(videos);
     playlist = window.btoa(playlist);
     playlist = encodeURIComponent(playlist);
@@ -193,7 +192,7 @@ function addVideo() {
   
   setPlaylist();
   
-  if (videoCounter == 0 || timer == 0) {
+  if (videoCounter == 1 || timer == 0) {
     loopVideo();
   }
 }
@@ -258,6 +257,8 @@ function input(type) {
         else {
           alert("That video's URL seems broken\n\nTry copying it again, or drag and drop the video directly");
         }
+        break;
+      case 2:
         break;
     }
   }
