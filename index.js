@@ -239,9 +239,10 @@ function urlValidate(url) {
 }
 
 function input(type) {
-  var input = $("#inputBox").val();
-  if (input != "") {
-    switch (type) {
+  var inputBox = $("#inputBox").val();
+  var playlistNameBox = $("#playlistNameBox").val();
+  switch (type) {
+    if (input != "") {
       case 0:
         window.open("https://www.youtube.com/results?search_query=" + input.replace(/ /g, "+"));
         $("#inputBox").val("").attr("placeholder", placeholder);
@@ -257,9 +258,9 @@ function input(type) {
           alert("That video's URL seems broken\n\nTry copying it again, or drag and drop the video directly");
         }
         break;
-      case 2:
-        break;
     }
+    case 2:
+      videos[0] = encodeURIComponent(playlistNameBox);
   }
 }
 
