@@ -196,9 +196,9 @@ function addVideo() {
     loopVideo();
   }
 }
-var index;
+
 function removeVideo(element) {
-  var index = $(".tableButton").index(element);
+  var index = $(".tableButton").index(element) + 1;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
