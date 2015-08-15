@@ -28,8 +28,10 @@ footer {
 #title, #searchForm {
   display: inline;
 }
-#inputBox {
+#inputBox, #playlistNameBox {
   font-family: 'Roboto', sans-serif;
+}
+#inputBox {
   font-size: 1em;
   position: relative;
   top: -5px;
@@ -52,10 +54,17 @@ td, th {
   border: 1px solid black;
   background: #FFF;
 }
-table {
+table, #playlistNameBox {
   width: 95%;
+}
+table {
   font-size: 1.2em;
   margin: 10px auto 10px auto;
+}
+#playlistNameBox {
+  text-align: center;
+  border: none;
+  font-size: 2em;
 }
 td {
   padding: 5px;
