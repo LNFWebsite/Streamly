@@ -134,7 +134,9 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
-    $("#playlistNameBox").val(decodeURIComponent(videos[0]));
+    if (videos[0] != undefined) {
+      $("#playlistNameBox").val(decodeURIComponent(videos[0]));
+    }
     
     for (i = 0; i < videos.length; i++) {
       videoCounter = i;
@@ -266,6 +268,7 @@ function input(type) {
     case 2:
       if (playlistNameBox != "") {
         videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
+        setPlaylist();
       }
       break;
   }
