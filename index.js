@@ -157,7 +157,7 @@ function getVideoData() {
       } catch(err) {
         videoName = prompt("Please enter the name of the video", "");
       }
-      videoName = encodeURIComponent(decodeURIComponent(videoName)).replace(/%20/g, "");
+      videoName = encodeURIComponent(decodeURIComponent(videoName)).replace(/%20/g, " ");
       try {
         videoTime = null;
         for (iteration in data) {
