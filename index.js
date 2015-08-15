@@ -46,12 +46,13 @@ function highlight(i) {
 }
 
 function addVideoToList(name, time) {
+  name = decodeURIComponent(name);
   $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
   highlight(videoIteration);
-  document.title = "Streamly - " + videos[videoIteration]["name"];
+  document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
   var embedUrl = videos[videoIteration]["url"];
   if (embedUrl.search(/file:\/\//i) == -1) {
     embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + "?autoplay=1";
@@ -117,7 +118,6 @@ function forwardVideo() {
 function setPlaylist() {
   if (videos.length > 0) {
     var playlist = JSON.stringify(videos);
-    playlist = encodeURIComponent(playlist);
     playlist = window.btoa(playlist);
     playlist = encodeURIComponent(playlist);
     window.location.hash = playlist;
@@ -132,7 +132,6 @@ function getPlaylist() {
     var playlist = window.location.hash.substr(1);
     playlist = decodeURIComponent(playlist);
     playlist = window.atob(playlist);
-    playlist = decodeURIComponent(playlist);
     playlist = JSON.parse(playlist);
     videos = playlist;
     
@@ -158,6 +157,7 @@ function getVideoData() {
       } catch(err) {
         videoName = prompt("Please enter the name of the video", "");
       }
+      videoName = encodeURIComponent(decodeURIComponent(videoName));
       try {
         videoTime = null;
         for (iteration in data) {
