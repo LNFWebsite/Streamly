@@ -196,7 +196,7 @@ function addVideo() {
     loopVideo();
   }
 }
-
+var index;
 function removeVideo(element) {
   var index = $(".tableButton").index(element);
   if (index == videoIteration) {
