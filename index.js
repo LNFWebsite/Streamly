@@ -228,6 +228,12 @@ function actionRemoveVideo(element) {
   setPlaylist();
 }
 
+function actionPlayVideo(element) {
+  var index = $("#playButton").index(element);
+  videoIteration = index;
+  loopVideo();
+}
+
 function urlValidate(url) {
   var isValidYouTube = /^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=.+$/i;
   var isValidFile = /^file:\/\/.+$/i;
