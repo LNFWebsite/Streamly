@@ -157,7 +157,9 @@ function getVideoData() {
       try {
         videoName = data.find("span#eow-title");
         videoName = videoName[0].textContent;
-        videoName = $('<div/>').html(videoName).text();
+        alert(videoName);
+        videoName = $("<div/>").html(videoName).text();
+        alert(videoName);
         videoName = videoName.trim();
       } catch(err) {
         videoName = prompt("Please enter the name of the video", "");
