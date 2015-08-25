@@ -94,9 +94,8 @@ function pauseVideo() {
   }, 500);
 }
 
-function backVideo() {
-  if (videoIteration - 2 > -1) {
-    videoIteration = videoIteration - 2;
+function forwardVideo() {
+  if (videoIteration + 1 <= videoCounter) {
     if (timer != 0) {
       timer.pause();
     }
@@ -105,8 +104,9 @@ function backVideo() {
   }
 }
 
-function forwardVideo() {
-  if (videoIteration + 1 <= videoCounter) {
+function backVideo() {
+  if (videoIteration - 2 > -1) {
+    videoIteration = videoIteration - 2;
     if (timer != 0) {
       timer.pause();
     }
@@ -202,6 +202,12 @@ function addVideo() {
   }
 }
 
+function actionPlayVideo(element) {
+  var index = $(".playButton").index(element);
+  videoIteration = index;
+  loopVideo();
+}
+
 function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
   if (index == videoIteration) {
@@ -226,13 +232,6 @@ function actionRemoveVideo(element) {
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
-}
-
-function actionPlayVideo(element) {
-  var index = $(".playButton").index(element);
-  alert(index);
-  videoIteration = index;
-  loopVideo();
 }
 
 function urlValidate(url) {
