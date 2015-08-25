@@ -46,8 +46,8 @@ function highlight(i) {
 
 function addVideoToList(name, time) {
   name = decodeURIComponent(name);
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" id=\"removeButton\" onclick=\"actionRemoveVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button>" +
-  "<button class=\"tableButton\" id=\"playButton\" onclick=\"actionPlayVideo(this);\"><img src=\"" + playImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\"><img src=\"" + playImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
@@ -203,7 +203,7 @@ function addVideo() {
 }
 
 function actionRemoveVideo(element) {
-  var index = $("#removeButton").index(element) + 1;
+  var index = $(".removeButton").index(element) + 1;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
@@ -229,7 +229,7 @@ function actionRemoveVideo(element) {
 }
 
 function actionPlayVideo(element) {
-  var index = $("#playButton").index(element);
+  var index = $(".playButton").index(element);
   alert(index);
   videoIteration = index;
   loopVideo();
