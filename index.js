@@ -46,7 +46,7 @@ function highlight(i) {
 
 function addVideoToList(name, time) {
   name = decodeURIComponent(name);
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"actionRemoveVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
@@ -201,7 +201,7 @@ function addVideo() {
   }
 }
 
-function removeVideo(element) {
+function actionRemoveVideo(element) {
   var index = $(".tableButton").index(element) + 1;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
