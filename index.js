@@ -230,6 +230,7 @@ function actionRemoveVideo(element) {
 
 function actionPlayVideo(element) {
   var index = $("#playButton").index(element);
+  alert(index);
   videoIteration = index;
   loopVideo();
 }
