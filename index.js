@@ -206,6 +206,10 @@ function addVideo() {
 function actionPlayVideo(element) {
   var index = $(".playButton").index(element);
   videoIteration = index;
+  if (timer != 0) {
+    timer.pause();
+  }
+  timer = 0;
   loopVideo();
 }
 
