@@ -12,6 +12,7 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 var videoPaused;
+var backRestart;
 var timer;
 
 function Timer(callback, delay) {
@@ -59,6 +60,11 @@ function playVideo() {
   }
   $("#youtube").attr("src", embedUrl);
   $("#pauseImg").attr("src", pauseImgSrc);
+  
+  backRestart = true;
+  window.setTimeout(function() {
+    backRestart = false;
+  }, 3000);
 }
 
 function loopVideo() {
@@ -105,8 +111,18 @@ function forwardVideo() {
 }
 
 function backVideo() {
-  if (videoIteration - 2 > -1) {
-    videoIteration = videoIteration - 2;
+  if (!backRestart) {
+    if (videoIteration - 2 > -1) {
+      videoIteration = videoIteration - 2;
+      if (timer != 0) {
+        timer.pause();
+      }
+      timer = 0;
+      loopVideo();
+    }
+  }
+  else {
+    videoIteration = videoIteration - 1;
     if (timer != 0) {
       timer.pause();
     }
