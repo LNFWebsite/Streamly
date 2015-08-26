@@ -103,6 +103,7 @@ function pauseVideo() {
     videoPaused = false;
     stayPaused = false;
   }
+  $("#youtube").blur();
   $("#pauseOverlay").css("display", "none");
   setTimeout(function(){
     $("#pauseOverlay").css("display", "block");
