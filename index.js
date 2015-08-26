@@ -215,7 +215,7 @@ function getVideoData() {
         videoTime = videoTime * 1000;
       }
     }
-    error: function() {
+    error: function(jqXHR, textStatus, errorThrown) {
       videoName = prompt("Please enter the name of the video", "");
       videoTime = prompt("Please enter the length of the video", "3:00");
     }
