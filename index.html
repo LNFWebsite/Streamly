@@ -9,57 +9,45 @@
   <script src="index.js"></script>
 </head>
 <body>
+  <a href="https://github.com/LNFWebsite/Streamly" target="_blank"><img style="position: absolute; top: 65px; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <header>
+    <h1 id="title"><a href="#" style="color:white;text-decoration:none;">Streamly <span style="color:blue;">Beta</span></a></h1>
+    <form action="javascript:input(0);" method="get" id="searchForm">
+      <input type="textbox" id="inputBox" placeholder="Search, drag and drop video, or paste its URL..." autofocus>
+    </form>
+  </header>
   <div id="main">
-    <a href="https://github.com/LNFWebsite/Streamly" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-    <h1 class="title"><a href="#" style="color:black;text-decoration:none;">Streamly <span style="color:blue;">Beta</span></a></h1>
-    <h2 class="title" style="margin:0px 0px 10px 70px;"><em>It's Streamly simple!</em></h2>
-    <div class="center">
-      <form action="javascript:input();" method="get" id="searchForm">
-        <input type="textbox" id="inputBox" placeholder="Drag-and-drop the video or paste its URL here..." ondrop="onDrop(event);" autofocus>
-      </form>
-      <table id="videosTable">
-      </table>
-      <button id="backButton" onclick="backVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-backward-4x.png" /></button>
-      <button id="pauseButton" onclick="pauseVideo();"><img id="pauseImg" src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png" /></button>
-      <button id="forwardButton" onclick="forwardVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-forward-4x.png" /></button>
-      <iframe id="youtube" src="" allowfullscreen></iframe>
-      <div id="footer">
-        <h2>Instructions</h2>
-        <h3>Adding videos</h3>
-        <p>Hit <code>Enter</code> to open a YouTube search window.</p>
-        <p>Drag and drop the video or copy and paste its URL to add it to the playlist.</p>
-        <p>That's it! No API, no nonsense. Pure and simple.</p>
-        <h3>Pausing videos</h3>
-        <p>Click the YouTube video to pause it, then click the pause button on top of the video.</p>
-        <p>In the same order, click the YouTube video, then click the play button on top to unpause.</p>
-        <h3>Going forward or backward in the playlist</h3>
-        <p>Just click the forward or backward buttons above the video. It will then go to the next or previous video.</p>
-        <p>(You can also do this by using the left and right arrow keys) You're welcome!</p>
-        <h3>Saving the playlist</h3>
-        <p>Just copy the URL (in the address bar) and save it somewhere.</p>
-        <p>It will always load the playlist you have created.</p>
-        <p>You can save this URL as a shortened link, or you can create a text file filled with them, etc...</p>
-        <p>Check out our <a href="//github.com/LNFWebsite/Streamly" target="_blank">GitHub repo</a> for more info.</p>
-      </div>
-    </div>
+    <form action="javascript:input(2);" method="get">
+      <input type="textbox" id="playlistNameBox" placeholder="Streamly Playlist" />
+    </form>
+    <table id="videosTable"></table>
   </div>
+  <footer>
+    <div id="playlistInterface">
+      <button id="backButton" onclick="backVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-backward-4x.png" /></button>
+      <div id="youtubeContainer">
+        <div id="pauseOverlay" onclick="pauseVideo();"></div>
+        <iframe id="youtube" src=""></iframe>
+      </div>
+      <button id="forwardButton" onclick="forwardVideo();"><img src="//cdn.rawgit.com/iconic/open-iconic/master/png/media-skip-forward-4x.png" /></button>
+    </div>
+  </footer>
   <script>
   getPlaylist();
   
   $("#inputBox").on("paste", function() {
     setTimeout(function() {
-      input();
+      input(1);
     }, 0);
   });
   
+  $("#playlistNameBox").on("blur", function() {
+    input(2);
+  });
+  
   $(document).keyup(function(e) {
-    if (!$("#inputBox").is(":focus")) {
+    if (!$("#inputBox").is(":focus") && !$("#playlistNameBox").is(":focus")) {
       switch (e.keyCode) {
-        case 13:
-          e.preventDefault();
-          $("#inputBox").val("");
-          input();
-          break;
         case 37:
           e.preventDefault();
           backVideo();

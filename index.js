@@ -1,17 +1,20 @@
-enterUrlMsg = "Drag-and-drop the video or paste its URL here...";
+var placeholder = "Search, drag and drop video, or paste its URL...";
 
-removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
-pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
-playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
+var playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
+var removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
 
 var videoUrl;
 var videoName;
 var videoTime = null;
 
 var videos = [];
-var videoCounter = -1;
-var videoIteration = -1;
+var videoCounter = 0;
+var videoIteration = 0;
+
 var videoPaused;
+var stayPaused;
+var backRestart;
+
 var timer;
 
 function Timer(callback, delay) {
@@ -38,7 +41,6 @@ function msConversion(millis) {
 }
 
 function highlight(i) {
-  i++;
   $("tr:nth-child(" + i + ")").attr("id", "newSelected");
   $("tr.selected").removeClass("selected");
   $("#newSelected").addClass("selected");
@@ -46,16 +48,30 @@ function highlight(i) {
 }
 
 function addVideoToList(name, time) {
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton\" onclick=\"removeVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
+  name = decodeURIComponent(name);
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\"><img src=\"" + playImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
 function playVideo() {
   highlight(videoIteration);
-  document.title = "Streamly - " + videos[videoIteration]["name"];
+  document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
+  var embedUrl = videos[videoIteration]["url"];
   
-  var embedUrl = videos[videoIteration]["url"].replace("/watch?v=", "/embed/") + "?autoplay=1";
+  var autoplay = "";
+  if (!stayPaused) {
+    autoplay = "?autoplay=1";
+  }
+  
+  if (embedUrl.search(/file:\/\//i) == -1) {
+    embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + autoplay;
+  }
   $("#youtube").attr("src", embedUrl);
-  $("#pauseImg").attr("src", pauseImgSrc);
+  
+  backRestart = false;
+  window.setTimeout(function() {
+    backRestart = true;
+  }, 3000);
 }
 
 function loopVideo() {
@@ -72,34 +88,59 @@ function loopVideo() {
       document.title = "Streamly";
     }
   }, videos[videoIteration]["time"] + 2000);
+  if (stayPaused) {
+    timer.pause();
+  }
 }
 
 function pauseVideo() {
   if (!videoPaused) {
     timer.pause();
-    $("#pauseImg").attr("src", playImgSrc);
     videoPaused = true;
   }
   else {
     timer.resume();
-    $("#pauseImg").attr("src", pauseImgSrc);
     videoPaused = false;
+    stayPaused = false;
   }
-}
-
-function backVideo() {
-  if (videoIteration - 2 > -2) {
-    videoIteration = videoIteration - 2;
-    if (timer != 0) {
-      timer.pause();
-    }
-    timer = 0;
-    loopVideo();
-  }
+  $("#pauseOverlay").css("display", "none");
+  setTimeout(function(){
+    $("#pauseOverlay").css("display", "block");
+    $("#youtube").blur();
+  }, 500);
 }
 
 function forwardVideo() {
   if (videoIteration + 1 <= videoCounter) {
+    if (timer != 0) {
+      timer.pause();
+    }
+    timer = 0;
+    
+    if (videoPaused) {
+      stayPaused = true;
+    }
+    loopVideo();
+  }
+}
+
+function backVideo() {
+  if (!backRestart) {
+    if (videoIteration - 2 > -1) {
+      videoIteration = videoIteration - 2;
+      if (timer != 0) {
+        timer.pause();
+      }
+      timer = 0;
+      
+      if (videoPaused) {
+        stayPaused = true;
+      }
+      loopVideo();
+    }
+  }
+  else {
+    videoIteration = videoIteration - 1;
     if (timer != 0) {
       timer.pause();
     }
@@ -109,7 +150,7 @@ function forwardVideo() {
 }
 
 function setPlaylist() {
-  if (videos.length > 0) {
+  if (videos.length > 1) {
     var playlist = JSON.stringify(videos);
     playlist = window.btoa(playlist);
     playlist = encodeURIComponent(playlist);
@@ -128,7 +169,11 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
-    for (i = 0; i < videos.length; i++) {
+    if (videos[0] != undefined) {
+      $("#playlistNameBox").val(decodeURIComponent(videos[0]));
+    }
+    
+    for (i = 1; i < videos.length; i++) {
       videoCounter = i;
       var printTime = msConversion(videos[videoCounter]["time"]);
       addVideoToList(videos[videoCounter]["name"], printTime);
@@ -146,10 +191,12 @@ function getVideoData() {
       try {
         videoName = data.find("span#eow-title");
         videoName = videoName[0].textContent;
+        videoName = $("<div/>").html(videoName).text();
         videoName = videoName.trim();
       } catch(err) {
         videoName = prompt("Please enter the name of the video", "");
       }
+      videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       try {
         videoTime = null;
         for (iteration in data) {
@@ -167,6 +214,14 @@ function getVideoData() {
         videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
         videoTime = videoTime * 1000;
       }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      videoName = prompt("Please enter the name of the video", "");
+      
+      videoTime = prompt("Please enter the length of the video", "3:00");
+      videoTime = videoTime.split(":");
+      videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
+      videoTime = videoTime * 1000;
     }
   });
 }
@@ -176,7 +231,7 @@ function addVideo() {
   var video = {};
   video["name"] = videoName;
   video["time"] = videoTime;
-  video["url"] = videoUrl;
+  video["url"] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=/i, "");
   videos[videoCounter] = video;
   
   var printTime = msConversion(videos[videoCounter]["time"]);
@@ -185,13 +240,23 @@ function addVideo() {
   
   setPlaylist();
   
-  if (videoCounter == 0 || timer == 0) {
+  if (videoCounter == 1 || timer == 0) {
     loopVideo();
   }
 }
 
-function removeVideo(element) {
-  var index = $(".tableButton").index(element);
+function actionPlayVideo(element) {
+  var index = $(".playButton").index(element);
+  videoIteration = index;
+  if (timer != 0) {
+    timer.pause();
+  }
+  timer = 0;
+  loopVideo();
+}
+
+function actionRemoveVideo(element) {
+  var index = $(".removeButton").index(element) + 1;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
@@ -212,36 +277,73 @@ function removeVideo(element) {
   }
   videoCounter--;
   videos.splice(index, 1);
-  index++;
   $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
 }
 
-function input() {
-  switch ($("#inputBox").attr("placeholder")) {
-    case enterUrlMsg:
-      if ($("#inputBox").val() != "") {
-        videoUrl = $("#inputBox").val();
-        videoUrl = videoUrl.trim();
-        $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
-        getVideoData();
+function urlValidate(url) {
+  var isValidYouTube = /^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=.+$/i;
+  var isValidFile = /^file:\/\/.+$/i;
+  
+  url = url.trim();
+  url = url.replace(/&list=.+/g, "");
+  
+  if (url.search(isValidYouTube) > -1 || url.search(isValidFile) > -1) {
+    return url;
+  }
+  else {
+    return false;
+  }
+}
+
+function input(type) {
+  var inputBox = $("#inputBox").val();
+  var playlistNameBox = $("#playlistNameBox").val();
+  switch (type) {
+    case 0:
+      if (inputBox != "") {
+        window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"));
+        $("#inputBox").val("").attr("placeholder", placeholder);
+      }
+      break;
+    case 1:
+      if (inputBox != "") {
+        inputBox = urlValidate(inputBox);
+        if (inputBox) {
+          videoUrl = inputBox;
+          $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
+          getVideoData();
+        }
+        else {
+          alert("That video's URL seems broken\n\nTry copying it again, or drag and drop the video directly");
+        }
+      }
+      break;
+    case 2:
+      if (playlistNameBox != "") {
+        videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
+        setPlaylist();
       }
       else {
-        window.open("https://www.youtube.com");
+        videos[0] = undefined;
       }
       break;
   }
 }
 
 $(document).ajaxStop(function() {
-  $("#inputBox").val("").attr("placeholder", enterUrlMsg);
+  $("#inputBox").val("").attr("placeholder", placeholder);
   addVideo();
 });
 
-function onDrop(event) {
-  var data = event.dataTransfer.getData("URL");
-  event.target.textContent = data;
-  $("#inputBox").val(data);
-  input();
+document.addEventListener("drop", function(event) {
   event.preventDefault();
-}
+  var data = event.dataTransfer.getData("URL");
+  
+  $("#inputBox").val(data);
+  input(1);
+});
+
+document.addEventListener("dragover", function(event) {
+  event.preventDefault();
+});
