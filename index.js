@@ -60,9 +60,9 @@ function playVideo() {
   }
   $("#youtube").attr("src", embedUrl);
   
-  backRestart = true;
+  backRestart = false;
   window.setTimeout(function() {
-    backRestart = false;
+    backRestart = true;
   }, 3000);
 }
 
