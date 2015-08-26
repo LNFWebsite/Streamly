@@ -1,8 +1,8 @@
 var placeholder = "Search, drag and drop video, or paste its URL...";
 
-var removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
-var pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 var playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
+var removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
+//var pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 
 var videoUrl;
 var videoName;
@@ -59,7 +59,6 @@ function playVideo() {
     embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + "?autoplay=1";
   }
   $("#youtube").attr("src", embedUrl);
-  $("#pauseImg").attr("src", pauseImgSrc);
   
   backRestart = true;
   window.setTimeout(function() {
@@ -86,12 +85,10 @@ function loopVideo() {
 function pauseVideo() {
   if (!videoPaused) {
     timer.pause();
-    $("#pauseImg").attr("src", playImgSrc);
     videoPaused = true;
   }
   else {
     timer.resume();
-    $("#pauseImg").attr("src", pauseImgSrc);
     videoPaused = false;
   }
   $("#pauseOverlay").css("display", "none");
