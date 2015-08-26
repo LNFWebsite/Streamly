@@ -10,8 +10,11 @@ var videoTime = null;
 var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
+
 var videoPaused;
+var stayPaused;
 var backRestart;
+
 var timer;
 
 function Timer(callback, delay) {
@@ -54,8 +57,14 @@ function playVideo() {
   highlight(videoIteration);
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
   var embedUrl = videos[videoIteration]["url"];
+  
+  var autoplay = "";
+  if (!stayPaused) {
+    autoplay = "?autoplay=1";
+  }
+  
   if (embedUrl.search(/file:\/\//i) == -1) {
-    embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + "?autoplay=1";
+    embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + autoplay;
   }
   $("#youtube").attr("src", embedUrl);
   
@@ -79,6 +88,9 @@ function loopVideo() {
       document.title = "Streamly";
     }
   }, videos[videoIteration]["time"] + 2000);
+  if (stayPaused) {
+    timer.pause();
+  }
 }
 
 function pauseVideo() {
@@ -89,6 +101,7 @@ function pauseVideo() {
   else {
     timer.resume();
     videoPaused = false;
+    stayPaused = false;
   }
   $("#pauseOverlay").css("display", "none");
   setTimeout(function(){
@@ -102,6 +115,10 @@ function forwardVideo() {
       timer.pause();
     }
     timer = 0;
+    
+    if (videoPaused) {
+      stayPaused = true;
+    }
     loopVideo();
   }
 }
@@ -114,6 +131,10 @@ function backVideo() {
         timer.pause();
       }
       timer = 0;
+      
+      if (videoPaused) {
+        stayPaused = true;
+      }
       loopVideo();
     }
   }
