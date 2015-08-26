@@ -2,7 +2,6 @@ var placeholder = "Search, drag and drop video, or paste its URL...";
 
 var playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
 var removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
-//var pauseImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-pause-4x.png";
 
 var videoUrl;
 var videoName;
