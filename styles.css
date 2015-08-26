@@ -48,7 +48,6 @@ td, th, #main, #playlistInterface {
   text-align: center;
   margin: 110px 150px 250px 150px;
   padding: 10px;
-  border: 1px solid black;
   background: #FFF;
 }
 table, #playlistNameBox {
