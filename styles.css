@@ -107,12 +107,12 @@ td {
   float: right;
   margin-top: 3px;
   
-  opacity: 0;
-  -o-transition:.5s;
-  -ms-transition:.5s;
-  -moz-transition:.5s;
-  -webkit-transition:.5s;
-  transition:.5s;
+  opacity: 0.1;
+  -o-transition: .2s;
+  -ms-transition: .2s;
+  -moz-transition: .2s;
+  -webkit-transition: .2s;
+  transition: .2s;
 }
 .tableButton:hover {
   opacity: 1;
