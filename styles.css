@@ -46,7 +46,7 @@ td, th, #main, #playlistInterface {
 }
 #main {
   text-align: center;
-  margin: 110px 150px 250px 150px;
+  margin: 110px 12% 250px 12%;
   padding: 10px;
   background: #FFF;
 }
