@@ -79,7 +79,7 @@
         $.each(data[1], function(key, val) {
           suggestions.push({"value":val[0]});
         });
-        suggestions.length = 5; // prune suggestions list to only 5 items
+        suggestions.length = 10; // prune suggestions list to 10 items
         response(suggestions);
       };
     },
