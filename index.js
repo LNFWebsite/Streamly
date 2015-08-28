@@ -215,6 +215,10 @@ function getVideoData() {
         videoTime = videoTime * 1000;
       }
     },
+    complete: function(jqXHR, textStatus) {
+      $("#inputBox").val("").attr("placeholder", placeholder);
+      addVideo();
+    },
     error: function(jqXHR, textStatus, errorThrown) {
       videoName = prompt("Please enter the name of the video", "");
       
@@ -330,11 +334,6 @@ function input(type) {
       break;
   }
 }
-
-$(document).ajaxStop(function() {
-  $("#inputBox").val("").attr("placeholder", placeholder);
-  addVideo();
-});
 
 document.addEventListener("drop", function(event) {
   event.preventDefault();

@@ -4,7 +4,9 @@
   <title>Streamly</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico|Roboto" type="text/css" />
   <link rel="stylesheet" href="styles.css" type="text/css" />
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css" type="text/css" />
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
   <script src="jquery.xdomainajax.js"></script>
   <script src="index.js"></script>
 </head>
@@ -58,6 +60,29 @@
           break;
       }
     }
+  });
+  
+  var suggestCallBack; // global var for autocomplete jsonp
+  $("#inputBox").autocomplete({
+    source: function(request, response) {
+      $.getJSON("//suggestqueries.google.com/complete/search?callback=?",
+        {
+          "hl":"en", // Language
+          "ds":"yt", // Restrict lookup to youtube
+          "jsonp":"suggestCallBack", // jsonp callback function name
+          "q":request.term, // query term
+          "client":"youtube" // force youtube style response, i.e. jsonp
+        }
+      );
+      suggestCallBack = function(data) {
+        var suggestions = [];
+        $.each(data[1], function(key, val) {
+          suggestions.push({"value":val[0]});
+        });
+        suggestions.length = 5; // prune suggestions list to only 5 items
+        response(suggestions);
+      };
+    },
   });
   </script>
   
