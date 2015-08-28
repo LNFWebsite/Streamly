@@ -64,7 +64,7 @@
   var suggestCallBack; // global var for autocomplete jsonp
   $("#inputBox").autocomplete({
     source: function(request, response) {
-      $.getJSON("http://suggestqueries.google.com/complete/search?callback=?",
+      $.getJSON("//suggestqueries.google.com/complete/search?callback=?",
         {
           "hl":"en", // Language
           "ds":"yt", // Restrict lookup to youtube
