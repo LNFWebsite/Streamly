@@ -76,8 +76,10 @@
         suggestions = data[1];
         suggestions.length = 10;
         for(var i = 0; i < suggestions.length; i++) {
-          if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
-            suggestions.splice(i, 1);
+          if (typeof suggestions[i] !== "undefined") {
+            if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
+              suggestions.splice(i, 1);
+            }
           }
         }
         response(suggestions);
