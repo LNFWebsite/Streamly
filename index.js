@@ -169,7 +169,7 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
-    if (videos[0] != undefined) {
+    if (videos[0] !== undefined) {
       $("#playlistNameBox").val(decodeURIComponent(videos[0]));
     }
     
@@ -201,7 +201,7 @@ function getVideoData() {
         videoTime = null;
         for (iteration in data) {
           var str = data[iteration].innerHTML;
-          if (videoTime == null && typeof str != "undefined") {
+          if (videoTime == null && typeof str !== undefined) {
             videoTime = str.match(/,"length_seconds":"\d+",/g);
           }
         }
