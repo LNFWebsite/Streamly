@@ -125,6 +125,9 @@ function forwardVideo() {
 }
 
 function backVideo() {
+  if (videoPaused) {
+    stayPaused = true;
+  }
   if (!backRestart) {
     if (videoIteration - 2 > -1) {
       videoIteration = videoIteration - 2;
@@ -132,10 +135,6 @@ function backVideo() {
         timer.pause();
       }
       timer = 0;
-      
-      if (videoPaused) {
-        stayPaused = true;
-      }
       loopVideo();
     }
   }
