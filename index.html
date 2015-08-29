@@ -65,7 +65,7 @@
   $("#inputBox").autocomplete({
     delay: 100,
     source: function (request, response) {
-      var suggestURL = "http://suggestqueries.google.com/complete/search?hl=en&ds=yt&q=" + request.term + "&client=chrome";
+      var suggestURL = "//suggestqueries.google.com/complete/search?hl=en&ds=yt&q=" + request.term + "&client=chrome";
       $.ajax({
         method: 'GET',
         dataType: 'jsonp',
@@ -73,7 +73,9 @@
         url: suggestURL
       })
       .success(function(data){
-        response(data[1]);
+        suggestions = data[1];
+        suggestions.length = 10;
+        response(suggestions);
       });
     }
   });
