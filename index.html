@@ -62,7 +62,7 @@
     }
   });
   
-  var fewerIndexThanLength;
+  var unsetVarInArray;
   $("#inputBox").autocomplete({
     delay: 100,
     source: function (request, response) {
@@ -77,16 +77,16 @@
         suggestions = data[1];
         suggestions.length = 10;
         for(var i = 0; i < suggestions.length; i++) {
-          if (typeof suggestions[i] !== "undefined") {
+          if (suggestions[i] != "") {
             if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
               suggestions.splice(i, 1);
             }
           }
           else {
-            fewerIndexThanLength = true;
+            unsetVarInArray = true;
           }
         }
-        if (!fewerIndexThanLength) {
+        if (!unsetVarInArray) {
           response(suggestions);
         }
       });
