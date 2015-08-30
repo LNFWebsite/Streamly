@@ -75,10 +75,9 @@
       .success(function(data){
         suggestions = data[1];
         for (var i = 0; i < suggestions.length; i++) {
-          alert(i);
-          alert(suggestions[i].search(/htt(p|s):\/\//i));
           if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
             suggestions.splice(i, 1);
+            alert("spliced " + i);
           }
         }
         if (suggestions.length > 10) {
