@@ -174,7 +174,7 @@ function getPlaylist() {
     
     for (i = 1; i < videos.length; i++) {
       videoCounter = i;
-      var printTime = msConversion(videos[videoCounter]["time"]);
+      var printTime = msConversion(videos[videoCounter]["time"] * 1000);
       addVideoToList(videos[videoCounter]["name"], printTime);
     }
     loopVideo();
