@@ -87,7 +87,7 @@ function loopVideo() {
       $("#youtube").attr("src", "");
       document.title = "Streamly";
     }
-  }, videos[videoIteration]["time"] + 2000);
+  }, (videos[videoIteration]["time"] * 1000) + 2000);
   if (stayPaused) {
     timer.pause();
   }
@@ -233,7 +233,7 @@ function addVideo() {
   videoCounter++;
   var video = {};
   video["name"] = videoName;
-  video["time"] = videoTime;
+  video["time"] = videoTime / 1000;
   video["url"] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=/i, "");
   videos[videoCounter] = video;
   
