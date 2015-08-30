@@ -237,7 +237,7 @@ function addVideo() {
   video["url"] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=/i, "");
   videos[videoCounter] = video;
   
-  var printTime = msConversion(videoTime / 1000);
+  var printTime = msConversion(videoTime);
   
   addVideoToList(videoName, printTime);
   
