@@ -75,7 +75,6 @@
       .success(function(data){
         suggestions = data[1];
         for (var i = 10; i > -1; i--) {
-          alert(i);
           if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
             suggestions.splice(i, 1);
           }
