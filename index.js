@@ -97,7 +97,7 @@ function pauseVideo() {
   if (!videoPaused) {
     timer.pause();
     videoPaused = true;
-    if (typeof videos[0] != "undefined") {
+    if (videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
   }
