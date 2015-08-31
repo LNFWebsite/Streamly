@@ -107,6 +107,26 @@ td {
   opacity: 0;
   z-index: 2;
 }
+#progressContainer {
+  display: inline-block;
+  overflow: hidden;
+  width: 400px;
+  height: 4px;
+  border: 1px solid #333333;
+  border-radius: 999px;
+}
+#progress {
+  display: block;
+  height: 100%;
+  background-color: orange;
+  border-radius: 999px;
+  
+  -o-transition: .1s;
+  -ms-transition: .1s;
+  -moz-transition: .1s;
+  -webkit-transition: .1s;
+  transition: .1s;
+}
 .tableButton {
   background: none;
   border: none;
