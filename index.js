@@ -97,11 +97,15 @@ function pauseVideo() {
   if (!videoPaused) {
     timer.pause();
     videoPaused = true;
+    if (typeof videos[0] != "undefined") {
+      document.title = "Streamly - " + decodeURIComponent(videos[0]);
+    }
   }
   else {
     timer.resume();
     videoPaused = false;
     stayPaused = false;
+    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
   }
   $("#pauseOverlay").css("display", "none");
   setTimeout(function(){
