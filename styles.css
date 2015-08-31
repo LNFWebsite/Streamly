@@ -70,10 +70,13 @@ td {
 }
 #playlistInterface {
   background-color: black;
-  width: 400px;
+  width: 500px;
   margin: 10px auto;
   border: 0px solid transparent;
   text-align: center;
+}
+#backButton, #forwardButton {
+  margin-top: 65px;
 }
 #backButton {
   float: left;
