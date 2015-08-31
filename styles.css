@@ -20,7 +20,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 200px;
+  height: 215px;
 }
 #title {
   font-family: 'Pacifico', cursive;
@@ -46,7 +46,7 @@ td, th, #main, #playlistInterface {
 }
 #main {
   text-align: center;
-  margin: 110px 12% 250px 12%;
+  margin: 110px 12% 275px 12%;
   padding: 10px;
   background: #FFF;
 }
@@ -90,7 +90,6 @@ td {
 #youtubeContainer {
   display: inline-block;
   position: relative;
-  margin: 0px auto;
   width: 300px;
   height: 175px;
 }
@@ -107,8 +106,11 @@ td {
   opacity: 0;
   z-index: 2;
 }
-#progressContainer {
+#currentVideoTiming {
   display: inline-block;
+}
+#progressContainer {
+  display: block;
   overflow: hidden;
   width: 400px;
   height: 4px;
