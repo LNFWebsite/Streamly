@@ -82,10 +82,10 @@ td {
   transform: translateY(-50%);
 }
 #backButton {
-  float: left;
+  left: 5px;
 }
 #forwardButton {
-  float: right;
+  right: 5px;
 }
 #youtubeContainer {
   display: inline-block;
