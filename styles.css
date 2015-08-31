@@ -69,6 +69,7 @@ td {
   background-color: #FCCC99;
 }
 #playlistInterface {
+  position: relative;
   background-color: black;
   width: 500px;
   margin: 10px auto;
@@ -76,13 +77,15 @@ td {
   text-align: center;
 }
 #backButton, #forwardButton {
-  margin-top: 65px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 #backButton {
-  float: left;
+  left: 5px;
 }
 #forwardButton {
-  float: right;
+  right: 5px;
 }
 #youtubeContainer {
   display: inline-block;
