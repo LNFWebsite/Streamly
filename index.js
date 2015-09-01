@@ -100,12 +100,14 @@ function playVideo() {
   
   var percentChange = 1 / videos[videoIteration]["time"] * 100;
   var currentPercent = 0;
+  var interval = 2000;
   function progressLoop() {
     currentPercent = currentPercent + percentChange;
-    var progressTimer = new Timer(function() {
+    progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
       progressLoop();
-    }, 1000);
+    }, interval);
+    interval = 1000;
   }
   progressLoop();
 }
