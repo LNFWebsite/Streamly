@@ -120,7 +120,7 @@ td {
   right: 0;
 }
 #progressContainer {
-  display: block;
+  display: inline-block;
   overflow: hidden;
   width: 400px;
   height: 4px;
