@@ -60,7 +60,7 @@ function resetTimer(which) {
     which = 0;
 }
 
-var actionTimers = function() {
+var ActionTimers = function() {
   this.pause = function() {
     loopTimer.pause();
   }
@@ -71,6 +71,7 @@ var actionTimers = function() {
     resetTimer(loopTimer);
   }
 }
+var actionTimers = new ActionTimers();
 
 function playVideo() {
   highlight(videoIteration);
