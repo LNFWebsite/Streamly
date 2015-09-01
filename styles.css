@@ -107,7 +107,17 @@ td {
   z-index: 2;
 }
 #currentVideoTiming {
-  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+#currentTime, #videoTime {
+  color: #FFF;
+}
+#currentTime {
+  left: 0;
+}
+#videoTime {
+  right: 0;
 }
 #progressContainer {
   display: block;
