@@ -93,12 +93,12 @@ function playVideo() {
     backRestart = true;
   }, 3000);
   
-  var startTime = new Date();
-  
+  var percentChange = videos[videoIteration]["time"] / 100;
+  var currentPercent = 0;
   function progressLoop() {
+    currentPercent = currentPercent + percentChange;
     window.setTimeout(function() {
-      var currentTime = new Date() - startTime;
-      console.log("time elapsed: " + currentTime);
+      $("#progress").css("width", currentPercent + "%");
       progressLoop();
     }, 1000);
   }
