@@ -94,13 +94,14 @@ function playVideo() {
   }, 3000);
   
   var startTime = new Date();
-  /***
-  function progressLoop()
-  window.setTimeout(function() {
-    var currentTime = new Date() - startTime;
-    console.log("time elapsed: " + currentTime);
-  }, 1000);
-  ***/
+  
+  function progressLoop() {
+    window.setTimeout(function() {
+      var currentTime = new Date() - startTime;
+      console.log("time elapsed: " + currentTime);
+      progressLoop();
+    }, 1000);
+  }
 }
 
 function loopVideo() {
