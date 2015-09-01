@@ -60,7 +60,7 @@ function resetTimer(which) {
     which = 0;
 }
 
-var actionTimers = function(this) {
+var actionTimers = function() {
   this.pause = function() {
     loopTimer.pause();
   }
