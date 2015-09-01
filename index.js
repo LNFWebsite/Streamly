@@ -16,6 +16,7 @@ var stayPaused;
 var backRestart;
 
 var loopTimer;
+var progressTimer;
 
 function Timer(callback, delay) {
   var timerId, start, remaining = delay;
