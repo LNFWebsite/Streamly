@@ -72,6 +72,12 @@ function playVideo() {
   window.setTimeout(function() {
     backRestart = true;
   }, 3000);
+  
+  var startTime = new Date();
+  window.setTimeout(function() {
+    var currentTime = new Date() - startTime;
+    console.log("time elapsed: " + currentTime);
+  }, 1000);
 }
 
 function loopVideo() {
