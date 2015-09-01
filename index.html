@@ -84,7 +84,7 @@
         if (suggestions.length > 10) {
           suggestions.length = 10;
         }
-        for (var i = suggestions.length; i > -1; i--) {
+        for (var i = suggestions.length - 1; i > -1; i--) {
           if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
             suggestions.splice(i, 1);
           }
