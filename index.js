@@ -63,12 +63,16 @@ function resetTimer(which) {
 var ActionTimers = function() {
   this.pause = function() {
     loopTimer.pause();
+    progressTimer.pause();
   }
   this.resume = function() {
     loopTimer.resume();
+    progressTimer.resume();
   }
   this.clear = function() {
     resetTimer(loopTimer);
+    resetTimer(progressTimer);
+    $("#progress").css("width", "0%");
   }
 }
 var actionTimers = new ActionTimers();
@@ -97,7 +101,7 @@ function playVideo() {
   var currentPercent = 0;
   function progressLoop() {
     currentPercent = currentPercent + percentChange;
-    window.setTimeout(function() {
+    var progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
       progressLoop();
     }, 1000);
