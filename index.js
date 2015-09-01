@@ -102,6 +102,7 @@ function playVideo() {
       progressLoop();
     }, 1000);
   }
+  progressLoop();
 }
 
 function loopVideo() {
