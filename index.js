@@ -93,7 +93,7 @@ function playVideo() {
     backRestart = true;
   }, 3000);
   
-  var percentChange = videos[videoIteration]["time"] / 100;
+  var percentChange = 100 / videos[videoIteration]["time"];
   var currentPercent = 0;
   function progressLoop() {
     currentPercent = currentPercent + percentChange;
