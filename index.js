@@ -53,6 +53,25 @@ function addVideoToList(name, time) {
   "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\"><img src=\"" + playImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
+function resetTimer(which) {
+  if (which != 0) {
+      which.pause();
+    }
+    which = 0;
+}
+
+var actionTimers = function(this) {
+  this.pause = function() {
+    loopTimer.pause();
+  }
+  this.resume = function() {
+    loopTimer.resume();
+  }
+  this.clear = function() {
+    resetTimer(loopTimer);
+  }
+}
+
 function playVideo() {
   highlight(videoIteration);
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
@@ -74,6 +93,7 @@ function playVideo() {
   }, 3000);
   
   var startTime = new Date();
+  function progressLoop()
   window.setTimeout(function() {
     var currentTime = new Date() - startTime;
     console.log("time elapsed: " + currentTime);
@@ -88,27 +108,26 @@ function loopVideo() {
       loopVideo();
     }
     else {
-      loopTimer.pause();
-      loopTimer = 0;
+      actionTimers.clear();
       $("#youtube").attr("src", "");
       document.title = "Streamly";
     }
   }, (videos[videoIteration]["time"] * 1000) + 2000);
   if (stayPaused) {
-    loopTimer.pause();
+    actionTimers.pause();
   }
 }
 
 function pauseVideo() {
   if (!videoPaused) {
-    loopTimer.pause();
+    actionTimers.pause();
     videoPaused = true;
     if (videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
   }
   else {
-    loopTimer.resume();
+    actionTimers.resume();
     videoPaused = false;
     stayPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
@@ -122,10 +141,7 @@ function pauseVideo() {
 
 function forwardVideo() {
   if (videoIteration + 1 <= videoCounter) {
-    if (loopTimer != 0) {
-      loopTimer.pause();
-    }
-    loopTimer = 0;
+    actionTimers.clear();
     
     if (videoPaused) {
       stayPaused = true;
@@ -141,19 +157,13 @@ function backVideo() {
   if (!backRestart) {
     if (videoIteration - 2 > -1) {
       videoIteration = videoIteration - 2;
-      if (loopTimer != 0) {
-        loopTimer.pause();
-      }
-      loopTimer = 0;
+      actionTimers.clear();
       loopVideo();
     }
   }
   else {
     videoIteration = videoIteration - 1;
-    if (loopTimer != 0) {
-      loopTimer.pause();
-    }
-    loopTimer = 0;
+    actionTimers.clear();
     loopVideo();
   }
 }
@@ -261,10 +271,7 @@ function addVideo() {
 function actionPlayVideo(element) {
   var index = $(".playButton").index(element);
   videoIteration = index;
-  if (loopTimer != 0) {
-    loopTimer.pause();
-  }
-  loopTimer = 0;
+  actionTimers.clear();
   loopVideo();
 }
 
@@ -276,10 +283,7 @@ function actionRemoveVideo(element) {
       videoIteration--;
     }
     else {
-      if (loopTimer != 0) {
-        loopTimer.pause();
-      }
-      loopTimer = 0;
+      actionTimers.clear();
       $("#youtube").attr("src", "");
       document.title = "Streamly";
       videoIteration--;
