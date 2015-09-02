@@ -10,6 +10,7 @@ var videoTime = null;
 var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
+var bufferTime = 2000;
 
 var videoPaused;
 var stayPaused;
@@ -74,6 +75,7 @@ var ActionTimers = function() {
     resetTimer(loopTimer);
     resetTimer(progressTimer);
     $("#progress").css("width", "0%");
+    $("#videoTime").text("0:00");
   }
 }
 var actionTimers = new ActionTimers();
@@ -83,7 +85,7 @@ function videoProgress() {
   var iteration = 0;
   var percentChange = 1 / videos[videoIteration]["time"] * 100;
   var currentPercent = 0;
-  var interval = 2000;
+  var interval = bufferTime;
   function progressLoop() {
     iteration++;
     currentPercent = currentPercent + percentChange;
@@ -105,9 +107,6 @@ function playVideo() {
   var autoplay = "";
   if (!stayPaused) {
     autoplay = "?autoplay=1";
-  }
-  else {
-    $("#videoTime").text("0:00");
   }
   
   if (embedUrl.search(/file:\/\//i) == -1) {
@@ -135,7 +134,7 @@ function loopVideo() {
       $("#youtube").attr("src", "");
       document.title = "Streamly";
     }
-  }, (videos[videoIteration]["time"] * 1000) + 2000);
+  }, (videos[videoIteration]["time"] * 1000) + bufferTime);
   if (stayPaused) {
     actionTimers.pause();
   }
