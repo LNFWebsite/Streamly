@@ -136,7 +136,12 @@ function loopVideo() {
     else {
       actionTimers.clear();
       $("#youtube").attr("src", "");
-      document.title = "Streamly";
+      if (videos[0] !== null && videos[0] !== undefined) {
+        document.title = "Streamly - " + decodeURIComponent(videos[0]);
+      }
+      else {
+        document.title = "Streamly";
+      }
     }
   }, (videos[videoIteration]["time"] * 1000) + bufferTime);
   
