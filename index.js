@@ -15,7 +15,8 @@ var videoPaused;
 var stayPaused;
 var backRestart;
 
-var timer;
+var loopTimer;
+var progressTimer;
 
 function Timer(callback, delay) {
   var timerId, start, remaining = delay;
@@ -53,6 +54,49 @@ function addVideoToList(name, time) {
   "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\"><img src=\"" + playImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
 }
 
+function resetTimer(which) {
+  if (which != 0) {
+      which.pause();
+    }
+    which = 0;
+}
+
+var ActionTimers = function() {
+  this.pause = function() {
+    loopTimer.pause();
+    progressTimer.pause();
+  }
+  this.resume = function() {
+    loopTimer.resume();
+    progressTimer.resume();
+  }
+  this.clear = function() {
+    resetTimer(loopTimer);
+    resetTimer(progressTimer);
+    $("#progress").css("width", "0%");
+  }
+}
+var actionTimers = new ActionTimers();
+
+function videoProgress() {
+  $("#videoTime").text(msConversion(videos[videoIteration]["time"] * 1000));
+  var iteration = 0;
+  var percentChange = 1 / videos[videoIteration]["time"] * 100;
+  var currentPercent = 0;
+  var interval = 2000;
+  function progressLoop() {
+    iteration++;
+    currentPercent = currentPercent + percentChange;
+    progressTimer = new Timer(function() {
+      $("#progress").css("width", currentPercent + "%");
+      $("#currentTime").text(msConversion(iteration * 1000));
+      progressLoop();
+    }, interval);
+    interval = 1000;
+  }
+  progressLoop();
+}
+
 function playVideo() {
   highlight(videoIteration);
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
@@ -72,37 +116,38 @@ function playVideo() {
   window.setTimeout(function() {
     backRestart = true;
   }, 3000);
+  
+  videoProgress();
 }
 
 function loopVideo() {
   videoIteration++;
   playVideo();
-  timer = new Timer(function() {
+  loopTimer = new Timer(function() {
     if (videoIteration < videoCounter) {
       loopVideo();
     }
     else {
-      timer.pause();
-      timer = 0;
+      actionTimers.clear();
       $("#youtube").attr("src", "");
       document.title = "Streamly";
     }
   }, (videos[videoIteration]["time"] * 1000) + 2000);
   if (stayPaused) {
-    timer.pause();
+    actionTimers.pause();
   }
 }
 
 function pauseVideo() {
   if (!videoPaused) {
-    timer.pause();
+    actionTimers.pause();
     videoPaused = true;
-    if (typeof videos[0] != "undefined") {
+    if (videos[0] !== null && videos[0] !== undefined) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
   }
   else {
-    timer.resume();
+    actionTimers.resume();
     videoPaused = false;
     stayPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
@@ -116,10 +161,7 @@ function pauseVideo() {
 
 function forwardVideo() {
   if (videoIteration + 1 <= videoCounter) {
-    if (timer != 0) {
-      timer.pause();
-    }
-    timer = 0;
+    actionTimers.clear();
     
     if (videoPaused) {
       stayPaused = true;
@@ -135,19 +177,13 @@ function backVideo() {
   if (!backRestart) {
     if (videoIteration - 2 > -1) {
       videoIteration = videoIteration - 2;
-      if (timer != 0) {
-        timer.pause();
-      }
-      timer = 0;
+      actionTimers.clear();
       loopVideo();
     }
   }
   else {
     videoIteration = videoIteration - 1;
-    if (timer != 0) {
-      timer.pause();
-    }
-    timer = 0;
+    actionTimers.clear();
     loopVideo();
   }
 }
@@ -247,7 +283,7 @@ function addVideo() {
   
   setPlaylist();
   
-  if (videoCounter == 1 || timer == 0) {
+  if (videoCounter == 1 || loopTimer == 0) {
     loopVideo();
   }
 }
@@ -255,10 +291,7 @@ function addVideo() {
 function actionPlayVideo(element) {
   var index = $(".playButton").index(element);
   videoIteration = index;
-  if (timer != 0) {
-    timer.pause();
-  }
-  timer = 0;
+  actionTimers.clear();
   loopVideo();
 }
 
@@ -270,10 +303,7 @@ function actionRemoveVideo(element) {
       videoIteration--;
     }
     else {
-      if (timer != 0) {
-        timer.pause();
-      }
-      timer = 0;
+      actionTimers.clear();
       $("#youtube").attr("src", "");
       document.title = "Streamly";
       videoIteration--;
