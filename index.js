@@ -108,7 +108,7 @@ function playVideo() {
     currentPercent = currentPercent + percentChange;
     progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
-      $("#videoTime").val(msConversion(iteration * 1000));
+      $("#currentTime").val(msConversion(iteration * 1000));
       progressLoop();
     }, interval);
     interval = 1000;
