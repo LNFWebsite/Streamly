@@ -82,19 +82,15 @@ var actionTimers = new ActionTimers();
 
 function videoProgress() {
   $("#videoTime").text(msConversion(videos[videoIteration]["time"] * 1000));
-  var iteration = 0;
-  var percentChange = 1 / videos[videoIteration]["time"] * 100;
-  var currentPercent = 0;
-  var interval = bufferTime;
+  var startTime = new Date();
   function progressLoop() {
-    iteration++;
-    currentPercent = currentPercent + percentChange;
+    var currentTime = new Date() - startTime;
+    var currentPercent = currentTime / (videos[videoIteration]["time"] * 1000) * 100;
     progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
-      $("#currentTime").text(msConversion(iteration * 1000));
+      $("#currentTime").text(msConversion(currentTime));
       progressLoop();
-    }, interval);
-    interval = 1000;
+    }, 1000);
   }
   progressLoop();
 }
