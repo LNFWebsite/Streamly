@@ -79,7 +79,7 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  $("#videoTime").text(msConversion(videos[videoIteration]["time"]));
+  $("#videoTime").text(msConversion(videos[videoIteration]["time"] * 1000));
   var iteration = 0;
   var percentChange = 1 / videos[videoIteration]["time"] * 100;
   var currentPercent = 0;
