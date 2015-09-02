@@ -117,8 +117,6 @@ function playVideo() {
   }
   $("#youtube").attr("src", embedUrl);
   
-  videoProgress();
-  
   backRestart = false;
   window.setTimeout(function() {
     backRestart = true;
@@ -139,6 +137,7 @@ function loopVideo() {
       document.title = "Streamly";
     }
   }, (videos[videoIteration]["time"] * 1000) + bufferTime);
+  videoProgress();
   if (stayPaused) {
     actionTimers.pause();
   }
