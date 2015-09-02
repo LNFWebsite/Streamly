@@ -21,7 +21,7 @@ var progressTimer;
 
 function Timer(callback, delay) {
   var id, started, remaining = delay, running;
-  this.start = function() {
+  this.resume = function() {
     running = true;
     started = new Date();
     id = window.setTimeout(callback, remaining);
