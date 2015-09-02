@@ -127,6 +127,7 @@ function loopVideo() {
   playVideo();
   loopTimer = new Timer(function() {
     if (videoIteration < videoCounter) {
+      actionTimers.clear();
       loopVideo();
     }
     else {
