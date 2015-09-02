@@ -130,7 +130,7 @@ td {
 #progress {
   display: block;
   height: 100%;
-  background-color: orange;
+  background-color: #F77F00;
   border-radius: 999px;
   
   -o-transition: 1.5s;
