@@ -98,13 +98,17 @@ function playVideo() {
     backRestart = true;
   }, 3000);
   
+  $("#videoTime").val(msConversion(videos[videoIteration]["time"]));
+  var iteration = 0;
   var percentChange = 1 / videos[videoIteration]["time"] * 100;
   var currentPercent = 0;
   var interval = 2000;
   function progressLoop() {
+    iteration++;
     currentPercent = currentPercent + percentChange;
     progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
+      $("#videoTime").val(msConversion(iteration * 1000));
       progressLoop();
     }, interval);
     interval = 1000;
@@ -134,7 +138,7 @@ function pauseVideo() {
   if (!videoPaused) {
     actionTimers.pause();
     videoPaused = true;
-    if (videos[0] !== null) {
+    if (videos[0] !== null && videos[0] !== undefined) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
   }
