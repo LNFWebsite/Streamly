@@ -1,3 +1,5 @@
+//! License: MIT Adapted (as stated in the LICENSE file)
+
 var placeholder = "Search, drag and drop video, or paste its URL...";
 
 var playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
