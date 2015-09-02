@@ -23,20 +23,28 @@ var loopTimer;
 var progressTimer;
 
 function Timer(callback, delay) {
-  var timerId, start, remaining = delay;
-
+  var id, started, remaining = delay, running;
+  this.start = function() {
+    running = true;
+    started = new Date();
+    id = window.setTimeout(callback, remaining);
+  }
   this.pause = function() {
-      window.clearTimeout(timerId);
-      remaining -= new Date() - start;
-  };
-
-  this.resume = function() {
-      start = new Date();
-      window.clearTimeout(timerId);
-      timerId = window.setTimeout(callback, remaining);
-  };
-  
-  this.resume();
+    running = false;
+    window.clearTimeout(id);
+    remaining -= new Date() - started;
+  }
+  this.getTimeLeft = function() {
+    if (running) {
+      this.pause();
+      this.start();
+    }
+    return remaining;
+  }
+  this.getStateRunning = function() {
+    return running;
+  }
+  this.start();
 }
 
 function msConversion(millis) {
