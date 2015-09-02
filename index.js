@@ -34,14 +34,14 @@ function Timer(callback, delay) {
   this.getTimeLeft = function() {
     if (running) {
       this.pause();
-      this.start();
+      this.resume();
     }
     return remaining;
   }
   this.getStateRunning = function() {
     return running;
   }
-  this.start();
+  this.resume();
 }
 
 function msConversion(millis) {
