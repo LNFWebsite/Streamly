@@ -87,7 +87,7 @@ var actionTimers = new ActionTimers();
 
 function videoProgress() {
   $("#videoTime").text(msConversion(videos[videoIteration]["time"] * 1000));
-  var startTime = new Date();
+  var startTime = new Date() + bufferTime;
   function progressLoop() {
     var currentTime = new Date() - timeProgressPaused - startTime;
     var currentPercent = currentTime / (videos[videoIteration]["time"] * 1000) * 100;
