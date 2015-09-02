@@ -115,12 +115,12 @@ function playVideo() {
   }
   $("#youtube").attr("src", embedUrl);
   
+  videoProgress();
+  
   backRestart = false;
   window.setTimeout(function() {
     backRestart = true;
   }, 3000);
-  
-  videoProgress();
 }
 
 function loopVideo() {
