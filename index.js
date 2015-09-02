@@ -98,9 +98,7 @@ function videoProgress() {
         $("#progress").css("width", currentPercent + "%");
         $("#currentTime").text(msConversion(currentTime));
       }
-      if (loopTimer.getStateRunning() === true) {
-        progressLoop();
-      }
+      progressLoop();
     }, 500);
   }
   progressLoop();
@@ -294,7 +292,7 @@ function addVideo() {
   
   setPlaylist();
   
-  if (videoCounter == 1 || loopTimer == 0) {
+  if (videoCounter == 1 || loopTimer.getStateRunning() === false) {
     loopVideo();
   }
 }
