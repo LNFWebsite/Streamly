@@ -85,7 +85,7 @@ function videoProgress() {
   var startTime = new Date();
   var currentTime = 0;
   function progressLoop() {
-    var currentTime = new Date() - currentTime - startTime;
+    var currentTime = new Date() - startTime;
     var currentPercent = currentTime / (videos[videoIteration]["time"] * 1000) * 100;
     progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
