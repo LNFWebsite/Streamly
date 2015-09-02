@@ -106,6 +106,9 @@ function playVideo() {
   if (!stayPaused) {
     autoplay = "?autoplay=1";
   }
+  else {
+    $("#videoTime").text("0:00");
+  }
   
   if (embedUrl.search(/file:\/\//i) == -1) {
     embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + autoplay;
