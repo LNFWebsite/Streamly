@@ -98,7 +98,9 @@ function videoProgress() {
         $("#progress").css("width", currentPercent + "%");
         $("#currentTime").text(msConversion(currentTime));
       }
-      progressLoop();
+      if (loopTimer.getStateRunning() === true) {
+        progressLoop();
+      }
     }, 500);
   }
   progressLoop();
