@@ -12,9 +12,6 @@ var videoCounter = 0;
 var videoIteration = 0;
 var bufferTime = 2000;
 
-var pauseProgressTime;
-var timeProgressPaused = 0;
-
 var videoPaused;
 var stayPaused;
 var backRestart;
@@ -23,20 +20,28 @@ var loopTimer;
 var progressTimer;
 
 function Timer(callback, delay) {
-  var timerId, start, remaining = delay;
-
+  var id, started, remaining = delay, running;
+  this.start = function() {
+    running = true;
+    started = new Date();
+    id = window.setTimeout(callback, remaining);
+  }
   this.pause = function() {
-      window.clearTimeout(timerId);
-      remaining -= new Date() - start;
-  };
-
-  this.resume = function() {
-      start = new Date();
-      window.clearTimeout(timerId);
-      timerId = window.setTimeout(callback, remaining);
-  };
-  
-  this.resume();
+    running = false;
+    window.clearTimeout(id);
+    remaining -= new Date() - started;
+  }
+  this.getTimeLeft = function() {
+    if (running) {
+      this.pause();
+      this.start();
+    }
+    return remaining;
+  }
+  this.getStateRunning = function() {
+    return running;
+  }
+  this.start();
 }
 
 function msConversion(millis) {
@@ -69,11 +74,9 @@ var ActionTimers = function() {
   this.pause = function() {
     loopTimer.pause();
     progressTimer.pause();
-    pauseProgressTime = new Date();
   }
   this.resume = function() {
     loopTimer.resume();
-    timeProgressPaused = timeProgressPaused + (new Date() - pauseProgressTime);
     progressTimer.resume();
   }
   this.clear = function() {
@@ -87,9 +90,8 @@ var actionTimers = new ActionTimers();
 
 function videoProgress() {
   $("#videoTime").text(msConversion(videos[videoIteration]["time"] * 1000));
-  var startTime = new Date() + bufferTime;
   function progressLoop() {
-    var currentTime = new Date() - timeProgressPaused - startTime;
+    var currentTime = (videos[videoIteration]["time"] * 1000) - loopTimer.getTimeLeft();
     var currentPercent = currentTime / (videos[videoIteration]["time"] * 1000) * 100;
     progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
@@ -119,8 +121,6 @@ function playVideo() {
   window.setTimeout(function() {
     backRestart = true;
   }, 3000);
-  
-  videoProgress();
 }
 
 function loopVideo() {
@@ -137,6 +137,7 @@ function loopVideo() {
       document.title = "Streamly";
     }
   }, (videos[videoIteration]["time"] * 1000) + bufferTime);
+  videoProgress();
   if (stayPaused) {
     actionTimers.pause();
   }
