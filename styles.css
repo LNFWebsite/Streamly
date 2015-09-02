@@ -133,11 +133,11 @@ td {
   background-color: #F77F00;
   border-radius: 999px;
   
-  -o-transition: 1.5s;
-  -ms-transition: 1.5s;
-  -moz-transition: 1.5s;
-  -webkit-transition: 1.5s;
-  transition: 1.5s;
+  -o-transition: .2s;
+  -ms-transition: .2s;
+  -moz-transition: .2s;
+  -webkit-transition: .2s;
+  transition: .2s;
 }
 .tableButton {
   background: none;
