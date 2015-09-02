@@ -12,9 +12,6 @@ var videoCounter = 0;
 var videoIteration = 0;
 var bufferTime = 2000;
 
-var pauseProgressTime;
-var timeProgressPaused = 0;
-
 var videoPaused;
 var stayPaused;
 var backRestart;
@@ -77,11 +74,9 @@ var ActionTimers = function() {
   this.pause = function() {
     loopTimer.pause();
     progressTimer.pause();
-    pauseProgressTime = new Date();
   }
   this.resume = function() {
     loopTimer.resume();
-    timeProgressPaused = timeProgressPaused + (new Date() - pauseProgressTime);
     progressTimer.resume();
   }
   this.clear = function() {
@@ -95,9 +90,8 @@ var actionTimers = new ActionTimers();
 
 function videoProgress() {
   $("#videoTime").text(msConversion(videos[videoIteration]["time"] * 1000));
-  var startTime = new Date() + bufferTime;
   function progressLoop() {
-    var currentTime = new Date() - timeProgressPaused - startTime;
+    var currentTime = (videos[videoIteration]["time"] * 1000) - loopTimer.getTimeLeft();
     var currentPercent = currentTime / (videos[videoIteration]["time"] * 1000) * 100;
     progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
