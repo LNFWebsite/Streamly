@@ -98,11 +98,13 @@ function videoProgress() {
     var currentTime = (time + waitEndTime) - loopTimer.getTimeLeft();
     var currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
-      if (currentTime > 0 && currentTime <= time) {
+      if (currentTime > 0) {
         $("#progress").css("width", currentPercent + "%");
         $("#currentTime").text(msConversion(currentTime));
       }
-      progressLoop();
+      if (currentTime < time) {
+        progressLoop();
+      }
     }, 500);
   }
   progressLoop();
