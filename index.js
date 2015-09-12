@@ -13,7 +13,7 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 var bufferTime = 2000;
-var waitEndTime = 1000;
+var waitEndTime = 5000;
 
 var videoPaused;
 var stayPaused;
