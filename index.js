@@ -92,12 +92,13 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  $("#videoTime").text(msConversion(videos[videoIteration]["time"] * 1000));
+  var time = videos[videoIteration]["time"] * 1000;
+  $("#videoTime").text(msConversion(time));
   function progressLoop() {
-    var currentTime = (videos[videoIteration]["time"] * 1000) + waitEndTime - loopTimer.getTimeLeft();
-    var currentPercent = currentTime / (videos[videoIteration]["time"] * 1000) * 100;
+    var currentTime = time + waitEndTime - loopTimer.getTimeLeft();
+    var currentPercent = currentTime / time * 100;
     progressTimer = new Timer(function() {
-      if (currentTime > 0) {
+      if (currentTime > 0 && currentTime <= time) {
         $("#progress").css("width", currentPercent + "%");
         $("#currentTime").text(msConversion(currentTime));
       }
