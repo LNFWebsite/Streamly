@@ -13,6 +13,7 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 var bufferTime = 2000;
+var waitEndTime = 1000;
 
 var videoPaused;
 var stayPaused;
@@ -93,7 +94,7 @@ var actionTimers = new ActionTimers();
 function videoProgress() {
   $("#videoTime").text(msConversion(videos[videoIteration]["time"] * 1000));
   function progressLoop() {
-    var currentTime = (videos[videoIteration]["time"] * 1000) - loopTimer.getTimeLeft();
+    var currentTime = (videos[videoIteration]["time"] * 1000) - loopTimer.getTimeLeft() - waitEndTime;
     var currentPercent = currentTime / (videos[videoIteration]["time"] * 1000) * 100;
     progressTimer = new Timer(function() {
       if (currentTime > 0) {
@@ -145,7 +146,7 @@ function loopVideo() {
         document.title = "Streamly";
       }
     }
-  }, (videos[videoIteration]["time"] * 1000) + bufferTime);
+  }, (videos[videoIteration]["time"] * 1000) + bufferTime + waitEndTime);
   
   videoProgress();
   
