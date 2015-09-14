@@ -87,6 +87,7 @@ var ActionTimers = function() {
     resetTimer(progressTimer);
     $("#progress").css("width", "0%");
     $("#currentTime").text("0:00");
+    $("#videoTime").text("0:00");
   }
 }
 var actionTimers = new ActionTimers();
