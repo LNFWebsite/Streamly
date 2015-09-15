@@ -312,6 +312,9 @@ function addVideo() {
 function actionPlayVideo(element) {
   var index = $(".playButton").index(element);
   videoIteration = index;
+  if (videoPaused) {
+    stayPaused = true;
+  }
   actionTimers.clear();
   loopVideo();
 }
