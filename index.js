@@ -304,7 +304,7 @@ function addVideo() {
   
   setPlaylist();
   
-  if (videoCounter == 1 || loopTimer.getStateRunning() === false) {
+  if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
   }
 }
