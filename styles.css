@@ -159,16 +159,16 @@ td {
   width: 20px;
 }
 /* Styles for draggable videosTable */
-body.dragging, body.dragging * {
-  cursor: move !important;
+.dragging {
+  cursor: move;
 }
-#videosTable .placeholder {
+.placeholder {
   position: relative;
   margin: 0;
   padding: 0;
   border: none;
 }
-#videosTable .placeholder:before {
+.placeholder:before {
   position: absolute;
   content: "";
   width: 0;
