@@ -107,6 +107,7 @@
     },
     onDrop: function ($item, container, _super) {
       console.log("moved from " + oldIndex + " to " + $item.index());
+      actionMoveVideo(oldIndex, $item.index());
     }
   });
   </script>
