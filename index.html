@@ -9,7 +9,7 @@
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
   <script src="jquery.xdomainajax.js"></script>
-  <script src="//cdn.rawgit.com/voidberg/html5sortable/d218f422cd6935c9526bc0d3ad67025716d0c5b8/dist/html.sortable.min.js"></script>
+  <script src="https://cdn.rawgit.com/johnny/jquery-sortable/35f4ffaf5802ebf61202279cbab5037edf2af82a/source/js/jquery-sortable-min.js"></script>
   <script src="index.js"></script>
 </head>
 <body>
@@ -96,8 +96,15 @@
     }
   });
   
-  $("#videosTable").sortable().bind("sortupdate", function(e, ui) {
-    console.log(ui.oldindex + " moved to " + ui.index);
+  //$("#videosTable").sortable();//.bind("sortupdate", function(e, ui) {
+    //console.log(ui.oldindex + " moved to " + ui.index);
+  //});
+  
+  $("#videosTable").sortable({
+    containerSelector: "table",
+    itemPath: "> tbody",
+    itemSelector: "tr",
+    placeholder: "<tr class=\"placeholder\"/>"
   });
   </script>
   
