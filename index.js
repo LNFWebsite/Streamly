@@ -47,6 +47,10 @@ function Timer(callback, delay) {
   this.resume();
 }
 
+Array.prototype.move = function(from, to) {
+  this.splice(to, 0, this.splice(from, 1)[0]);
+};
+
 function msConversion(millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -340,6 +344,15 @@ function actionRemoveVideo(element) {
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
+}
+
+function actionMoveVideo(oldIndex, newIndex) {
+  oldIndex++;
+  newIndex++;
+  videos.move(oldIndex, newIndex);
+  if (oldIndex == videoIteration) {
+    videoIteration = newIndex;
+  }
 }
 
 function urlValidate(url) {
