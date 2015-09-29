@@ -96,20 +96,23 @@
     }
   });
   
-  var oldIndex;
-  $("#videosTable").sortable({
-    containerSelector: "table",
-    itemPath: "> tbody",
-    itemSelector: "tr",
-    placeholder: "<tr class=\"placeholder\"/>",
-    onDragStart: function ($item, container, _super) {
-      oldIndex = $item.index();
-    },
-    onDrop: function ($item, container, _super) {
-      console.log("moved from " + oldIndex + " to " + $item.index());
-      actionMoveVideo(oldIndex, $item.index());
-    }
-  });
+  function makeSortable() {
+    var oldIndex;
+    $("#videosTable").sortable({
+      containerSelector: "table",
+      itemPath: "> tbody",
+      itemSelector: "tr",
+      placeholder: "<tr class=\"placeholder\"/>",
+      onDragStart: function ($item, container, _super) {
+        oldIndex = $item.index();
+      },
+      onDrop: function ($item, container, _super) {
+        console.log("moved from " + oldIndex + " to " + $item.index());
+        actionMoveVideo(oldIndex, $item.index());
+      }
+    });
+  }
+  makeSortable();
   </script>
   
   <!-- Start of StatCounter Code for Default Guide -->
