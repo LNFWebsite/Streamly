@@ -5,9 +5,11 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico|Roboto" type="text/css" />
   <link rel="stylesheet" href="styles.css" type="text/css" />
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css" type="text/css" />
+  
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
   <script src="jquery.xdomainajax.js"></script>
+  <script src="//cdn.rawgit.com/voidberg/html5sortable/d218f422cd6935c9526bc0d3ad67025716d0c5b8/dist/html.sortable.min.js"></script>
   <script src="index.js"></script>
 </head>
 <body>
@@ -92,6 +94,10 @@
         response(suggestions);
       });
     }
+  });
+  
+  $("#videosTable").sortable().bind("sortupdate", function(e, ui) {
+    console.log(ui.oldindex + " moved to " + ui.index);
   });
   </script>
   
