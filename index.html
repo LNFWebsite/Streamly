@@ -96,15 +96,18 @@
     }
   });
   
-  //$("#videosTable").sortable();//.bind("sortupdate", function(e, ui) {
-    //console.log(ui.oldindex + " moved to " + ui.index);
-  //});
-  
+  var oldIndex;
   $("#videosTable").sortable({
     containerSelector: "table",
     itemPath: "> tbody",
     itemSelector: "tr",
-    placeholder: "<tr class=\"placeholder\"/>"
+    placeholder: "<tr class=\"placeholder\"/>",
+    onDragStart: function ($item, container, _super) {
+      oldIndex = $item.index();
+    },
+    onDrop: function ($item, container, _super) {
+      console.log("moved from " + oldIndex + " to " + $item.index());
+    }
   });
   </script>
   
