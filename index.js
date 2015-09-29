@@ -307,6 +307,7 @@ function addVideo() {
   addVideoToList(videoName, printTime);
   
   setPlaylist();
+  $("#videosTable").sortable("refresh");
   
   if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
@@ -344,6 +345,7 @@ function actionRemoveVideo(element) {
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
+  $("#videosTable").sortable("refresh");
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
