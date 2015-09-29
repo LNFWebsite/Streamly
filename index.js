@@ -48,7 +48,7 @@ function Timer(callback, delay) {
 }
 
 Array.prototype.move = function(from, to) {
-    this.splice(to, 0, this.splice(from, 1)[0]);
+  this.splice(to, 0, this.splice(from, 1)[0]);
 };
 
 function msConversion(millis) {
@@ -347,8 +347,8 @@ function actionRemoveVideo(element) {
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
-  oldIndex = oldIndex + 2;
-  newIndex = newIndex + 2;
+  oldIndex++;
+  newIndex++;
   videos.move(oldIndex, newIndex);
   if (oldIndex == videoIteration) {
     videoIteration = newIndex;
