@@ -97,6 +97,7 @@
   });
   
   function makeSortable() {
+    $("#videosTable").sortable("destroy");
     var oldIndex;
     $("#videosTable").sortable({
       containerSelector: "table",
