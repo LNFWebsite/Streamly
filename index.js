@@ -309,8 +309,6 @@ function addVideo() {
   setPlaylist();
   makeSortable();
   
-  $("#gettingStarted").remove();
-  
   if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
   }
