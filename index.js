@@ -51,6 +51,23 @@ Array.prototype.move = function(from, to) {
   this.splice(to, 0, this.splice(from, 1)[0]);
 };
 
+function makeSortable() {
+  $("#videosTable").sortable("destroy");
+  var oldIndex;
+  $("#videosTable").sortable({
+    containerSelector: "table",
+    itemPath: "> tbody",
+    itemSelector: "tr",
+    placeholder: "<tr class=\"placeholder\"/>",
+    onDragStart: function ($item, container, _super) {
+      oldIndex = $item.index();
+    },
+    onDrop: function ($item, container, _super) {
+      actionMoveVideo(oldIndex, $item.index());
+    }
+  });
+}
+
 function msConversion(millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -307,6 +324,7 @@ function addVideo() {
   addVideoToList(videoName, printTime);
   
   setPlaylist();
+  makeSortable();
   
   if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
@@ -344,6 +362,7 @@ function actionRemoveVideo(element) {
   videos.splice(index, 1);
   $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
+  makeSortable();
 }
 
 function actionMoveVideo(oldIndex, newIndex) {

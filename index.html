@@ -45,6 +45,7 @@
   </footer>
   <script>
   getPlaylist();
+  makeSortable();
   
   $("#inputBox").on("paste", function() {
     setTimeout(function() {
@@ -93,21 +94,6 @@
         }
         response(suggestions);
       });
-    }
-  });
-  
-  var oldIndex;
-  $("#videosTable").sortable({
-    containerSelector: "table",
-    itemPath: "> tbody",
-    itemSelector: "tr",
-    placeholder: "<tr class=\"placeholder\"/>",
-    onDragStart: function ($item, container, _super) {
-      oldIndex = $item.index();
-    },
-    onDrop: function ($item, container, _super) {
-      console.log("moved from " + oldIndex + " to " + $item.index());
-      actionMoveVideo(oldIndex, $item.index());
     }
   });
   </script>
