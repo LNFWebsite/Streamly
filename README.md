@@ -7,7 +7,7 @@ Streamly is a client side YouTube video streaming page.
 
 Our motto is simplicity which is why we do not use any external API's to manipulate YouTube's native HTML5 video frame.
 
-Our goal is to create a simple way to consecutively play YouTube videos similar to YouTube's current playlist functionality with the difference of being able to add videos to the queue at any time.
+Our goal is to create a simple way to consecutively play YouTube videos similar to YouTube's current playlist functionality with the difference of being able to manipulate the queue at any time.
 
 For any questions or comments, please leave an Issue.
 
@@ -17,9 +17,25 @@ Go to our website! <http://streamly.us.to>
 
 Or clone us into your web server...
 
-## How does Streamly work?
+## What makes Streamly different?
 
-Streamly is written in Javascript. Every aspect of Streamly is controlled by the user (it does not and cannot get its information from anywhere else than the user's browser).
+Streamly is the first ever YouTube video player that prides itself in not using a single proprietary API! This essentially means that Streamly runs entirely in your browser and only accesses what is publicly available to anyone on the internet.
+
+## Why does that matter?
+
+In the cases of other YouTube player projects that use a company key to access YouTube content, the product has been proven to be short-lived in that it is hard to upkeep with changing standards in the often-complicated world of specifications given by YouTube for doing simple tasks.
+
+I have found it long overdue to find a project that, unlike a service, does not store any information of its own nor unnecessarily requires private parties to collect data from.
+
+## So... how does Streamly do it?
+
+Streamly essentially runs as a helper to the YouTube embed player. It retrieves public data about the video such as the title and time of the video readily accessible on the net. It then builds a playlist off of these values and plays each video in a native embed player.
+
+Following our policy of not using proprietary systems or storing any data on our own, the playlist you create is stored in the URL (or web address) of Streamly. This allows you to store it as a bookmark, create a short link from it by throwing it into a link shortener such as <https://tiny.cc> or <https://bit.ly>, throw it into a text file on your computer, or hand copy it down to a piece of paper (nuts but I've tried it before).
+
+And, you don't have to worry about losing anything because Streamly requires nothing other than the playlist you create.
+
+## No, really... How does Streamly work?
 
 Streamly gets its video metadata by using the [YQL Console](https://developer.yahoo.com/yql/console/) developed by Yahoo to parse YouTube for the video's name and length.
 
