@@ -365,7 +365,7 @@ function makeSortable() {
     itemPath: "> tbody",
     itemSelector: "tr",
     placeholder: "<tr class=\"placeholder\"/>",
-    delay: 100,
+    delay: 50,
     onDragStart: function ($item, container, _super) {
       oldIndex = $item.index();
     },
