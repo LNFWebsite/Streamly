@@ -51,6 +51,23 @@ Array.prototype.move = function(from, to) {
   this.splice(to, 0, this.splice(from, 1)[0]);
 };
 
+function makeSortable() {
+  $("#videosTable").sortable("destroy");
+  var oldIndex;
+  $("#videosTable").sortable({
+    containerSelector: "table",
+    itemPath: "> tbody",
+    itemSelector: "tr",
+    placeholder: "<tr class=\"placeholder\"/>",
+    onDragStart: function ($item, container, _super) {
+      oldIndex = $item.index();
+    },
+    onDrop: function ($item, container, _super) {
+      actionMoveVideo(oldIndex, $item.index());
+    }
+  });
+}
+
 function msConversion(millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
