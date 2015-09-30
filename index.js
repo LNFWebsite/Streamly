@@ -349,11 +349,15 @@ function actionRemoveVideo(element) {
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
-  oldIndex++;
-  newIndex++;
   videos.move(oldIndex, newIndex);
   if (oldIndex == videoIteration) {
     videoIteration = newIndex;
+  }
+  else if (oldIndex < videoIteration && newIndex >= videoIteration) {
+    videoIteration--;
+  }
+  else if (oldIndex > videoIteration && newIndex <= videoIteration) {
+    videoIteration++;
   }
 }
 
@@ -370,7 +374,7 @@ function makeSortable() {
       oldIndex = $item.index();
     },
     onDrop: function ($item, container, _super) {
-      actionMoveVideo(oldIndex, $item.index());
+      actionMoveVideo(oldIndex + 1, $item.index() + 1);
       setPlaylist();
     }
   });
