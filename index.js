@@ -125,9 +125,7 @@ function playVideo() {
     autoplay = "?autoplay=1";
   }
   
-  if (embedUrl.search(/file:\/\//i) == -1) {
-    embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + autoplay;
-  }
+  embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + autoplay;
   $("#youtube").attr("src", embedUrl);
   
   backRestart = false;
@@ -382,12 +380,11 @@ function makeSortable() {
 
 function urlValidate(url) {
   var isValidYouTube = /^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=.+$/i;
-  var isValidFile = /^file:\/\/.+$/i;
   
   url = url.trim();
-  url = url.replace(/&list=.+/g, "");
+  url = url.replace(/&index=.+/i, "").replace(/&list=.+/i, "");
   
-  if (url.search(isValidYouTube) > -1 || url.search(isValidFile) > -1) {
+  if (url.search(isValidYouTube) > -1) {
     return url;
   }
   else {
