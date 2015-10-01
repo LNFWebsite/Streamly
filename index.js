@@ -145,7 +145,7 @@ function loopVideo() {
     else {
       actionTimers.clear();
       $("#youtube").attr("src", "");
-      if (videos[0] !== undefined) {
+      if (videos[0] !== undefined && videos[0] !== null) {
         document.title = "Streamly - " + decodeURIComponent(videos[0]);
       }
       else {
@@ -165,7 +165,7 @@ function pauseVideo() {
   if (!videoPaused) {
     actionTimers.pause();
     videoPaused = true;
-    if (videos[0] !== undefined) {
+    if (videos[0] !== undefined && videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
   }
@@ -231,7 +231,7 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
-    if (videos[0] !== undefined) {
+    if (videos[0] !== undefined && videos[0] !== null) {
       $("#playlistNameBox").val(decodeURIComponent(videos[0]));
     }
     
