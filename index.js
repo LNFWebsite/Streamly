@@ -97,7 +97,7 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  var time = videos[videoIteration]["time"] * 1000;
+  var time = videos[videoIteration][1] * 1000;
   $("#videoTime").text(msConversion(time));
   function progressLoop() {
     var currentTime = (time + waitEndTime) - loopTimer.getTimeLeft();
@@ -117,15 +117,15 @@ function videoProgress() {
 
 function playVideo() {
   highlight(videoIteration);
-  document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
-  var embedUrl = videos[videoIteration]["url"];
+  document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
+  var embedUrl = videos[videoIteration][2];
   
   var autoplay = "";
   if (!stayPaused) {
     autoplay = "?autoplay=1";
   }
   
-  embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration]["url"] + autoplay;
+  embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + autoplay;
   $("#youtube").attr("src", embedUrl);
   
   backRestart = false;
@@ -152,7 +152,7 @@ function loopVideo() {
         document.title = "Streamly";
       }
     }
-  }, (videos[videoIteration]["time"] * 1000) + bufferTime + waitEndTime);
+  }, (videos[videoIteration][1] * 1000) + bufferTime + waitEndTime);
   
   videoProgress();
   
@@ -173,7 +173,7 @@ function pauseVideo() {
     actionTimers.resume();
     videoPaused = false;
     stayPaused = false;
-    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration]["name"]);
+    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   }
   $("#pauseOverlay").css("display", "none");
   setTimeout(function(){
@@ -237,8 +237,8 @@ function getPlaylist() {
     
     for (i = 1; i < videos.length; i++) {
       videoCounter = i;
-      var printTime = msConversion(videos[videoCounter]["time"] * 1000);
-      addVideoToList(videos[videoCounter]["name"], printTime);
+      var printTime = msConversion(videos[videoCounter][1] * 1000);
+      addVideoToList(videos[videoCounter][0], printTime);
     }
     loopVideo();
   }
@@ -294,10 +294,10 @@ function getVideoData() {
 
 function addVideo() {
   videoCounter++;
-  var video = {};
-  video["name"] = videoName;
-  video["time"] = videoTime / 1000;
-  video["url"] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=/i, "");
+  var video = [];
+  video[0] = videoName;
+  video[1] = videoTime / 1000;
+  video[2] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=/i, "");
   videos[videoCounter] = video;
   
   var printTime = msConversion(videoTime);
