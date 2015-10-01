@@ -41,7 +41,7 @@ Streamly gets its video metadata by using the [YQL Console](https://developer.ya
 
 Pausing videos is operated by an external div. Because of the [Same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) of Javascript, Streamly is unable to verify when or if you paused the video, and is unable to pause it for you. For this reason, there is an invisible div in front of the YouTube frame to pause the timer that operates the playlist.
 
-Going from one video to another is controlled by cycling through a Javascript array containing objects with the video's title, URL, and length (in seconds).
+Going from one video to another is controlled by cycling through a two-dimensional Javascript array containing the video's title, URL, and length (in seconds) for each in the playlist.
 
 Saving playlists is done by creating a [JSON](https://json.org) string of the object containing video properties, then encoding it into [Base64](https://en.wikipedia.org/wiki/Base64), and finally running that into the hash parameter of the URL.
 
