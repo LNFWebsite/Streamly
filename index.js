@@ -231,7 +231,8 @@ function getPlaylist() {
     playlist = JSON.parse(playlist);
     videos = playlist;
     
-    if (videos[0] != undefined) {
+    if (videos[0] !== null && videos[0] !== undefined) {
+      document.title = "Streamly - " + decodeURIComponent(videos[0]);
       $("#playlistNameBox").val(decodeURIComponent(videos[0]));
     }
     
