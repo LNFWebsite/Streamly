@@ -217,11 +217,11 @@ function setPlaylist() {
     playlist = window.btoa(playlist);
     playlist = encodeURIComponent(playlist);
     window.location.hash = playlist;
-    $("#shareButton").data("clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
+    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
   }
   else {
     window.location.hash = "";
-    $("#shareButton").data("clipboard-text", "https://lnfwebsite.github.io/Streamly/");
+    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/");
   }
 }
 
