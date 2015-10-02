@@ -221,6 +221,7 @@ function setPlaylist() {
   }
   else {
     window.location.hash = "";
+    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/");
   }
 }
 
