@@ -217,9 +217,11 @@ function setPlaylist() {
     playlist = window.btoa(playlist);
     playlist = encodeURIComponent(playlist);
     window.location.hash = playlist;
+    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
   }
   else {
     window.location.hash = "";
+    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/");
   }
 }
 
@@ -425,6 +427,13 @@ function input(type) {
       setPlaylist();
       break;
   }
+}
+
+function shareButton() {
+  $("#inputBox").val("").attr("placeholder", "Playlist copied to clipboard!");
+  setTimeout(function() {
+    $("#inputBox").val("").attr("placeholder", placeholder);
+  }, 2000);
 }
 
 document.addEventListener("drop", function(event) {

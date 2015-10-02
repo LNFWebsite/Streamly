@@ -28,20 +28,27 @@ footer {
 #title, #searchForm {
   display: inline;
 }
-#inputBox, #playlistNameBox {
+#inputBox, #shareButton, #playlistNameBox {
   font-family: 'Roboto', sans-serif;
 }
-#inputBox {
+#inputBox, #shareButton {
+  top: -5px;
   font-size: 1em;
   position: relative;
-  top: -5px;
+  border: none;
+}
+#inputBox {
   left: 15px;
-  border: 0px solid transparent;
   border-radius: 999px;
   padding: 5px;
   width: 50%;
 }
-td, th, #main, #playlistInterface {
+#shareButton {
+  left: 25px;
+  background-color: white;
+  padding: 5px 7px 5px 7px;
+}
+td, th, #main, #playlistInterface, #shareButton {
   border-radius: 5px;
 }
 #main {
