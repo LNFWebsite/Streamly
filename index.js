@@ -429,6 +429,13 @@ function input(type) {
   }
 }
 
+function shareButton() {
+  $("#inputBox").val("").attr("placeholder", "Playlist copied to clipboard!");
+  setTimeout(function() {
+    $("#inputBox").val("").attr("placeholder", placeholder);
+  }, 2000);
+}
+
 document.addEventListener("drop", function(event) {
   event.preventDefault();
   var data = event.dataTransfer.getData("URL");
