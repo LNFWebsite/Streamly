@@ -102,6 +102,12 @@
   });
   
   new Clipboard("#shareButton");
+  function shareButton() {
+    $("#shareButton").val("Playlist copied to clipboard!");
+    setTimeout(function() {
+      $("#shareButton").val("Share playlist");
+    }, 2000);
+  }
   </script>
   
   <!-- Start of StatCounter Code for Default Guide -->
