@@ -400,7 +400,7 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox != "") {
-        window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"));
+        window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
       break;
