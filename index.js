@@ -381,12 +381,14 @@ function makeSortable() {
 }
 
 function urlValidate(url) {
-  var isValidYouTube = /^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=.+$/i;
+  var regex = /(http(s*):\/\/www\.youtube\.com\/watch\?v=|http(s*):\/\/youtu.be\/)[^&.*]+/i;
   
   url = url.trim();
-  url = url.replace(/&index=.+/i, "").replace(/&list=.+/i, "");
+  url = url.match(regex);
   
-  if (url.search(isValidYouTube) > -1) {
+  url = url[0].replace(/http:\/\//i, "https://").replace(/https:\/\/youtu.be\//i, "https://www.youtube.com/watch?v=");
+  
+  if (url !== null) {
     return url;
   }
   else {
