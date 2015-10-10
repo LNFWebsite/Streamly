@@ -228,7 +228,8 @@ function setPlaylist() {
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
     var playlist = window.location.hash.substr(1);
-    //playlist = decodeURIComponent(playlist);
+    //leave the following decode for compatibility 10/10/2015
+    playlist = decodeURIComponent(playlist);
     playlist = window.atob(playlist);
     playlist = JSON.parse(playlist);
     videos = playlist;
