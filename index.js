@@ -215,7 +215,7 @@ function setPlaylist() {
   if (videos.length > 1) {
     var playlist = JSON.stringify(videos);
     playlist = window.btoa(playlist);
-    playlist = encodeURIComponent(playlist);
+    // This may not be necessary - playlist = encodeURIComponent(playlist);
     window.location.hash = playlist;
     $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
   }
