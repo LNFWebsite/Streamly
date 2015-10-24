@@ -62,7 +62,7 @@
   });
   
   $(document).keyup(function(e) {
-    if (!$("#inputBox").is(":focus") && !$("#playlistNameBox").is(":focus")) {
+    if ((!$("#inputBox").is(":focus") || $("#inputBox").val() = "") && !$("#playlistNameBox").is(":focus")) {
       switch (e.keyCode) {
         case 37:
           e.preventDefault();
