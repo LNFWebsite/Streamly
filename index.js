@@ -383,9 +383,8 @@ function urlValidate(url) {
   url = url.trim();
   url = url.match(regex);
   
-  url = url[0].replace(/http:\/\//i, "https://").replace(/https:\/\/youtu.be\//i, "https://www.youtube.com/watch?v=");
-  
   if (url !== null) {
+    url = url[0].replace(/http:\/\//i, "https://").replace(/https:\/\/youtu.be\//i, "https://www.youtube.com/watch?v=");
     return url;
   }
   else {
