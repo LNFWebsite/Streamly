@@ -378,14 +378,13 @@ function makeSortable() {
 }
 
 function urlValidate(url) {
-  var regex = /(http(s*):\/\/www\.youtube\.com\/watch\?v=|http(s*):\/\/youtu.be\/)[^&.*]+/i;
+  var regex = /^(http(|s):\/\/www\.youtube\.com\/watch\?v=|http(|s):\/\/youtu.be\/)[^&.*]+$/i;
   
   url = url.trim();
   url = url.match(regex);
   
-  url = url[0].replace(/http:\/\//i, "https://").replace(/https:\/\/youtu.be\//i, "https://www.youtube.com/watch?v=");
-  
   if (url !== null) {
+    url = url[0].replace(/http:\/\//i, "https://").replace(/https:\/\/youtu.be\//i, "https://www.youtube.com/watch?v=");
     return url;
   }
   else {
