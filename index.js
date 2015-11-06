@@ -16,7 +16,6 @@ var bufferTime = 2000;
 var waitEndTime = 1500;
 
 var videoPaused;
-var stayPaused;
 var backRestart;
 
 var loopTimer;
@@ -121,7 +120,7 @@ function playVideo() {
   var embedUrl = videos[videoIteration][2];
   
   var autoplay = "";
-  if (!stayPaused) {
+  if (!videoPaused) {
     autoplay = "?autoplay=1";
   }
   
@@ -156,7 +155,7 @@ function loopVideo() {
   
   videoProgress();
   
-  if (stayPaused) {
+  if (videoPaused) {
     actionTimers.pause();
   }
 }
@@ -172,7 +171,6 @@ function pauseVideo() {
   else {
     actionTimers.resume();
     videoPaused = false;
-    stayPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   }
   $("#pauseOverlay").css("display", "none");
@@ -185,18 +183,11 @@ function pauseVideo() {
 function forwardVideo() {
   if (videoIteration + 1 <= videoCounter) {
     actionTimers.clear();
-    
-    if (videoPaused) {
-      stayPaused = true;
-    }
     loopVideo();
   }
 }
 
 function backVideo() {
-  if (videoPaused) {
-    stayPaused = true;
-  }
   if (!backRestart) {
     if (videoIteration - 2 > -1) {
       videoIteration = videoIteration - 2;
@@ -316,7 +307,6 @@ function addVideo() {
 function actionPlayVideo(element) {
   var index = $(".playButton").index(element);
   videoIteration = index;
-  stayPaused = false;
   videoPaused = false;
   actionTimers.clear();
   loopVideo();
