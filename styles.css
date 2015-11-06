@@ -10,6 +10,9 @@ header {
   width: 100%;
   height: 65px;
 }
+header, .ui-autocomplete {
+  z-index: 1;
+}
 body {
   background-color: #F77F00;
   font-family: 'Roboto', sans-serif;
