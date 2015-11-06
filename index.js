@@ -120,7 +120,7 @@ function playVideo() {
   var embedUrl = videos[videoIteration][2];
   
   var autoplay = "";
-  if (videoPaused) {
+  if (!videoPaused) {
     autoplay = "?autoplay=1";
   }
   
