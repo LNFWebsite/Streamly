@@ -317,6 +317,7 @@ function actionPlayVideo(element) {
   var index = $(".playButton").index(element);
   videoIteration = index;
   stayPaused = false;
+  videoPaused = false;
   actionTimers.clear();
   loopVideo();
 }
