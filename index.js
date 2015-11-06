@@ -369,7 +369,7 @@ function makeSortable() {
 }
 
 function urlValidate(url) {
-  var regex = /^(http(|s):\/\/www\.youtube\.com\/watch\?v=|http(|s):\/\/youtu.be\/)[^&.*]+$/i;
+  var regex = /^(http(|s):\/\/www\.youtube\.com\/watch\?v=|http(|s):\/\/youtu.be\/)[^&.*]+/i;
   
   url = url.trim();
   url = url.match(regex);
