@@ -2,9 +2,6 @@
 
 var placeholder = "Search, drag and drop video, or paste its URL...";
 
-var playImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/media-play-4x.png";
-var removeImgSrc = "//cdn.rawgit.com/iconic/open-iconic/master/png/x-4x.png";
-
 var videoUrl;
 var videoName;
 var videoTime = null;
@@ -65,8 +62,8 @@ function highlight(i) {
 
 function addVideoToList(name, time) {
   name = decodeURIComponent(name);
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\"><img src=\"" + removeImgSrc + "\" /></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\"><img src=\"" + playImgSrc + "\" /></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\"><span class=\"fa fa-times\"></span></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>");
 }
 
 function resetTimer(which) {
