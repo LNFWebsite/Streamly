@@ -93,7 +93,7 @@ td {
 #playlistInterface {
   text-align: center;
   background-color: #000;
-  margin: 6px 5% 0;
+  margin: 6px 2% 0 2%;
   padding: 0 10px 5px;
   position: relative;
 }
