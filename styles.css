@@ -79,6 +79,7 @@ td {
   background-color: #FCCC99;
 }
 #playlistInterface {
+  display: inline-block;
   position: relative;
   background-color: black;
   padding: 0px 10px 5px 10px;
