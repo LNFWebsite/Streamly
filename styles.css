@@ -52,7 +52,7 @@ footer {
   background-color: white;
   padding: 5px 7px 5px 7px;
 }
-td, th, #main, #playlistInterface, #shareButton {
+td, th, #main, #playlistInterface, #shareButton, #nextVideo {
   border-radius: 5px;
 }
 #main {
@@ -80,11 +80,10 @@ td {
   background-color: #FCCC99;
 }
 #playlistInterface {
-  display: inline-block;
   position: relative;
   background-color: black;
   padding: 0px 10px 5px 10px;
-  margin: 6px 0px 0px 0px;
+  margin: 6px 5% 0px 5%;
   text-align: center;
 }
 #backButton, #forwardButton {
@@ -99,7 +98,6 @@ td {
   right: 5px;
 }
 #youtubeContainer {
-  display: inline-block;
   position: relative;
   width: 300px;
   height: 175px;
@@ -131,12 +129,20 @@ td {
   right: 0;
 }
 #progressContainer {
-  display: inline-block;
   overflow: hidden;
   width: 400px;
   height: 4px;
   border: 1px solid #333333;
   border-radius: 999px;
+}
+#playlistInterface, #youtubeContainer, #progressContainer, #nextVideo {
+  display: inline-block;
+}
+#nextVideo {
+  background-color: white;
+  height: 100px;
+  padding: 5px;
+  margin-right: 5px;
 }
 #progress {
   display: block;
