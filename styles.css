@@ -153,8 +153,6 @@ td {
   background: none;
   border: none;
   float: right;
-  margin-top: 3px;
-  
   opacity: 0.1;
   -o-transition: .2s;
   -ms-transition: .2s;
@@ -165,9 +163,16 @@ td {
 .tableButton:hover {
   opacity: 1;
 }
-.tableButton img {
-  width: 20px;
+.playButton {
+  margin-top: 3px;
 }
+.fa {
+  font-size: 2em;
+}
+.fa-play {
+  font-size: 1.6em;
+}
+
 /* Styles for draggable videosTable */
 #videosTable tr {
   cursor: pointer;
