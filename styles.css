@@ -81,9 +81,8 @@ td {
 #playlistInterface {
   position: relative;
   background-color: black;
-  width: 500px;
-  margin: 10px auto;
-  border: 0px solid transparent;
+  padding: 0px 10px 5px 10px;
+  margin: 6px 0px 0px 0px;
   text-align: center;
 }
 #backButton, #forwardButton {
