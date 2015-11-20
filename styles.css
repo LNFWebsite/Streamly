@@ -159,8 +159,22 @@ td {
 #nextVideo {
   margin-right: 5px;
   background-color: #fff;
-  height: 100px;
+  height: 75px;
+  width: 300px;
   padding: 5px;
+  text-align: initial;
+}
+#nextVideoName {
+  display: inline-block;
+  width: 195px;
+  margin: 0px 0px 0px 5px;
+}
+#nextVideoTime {
+  position: absolute;
+  color: white;
+  font-size: 0.7em;
+  bottom: -6px;
+  left: 80px;
 }
 #progress {
   border-radius: 999px;
@@ -193,6 +207,11 @@ td {
 }
 .fa-play {
   font-size: 1.6em;
+}
+.fa-forward {
+  position: absolute;
+  top: 27px;
+  left: 42px;
 }
 #videosTable tr {
   cursor: pointer;
