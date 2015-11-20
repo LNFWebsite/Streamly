@@ -86,7 +86,7 @@ td {
   margin: 6px 5% 0px 5%;
   text-align: center;
 }
-#backButton, #forwardButton {
+#backButton, #forwardButton, #nextVideo {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
