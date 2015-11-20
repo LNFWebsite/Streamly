@@ -164,6 +164,10 @@ td {
   padding: 5px;
   text-align: initial;
 }
+#nextVideoImage {
+  height: inherit;
+  float: left;
+}
 #nextVideoName {
   display: inline-block;
   width: 195px;
