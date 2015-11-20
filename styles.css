@@ -37,7 +37,7 @@ footer {
 #inputBox,
 #shareButton,
 #playlistNameBox {
-  font-family: 'Roboto',sans-serif
+  font-family: 'Roboto',sans-serif;
 }
 #inputBox,
 #shareButton {
@@ -98,7 +98,7 @@ td {
   position: relative;
 }
 #backButton,
-#nextVideo {
+#nextVideo, #nextVideoName {
   top: 50%;
   position: absolute;
   transform: translateY(-50%);
