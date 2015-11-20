@@ -1,72 +1,83 @@
 /* Streamly Stylesheet */
 h1 {
-  margin: 0px;
+  margin: 0;
 }
 header {
-  background-color: black;
-  position: fixed;
+  background-color: #000;
   top: 0;
   left: 0;
   width: 100%;
   height: 65px;
+  position: fixed;
 }
-header, .ui-autocomplete {
+header,
+.ui-autocomplete {
   z-index: 1;
 }
 body {
-  background-color: #F77F00;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto',sans-serif;
+  background-color: #f77f00;
 }
 footer {
+  text-align: center;
   background-color: #191919;
-  position: fixed;
-  bottom: 0;
   left: 0;
   width: 100%;
+  bottom: 0;
   height: 215px;
-  text-align: center;
+  position: fixed;
 }
 #title {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Pacifico',cursive;
 }
-#title, #searchForm {
+#title,
+#searchForm {
   display: inline;
 }
-#inputBox, #shareButton, #playlistNameBox {
-  font-family: 'Roboto', sans-serif;
+#inputBox,
+#shareButton,
+#playlistNameBox {
+  font-family: 'Roboto',sans-serif
 }
-#inputBox, #shareButton {
+#inputBox,
+#shareButton {
   top: -5px;
-  font-size: 1em;
-  position: relative;
   border: none;
+  position: relative;
+  font-size: 1em;
 }
 #inputBox {
-  left: 15px;
   border-radius: 999px;
-  padding: 5px;
+  left: 15px;
   width: 50%;
+  padding: 5px;
 }
 #shareButton {
+  background-color: #fff;
   left: 25px;
-  background-color: white;
-  padding: 5px 7px 5px 7px;
+  padding: 5px 7px;
 }
-td, th, #main, #playlistInterface, #shareButton, #nextVideo {
+td,
+th,
+#main,
+#playlistInterface,
+#shareButton,
+#nextVideo {
   border-radius: 5px;
 }
 #main {
   text-align: center;
-  margin: 110px 12% 260px 12%;
+  background: #fff;
+  margin: 110px 12% 260px;
   padding: 10px;
-  background: #FFF;
 }
-table, #playlistNameBox {
+table,
+#playlistNameBox {
   width: 95%;
 }
 table {
+  margin: 10px auto;
   font-size: 1.2em;
-  margin: 10px auto 10px auto;
 }
 #playlistNameBox {
   text-align: center;
@@ -77,18 +88,20 @@ td {
   padding: 5px;
 }
 .selected {
-  background-color: #FCCC99;
+  background-color: #fccc99;
 }
 #playlistInterface {
-  position: relative;
-  background-color: black;
-  padding: 0px 10px 5px 10px;
-  margin: 6px 5% 0px 5%;
   text-align: center;
+  background-color: #000;
+  margin: 6px 5% 0;
+  padding: 0 10px 5px;
+  position: relative;
 }
-#backButton, #forwardButton, #nextVideo {
-  position: absolute;
+#backButton,
+#forwardButton,
+#nextVideo {
   top: 50%;
+  position: absolute;
   transform: translateY(-50%);
 }
 #backButton {
@@ -98,15 +111,16 @@ td {
   right: 5px;
 }
 #youtubeContainer {
-  position: relative;
   width: 300px;
   height: 175px;
+  position: relative;
 }
-#youtube, #pauseOverlay {
+#youtube,
+#pauseOverlay {
   width: 100%;
   height: 100%;
-  position: absolute;
   display: block;
+  position: absolute;
 }
 #youtube {
   border: none;
@@ -116,11 +130,12 @@ td {
   z-index: 2;
 }
 #currentVideoTiming {
-  position: relative;
   text-align: center;
+  position: relative;
 }
-#currentTime, #videoTime {
-  color: #FFF;
+#currentTime,
+#videoTime {
+  color: #fff;
 }
 #currentTime {
   left: 0;
@@ -129,46 +144,46 @@ td {
   right: 0;
 }
 #progressContainer {
-  overflow: hidden;
+  border-radius: 999px;
   width: 400px;
   height: 4px;
-  border: 1px solid #333333;
-  border-radius: 999px;
+  border: 1px solid #333;
+  overflow: hidden;
 }
-#playlistInterface, #youtubeContainer, #progressContainer, #nextVideo {
+#playlistInterface,
+#youtubeContainer,
+#progressContainer,
+#nextVideo {
   display: inline-block;
 }
 #nextVideo {
-  background-color: white;
+  margin-right: 5px;
+  background-color: #fff;
   height: 100px;
   padding: 5px;
-  margin-right: 5px;
 }
 #progress {
-  display: block;
-  height: 100%;
-  background-color: #F77F00;
   border-radius: 999px;
-  
-  -o-transition: .2s;
-  -ms-transition: .2s;
-  -moz-transition: .2s;
-  -webkit-transition: .2s;
-  transition: .2s;
+  background-color: #f77f00;
+  height: 100%;
+  display: block;
 }
+#progress,
 .tableButton {
-  background: none;
-  border: none;
-  float: right;
-  opacity: 0.1;
+  transition: .2s;
   -o-transition: .2s;
   -ms-transition: .2s;
   -moz-transition: .2s;
   -webkit-transition: .2s;
-  transition: .2s;
 }
 .tableButton:hover {
   opacity: 1;
+}
+.tableButton {
+  background: 0 0;
+  float: right;
+  border: none;
+  opacity: .1;
 }
 .playButton {
   margin-top: 3px;
@@ -179,27 +194,25 @@ td {
 .fa-play {
   font-size: 1.6em;
 }
-
-/* Styles for draggable videosTable */
 #videosTable tr {
   cursor: pointer;
 }
 tr.placeholder {
-  display: block;
   background: red;
-  position: relative;
   margin: 0;
-  padding: 0;
   border: none;
+  display: block;
+  padding: 0;
+  position: relative;
 }
 tr.placeholder:before {
-  content: "";
-  position: absolute;
+  margin-top: -5px;
+  border-right: none;
+  border-left-color: #000;
+  left: -5px;
   width: 0;
   height: 0;
   border: 5px solid transparent;
-  border-left-color: black;
-  margin-top: -5px;
-  left: -5px;
-  border-right: none;
+  content: "";
+  position: absolute;
 }
