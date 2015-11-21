@@ -96,7 +96,7 @@ td {
   padding: 0 10px 5px;
 }
 #backButton,
-#nextVideo, #nextVideoName {
+#nextVideoName {
   top: 50%;
   position: absolute;
   transform: translateY(-50%);
@@ -164,14 +164,14 @@ td {
 #nextVideoName {
   display: inline-block;
   width: 195px;
-  margin: 0px 0px 0px 5px;
+  margin-left: 5px;
 }
 #nextVideoTime {
   position: absolute;
   color: white;
   font-size: 0.7em;
   bottom: -6px;
-  right: 208px;
+  left: 81px;
 }
 #progress {
   border-radius: 999px;
