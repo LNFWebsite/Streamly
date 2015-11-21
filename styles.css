@@ -91,11 +91,9 @@ td {
   background-color: #fccc99;
 }
 #playlistInterface {
-  text-align: center;
   background-color: #000;
   margin: 6px 2% 0 2%;
   padding: 0 10px 5px;
-  position: relative;
 }
 #backButton,
 #nextVideo, #nextVideoName {
@@ -105,6 +103,8 @@ td {
 }
 #backButton {
   left: 5px;
+  /** TEMPORARY RULE 11/21/2015 **/
+  display: none;
 }
 #youtubeContainer {
   width: 300px;
@@ -124,10 +124,6 @@ td {
 #pauseOverlay {
   opacity: 0;
   z-index: 2;
-}
-#currentVideoTiming {
-  text-align: center;
-  position: relative;
 }
 #currentTime,
 #videoTime {
@@ -153,12 +149,13 @@ td {
   display: inline-block;
 }
 #nextVideo {
-  margin-right: 5px;
+  margin-bottom: 50px;
   background-color: #fff;
   height: 75px;
-  width: 300px;
+  width: 25%;
   padding: 5px;
   text-align: initial;
+  position: relative;
 }
 #nextVideoImage {
   height: inherit;
