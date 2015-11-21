@@ -164,7 +164,7 @@ td {
 #nextVideoName {
   display: inline-block;
   width: 195px;
-  margin-left: 5px;
+  margin: 0px 0px 0px 5px;
 }
 #nextVideoTime {
   position: absolute;
