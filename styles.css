@@ -167,10 +167,12 @@ td {
 }
 #nextVideoTime {
   position: absolute;
+  width: 98px;
+  overflow: hidden;
+  text-align: right;
   color: white;
   font-size: 0.7em;
   bottom: -6px;
-  left: 81px;
 }
 #progress {
   border-radius: 999px;
