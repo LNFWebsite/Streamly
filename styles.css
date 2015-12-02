@@ -103,11 +103,6 @@ td {
   position: absolute;
   transform: translateY(-50%);
 }
-#backButton {
-  left: 5px;
-  /** TEMPORARY RULE 11/21/2015 **/
-  display: none;
-}
 #youtubeContainer {
   width: 300px;
   height: 175px;
