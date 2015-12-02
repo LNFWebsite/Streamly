@@ -213,7 +213,7 @@ td {
 .fa-play {
   font-size: 1.6em;
 }
-.fa-forward {
+.fa-backward, .fa-forward {
   position: absolute;
   top: 27px;
   left: 42px;
