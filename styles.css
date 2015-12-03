@@ -158,12 +158,6 @@ td {
 #nextVideo {
   right: 5%;
 }
-#previousVideoImage {
-  float: right;
-}
-#nextVideoImage {
-  float: left;
-}
 #previousVideoName,
 #nextVideoName {
   background-color: white;
@@ -171,21 +165,21 @@ td {
   padding: 5px;
   margin: 0 auto;
 }
-#previousVideoTime {
-  right: 7px
-}
 #previousVideoTime,
 #nextVideoTime {
   bottom: -7px;
-  left: 0;
   color: #fff;
   font-size: .7em;
   overflow: hidden;
   position: absolute;
   text-align: right;
 }
+#previousVideoTime {
+  right: 7px
+}
 #nextVideoTime {
-  width: 123px
+  left: 0;
+  width: 123px;
 }
 #progress {
   background-color: #f77f00;
