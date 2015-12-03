@@ -164,7 +164,7 @@ td {
 }
 #previousVideoName {
   display: inline-block;
-  margin: 0 100px 0 5px;
+  margin: 0px 105px 0px 0px;
 }
 #nextVideoName {
   display: inline-block;
@@ -223,7 +223,7 @@ td {
   top: 27px;
 }
 .fa-forward {
-  left: 42px;
+  left: 43px;
   position: absolute;
   top: 27px;
 }
