@@ -2,6 +2,8 @@
 
 var placeholder = "Search, drag and drop video, or paste its URL...";
 
+var popup;
+
 var videoUrl;
 var videoName;
 var videoTime = null;
@@ -386,7 +388,7 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox != "") {
-        window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
+        popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
       break;
@@ -396,6 +398,7 @@ function input(type) {
         if (inputBox) {
           videoUrl = inputBox;
           $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
+          popup.close();
           getVideoData();
         }
         else {
