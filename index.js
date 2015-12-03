@@ -370,6 +370,8 @@ function makeSortable() {
 function videoPreviews() {
   if (videoIteration + 1 <= videoCounter) {
     $("#nextVideoName").text(videos[videoIteration + 1][0]);
+    $("#nextVideoTime").text(msConversion(videos[videoIteration + 1][1]));
+    $("#nextVideoImage").attr("src", "https://i.ytimg.com/vi/" + videos[videoIteration + 1][2] + "/default.jpg");
   }
 }
 
