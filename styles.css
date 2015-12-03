@@ -153,6 +153,7 @@ td {
   padding: 5px;
   text-align: initial;
   width: 25%;
+  height: 90px;
   cursor: pointer;
 }
 #previousVideo {
@@ -177,7 +178,7 @@ td {
 }
 #previousVideoName {
   display: inline-block;
-  margin: 0px 110px 0px 0px;
+  margin: 0px 130px 0px 0px;
 }
 #nextVideoName {
   display: inline-block;
@@ -188,7 +189,7 @@ td {
 }
 #previousVideoTime,
 #nextVideoTime {
-  bottom: -6px;
+  bottom: -7px;
   color: #fff;
   font-size: .7em;
   overflow: hidden;
@@ -196,7 +197,7 @@ td {
   text-align: right;
 }
 #nextVideoTime {
-  width: 98px
+  width: 118px
 }
 #progress {
   background-color: #f77f00;
@@ -233,13 +234,13 @@ td {
 }
 .fa-backward {
   position: absolute;
-  right: 43px;
-  top: 27px;
+  right: 51px;
+  top: 35px;
 }
 .fa-forward {
-  left: 43px;
   position: absolute;
-  top: 27px;
+  left: 51px;
+  top: 35px;
 }
 #videosTable tr {
   cursor: pointer
