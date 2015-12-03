@@ -388,7 +388,7 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox != "") {
-        popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
+        popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800,chrome");
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
       break;
