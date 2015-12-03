@@ -85,7 +85,8 @@ table {
   text-align: center;
 }
 td {
-  padding: 5px
+  padding: 5px;
+  cursor: move;
 }
 .selected {
   background-color: #fccc99
@@ -105,6 +106,7 @@ td {
   position: relative;
   width: 300px;
   padding-top: 1px;
+  cursor: pointer;
 }
 #youtube,
 #pauseOverlay {
@@ -153,6 +155,7 @@ td {
   position: relative;
   text-align: initial;
   width: 25%;
+  cursor: pointer;
 }
 #previousVideoImage {
   float: right;
@@ -207,6 +210,7 @@ td {
   border: none;
   float: right;
   opacity: .1;
+  cursor: pointer;
 }
 .playButton {
   margin-top: 3px
