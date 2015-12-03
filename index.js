@@ -183,6 +183,7 @@ function forwardVideo() {
   if (videoIteration + 1 <= videoCounter) {
     actionTimers.clear();
     loopVideo();
+    videoPreviews();
   }
 }
 
@@ -192,12 +193,14 @@ function backVideo() {
       videoIteration = videoIteration - 2;
       actionTimers.clear();
       loopVideo();
+      videoPreviews();
     }
   }
   else {
     videoIteration = videoIteration - 1;
     actionTimers.clear();
     loopVideo();
+    videoPreviews();
   }
 }
 
@@ -232,6 +235,7 @@ function getPlaylist() {
       addVideoToList(videos[videoCounter][0], printTime);
     }
     loopVideo();
+    videoPreviews();
   }
 }
 
@@ -310,6 +314,7 @@ function actionPlayVideo(element) {
   videoPaused = false;
   actionTimers.clear();
   loopVideo();
+  videoPreviews();
 }
 
 function actionRemoveVideo(element) {
