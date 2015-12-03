@@ -147,7 +147,6 @@ td {
 #nextVideo {
   display: flex;
   align-items: center;
-  text-align: center;
   padding: 5px;
   width: 25%;
   height: 90px;
@@ -161,11 +160,9 @@ td {
 }
 #previousVideoImage {
   float: right;
-  height: inherit;
 }
 #nextVideoImage {
   float: left;
-  height: inherit;
 }
 #previousVideoName,
 #nextVideoName {
