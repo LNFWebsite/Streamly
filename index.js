@@ -367,6 +367,12 @@ function makeSortable() {
   });
 }
 
+function videoPreviews() {
+  if (videoIteration + 1 <= videoCounter) {
+    $("#nextVideoName").text(videos[videoIteration + 1][0]);
+  }
+}
+
 function urlValidate(url) {
   var regex = /^(http(|s):\/\/www\.youtube\.com\/watch\?v=|http(|s):\/\/youtu.be\/)[^&.*]+/i;
   
