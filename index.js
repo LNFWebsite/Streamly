@@ -297,6 +297,7 @@ function addVideo() {
   
   setPlaylist();
   makeSortable();
+  videoPreviews();
   
   if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
@@ -333,6 +334,7 @@ function actionRemoveVideo(element) {
   $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
   makeSortable();
+  videoPreviews();
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
@@ -363,6 +365,7 @@ function makeSortable() {
     onDrop: function ($item, container, _super) {
       actionMoveVideo(oldIndex + 1, $item.index() + 1);
       setPlaylist();
+      videoPreviews();
     }
   });
 }
@@ -376,6 +379,9 @@ function videoPreviews() {
   function changeOpacity(which, amount) {
     $("#" + which + "VideoName, #" + which + "VideoTime, #" + which + "VideoImage").css("opacity", amount);
   }
+  function greyOut(which) {
+    $("#" + which + "Video").css("background-color", "grey");
+  }
   
   if (videoIteration + 1 <= videoCounter) {
     changeOpacity("next", "1");
@@ -383,6 +389,7 @@ function videoPreviews() {
   }
   else {
     changeOpacity("next", "0");
+    greyOut("next");
   }
   
   if (videoIteration - 2 > -1) {
@@ -391,6 +398,7 @@ function videoPreviews() {
   }
   else {
     changeOpacity("previous", "0");
+    greyOut("previous");
   }
 }
 
