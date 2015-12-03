@@ -151,6 +151,7 @@ td {
   width: 25%;
   height: 90px;
   cursor: pointer;
+  z-index: -1;
 }
 #previousVideo {
   left: 5%;
