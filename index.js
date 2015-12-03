@@ -115,6 +115,7 @@ function videoProgress() {
 
 function playVideo() {
   highlight(videoIteration);
+  videoPreviews();
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   var embedUrl = videos[videoIteration][2];
   
@@ -183,7 +184,6 @@ function forwardVideo() {
   if (videoIteration + 1 <= videoCounter) {
     actionTimers.clear();
     loopVideo();
-    videoPreviews();
   }
 }
 
@@ -193,14 +193,12 @@ function backVideo() {
       videoIteration = videoIteration - 2;
       actionTimers.clear();
       loopVideo();
-      videoPreviews();
     }
   }
   else {
     videoIteration = videoIteration - 1;
     actionTimers.clear();
     loopVideo();
-    videoPreviews();
   }
 }
 
@@ -236,7 +234,6 @@ function getPlaylist() {
     }
     loopVideo();
   }
-  videoPreviews();
 }
 
 function getVideoData() {
@@ -314,7 +311,6 @@ function actionPlayVideo(element) {
   videoPaused = false;
   actionTimers.clear();
   loopVideo();
-  videoPreviews();
 }
 
 function actionRemoveVideo(element) {
