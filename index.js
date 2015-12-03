@@ -394,7 +394,7 @@ function videoPreviews() {
     greyOut("next", "grey");
   }
   
-  if (videoIteration - 2 > -1) {
+  if (videoIteration - 1 > 0) {
     changeOpacity("previous", "1")
     greyOut("previous", "white");
     addData("previous", videoIteration - 2);
