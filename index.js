@@ -368,10 +368,29 @@ function makeSortable() {
 }
 
 function videoPreviews() {
+  function addData(which, iteration) {
+    $("#" + which + "VideoName").text(videos[iteration][0]);
+    $("#" + which + "VideoTime").text(msConversion(videos[iteration][1] * 1000));
+    $("#" + which + "VideoImage").attr("src", "https://i.ytimg.com/vi/" + videos[iteration][2] + "/default.jpg");
+  }
+  function changeOpacity(which, amount) {
+    $("#" + which + "VideoName, #" + which + "VideoTime, #" + which + "VideoImage").css("opacity", amount);
+  }
+  
   if (videoIteration + 1 <= videoCounter) {
-    $("#nextVideoName").text(videos[videoIteration + 1][0]);
-    $("#nextVideoTime").text(msConversion(videos[videoIteration + 1][1]));
-    $("#nextVideoImage").attr("src", "https://i.ytimg.com/vi/" + videos[videoIteration + 1][2] + "/default.jpg");
+    changeOpacity("next", "1");
+    addData("next", videoIteration + 1);
+  }
+  else {
+    changeOpacity("next", "0");
+  }
+  
+  if (videoIteration - 2 > -1) {
+    changeOpacity("previous", "1")
+    addData("previous", videoIteration - 2);
+  }
+  else {
+    changeOpacity("previous", "0");
   }
 }
 
