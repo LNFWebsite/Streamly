@@ -384,26 +384,28 @@ function videoPreviews() {
   function changeOpacity(which, amount) {
     $("#" + which + "VideoName, #" + which + "VideoTime, #" + which + "VideoImage").css("opacity", amount);
   }
-  function greyOut(which) {
-    $("#" + which + "Video").css("background-color", "grey");
+  function greyOut(which, color) {
+    $("#" + which + "Video").css("background-color", color);
   }
   
   if (videoIteration + 1 <= videoCounter) {
     changeOpacity("next", "1");
+    greyOut("next", "white");
     addData("next", videoIteration + 1);
   }
   else {
     changeOpacity("next", "0");
-    greyOut("next");
+    greyOut("next", "grey");
   }
   
   if (videoIteration - 2 > -1) {
     changeOpacity("previous", "1")
+    greyOut("previous", "white");
     addData("previous", videoIteration - 2);
   }
   else {
     changeOpacity("previous", "0");
-    greyOut("previous");
+    greyOut("previous", "grey");
   }
 }
 
