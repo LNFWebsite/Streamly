@@ -95,9 +95,7 @@ td {
   margin-top: 6px;
 }
 #previousVideo,
-#nextVideo,
-#previousVideoName,
-#nextVideoName {
+#nextVideo {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -142,15 +140,15 @@ td {
 }
 #playlistInterface,
 #youtubeContainer,
-#progressContainer,
-#previousVideo,
-#nextVideo {
+#progressContainer {
   display: inline-block
 }
 #previousVideo,
 #nextVideo {
+  display: flex;
+  align-items: center;
+  text-align: center;
   padding: 5px;
-  text-align: initial;
   width: 25%;
   height: 90px;
   cursor: pointer;
@@ -169,7 +167,8 @@ td {
   float: left;
   height: inherit;
 }
-#previousVideoName, #nextVideoName {
+#previousVideoName,
+#nextVideoName {
   text-align: center;
   background-color: white;
   border-radius: 5px;
@@ -189,6 +188,7 @@ td {
 #previousVideoTime,
 #nextVideoTime {
   bottom: -7px;
+  left: 0;
   color: #fff;
   font-size: .7em;
   overflow: hidden;
@@ -196,7 +196,7 @@ td {
   text-align: right;
 }
 #nextVideoTime {
-  width: 118px
+  width: 123px
 }
 #progress {
   background-color: #f77f00;
