@@ -156,17 +156,31 @@ td {
   text-align: initial;
   position: relative;
 }
-#previousVideoImage,
+#previousVideoImage {
+  height: inherit;
+  float: right;
+}
 #nextVideoImage {
   height: inherit;
   float: left;
 }
-#previousVideoName,
+#previousVideoName {
+  display: inline-block;
+  margin: 0px 100px 0px 5px;
+}
 #nextVideoName {
   display: inline-block;
   margin: 0px 0px 0px 5px;
 }
-#previousVideoTime,
+#previousVideoTime {
+  position: absolute;
+  overflow: hidden;
+  text-align: right;
+  color: white;
+  font-size: 0.7em;
+  bottom: -6px;
+  right: 7px;
+}
 #nextVideoTime {
   position: absolute;
   width: 98px;
@@ -208,7 +222,12 @@ td {
 .fa-play {
   font-size: 1.6em;
 }
-.fa-backward, .fa-forward {
+.fa-backward {
+  position: absolute;
+  top: 27px;
+  right: 43px;
+}
+.fa-forward {
   position: absolute;
   top: 27px;
   left: 42px;
