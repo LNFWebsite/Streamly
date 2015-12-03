@@ -92,9 +92,10 @@ td {
   background-color: #fccc99
 }
 #playlistInterface {
-  margin: 6px 2% 0;
+  margin-top: 6px;
 }
-#backButton,
+#previousVideo,
+#nextVideo,
 #previousVideoName,
 #nextVideoName {
   position: absolute;
@@ -149,13 +150,16 @@ td {
 #previousVideo,
 #nextVideo {
   background-color: #fff;
-  height: 75px;
-  margin-bottom: 50px;
   padding: 5px;
-  position: relative;
   text-align: initial;
   width: 25%;
   cursor: pointer;
+}
+#previousVideo {
+  left: 2%;
+}
+#nextVideo {
+  right: 2%;
 }
 #previousVideoImage {
   float: right;
@@ -167,6 +171,9 @@ td {
 }
 #previousVideoName, #nextVideoName {
   text-align: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
 }
 #previousVideoName {
   display: inline-block;
