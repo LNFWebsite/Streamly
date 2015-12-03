@@ -1,56 +1,55 @@
-/* Streamly Stylesheet */
 h1 {
-  margin: 0;
+  margin: 0
 }
 header {
   background-color: #000;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 65px;
+  left: 0;
   position: fixed;
+  top: 0;
+  width: 100%;
 }
 header,
 .ui-autocomplete {
-  z-index: 1;
+  z-index: 1
 }
 body {
-  font-family: 'Roboto',sans-serif;
   background-color: #f77f00;
+  font-family: 'Roboto',sans-serif;
 }
 footer {
-  text-align: center;
   background-color: #191919;
-  left: 0;
-  width: 100%;
   bottom: 0;
   height: 215px;
+  left: 0;
   position: fixed;
+  text-align: center;
+  width: 100%;
 }
 #title {
-  font-family: 'Pacifico',cursive;
+  font-family: 'Pacifico',cursive
 }
 #title,
 #searchForm {
-  display: inline;
+  display: inline
 }
 #inputBox,
 #shareButton,
 #playlistNameBox {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto',sans-serif
 }
 #inputBox,
 #shareButton {
-  top: -5px;
   border: none;
-  position: relative;
   font-size: 1em;
+  position: relative;
+  top: -5px;
 }
 #inputBox {
   border-radius: 999px;
   left: 15px;
-  width: 50%;
   padding: 5px;
+  width: 50%;
 }
 #shareButton {
   background-color: #fff;
@@ -64,59 +63,59 @@ th,
 #shareButton,
 #previousVideo,
 #nextVideo {
-  border-radius: 5px;
+  border-radius: 5px
 }
 #main {
-  text-align: center;
   background: #fff;
   margin: 110px 12% 260px;
   padding: 10px;
+  text-align: center;
 }
 table,
 #playlistNameBox {
-  width: 95%;
+  width: 95%
 }
 table {
-  margin: 10px auto;
   font-size: 1.2em;
+  margin: 10px auto;
 }
 #playlistNameBox {
-  text-align: center;
   border: none;
   font-size: 2em;
+  text-align: center;
 }
 td {
-  padding: 5px;
+  padding: 5px
 }
 .selected {
-  background-color: #fccc99;
+  background-color: #fccc99
 }
 #playlistInterface {
   background-color: #000;
-  margin: 6px 2% 0 2%;
+  margin: 6px 2% 0;
   padding: 0 10px 5px;
 }
 #backButton,
 #previousVideoName,
 #nextVideoName {
-  top: 50%;
   position: absolute;
+  top: 50%;
   transform: translateY(-50%);
 }
 #youtubeContainer {
-  width: 300px;
   height: 175px;
   position: relative;
+  width: 300px;
 }
 #youtube,
 #pauseOverlay {
-  width: 100%;
-  height: 100%;
   display: block;
+  height: 100%;
   position: absolute;
+  width: 100%;
 }
 #youtube {
-  border: none;
+  border: none
 }
 #pauseOverlay {
   opacity: 0;
@@ -124,133 +123,128 @@ td {
 }
 #currentTime,
 #videoTime {
-  color: #fff;
+  color: #fff
 }
 #currentTime {
-  left: 0;
+  left: 0
 }
 #videoTime {
-  right: 0;
+  right: 0
 }
 #progressContainer {
-  border-radius: 999px;
-  width: 228px;
-  height: 4px;
   border: 1px solid #333;
+  border-radius: 999px;
+  height: 4px;
   overflow: hidden;
+  width: 228px;
 }
 #playlistInterface,
 #youtubeContainer,
 #progressContainer,
 #previousVideo,
 #nextVideo {
-  display: inline-block;
+  display: inline-block
 }
 #previousVideo,
 #nextVideo {
-  margin-bottom: 50px;
   background-color: #fff;
   height: 75px;
-  width: 25%;
+  margin-bottom: 50px;
   padding: 5px;
-  text-align: initial;
   position: relative;
+  text-align: initial;
+  width: 25%;
 }
 #previousVideoImage {
-  height: inherit;
   float: right;
+  height: inherit;
 }
 #nextVideoImage {
-  height: inherit;
   float: left;
+  height: inherit;
 }
 #previousVideoName {
   display: inline-block;
-  margin: 0px 100px 0px 5px;
+  margin: 0 100px 0 5px;
 }
 #nextVideoName {
   display: inline-block;
-  margin: 0px 0px 0px 5px;
+  margin: 0 0 0 5px;
 }
 #previousVideoTime {
-  position: absolute;
-  overflow: hidden;
-  text-align: right;
-  color: white;
-  font-size: 0.7em;
+  right: 7px
+}
+#previousVideoTime,
+#nextVideoTime {
   bottom: -6px;
-  right: 7px;
+  color: #fff;
+  font-size: .7em;
+  overflow: hidden;
+  position: absolute;
+  text-align: right;
 }
 #nextVideoTime {
-  position: absolute;
-  width: 98px;
-  overflow: hidden;
-  text-align: right;
-  color: white;
-  font-size: 0.7em;
-  bottom: -6px;
+  width: 98px
 }
 #progress {
-  border-radius: 999px;
   background-color: #f77f00;
-  height: 100%;
+  border-radius: 999px;
   display: block;
+  height: 100%;
 }
 #progress,
 .tableButton {
-  transition: .2s;
-  -o-transition: .2s;
-  -ms-transition: .2s;
   -moz-transition: .2s;
+  -ms-transition: .2s;
+  -o-transition: .2s;
   -webkit-transition: .2s;
+  transition: .2s;
 }
 .tableButton:hover {
-  opacity: 1;
+  opacity: 1
 }
 .tableButton {
   background: 0 0;
-  float: right;
   border: none;
+  float: right;
   opacity: .1;
 }
 .playButton {
-  margin-top: 3px;
+  margin-top: 3px
 }
 .fa {
-  font-size: 2em;
+  font-size: 2em
 }
 .fa-play {
-  font-size: 1.6em;
+  font-size: 1.6em
 }
 .fa-backward {
   position: absolute;
-  top: 27px;
   right: 43px;
+  top: 27px;
 }
 .fa-forward {
+  left: 42px;
   position: absolute;
   top: 27px;
-  left: 42px;
 }
 #videosTable tr {
-  cursor: pointer;
+  cursor: pointer
 }
 tr.placeholder {
   background: red;
-  margin: 0;
   border: none;
   display: block;
+  margin: 0;
   padding: 0;
   position: relative;
 }
 tr.placeholder:before {
-  margin-top: -5px;
-  border-right: none;
-  border-left-color: #000;
-  left: -5px;
-  width: 0;
-  height: 0;
   border: 5px solid transparent;
   content: "";
+  height: 0;
+  left: -5px;
+  margin-top: -5px;
   position: absolute;
+  width: 0;
 }
