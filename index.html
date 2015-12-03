@@ -33,8 +33,13 @@
     <a href="//lnfwebsite.github.io/Streamly-Import/" target="_blank">Import Playlists</a>
   </div>
   <footer>
+    <div id="previousVideo" onclick="backVideo();">
+      <p id="previousVideoName"></p>
+      <img id="previousVideoImage" src="" />
+      <span class="fa fa-backward"></span>
+      <p id="previousVideoTime"></p>
+    </div>
     <div id="playlistInterface">
-      <button id="backButton" onclick="backVideo();"><span class="fa fa-backward"></span></button>
       <div id="youtubeContainer">
         <div id="pauseOverlay" onclick="pauseVideo();"></div>
         <iframe id="youtube" src=""></iframe>
@@ -46,13 +51,19 @@
         </span>
         <span id="videoTime">0:00</span>
       </div>
-      <button id="forwardButton" onclick="forwardVideo();"><span class="fa fa-forward"></span></button>
+    </div>
+    <div id="nextVideo" onclick="forwardVideo();">
+      <img id="nextVideoImage" src="" />
+      <p id="nextVideoName"></p>
+      <span class="fa fa-forward"></span>
+      <p id="nextVideoTime"></p>
     </div>
   </footer>
   <script>
   getPlaylist();
   setPlaylist();
   makeSortable();
+  videoPreviews();
   
   $("#inputBox").on("paste", function() {
     setTimeout(function() {

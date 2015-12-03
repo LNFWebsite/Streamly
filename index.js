@@ -2,6 +2,8 @@
 
 var placeholder = "Search, drag and drop video, or paste its URL...";
 
+var popup;
+
 var videoUrl;
 var videoName;
 var videoTime = null;
@@ -113,6 +115,7 @@ function videoProgress() {
 
 function playVideo() {
   highlight(videoIteration);
+  videoPreviews();
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   var embedUrl = videos[videoIteration][2];
   
@@ -295,6 +298,7 @@ function addVideo() {
   
   setPlaylist();
   makeSortable();
+  videoPreviews();
   
   if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
@@ -331,6 +335,7 @@ function actionRemoveVideo(element) {
   $("tr:nth-child(" + index + ")").remove();
   setPlaylist();
   makeSortable();
+  videoPreviews();
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
@@ -361,8 +366,43 @@ function makeSortable() {
     onDrop: function ($item, container, _super) {
       actionMoveVideo(oldIndex + 1, $item.index() + 1);
       setPlaylist();
+      videoPreviews();
     }
   });
+}
+
+function videoPreviews() {
+  function addData(which, iteration) {
+    $("#" + which + "VideoName").text(decodeURIComponent(videos[iteration][0]));
+    $("#" + which + "VideoTime").text(msConversion(videos[iteration][1] * 1000));
+    $("#" + which + "VideoImage").attr("src", "https://i.ytimg.com/vi/" + videos[iteration][2] + "/default.jpg");
+  }
+  function changeOpacity(which, amount) {
+    $("#" + which + "VideoName, #" + which + "VideoTime, #" + which + "VideoImage").css("opacity", amount);
+  }
+  function greyOut(which, color) {
+    $("#" + which + "Video").css("background-color", color);
+  }
+  
+  if (videoIteration + 1 <= videoCounter) {
+    changeOpacity("next", "1");
+    greyOut("next", "white");
+    addData("next", videoIteration + 1);
+  }
+  else {
+    changeOpacity("next", "0");
+    greyOut("next", "grey");
+  }
+  
+  if (videoIteration - 1 > 0) {
+    changeOpacity("previous", "1")
+    greyOut("previous", "white");
+    addData("previous", videoIteration - 1);
+  }
+  else {
+    changeOpacity("previous", "0");
+    greyOut("previous", "grey");
+  }
 }
 
 function urlValidate(url) {
@@ -386,7 +426,7 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox != "") {
-        window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
+        popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
       break;
@@ -396,6 +436,7 @@ function input(type) {
         if (inputBox) {
           videoUrl = inputBox;
           $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
+          popup.close();
           getVideoData();
         }
         else {
