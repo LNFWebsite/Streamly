@@ -235,8 +235,8 @@ function getPlaylist() {
       addVideoToList(videos[videoCounter][0], printTime);
     }
     loopVideo();
-    videoPreviews();
   }
+  videoPreviews();
 }
 
 function getVideoData() {
