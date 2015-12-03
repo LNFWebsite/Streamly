@@ -373,7 +373,7 @@ function makeSortable() {
 
 function videoPreviews() {
   function addData(which, iteration) {
-    $("#" + which + "VideoName").text(videos[iteration][0]);
+    $("#" + which + "VideoName").text(decodeURIComponent(videos[iteration][0]));
     $("#" + which + "VideoTime").text(msConversion(videos[iteration][1] * 1000));
     $("#" + which + "VideoImage").attr("src", "https://i.ytimg.com/vi/" + videos[iteration][2] + "/default.jpg");
   }
