@@ -165,6 +165,9 @@ td {
   float: left;
   height: inherit;
 }
+#previousVideoName, #nextVideoName {
+  text-align: center;
+}
 #previousVideoName {
   display: inline-block;
   margin: 0px 110px 0px 0px;
