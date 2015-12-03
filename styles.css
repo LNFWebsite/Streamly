@@ -157,10 +157,10 @@ td {
   cursor: pointer;
 }
 #previousVideo {
-  left: 2%;
+  left: 5%;
 }
 #nextVideo {
-  right: 2%;
+  right: 5%;
 }
 #previousVideoImage {
   float: right;
