@@ -233,6 +233,8 @@ function getPlaylist() {
       addVideoToList(videos[videoCounter][0], printTime);
     }
     loopVideo();
+    
+    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
   }
 }
 
