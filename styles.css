@@ -162,8 +162,13 @@ td {
 #nextVideoName {
   background-color: white;
   border-radius: 5px;
-  padding: 5px;
   margin: 0 auto;
+}
+#previousVideoName {
+  padding: 5px 10px 5px 5px;
+}
+#nextVideoName {
+  padding: 5px 5px 5px 10px;
 }
 #previousVideoTime,
 #nextVideoTime {
