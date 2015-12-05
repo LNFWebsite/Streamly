@@ -219,8 +219,15 @@ function getPlaylist() {
     var playlist = window.location.hash.substr(1);
     //leave the following decode for compatibility 10/10/2015
     playlist = decodeURIComponent(playlist);
+    try {
     playlist = window.atob(playlist);
     playlist = JSON.parse(playlist);
+    }
+    catch(err) {
+      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n" +
+      "Make sure you save the URL that you have now, and contact the administrator by submitting an issue on Streamly's Github page.\n" +
+      "We're really sorry about this inconvenience.");
+    }
     videos = playlist;
     
     if (videos[0] !== undefined && videos[0] !== null) {
