@@ -220,28 +220,29 @@ function getPlaylist() {
     //leave the following decode for compatibility 10/10/2015
     playlist = decodeURIComponent(playlist);
     try {
-    playlist = window.atob(playlist);
-    playlist = JSON.parse(playlist);
+      playlist = window.atob(playlist);
+      playlist = JSON.parse(playlist);
+      
+      videos = playlist;
+      
+      if (videos[0] !== undefined && videos[0] !== null) {
+        $("#playlistNameBox").val(decodeURIComponent(videos[0]));
+      }
+      
+      for (i = 1; i < videos.length; i++) {
+        videoCounter = i;
+        var printTime = msConversion(videos[videoCounter][1] * 1000);
+        addVideoToList(videos[videoCounter][0], printTime);
+      }
+      loopVideo();
+      
+      $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
     }
     catch(err) {
-      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n" +
-      "Make sure you save the URL that you have now, and contact the administrator by submitting an issue on Streamly's Github page.\n" +
-      "We're really sorry about this inconvenience.");
+      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
+      "I'm really sorry about this inconvenience.");
     }
-    videos = playlist;
-    
-    if (videos[0] !== undefined && videos[0] !== null) {
-      $("#playlistNameBox").val(decodeURIComponent(videos[0]));
-    }
-    
-    for (i = 1; i < videos.length; i++) {
-      videoCounter = i;
-      var printTime = msConversion(videos[videoCounter][1] * 1000);
-      addVideoToList(videos[videoCounter][0], printTime);
-    }
-    loopVideo();
-    
-    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
   }
 }
 
