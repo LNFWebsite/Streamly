@@ -140,7 +140,8 @@ td {
 #playlistInterface,
 #youtubeContainer,
 #progressContainer {
-  display: inline-block
+  display: inline-block;
+  z-index: 999;
 }
 #previousVideo,
 #nextVideo {
@@ -150,7 +151,6 @@ td {
   width: 25%;
   height: 90px;
   cursor: pointer;
-  z-index: -1;
 }
 #previousVideo {
   left: 5%;
