@@ -186,6 +186,16 @@ td {
   left: 0;
   width: 123px;
 }
+#settings {
+  width: 130px;
+  height: 30px;
+  background-color: white;
+  padding: 5px;
+  position: absolute;
+  bottom: -5px;
+  right: calc(30% - 130px);
+  border-radius: 5px;
+}
 #progress {
   background-color: #f77f00;
   border-radius: 999px;
