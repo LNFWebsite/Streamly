@@ -9,7 +9,9 @@ Our motto is reliability which is why we do not use any external API's to manipu
 
 Our goal is to create a simple way to consecutively play YouTube videos similar to YouTube's current playlist functionality with the difference of being able to manipulate the queue at any time.
 
-For any questions or comments, please leave an [Issue](https://github.com/LNFWebsite/Streamly/issues).
+Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer.
+
+For any questions or comments, please leave an [issue](https://github.com/LNFWebsite/Streamly/issues).
 
 ## How do I use Streamly?
 
