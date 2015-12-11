@@ -5,11 +5,13 @@ YouTube video streaming, extremely simple.
 
 Streamly is a YouTube video player that runs entirely in your browser.
 
-Our motto is simplicity which is why we do not use any external API's to manipulate YouTube's native HTML5 video frame.
+Our motto is reliability which is why we do not use any external API's to manipulate YouTube's native HTML5 video frame, and we let you store the entirety of your playlist by way of a URL.
 
 Our goal is to create a simple way to consecutively play YouTube videos similar to YouTube's current playlist functionality with the difference of being able to manipulate the queue at any time.
 
-For any questions or comments, please leave an [Issue](https://github.com/LNFWebsite/Streamly/issues).
+Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer.
+
+For any questions or comments, please leave an [issue](https://github.com/LNFWebsite/Streamly/issues).
 
 ## How do I use Streamly?
 
@@ -39,7 +41,7 @@ And, you don't have to worry about losing anything because Streamly requires not
 
 Streamly gets its video metadata by using the [YQL Console](https://developer.yahoo.com/yql/console/) developed by Yahoo to parse YouTube for the video's name and length.
 
-Pausing videos is operated by an external div. Because of the [Same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) of Javascript, Streamly is unable to verify when or if you paused the video, and is unable to pause it for you. For this reason, there is an invisible div in front of the YouTube frame to pause the timer that operates the playlist.
+Pausing videos is operated using an external div. Because of the [Same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) of Javascript, Streamly is unable to verify when or if you paused the video, and is unable to pause it for you. For this reason, there is an invisible div in front of the YouTube frame to pause the timer that operates the playlist.
 
 Going from one video to another is controlled by cycling through a two-dimensional Javascript array containing the video's title, URL, and length (in seconds) for each in the playlist.
 

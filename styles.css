@@ -16,6 +16,9 @@ header,
 body {
   background-color: #f77f00;
   font-family: 'Roboto',sans-serif;
+  /** Merry Christmas! **/
+  background: url("https://farm3.staticflickr.com/2407/2127348012_f2e5c18282_b.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 footer {
   background-color: #191919;
@@ -186,7 +189,6 @@ td {
   left: 0;
   width: 123px;
 }
-/** hide this while it gets developed
 #settings {
   width: 130px;
   height: 30px;
@@ -197,7 +199,6 @@ td {
   right: calc(30% - 130px);
   border-radius: 5px;
 }
-**/
 #progress {
   background-color: #f77f00;
   border-radius: 999px;

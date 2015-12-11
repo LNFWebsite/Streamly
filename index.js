@@ -452,7 +452,9 @@ function input(type) {
         if (inputBox) {
           videoUrl = inputBox;
           $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
-          popup.close();
+          if (typeof popup !== "undefined") {
+            popup.close();
+          }
           getVideoData();
         }
         else {
