@@ -168,10 +168,12 @@ td {
   margin: 0 auto;
 }
 #previousVideoName {
-  padding: 5px 10px 5px 5px;
+  padding: 5px;
+  margin-right: 5px;
 }
 #nextVideoName {
-  padding: 5px 5px 5px 10px;
+  padding: 5px;
+  margin-left: 5px;
 }
 #previousVideoTime,
 #nextVideoTime {
