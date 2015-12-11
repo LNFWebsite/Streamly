@@ -226,6 +226,9 @@ function setPlaylist() {
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
     var playlist = window.location.hash.substr(1);
+    
+    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
+    
     //leave the following decode for compatibility 10/10/2015
     playlist = decodeURIComponent(playlist);
     try {
@@ -244,8 +247,6 @@ function getPlaylist() {
         addVideoToList(videos[videoCounter][0], printTime);
       }
       loopVideo();
-      
-      $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
     }
     catch(err) {
       alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
