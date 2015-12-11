@@ -23,6 +23,10 @@ var backRestart;
 var loopTimer;
 var progressTimer;
 
+function changeIteration(which) {
+  return videoIteration + which;
+}
+
 function Timer(callback, delay) {
   var id, started, remaining = delay, running;
   this.resume = function() {
@@ -137,7 +141,7 @@ function playVideo() {
 }
 
 function loopVideo() {
-  videoIteration++;
+  videoIteration = changeIteration(1);
   playVideo();
   loopTimer = new Timer(function() {
     if (videoIteration < videoCounter) {
@@ -186,7 +190,7 @@ function pauseVideo() {
 }
 
 function forwardVideo() {
-  if (videoIteration + 1 <= videoCounter) {
+  if (changeIteration(1) <= videoCounter) {
     actionTimers.clear();
     loopVideo();
   }
@@ -194,14 +198,14 @@ function forwardVideo() {
 
 function backVideo() {
   if (!backRestart) {
-    if (videoIteration - 2 > -1) {
-      videoIteration = videoIteration - 2;
+    if (changeIteration(-2) > -1) {
+      videoIteration = changeIteration(-2);
       actionTimers.clear();
       loopVideo();
     }
   }
   else {
-    videoIteration = videoIteration - 1;
+    videoIteration = changeIteration(-1);
     actionTimers.clear();
     loopVideo();
   }
@@ -332,19 +336,19 @@ function actionPlayVideo(element) {
 function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
   if (index == videoIteration) {
-    if (videoIteration + 1 <= videoCounter) {
+    if (changeIteration(1) <= videoCounter) {
       forwardVideo();
-      videoIteration--;
+      videoIteration = changeIteration(-1);
     }
     else {
       actionTimers.clear();
       $("#youtube").attr("src", "");
       document.title = "Streamly";
-      videoIteration--;
+      videoIteration = changeIteration(-1);
     }
   }
   else if (index < videoIteration) {
-    videoIteration--;
+    videoIteration = changeIteration(-1);
   }
   videoCounter--;
   videos.splice(index, 1);
@@ -360,10 +364,10 @@ function actionMoveVideo(oldIndex, newIndex) {
     videoIteration = newIndex;
   }
   else if (oldIndex < videoIteration && newIndex >= videoIteration) {
-    videoIteration--;
+    videoIteration = changeIteration(-1);
   }
   else if (oldIndex > videoIteration && newIndex <= videoIteration) {
-    videoIteration++;
+    videoIteration = changeIteration(1);
   }
 }
 
@@ -400,20 +404,20 @@ function videoPreviews() {
     $("#" + which + "Video").css("background-color", color);
   }
   
-  if (videoIteration + 1 <= videoCounter) {
+  if (changeIteration(1) <= videoCounter) {
     changeOpacity("next", "1");
     greyOut("next", "white");
-    addData("next", videoIteration + 1);
+    addData("next", changeIteration(1));
   }
   else {
     changeOpacity("next", "0");
     greyOut("next", "grey");
   }
   
-  if (videoIteration - 1 > 0) {
+  if (changeIteration(-1) > 0) {
     changeOpacity("previous", "1")
     greyOut("previous", "white");
-    addData("previous", videoIteration - 1);
+    addData("previous", changeIteration(-1));
   }
   else {
     changeOpacity("previous", "0");
