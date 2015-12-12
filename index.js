@@ -32,7 +32,7 @@ function changeIteration(which) {
     return 1;
   }
   else if (playlistRepeat && sum <= 0) {
-    return videoCounter;
+    return videoCounter - 1;
   }
   else {
     return videoIteration + which;
@@ -430,7 +430,7 @@ function videoPreviews() {
   if (changeIteration(-1) > 0) {
     changeOpacity("previous", "1")
     greyOut("previous", "white");
-    addData("previous", changeIteration(-1));
+    addData("previous", (playlistRepeat ? changeIteration(-1) + 1 : changeIteration(-1)));
   }
   else {
     changeOpacity("previous", "0");
