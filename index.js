@@ -30,15 +30,12 @@ function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
     return 1;
-    console.log("sum greater than 1:");
   }
   else if (playlistRepeat && sum < 0) {
     return videoCounter - 1;
-    console.log("sum less than 0:" + videoCounter - 1);
   }
   else {
     return videoIteration + which;
-    console.log(videoIteration+which);
   }
 }
 
@@ -433,7 +430,7 @@ function videoPreviews() {
   if (changeIteration(-1) > 0) {
     changeOpacity("previous", "1");
     greyOut("previous", "white");
-    addData("previous", (playlistRepeat && videoIteration == 1 ? changeIteration(-1) + 1 : changeIteration(-1)));
+    addData("previous", (playlistRepeat && videoIteration == 1 ? changeIteration(-2) + 1 : changeIteration(-1)));
   }
   else {
     changeOpacity("previous", "0");
