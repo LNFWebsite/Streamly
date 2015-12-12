@@ -30,12 +30,15 @@ function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
     return 1;
+    console.log("sum greater than 1:");
   }
   else if (playlistRepeat && sum < 0) {
     return videoCounter - 1;
+    console.log("sum less than 0:" + videoCounter - 1);
   }
   else {
     return videoIteration + which;
+    console.log(videoIteration+which);
   }
 }
 
