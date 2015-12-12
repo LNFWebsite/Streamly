@@ -26,7 +26,7 @@
   </header>
   <div id="main">
     <form action="javascript:input(2);" method="get">
-      <input type="textbox" id="playlistNameBox" placeholder="Streamly Playlist" />
+      <input type="textbox" id="playlistNameBox" placeholder="Streamly Playlist" title="Enter your playlist name" />
     </form>
     <table id="videosTable"></table>
     <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started" target="_blank">Getting Started</a> | 
@@ -34,7 +34,7 @@
     <a href="//lnfwebsite.github.io/Streamly-Import/" target="_blank">Import Playlists</a>
   </div>
   <footer>
-    <div id="previousVideo" onclick="backVideo();">
+    <div id="previousVideo" onclick="backVideo();" title="Back">
       <p id="previousVideoName"></p>
       <img id="previousVideoImage" src="" />
       <span class="fa fa-backward"></span>
@@ -53,14 +53,14 @@
         <span id="videoTime">0:00</span>
       </div>
     </div>
-    <div id="nextVideo" onclick="forwardVideo();">
+    <div id="nextVideo" onclick="forwardVideo();" title="Forward">
       <img id="nextVideoImage" src="" />
       <p id="nextVideoName"></p>
       <span class="fa fa-forward"></span>
       <p id="nextVideoTime"></p>
     </div>
     <div id="settings">
-      <span class="fa fa-repeat" onclick="playlistFeatures.repeat();"></span>
+      <span class="fa fa-repeat" onclick="playlistFeatures.repeat();" title="Playlist repeat"></span>
     </div>
   </footer>
   <script>
