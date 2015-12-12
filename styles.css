@@ -223,7 +223,6 @@ td {
   border: none;
   float: right;
   opacity: .1;
-  cursor: pointer;
 }
 .playButton {
   margin-top: 3px
@@ -233,6 +232,9 @@ td {
 }
 .fa-play {
   font-size: 1.6em
+}
+.fa-repeat {
+  font-size: 1.5em;
 }
 .fa-backward {
   position: absolute;
@@ -246,6 +248,11 @@ td {
 }
 #videosTable tr {
   cursor: pointer
+}
+.tableButton,
+#settings,
+#videosTable tr {
+  cursor: pointer;
 }
 tr.placeholder {
   background: red;
