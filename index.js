@@ -428,9 +428,9 @@ function videoPreviews() {
   }
   
   if (changeIteration(-1) > 0) {
-    changeOpacity("previous", "1")
+    changeOpacity("previous", "1");
     greyOut("previous", "white");
-    addData("previous", (playlistRepeat ? changeIteration(-1) + 1 : changeIteration(-1)));
+    addData("previous", (playlistRepeat && videoIteration == 1 ? changeIteration(-1) + 1 : changeIteration(-1)));
   }
   else {
     changeOpacity("previous", "0");
