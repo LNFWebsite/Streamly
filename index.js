@@ -356,7 +356,7 @@ function actionPlayVideo(element) {
 function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
   if (index == videoIteration) {
-    if (changeIteration(1) <= videoCounter) {
+    if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
       videoIteration = changeIteration(-1);
     }
