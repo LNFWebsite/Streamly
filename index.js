@@ -26,16 +26,6 @@ var progressTimer;
 var playlistRepeat;
 var playlistShuffle;
 
-var PlaylistFeatures = function() {
-  this.repeat = function() {
-    playlistRepeat = (playlistRepeat ? false : true);
-  }
-  this.shuffle = function() {
-    playlistShuffle = (playlistShuffle ? false : true);
-  }
-}
-var playlistFeatures = new PlaylistFeatures;
-
 function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
@@ -444,6 +434,18 @@ function videoPreviews() {
     greyOut("previous", "grey");
   }
 }
+
+var PlaylistFeatures = function() {
+  this.repeat = function() {
+    playlistRepeat = (playlistRepeat ? false : true);
+    videoPreviews();
+  }
+  this.shuffle = function() {
+    playlistShuffle = (playlistShuffle ? false : true);
+    videoPreviews();
+  }
+}
+var playlistFeatures = new PlaylistFeatures;
 
 function urlValidate(url) {
   var regex = /^(http(|s):\/\/www\.youtube\.com\/watch\?v=|http(|s):\/\/youtu.be\/)[^&.*]+/i;
