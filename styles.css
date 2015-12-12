@@ -225,7 +225,7 @@ td {
   float: right;
   opacity: .1;
 }
-.settingsButton {
+#settings * {
   font-size: 1.5em !important;
   color: grey;
 }
