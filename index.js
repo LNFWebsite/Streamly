@@ -23,6 +23,19 @@ var backRestart;
 var loopTimer;
 var progressTimer;
 
+var playlistRepeat;
+var playlistShuffle;
+
+function changeIteration(which) {
+  var sum = videoIteration + which;
+  if (playlistRepeat && sum > videoCounter) {
+    return 1;
+  }
+  else {
+    return videoIteration + which;
+  }
+}
+
 function Timer(callback, delay) {
   var id, started, remaining = delay, running;
   this.resume = function() {
@@ -67,8 +80,8 @@ function highlight(i) {
 
 function addVideoToList(name, time) {
   name = decodeURIComponent(name);
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\"><span class=\"fa fa-times\"></span></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>");
 }
 
 function resetTimer(which) {
@@ -137,10 +150,10 @@ function playVideo() {
 }
 
 function loopVideo() {
-  videoIteration++;
+  videoIteration = changeIteration(1);
   playVideo();
   loopTimer = new Timer(function() {
-    if (videoIteration < videoCounter) {
+    if (videoIteration < videoCounter || playlistRepeat) {
       actionTimers.clear();
       loopVideo();
     }
@@ -186,7 +199,7 @@ function pauseVideo() {
 }
 
 function forwardVideo() {
-  if (videoIteration + 1 <= videoCounter) {
+  if (changeIteration(1) <= videoCounter) {
     actionTimers.clear();
     loopVideo();
   }
@@ -194,14 +207,14 @@ function forwardVideo() {
 
 function backVideo() {
   if (!backRestart) {
-    if (videoIteration - 2 > -1) {
-      videoIteration = videoIteration - 2;
+    if (changeIteration(-2) > -1) {
+      videoIteration = changeIteration(-2);
       actionTimers.clear();
       loopVideo();
     }
   }
   else {
-    videoIteration = videoIteration - 1;
+    videoIteration = changeIteration(-1);
     actionTimers.clear();
     loopVideo();
   }
@@ -222,6 +235,9 @@ function setPlaylist() {
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
     var playlist = window.location.hash.substr(1);
+    
+    $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
+    
     //leave the following decode for compatibility 10/10/2015
     playlist = decodeURIComponent(playlist);
     try {
@@ -240,8 +256,6 @@ function getPlaylist() {
         addVideoToList(videos[videoCounter][0], printTime);
       }
       loopVideo();
-      
-      $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
     }
     catch(err) {
       alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
@@ -334,17 +348,17 @@ function actionRemoveVideo(element) {
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
-      videoIteration--;
+      videoIteration = changeIteration(-1);
     }
     else {
       actionTimers.clear();
       $("#youtube").attr("src", "");
       document.title = "Streamly";
-      videoIteration--;
+      videoIteration = changeIteration(-1);
     }
   }
   else if (index < videoIteration) {
-    videoIteration--;
+    videoIteration = changeIteration(-1);
   }
   videoCounter--;
   videos.splice(index, 1);
@@ -360,10 +374,10 @@ function actionMoveVideo(oldIndex, newIndex) {
     videoIteration = newIndex;
   }
   else if (oldIndex < videoIteration && newIndex >= videoIteration) {
-    videoIteration--;
+    videoIteration = changeIteration(-1);
   }
   else if (oldIndex > videoIteration && newIndex <= videoIteration) {
-    videoIteration++;
+    videoIteration = changeIteration(1);
   }
 }
 
@@ -400,26 +414,40 @@ function videoPreviews() {
     $("#" + which + "Video").css("background-color", color);
   }
   
-  if (videoIteration + 1 <= videoCounter) {
+  if (changeIteration(1) <= videoCounter) {
     changeOpacity("next", "1");
     greyOut("next", "white");
-    addData("next", videoIteration + 1);
+    addData("next", changeIteration(1));
   }
   else {
     changeOpacity("next", "0");
     greyOut("next", "grey");
   }
   
-  if (videoIteration - 1 > 0) {
+  if (changeIteration(-1) > 0) {
     changeOpacity("previous", "1")
     greyOut("previous", "white");
-    addData("previous", videoIteration - 1);
+    addData("previous", changeIteration(-1));
   }
   else {
     changeOpacity("previous", "0");
     greyOut("previous", "grey");
   }
 }
+
+var PlaylistFeatures = function() {
+  this.repeat = function() {
+    playlistRepeat = (playlistRepeat ? false : true);
+    videoPreviews();
+    $(".fa-repeat").css("color", (playlistRepeat ? "#F77F00" : "grey"));
+  }
+  this.shuffle = function() {
+    playlistShuffle = (playlistShuffle ? false : true);
+    videoPreviews();
+    //$(".fa-shuffle").css("color", (playlistShuffle ? "#F77F00" : "grey"));
+  }
+}
+var playlistFeatures = new PlaylistFeatures;
 
 function urlValidate(url) {
   var regex = /^(http(|s):\/\/www\.youtube\.com\/watch\?v=|http(|s):\/\/youtu.be\/)[^&.*]+/i;

@@ -168,10 +168,12 @@ td {
   margin: 0 auto;
 }
 #previousVideoName {
-  padding: 5px 10px 5px 5px;
+  padding: 5px;
+  margin-right: 5px;
 }
 #nextVideoName {
-  padding: 5px 5px 5px 10px;
+  padding: 5px;
+  margin-left: 5px;
 }
 #previousVideoTime,
 #nextVideoTime {
@@ -192,11 +194,11 @@ td {
 #settings {
   width: 130px;
   height: 30px;
-  background-color: white;
   padding: 5px;
   position: absolute;
   bottom: -5px;
-  right: calc(30% - 130px);
+  right: calc(30% - 132px);
+  border: 1px solid white;
   border-radius: 5px;
 }
 #progress {
@@ -221,6 +223,10 @@ td {
   border: none;
   float: right;
   opacity: .1;
+}
+#settings * {
+  font-size: 1.5em !important;
+  color: grey;
   cursor: pointer;
 }
 .playButton {
@@ -244,6 +250,10 @@ td {
 }
 #videosTable tr {
   cursor: pointer
+}
+.tableButton,
+#videosTable tr {
+  cursor: pointer;
 }
 tr.placeholder {
   background: red;
