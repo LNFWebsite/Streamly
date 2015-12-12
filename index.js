@@ -23,8 +23,27 @@ var backRestart;
 var loopTimer;
 var progressTimer;
 
+var playlistRepeat;
+var playlistShuffle;
+
+var PlaylistFeatures = function() {
+  this.repeat = function() {
+    playlistRepeat = (playlistRepeat ? false : true);
+  }
+  this.shuffle = function() {
+    playlistShuffle = (playlistShuffle ? false : true);
+  }
+}
+var playlistFeatures = new PlaylistFeatures;
+
 function changeIteration(which) {
-  return videoIteration + which;
+  var sum = videoIteration + which;
+  if (playlistRepeat && sum == videoCounter) {
+    return 1;
+  }
+  else {
+    return videoIteration + which;
+  }
 }
 
 function Timer(callback, delay) {
@@ -144,7 +163,7 @@ function loopVideo() {
   videoIteration = changeIteration(1);
   playVideo();
   loopTimer = new Timer(function() {
-    if (videoIteration < videoCounter) {
+    if (videoIteration < videoCounter || playlistRepeat) {
       actionTimers.clear();
       loopVideo();
     }
