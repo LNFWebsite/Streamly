@@ -31,7 +31,7 @@ function changeIteration(which) {
   if (playlistRepeat && sum > videoCounter) {
     return 1;
   }
-  else if (playlistRepeat && sum <= -1) {
+  else if (playlistRepeat && sum <= 0) {
     return videoCounter;
   }
   else {
