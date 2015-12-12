@@ -228,6 +228,7 @@ td {
 #settings * {
   font-size: 1.5em !important;
   color: grey;
+  cursor: pointer;
 }
 .playButton {
   margin-top: 3px
