@@ -194,11 +194,11 @@ td {
 #settings {
   width: 130px;
   height: 30px;
-  background-color: white;
   padding: 5px;
   position: absolute;
   bottom: -5px;
-  right: calc(30% - 130px);
+  right: calc(30% - 128px);
+  border: 1px solid white;
   border-radius: 5px;
 }
 #progress {
@@ -208,7 +208,8 @@ td {
   height: 100%;
 }
 #progress,
-.tableButton {
+.tableButton,
+.settingsButton {
   -moz-transition: .2s;
   -ms-transition: .2s;
   -o-transition: .2s;
@@ -224,6 +225,10 @@ td {
   float: right;
   opacity: .1;
 }
+.settingsButton {
+  font-size: 1.5em;
+  color: grey;
+}
 .playButton {
   margin-top: 3px
 }
@@ -232,9 +237,6 @@ td {
 }
 .fa-play {
   font-size: 1.6em
-}
-.fa-repeat {
-  font-size: 1.5em;
 }
 .fa-backward {
   position: absolute;
@@ -250,7 +252,7 @@ td {
   cursor: pointer
 }
 .tableButton,
-#settings,
+.settingsButton,
 #videosTable tr {
   cursor: pointer;
 }
