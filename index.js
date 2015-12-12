@@ -38,7 +38,7 @@ var playlistFeatures = new PlaylistFeatures;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
-  if (playlistRepeat && sum == videoCounter) {
+  if (playlistRepeat && sum > videoCounter) {
     return 1;
   }
   else {
