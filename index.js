@@ -80,8 +80,8 @@ function highlight(i) {
 
 function addVideoToList(name, time) {
   name = decodeURIComponent(name);
-  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\"><span class=\"fa fa-times\"></span></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>");
+  $("#videosTable").append("<tr><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>");
 }
 
 function resetTimer(which) {
