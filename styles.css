@@ -208,8 +208,7 @@ td {
   height: 100%;
 }
 #progress,
-.tableButton,
-.settingsButton {
+.tableButton {
   -moz-transition: .2s;
   -ms-transition: .2s;
   -o-transition: .2s;
@@ -253,7 +252,6 @@ td {
   cursor: pointer
 }
 .tableButton,
-.settingsButton,
 #videosTable tr {
   cursor: pointer;
 }
