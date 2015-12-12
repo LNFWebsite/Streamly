@@ -439,10 +439,12 @@ var PlaylistFeatures = function() {
   this.repeat = function() {
     playlistRepeat = (playlistRepeat ? false : true);
     videoPreviews();
+    $(".fa-repeat").css("color", (playlistRepeat ? "#F77F00" : "grey"));
   }
   this.shuffle = function() {
     playlistShuffle = (playlistShuffle ? false : true);
     videoPreviews();
+    //$(".fa-shuffle").css("color", (playlistShuffle ? "#F77F00" : "grey"));
   }
 }
 var playlistFeatures = new PlaylistFeatures;
