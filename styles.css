@@ -197,7 +197,7 @@ td {
   padding: 5px;
   position: absolute;
   bottom: -5px;
-  right: calc(30% - 128px);
+  right: calc(30% - 132px);
   border: 1px solid white;
   border-radius: 5px;
 }
@@ -226,7 +226,7 @@ td {
   opacity: .1;
 }
 .settingsButton {
-  font-size: 1.5em;
+  font-size: 1.5em !important;
   color: grey;
 }
 .playButton {
