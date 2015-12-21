@@ -58,6 +58,7 @@ footer {
   background-color: #fff;
   left: 25px;
   padding: 5px 7px;
+  cursor: pointer;
 }
 td,
 th,
