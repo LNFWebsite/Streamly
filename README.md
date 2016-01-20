@@ -1,5 +1,5 @@
 # Streamly
-YouTube video streaming, extremely simple.
+YouTube HTML5 playlists, extremely simple.
 
 ## What is Streamly?
 
