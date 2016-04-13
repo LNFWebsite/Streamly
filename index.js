@@ -319,7 +319,7 @@ function getVideoData() {
 
 function setAutoplay() {
   $.ajax({
-    url: videos[videoCounter][2],
+    url: "https://www.youtube.com/watch?v=" + videos[videoCounter][2],
     type: 'GET',
     success: function(res) {
       var data = $(res.responseText);
@@ -500,7 +500,7 @@ var PlaylistFeatures = function() {
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
-    if (videoIteration == videoCounter) {
+    if (playlistAutoplay && videoIteration == videoCounter) {
       setAutoplay();
       videoPreviews();
     }
