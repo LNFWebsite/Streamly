@@ -25,6 +25,7 @@ var progressTimer;
 
 var playlistRepeat;
 var playlistShuffle;
+var playlistAutoplay;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -448,6 +449,11 @@ var PlaylistFeatures = function() {
     playlistShuffle = (playlistShuffle ? false : true);
     videoPreviews();
     //$(".fa-shuffle").css("color", (playlistShuffle ? "#F77F00" : "grey"));
+  }
+  this.autoplay = function() {
+    playlistAutoplay = (playlistAutoplay ? false : true);
+    videoPreviews();
+    $(".fa-rss").css("color", (playlistAutoplay ? "#F77F00" : "grey"));
   }
 }
 var playlistFeatures = new PlaylistFeatures;
