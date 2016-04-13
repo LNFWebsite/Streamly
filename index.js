@@ -322,7 +322,7 @@ function setAutoplay() {
     url: "https://www.youtube.com/watch?v=" + videos[videoCounter][2],
     type: 'GET',
     success: function(res) {
-      var data = res;
+      var data = res["responseText"];
       console.log(data);
       try {
         var regex = /\{\"class\":\"watch-sidebar-body\",\"ul\":\{\"class\":\"video-list\",\"li\":\{.+?\"href\":\"\/watch\?v=(.+?)\".+?\"title\":\"(.+?)\"/i;
