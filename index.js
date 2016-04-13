@@ -317,6 +317,54 @@ function getVideoData() {
   });
 }
 
+function setAutoplay() {
+  $.ajax({
+    url: videos[videoCounter][2],
+    type: 'GET',
+    success: function(res) {
+      var data = $(res.responseText);
+      try {
+        videoName = data.find("span#eow-title");
+        videoName = videoName[0].textContent;
+        videoName = $("<div/>").html(videoName).text();
+        videoName = videoName.trim();
+      } catch(err) {
+        videoName = prompt("Please enter the name of the video", "");
+      }
+      videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+      try {
+        videoTime = null;
+        for (iteration in data) {
+          var str = data[iteration].innerHTML;
+          if (videoTime == null && typeof str != "undefined") {
+            videoTime = str.match(/,"length_seconds":"\d+",/g);
+          }
+        }
+        videoTime = videoTime[0];
+        videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
+        videoTime = +videoTime * 1000;
+      } catch(err) {
+        videoTime = prompt("Please enter the length of the video", "3:00");
+        videoTime = videoTime.split(":");
+        videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
+        videoTime = videoTime * 1000;
+      }
+    },
+    complete: function(jqXHR, textStatus) {
+      $("#inputBox").val("").attr("placeholder", placeholder);
+      addVideo();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      videoName = prompt("Please enter the name of the video", "");
+      
+      videoTime = prompt("Please enter the length of the video", "3:00");
+      videoTime = videoTime.split(":");
+      videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
+      videoTime = videoTime * 1000;
+    }
+  });
+}
+
 function addVideo() {
   videoCounter++;
   var video = [];
@@ -452,7 +500,10 @@ var PlaylistFeatures = function() {
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
-    videoPreviews();
+    if (videoIteration == videoCounter) {
+      setAutoplay();
+      videoPreviews();
+    }
     $(".fa-rss").css("color", (playlistAutoplay ? "#F77F00" : "grey"));
   }
 }
