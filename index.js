@@ -349,6 +349,7 @@ function setAutoplay() {
     },
     complete: function(jqXHR, textStatus) {
       console.log(videoName);
+      infiniteLoopVideo = false;
       for (i = 1; i < videos.length; i++) {
         console.log(videos[i][1]);
         if (videos[i][1] == videoName) {
@@ -356,7 +357,6 @@ function setAutoplay() {
           return;
         }
       }
-      infiniteLoopVideo = false;
       $("#inputBox").val("").attr("placeholder", placeholder);
       addVideo();
     },
