@@ -332,37 +332,19 @@ function setAutoplay() {
         var data = res["responseText"];
         console.log(data);
         try {
-          var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
-          var nextAutoplay = data.match(regex);
-          
-          videoUrl = nextAutoplay[1];
-          videoName = nextAutoplay[2];
-          videoTime = nextAutoplay[3];
-          
-          autoplayMix = autoplayMix[1].replace("&amp;", "&");
-          
-          videoTime = videoTime.split(":");
-          videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
-          videoTime = videoTime * 1000;
+          var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
+          var data = data.match(regex);
+          videoUrl = data[1];
         } catch(err) {
           setTimeout(function() {
             setAutoplay();
             return;
           }, 3000);
         }
-        videoName = videoName.replace(/%20/g, " ");
       },
       complete: function(jqXHR, textStatus) {
         useAutoplayMix = false;
-        for (i = 1; i < videos.length; i++) {
-          if (videos[i][2] == videoUrl) {
-            useAutoplayMix = true;
-            //setAutoplay();
-            return;
-          }
-        }
-        $("#inputBox").val("").attr("placeholder", placeholder);
-        addVideo();
+        getVideoData();
       },
       error: function(jqXHR, textStatus, errorThrown) {
         setTimeout(function() {
