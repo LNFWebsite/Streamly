@@ -348,7 +348,7 @@ function setAutoplay() {
       videoName = videoName.replace(/%20/g, " ");
     },
     complete: function(jqXHR, textStatus) {
-      for (i = 0, i <= videos.length, i++) {
+      for (i = 0; i <= videos.length; i++) {
         if (videos[i][1] == videoName) {
           infiniteLoopVideo = true;
           return;
