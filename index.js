@@ -78,6 +78,22 @@ function msConversion(millis) {
   return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 }
 
+var decodeEntities = (function() {
+  var element = document.createElement('div');
+  function decodeHTMLEntities (str) {
+    if(str && typeof str === 'string') {
+      // strip script/html tags
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+      element.innerHTML = str;
+      str = element.textContent;
+      element.textContent = '';
+    }
+    return str;
+  }
+  return decodeHTMLEntities;
+})();
+
 function highlight(i) {
   $("tr:nth-child(" + i + ")").attr("id", "newSelected");
   $("tr.selected").removeClass("selected");
@@ -373,7 +389,7 @@ function setAutoplay() {
           videoName = nextAutoplay[2];
           videoTime = nextAutoplay[3];
           
-          autoplayMix = autoplayMix[1].replace("&amp;", "&");
+          autoplayMix = decodeEntities(autoplayMix[1]);
           
           videoTime = videoTime.split(":");
           videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
@@ -384,7 +400,7 @@ function setAutoplay() {
             return;
           }, 3000);
         }
-        videoName = decodeURIComponent(videoName).replace(/%20/g, " ");
+        videoName = decodeEntities(videoName).replace(/%20/g, " ");
       },
       complete: function(jqXHR, textStatus) {
         for (i = 1; i < videos.length; i++) {
