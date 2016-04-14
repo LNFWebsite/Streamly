@@ -135,7 +135,7 @@ function videoProgress() {
 
 function playVideo() {
   highlight(videoIteration);
-  if (playlistAutoplay) {
+  if (playlistAutoplay && videoIteration == videoCounter) {
     setAutoplay();
   }
   videoPreviews();
@@ -329,10 +329,11 @@ function setAutoplay() {
       try {
         var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
         data = data.match(regex);
-        console.log(data);
+        
         videoUrl = data[1];
         videoName = data[2];
         videoTime = data[3];
+        
         videoTime = videoTime.split(":");
         videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
         videoTime = videoTime * 1000;
@@ -342,7 +343,7 @@ function setAutoplay() {
         }, 3000);
         return;
       }
-      videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+      videoName = videoName.replace(/%20/g, " ");
     },
     complete: function(jqXHR, textStatus) {
       $("#inputBox").val("").attr("placeholder", placeholder);
