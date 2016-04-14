@@ -330,11 +330,10 @@ function setAutoplay() {
       type: 'GET',
       success: function(res) {
         var data = res["responseText"];
-        console.log(data);
         try {
           var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
           var data = data.match(regex);
-          videoUrl = "https://www.youtube.com/watch?v=" + data[1];
+          videoUrl = "https://www.youtube.com/watch?v=" + data[2];
         } catch(err) {
           setTimeout(function() {
             setAutoplay();
