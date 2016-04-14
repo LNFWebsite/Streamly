@@ -68,12 +68,17 @@
   </footer>
   <script>
   function streamlyRadioAd() {
-    for (i=0; i<5; i++) {
+    var i;
+    var interval = setInterval (function() {
+      i++;
       $(".fa-rss").css("color", "white");
       setTimeout(function() {
         $(".fa-rss").css("color", "grey");
       }, 500);
-    }
+      if (i <= 5) {
+        clearInterval(interval);
+      }
+    }, 500);
   }
   
   getPlaylist();
