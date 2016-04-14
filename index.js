@@ -401,7 +401,7 @@ function setAutoplay() {
           }, 3000);
         }
         console.log(videoName);
-        videoName = decodeEntities(decodeURIComponent(videoName)).replace(/%20/g, " ");
+        videoName = encodeURIComponent(decodeEntities(decodeEntities(videoName)).replace(/%20/g, " ");
         console.log(videoName);
       },
       complete: function(jqXHR, textStatus) {
