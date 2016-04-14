@@ -323,13 +323,13 @@ function setAutoplay() {
     type: 'GET',
     success: function(res) {
       var data = res["responseText"];
-      console.log(data);
       try {
-        var regex = /\{\"class\":\"watch-sidebar-body\",\"ul\":\{\"class\":\"video-list\",\"li\":\{.+?\"href\":\"\/watch\?v=(.+?)\".+?\"title\":\"(.+?)\"/i;
+        var regex = /<div class=\"content-wrapper\">.*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">.*?- Duration: (.+?)\./is;
         data = data.match(regex);
         console.log(data);
         videoUrl = data[1];
         videoName = data[2];
+        videoTime = data[3];
       } catch(err) {
         console.log(err);
         videoName = prompt("Please enter the name of the video", "");
