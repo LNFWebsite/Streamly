@@ -384,7 +384,7 @@ function setAutoplay() {
             return;
           }, 3000);
         }
-        videoName = videoName.replace(/%20/g, " ");
+        videoName = decodeURIComponent(videoName).replace(/%20/g, " ");
       },
       complete: function(jqXHR, textStatus) {
         for (i = 1; i < videos.length; i++) {
