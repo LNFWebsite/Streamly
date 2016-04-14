@@ -331,10 +331,12 @@ function setAutoplay() {
       success: function(res) {
         var data = res["responseText"];
         try {
-          var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/ig;
+          var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
           var data = data.match(regex);
-          console.log(data);
-          videoUrl = "https://www.youtube.com/watch?v=" + data[1][1];
+          
+          regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
+          data = data[1].match(regex);
+          videoUrl = "https://www.youtube.com/watch?v=" + data[1];
         } catch(err) {
           setTimeout(function() {
             setAutoplay();
