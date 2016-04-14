@@ -346,10 +346,11 @@ function setAutoplay() {
         videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
         videoTime = videoTime * 1000;
       } catch(err) {
+        console.log("err: " + err);
         setTimeout(function() {
           setAutoplay();
+          return;
         }, 3000);
-        return;
       }
       videoName = videoName.replace(/%20/g, " ");
     },
