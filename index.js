@@ -27,6 +27,8 @@ var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
 
+var infiniteLoopVideo;
+
 function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
@@ -346,6 +348,13 @@ function setAutoplay() {
       videoName = videoName.replace(/%20/g, " ");
     },
     complete: function(jqXHR, textStatus) {
+      for (i = 0, i <= videos.length, i++) {
+        if (videos[i][1] == videoName) {
+          infiniteLoopVideo = true;
+          return;
+        }
+      }
+      infiniteLoopVideo = false;
       $("#inputBox").val("").attr("placeholder", placeholder);
       addVideo();
     },
