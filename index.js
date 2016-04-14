@@ -400,7 +400,7 @@ function setAutoplay() {
             return;
           }, 3000);
         }
-        videoName = decodeEntities(videoName).replace(/%20/g, " ");
+        videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       },
       complete: function(jqXHR, textStatus) {
         for (i = 1; i < videos.length; i++) {
