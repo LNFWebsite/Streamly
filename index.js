@@ -330,9 +330,14 @@ function setAutoplay() {
         videoUrl = data[1];
         videoName = data[2];
         videoTime = data[3];
+        videoTime = videoTime.split(":");
+        videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
+        videoTime = videoTime * 1000;
       } catch(err) {
-        console.log(err);
-        videoName = prompt("Please enter the name of the video", "");
+        setTimeout(function() {
+          setAutoplay();
+        }, 3000);
+        return;
       }
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     },
