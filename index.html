@@ -63,22 +63,22 @@
     </div>
     <div id="settings">
       <span class="fa fa-repeat" onclick="playlistFeatures.repeat();" title="Playlist repeat"></span>
-      <span class="fa fa-rss" onclick="playlistFeatures.autoplay();" title="Streamly Radio"></span>
+      <span class="fa fa-rss" id="ad" onclick="playlistFeatures.autoplay();" title="Streamly Radio"></span>
     </div>
   </footer>
   <script>
   function streamlyRadioAd() {
-    var i;
-    var interval = setInterval (function() {
+    var i=0;
+    function flash() {
       i++;
-      $(".fa-rss").css("color", "white");
-      setTimeout(function() {
-        $(".fa-rss").css("color", "grey");
-      }, 500);
-      if (i <= 5) {
-        clearInterval(interval);
+      alert(i);
+      var text = document.getElementById('ad');
+      text.style.color = (text.style.color=='white') ? 'grey':'white';
+      if (i == 10) {
+        clearInterval(clr);
       }
-    }, 500);
+    }
+    var clr = setInterval(flash, 500);
   }
   
   getPlaylist();
