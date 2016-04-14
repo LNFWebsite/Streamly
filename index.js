@@ -135,6 +135,9 @@ function videoProgress() {
 
 function playVideo() {
   highlight(videoIteration);
+  if (playlistAutoplay) {
+    setAutoplay();
+  }
   videoPreviews();
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   var embedUrl = videos[videoIteration][2];
@@ -346,12 +349,10 @@ function setAutoplay() {
       addVideo();
     },
     error: function(jqXHR, textStatus, errorThrown) {
-      videoName = prompt("Please enter the name of the video", "");
-      
-      videoTime = prompt("Please enter the length of the video", "3:00");
-      videoTime = videoTime.split(":");
-      videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
-      videoTime = videoTime * 1000;
+      setTimeout(function() {
+        setAutoplay();
+      }, 3000);
+      return;
     }
   });
 }
