@@ -324,7 +324,7 @@ function setAutoplay() {
     success: function(res) {
       var data = res["responseText"];
       try {
-        var regex = /<div class=\"content-wrapper\">.*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">.*?- Duration: (.+?)\./is;
+        var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
         data = data.match(regex);
         console.log(data);
         videoUrl = data[1];
