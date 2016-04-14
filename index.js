@@ -305,6 +305,7 @@ function getVideoData() {
       } catch(err) {
         videoName = prompt("Please enter the name of the video", "");
       }
+      console.log(videoName);
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       try {
         videoTime = null;
@@ -387,6 +388,7 @@ function setAutoplay() {
           
           videoUrl = nextAutoplay[1];
           videoName = nextAutoplay[2];
+          console.log(videoName);
           videoTime = nextAutoplay[3];
           
           autoplayMix = decodeEntities(autoplayMix[1]);
