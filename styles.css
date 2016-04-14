@@ -250,6 +250,9 @@ td {
   left: 51px;
   top: 35px;
 }
+.fa-rss {
+  margin-left: 5px;
+}
 #videosTable tr {
   cursor: pointer
 }

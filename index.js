@@ -25,6 +25,10 @@ var progressTimer;
 
 var playlistRepeat;
 var playlistShuffle;
+var playlistAutoplay;
+
+var useAutoplayMix;
+var autoplayMix;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -73,6 +77,22 @@ function msConversion(millis) {
   var seconds = ((millis % 60000) / 1000).toFixed(0);
   return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 }
+
+var decodeEntities = (function() {
+  var element = document.createElement('div');
+  function decodeHTMLEntities (str) {
+    if(str && typeof str === 'string') {
+      // strip script/html tags
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+      element.innerHTML = str;
+      str = element.textContent;
+      element.textContent = '';
+    }
+    return str;
+  }
+  return decodeHTMLEntities;
+})();
 
 function highlight(i) {
   $("tr:nth-child(" + i + ")").attr("id", "newSelected");
@@ -134,6 +154,9 @@ function videoProgress() {
 
 function playVideo() {
   highlight(videoIteration);
+  if (playlistAutoplay && videoIteration == videoCounter) {
+    setAutoplay();
+  }
   videoPreviews();
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   var embedUrl = videos[videoIteration][2];
@@ -316,6 +339,90 @@ function getVideoData() {
   });
 }
 
+function setAutoplay() {
+  if (useAutoplayMix) {
+    $.ajax({
+      url: "https://www.youtube.com/watch?v=" + autoplayMix,
+      type: 'GET',
+      success: function(res) {
+        var data = res["responseText"];
+        try {
+          var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
+          var data = data.match(regex);
+          
+          regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
+          data = data[1].match(regex);
+          videoUrl = "https://www.youtube.com/watch?v=" + data[1];
+        } catch(err) {
+          setTimeout(function() {
+            setAutoplay();
+            return;
+          }, 3000);
+        }
+      },
+      complete: function(jqXHR, textStatus) {
+        useAutoplayMix = false;
+        getVideoData();
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        setTimeout(function() {
+          setAutoplay();
+          return;
+        }, 3000);
+      }
+    });
+  }
+  else {
+    $.ajax({
+      url: "https://www.youtube.com/watch?v=" + videos[videoCounter][2],
+      type: 'GET',
+      success: function(res) {
+        var data = res["responseText"];
+        try {
+          var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
+          var nextAutoplay = data.match(regex);
+          
+          regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
+          autoplayMix = data.match(regex);
+          
+          videoUrl = nextAutoplay[1];
+          videoName = nextAutoplay[2];
+          videoTime = nextAutoplay[3];
+          
+          autoplayMix = decodeEntities(autoplayMix[1]);
+          
+          videoTime = videoTime.split(":");
+          videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
+          videoTime = videoTime * 1000;
+        } catch(err) {
+          setTimeout(function() {
+            setAutoplay();
+            return;
+          }, 3000);
+        }
+        videoName = encodeURIComponent(decodeEntities(decodeEntities(videoName))).replace(/%20/g, " ");
+      },
+      complete: function(jqXHR, textStatus) {
+        for (i = 1; i < videos.length; i++) {
+          if (videos[i][2] == videoUrl) {
+            useAutoplayMix = true;
+            setAutoplay();
+            return;
+          }
+        }
+        $("#inputBox").val("").attr("placeholder", placeholder);
+        addVideo();
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        setTimeout(function() {
+          setAutoplay();
+          return;
+        }, 3000);
+      }
+    });
+  }
+}
+
 function addVideo() {
   videoCounter++;
   var video = [];
@@ -448,6 +555,14 @@ var PlaylistFeatures = function() {
     playlistShuffle = (playlistShuffle ? false : true);
     videoPreviews();
     //$(".fa-shuffle").css("color", (playlistShuffle ? "#F77F00" : "grey"));
+  }
+  this.autoplay = function() {
+    playlistAutoplay = (playlistAutoplay ? false : true);
+    if (playlistAutoplay && videoIteration == videoCounter && videos.length > 0) {
+      setAutoplay();
+      videoPreviews();
+    }
+    $(".fa-rss").css("color", (playlistAutoplay ? "#F77F00" : "grey"));
   }
 }
 var playlistFeatures = new PlaylistFeatures;
