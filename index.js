@@ -505,7 +505,7 @@ var PlaylistFeatures = function() {
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
-    if (playlistAutoplay && videoIteration == videoCounter) {
+    if (playlistAutoplay && videoIteration == videoCounter && videos.length > 0) {
       setAutoplay();
       videoPreviews();
     }
