@@ -33,7 +33,7 @@
     <a href="//github.com/LNFWebsite/Streamly/wiki/Playlists" target="_blank">Playlists Wiki</a> | 
     <a href="//lnfwebsite.github.io/Streamly-Import/" target="_blank">Import Playlists</a>
     <br>
-    <a href="javascript:playlistFeatures.autoplay();">Check out the new Streamly Radio feature!</a>
+    <a href="javascript:streamlyRadioAd();">Check out the new Streamly Radio feature!</a>
   </div>
   <footer>
     <div id="previousVideo" onclick="backVideo();" title="Back">
@@ -67,6 +67,15 @@
     </div>
   </footer>
   <script>
+  function streamlyRadioAd() {
+    for (i=0; i<5; i++) {
+      $(".fa-rss").css("color", "white");
+      setTimeout(function() {
+        $(".fa-rss").css("color", "grey");
+      }, 500);
+    }
+  }
+  
   getPlaylist();
   makeSortable();
   videoPreviews();
