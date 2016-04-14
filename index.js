@@ -341,6 +341,7 @@ function getVideoData() {
 
 function setAutoplay() {
   if (useAutoplayMix) {
+    console.log("Mix");
     $.ajax({
       url: "https://www.youtube.com/watch?v=" + autoplayMix,
       type: 'GET',
@@ -378,6 +379,7 @@ function setAutoplay() {
       type: 'GET',
       success: function(res) {
         var data = res["responseText"];
+        console.log(data);
         try {
           var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
           var nextAutoplay = data.match(regex);
