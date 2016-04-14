@@ -328,6 +328,7 @@ function setAutoplay() {
     type: 'GET',
     success: function(res) {
       var data = res["responseText"];
+      console.log(data);
       try {
         var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
         data = data.match(regex);
@@ -349,12 +350,10 @@ function setAutoplay() {
     },
     complete: function(jqXHR, textStatus) {
       infiniteLoopVideo = false;
-      console.log("videoname " + videoName);
       for (i = 1; i < videos.length; i++) {
-        console.log(decodeURIComponent(videos[i][0]));
         if (decodeURIComponent(videos[i][0]) == videoName) {
-          console.log("infinite");
           infiniteLoopVideo = true;
+          setAutoplay();
           return;
         }
       }
