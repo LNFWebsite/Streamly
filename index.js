@@ -328,7 +328,6 @@ function setAutoplay() {
     type: 'GET',
     success: function(res) {
       var data = res["responseText"];
-      console.log(data);
       try {
         var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
         nextAutoplay = data.match(regex);
@@ -340,7 +339,7 @@ function setAutoplay() {
         videoName = nextAutoplay[2];
         videoTime = nextAutoplay[3];
         
-        autoplayMix = autoplayMix[1];
+        autoplayMix = autoplayMix[1].replace("&amp;", "&");
         console.log(autoplayMix);
         
         videoTime = videoTime.split(":");
