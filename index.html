@@ -69,15 +69,16 @@
   <script>
   function streamlyRadioAd() {
     var i=0;
+    var text = document.getElementById('ad');
+    text.style.color = 'white';
     function flash() {
       i++;
-      var text = document.getElementById('ad');
       text.style.color = (text.style.color=='white') ? 'grey':'white';
       if (i == 10) {
         clearInterval(clr);
       }
     }
-    var clr = setInterval(flash, 500);
+    var clr = setInterval(flash, 300);
   }
   
   getPlaylist();
