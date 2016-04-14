@@ -385,11 +385,10 @@ function setAutoplay() {
         videoName = videoName.replace(/%20/g, " ");
       },
       complete: function(jqXHR, textStatus) {
-        useAutoplayMix = false;
         for (i = 1; i < videos.length; i++) {
           if (videos[i][2] == videoUrl) {
             useAutoplayMix = true;
-            //setAutoplay();
+            setAutoplay();
             return;
           }
         }
