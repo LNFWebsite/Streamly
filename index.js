@@ -331,11 +331,17 @@ function setAutoplay() {
       console.log(data);
       try {
         var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
-        data = data.match(regex);
+        nextAutoplay = data.match(regex);
         
-        videoUrl = data[1];
-        videoName = data[2];
-        videoTime = data[3];
+        regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
+        autoplayMix = data.match(regex);
+        
+        videoUrl = nextAutoplay[1];
+        videoName = nextAutoplay[2];
+        videoTime = nextAutoplay[3];
+        
+        autoplayMix = autoplayMix[1];
+        console.log(autoplayMix);
         
         videoTime = videoTime.split(":");
         videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
