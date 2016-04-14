@@ -352,7 +352,7 @@ function setAutoplay() {
       console.log(videoName);
       for (i = 1; i < videos.length; i++) {
         console.log(videos[i][0]);
-        if (videos[i][0] == videoName) {
+        if (videos[i][0] == encodeURIComponent(videoName)) {
           console.log("infinite");
           infiniteLoopVideo = true;
           return;
