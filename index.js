@@ -349,10 +349,10 @@ function setAutoplay() {
     },
     complete: function(jqXHR, textStatus) {
       infiniteLoopVideo = false;
-      console.log("videoname " + encodeURIComponent(videoName));
+      console.log("videoname " + videoName);
       for (i = 1; i < videos.length; i++) {
-        console.log(videos[i][0]);
-        if (videos[i][0] == encodeURIComponent(videoName)) {
+        console.log(decodeURIComponent(videos[i][0]));
+        if (decodeURIComponent(videos[i][0]) == videoName) {
           console.log("infinite");
           infiniteLoopVideo = true;
           return;
