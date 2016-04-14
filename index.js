@@ -334,7 +334,7 @@ function setAutoplay() {
         try {
           var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
           var data = data.match(regex);
-          videoUrl = data[1];
+          videoUrl = "https://www.youtube.com/watch?v=" + data[1];
         } catch(err) {
           setTimeout(function() {
             setAutoplay();
