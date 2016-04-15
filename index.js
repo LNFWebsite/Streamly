@@ -411,11 +411,11 @@ function addAutoplayVideo() {
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
       getAutoplayUrl();
     }
-    else {
+    else if (radioVideoIteration <= radioVideos.length) {
       videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
       getVideoData();
     }
-    if (radioVideoIteration === radioVideos.length) {
+    else {
       console.log("refilling radio");
       var regex = /^.*?&list=(.+?)$/i;
       saveAutoplay(autoplayMixUrl.match(regex)[1]);
