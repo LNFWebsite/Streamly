@@ -371,8 +371,6 @@ function saveAutoplay(list) {
         
         regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
         
-        console.log(data);
-        
         var notInPlaylist = true;
         for (i = 1; i <= 25; i++) {
           autoplayMixVideoUrl = data[i].match(regex)[1];
@@ -386,7 +384,6 @@ function saveAutoplay(list) {
           }
         }
       } catch(err) {
-        console.log(err);
         setTimeout(function() {
           saveAutoplay();
           return;
@@ -408,10 +405,14 @@ function saveAutoplay(list) {
 
 function addAutoplayVideo() {
   if (playlistAutoplay && videoIteration == videoCounter) {
+    radioVideoIteration++;
     if (typeof autoplayMixUrl == 'undefined') {
       getAutoplayUrl();
     }
-    radioVideoIteration++;
+    else {
+      videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+      getVideoData();
+    }
     if (radioVideoIteration > radioVideos.length) {
       console.log("refilling radio");
       var regex = /^.*?&list=(.+?)$/i;
