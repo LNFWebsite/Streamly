@@ -356,15 +356,18 @@ function setAutoplay() {
           loop1:
           for (i = 1; i <= 10; i++) {
             autoplayMixVideoUrl = data[i].match(regex);
+            console.log(autoplayMixVideoUrl);
             loop2:
             for (x = 1; x < videos.length; x++) {
+              console.log("playlist check:" + videos[i][2]);
               if (videos[i][2] != autoplayMixVideoUrl) {
+                console.log("GTG");
                 break loop1;
               }
             }
           }
           
-          videoUrl = "https://www.youtube.com/watch?v=" + data[1];
+          videoUrl = "https://www.youtube.com/watch?v=" + autoplayMixVideoUrl;
         } catch(err) {
           setTimeout(function() {
             setAutoplay();
