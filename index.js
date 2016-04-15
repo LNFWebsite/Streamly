@@ -373,8 +373,8 @@ function saveAutoplay(list) {
         
         console.log(data);
         
-        var notInPlaylist = true;
         for (i = 1; i <= 25; i++) {
+          var notInPlaylist = true;
           var autoplayMixVideoUrl = data[i].match(regex)[1];
           console.log(autoplayMixVideoUrl);
           for (x = 1; x < videos.length; x++) {
