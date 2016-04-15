@@ -371,6 +371,8 @@ function saveAutoplay(list) {
         
         regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
         
+        console.log(data);
+        
         var notInPlaylist = true;
         for (i = 1; i <= 25; i++) {
           autoplayMixVideoUrl = data[i].match(regex)[1];
@@ -413,7 +415,7 @@ function addAutoplayVideo() {
       videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
       getVideoData();
     }
-    if (radioVideoIteration > radioVideos.length) {
+    if (radioVideoIteration === radioVideos.length) {
       console.log("refilling radio");
       var regex = /^.*?&list=(.+?)$/i;
       saveAutoplay(autoplayMixUrl.match(regex)[1]);
