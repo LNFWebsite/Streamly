@@ -358,8 +358,8 @@ function setAutoplay() {
             autoplayMixVideoUrl = data[i].match(regex)[1];
             console.log(autoplayMixVideoUrl);
             for (x = 1; x < videos.length; x++) {
-              console.log("playlist check:" + videos[i][2]);
-              if (videos[i][2] == autoplayMixVideoUrl) {
+              console.log("playlist check:" + videos[x][2]);
+              if (videos[x][2] == autoplayMixVideoUrl) {
                 notInPlaylist = false;
               }
             }
