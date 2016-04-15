@@ -353,63 +353,63 @@ function getAutoplayUrl() {
 }
 
 function saveAutoplay(list) {
-  if (playlistAutoplay && videoIteration == videoCounter) {
-    if (list === "") {
-      getUrl = "https://www.youtube.com/watch?v=" + autoplayMix;
-    }
-    else {
-      getUrl = "https://www.youtube.com/watch?v=" + videos[videoCounter][2] + "&list=" + list;
-    }
-    $.ajax({
-      url: getUrl,
-      type: 'GET',
-      success: function(res) {
-        var data = res["responseText"];
-        try {
-          var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
-          var data = data.match(regex);
-          
-          regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
-          
-          var notInPlaylist = true;
-          for (i = 1; i <= 26; i++) {
-            autoplayMixVideoUrl = data[i].match(regex)[1];
-            for (x = 1; x < videos.length; x++) {
-              if (videos[x][2] == autoplayMixVideoUrl) {
-                notInPlaylist = false;
-              }
-            }
-            if (notInPlaylist) {
-              radioVideos.push(autoplayMixVideoUrl);
+  if (list === "") {
+    getUrl = "https://www.youtube.com/watch?v=" + autoplayMix;
+  }
+  else {
+    getUrl = "https://www.youtube.com/watch?v=" + videos[videoCounter][2] + "&list=" + list;
+  }
+  $.ajax({
+    url: getUrl,
+    type: 'GET',
+    success: function(res) {
+      var data = res["responseText"];
+      try {
+        var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
+        var data = data.match(regex);
+        
+        regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
+        
+        var notInPlaylist = true;
+        for (i = 1; i <= 26; i++) {
+          autoplayMixVideoUrl = data[i].match(regex)[1];
+          for (x = 1; x < videos.length; x++) {
+            if (videos[x][2] == autoplayMixVideoUrl) {
+              notInPlaylist = false;
             }
           }
-        } catch(err) {
-          setTimeout(function() {
-            setAutoplay();
-            return;
-          }, 3000);
+          if (notInPlaylist) {
+            radioVideos.push(autoplayMixVideoUrl);
+          }
         }
-      },
-      complete: function(jqXHR, textStatus) {
-        return;
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
+      } catch(err) {
         setTimeout(function() {
-          saveAutoplay();
+          setAutoplay();
           return;
         }, 3000);
       }
-    });
-  }
+    },
+    complete: function(jqXHR, textStatus) {
+      return;
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      setTimeout(function() {
+        saveAutoplay();
+        return;
+      }, 3000);
+    }
+  });
 }
 
 function addAutoplayVideo() {
-  radioVideoIteration++;
-  if (radioVideoIteration > radioVideos.length) {
-    var regex = /^.*?&list=(.+?)$/i;
-    saveAutoplay(autoplayMixUrl.match(regex)[1]);
+  if (playlistAutoplay && videoIteration == videoCounter) {
+    radioVideoIteration++;
+    if (radioVideoIteration > radioVideos.length) {
+      var regex = /^.*?&list=(.+?)$/i;
+      saveAutoplay(autoplayMixUrl.match(regex)[1]);
+    }
+    getVideoData(radioVideos[radioVideoIteration]);
   }
-  getVideoData(radioVideos[radioVideoIteration]);
 }
 
 function addVideo() {
