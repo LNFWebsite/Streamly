@@ -353,13 +353,14 @@ function setAutoplay() {
           
           regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
           
+          var notInPlaylist = true;
           for (i = 1; i <= 10; i++) {
             autoplayMixVideoUrl = data[i].match(regex)[1];
             console.log(autoplayMixVideoUrl);
             for (x = 1; x < videos.length; x++) {
               console.log("playlist check:" + videos[i][2]);
               if (videos[i][2] == autoplayMixVideoUrl) {
-                notInPlaylist = true;
+                notInPlaylist = false;
               }
             }
             if (notInPlaylist) {
