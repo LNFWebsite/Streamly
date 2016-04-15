@@ -354,7 +354,7 @@ function getAutoplayUrl() {
 
 function saveAutoplay(list) {
   if (list === "") {
-    getUrl = "https://www.youtube.com/watch?v=" + autoplayMix;
+    getUrl = "https://www.youtube.com/watch?v=" + autoplayMixUrl;
   }
   else {
     getUrl = "https://www.youtube.com/watch?v=" + videos[videoCounter][2] + "&list=" + list;
