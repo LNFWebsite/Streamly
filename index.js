@@ -558,6 +558,11 @@ var PlaylistFeatures = function() {
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
+    if (playlistAutoplay === false) {
+      var radioVideos = [];
+      var radioVideoIteration = -1;
+      var autoplayMixUrl;
+    }
     if (videos.length > 0) {
       addAutoplayVideo();
       videoPreviews();
