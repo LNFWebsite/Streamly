@@ -341,6 +341,7 @@ function getAutoplayUrl() {
         }
       },
       complete: function(jqXHR, textStatus) {
+        saveAutoplay("");
         return;
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -406,10 +407,6 @@ function addAutoplayVideo() {
     if (typeof autoplayMixUrl == 'undefined') {
       getAutoplayUrl();
     }
-    if (radioVideos !== undefined && radioVideos !== null) {
-      saveAutoplay("");
-    }
-    
     radioVideoIteration++;
     if (radioVideoIteration > radioVideos.length) {
       var regex = /^.*?&list=(.+?)$/i;
