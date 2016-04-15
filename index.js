@@ -391,7 +391,8 @@ function saveAutoplay(list) {
       }
     },
     complete: function(jqXHR, textStatus) {
-      return;
+      videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+      getVideoData();
     },
     error: function(jqXHR, textStatus, errorThrown) {
       setTimeout(function() {
@@ -412,8 +413,6 @@ function addAutoplayVideo() {
       var regex = /^.*?&list=(.+?)$/i;
       saveAutoplay(autoplayMixUrl.match(regex)[1]);
     }
-    videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
-    getVideoData();
   }
 }
 
