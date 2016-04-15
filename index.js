@@ -334,7 +334,6 @@ function getAutoplayUrl() {
           autoplayMixUrl = data.match(regex);
           autoplayMixUrl = $("<div/>").html(autoplayMixUrl[1]).text();
         } catch(err) {
-          console.log("err: getAutoplayUrl");
           setTimeout(function() {
             getAutoplayUrl();
             return;
@@ -385,7 +384,7 @@ function saveAutoplay(list) {
           }
         }
       } catch(err) {
-        console.log("err: saveAutoplay");
+        console.log(err);
         setTimeout(function() {
           saveAutoplay();
           return;
