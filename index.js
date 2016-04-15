@@ -354,13 +354,13 @@ function getAutoplayUrl() {
 
 function saveAutoplay(list) {
   if (playlistAutoplay && videoIteration == videoCounter) {
+    if (list === "") {
+      getUrl = "https://www.youtube.com/watch?v=" + autoplayMix;
+    }
+    else {
+      getUrl = "https://www.youtube.com/watch?v=" + videos[videoCounter][2] + "&list=" + list;
+    }
     $.ajax({
-      if (list === "") {
-        getUrl = "https://www.youtube.com/watch?v=" + autoplayMix;
-      }
-      else {
-        getUrl = "https://www.youtube.com/watch?v=" + videos[videoCounter][2] + "&list=" + list;
-      }
       url: getUrl,
       type: 'GET',
       success: function(res) {
