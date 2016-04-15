@@ -70,6 +70,7 @@
   function streamlyRadioAd() {
     var i=0;
     var text = document.getElementById('ad');
+    var originalColor = text.style.color;
     text.style.color = 'white';
     function flash() {
       i++;
@@ -79,6 +80,7 @@
       }
     }
     var clr = setInterval(flash, 300);
+    text.style.color = originalColor;
   }
   
   getPlaylist();
