@@ -413,7 +413,7 @@ function addAutoplayVideo() {
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
       getAutoplayUrl();
     }
-    else if (radioVideoIteration <= radioVideos.length) {
+    else if (radioVideoIteration < radioVideos.length) {
       videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
       getVideoData();
     }
