@@ -384,7 +384,7 @@ function saveAutoplay(list) {
         }
       } catch(err) {
         setTimeout(function() {
-          setAutoplay();
+          saveAutoplay();
           return;
         }, 3000);
       }
@@ -408,7 +408,8 @@ function addAutoplayVideo() {
       var regex = /^.*?&list=(.+?)$/i;
       saveAutoplay(autoplayMixUrl.match(regex)[1]);
     }
-    getVideoData(radioVideos[radioVideoIteration]);
+    videoUrl = radioVideos[radioVideoIteration];
+    getVideoData();
   }
 }
 
