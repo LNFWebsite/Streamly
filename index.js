@@ -355,7 +355,7 @@ function setAutoplay() {
           
           loop1:
           for (i = 1; i <= 10; i++) {
-            autoplayMixVideoUrl = data[i].match(regex);
+            autoplayMixVideoUrl = data[i].match(regex)[1];
             console.log(autoplayMixVideoUrl);
             loop2:
             for (x = 1; x < videos.length; x++) {
