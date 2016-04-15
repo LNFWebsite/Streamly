@@ -375,10 +375,12 @@ function saveAutoplay(list) {
         
         var notInPlaylist = true;
         for (i = 1; i <= 25; i++) {
-          autoplayMixVideoUrl = data[i].match(regex)[1];
+          var autoplayMixVideoUrl = data[i].match(regex)[1];
+          console.log(autoplayMixVideoUrl);
           for (x = 1; x < videos.length; x++) {
-            if (videos[x][2] == autoplayMixVideoUrl) {
+            if (videos[x][2] === autoplayMixVideoUrl) {
               notInPlaylist = false;
+              console.log("in playlist");
             }
           }
           if (notInPlaylist) {
