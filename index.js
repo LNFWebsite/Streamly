@@ -408,7 +408,7 @@ function addAutoplayVideo() {
       var regex = /^.*?&list=(.+?)$/i;
       saveAutoplay(autoplayMixUrl.match(regex)[1]);
     }
-    videoUrl = radioVideos[radioVideoIteration];
+    videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
     getVideoData();
   }
 }
