@@ -341,6 +341,7 @@ function getVideoData() {
 
 function setAutoplay() {
   if (useAutoplayMix) {
+    console.log("Mix");
     $.ajax({
       url: "https://www.youtube.com/watch?v=" + autoplayMix,
       type: 'GET',
@@ -351,8 +352,23 @@ function setAutoplay() {
           var data = data.match(regex);
           
           regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
-          data = data[1].match(regex);
-          videoUrl = "https://www.youtube.com/watch?v=" + data[1];
+          
+          var notInPlaylist = true;
+          for (i = 1; i <= 10; i++) {
+            autoplayMixVideoUrl = data[i].match(regex)[1];
+            console.log(autoplayMixVideoUrl);
+            for (x = 1; x < videos.length; x++) {
+              console.log("playlist check:" + videos[i][2]);
+              if (videos[i][2] == autoplayMixVideoUrl) {
+                notInPlaylist = false;
+              }
+            }
+            if (notInPlaylist) {
+              break;
+            }
+          }
+          
+          videoUrl = "https://www.youtube.com/watch?v=" + autoplayMixVideoUrl;
         } catch(err) {
           setTimeout(function() {
             setAutoplay();
