@@ -345,6 +345,7 @@ function getAutoplayUrl() {
         return;
       },
       error: function(jqXHR, textStatus, errorThrown) {
+        console.log("err: getAutoplayUrl");
         setTimeout(function() {
           getAutoplayUrl();
           return;
@@ -395,6 +396,7 @@ function saveAutoplay(list) {
       getVideoData();
     },
     error: function(jqXHR, textStatus, errorThrown) {
+      console.log("err: saveAutoplay");
       setTimeout(function() {
         saveAutoplay();
         return;
@@ -410,6 +412,7 @@ function addAutoplayVideo() {
     }
     radioVideoIteration++;
     if (radioVideoIteration > radioVideos.length) {
+      console.log("refilling radio");
       var regex = /^.*?&list=(.+?)$/i;
       saveAutoplay(autoplayMixUrl.match(regex)[1]);
     }
