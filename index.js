@@ -79,22 +79,6 @@ function msConversion(millis) {
   return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 }
 
-var decodeEntities = (function() {
-  var element = document.createElement('div');
-  function decodeHTMLEntities (str) {
-    if(str && typeof str === 'string') {
-      // strip script/html tags
-      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
-      element.innerHTML = str;
-      str = element.textContent;
-      element.textContent = '';
-    }
-    return str;
-  }
-  return decodeHTMLEntities;
-})();
-
 function highlight(i) {
   $("tr:nth-child(" + i + ")").attr("id", "newSelected");
   $("tr.selected").removeClass("selected");
@@ -155,7 +139,7 @@ function videoProgress() {
 
 function playVideo() {
   highlight(videoIteration);
-  setAutoplay();
+  addAutoplayVideo();
   videoPreviews();
   
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
@@ -348,7 +332,7 @@ function getAutoplayUrl() {
         try {
           var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
           autoplayMixUrl = data.match(regex);
-          autoplayMixUrl = decodeEntities(autoplayMixUrl[1]);
+          autoplayMixUrl = $("<div/>").html(autoplayMixUrl[1]).text();
         } catch(err) {
           setTimeout(function() {
             getAutoplayUrl();
@@ -420,14 +404,12 @@ function saveAutoplay(list) {
 }
 
 function addAutoplayVideo() {
-  if (radioVideoIteration + 1 <= radioVideos.length) {
-    radioVideoIteration++;
-    getVideoData(radioVideos[radioVideoIteration]);
-  }
-  else {
+  radioVideoIteration++;
+  if (radioVideoIteration > radioVideos.length) {
     var regex = /^.*?&list=(.+?)$/i;
     saveAutoplay(autoplayMixUrl.match(regex)[1]);
   }
+  getVideoData(radioVideos[radioVideoIteration]);
 }
 
 function addVideo() {
@@ -483,7 +465,7 @@ function actionRemoveVideo(element) {
   setPlaylist();
   makeSortable();
   videoPreviews();
-  setAutoplay();
+  addAutoplayVideo();
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
@@ -497,7 +479,7 @@ function actionMoveVideo(oldIndex, newIndex) {
   else if (oldIndex > videoIteration && newIndex <= videoIteration) {
     videoIteration = changeIteration(1);
   }
-  setAutoplay();
+  addAutoplayVideo();
 }
 
 function makeSortable() {
@@ -568,7 +550,10 @@ var PlaylistFeatures = function() {
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (videos.length > 0) {
-      setAutoplay();
+      getAutoplayUrl();
+      saveAutoplay("");
+      addAutoplayVideo();
+      
       videoPreviews();
     }
     $(".fa-rss").css("color", (playlistAutoplay ? "#F77F00" : "grey"));
