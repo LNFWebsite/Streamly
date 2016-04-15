@@ -353,16 +353,18 @@ function setAutoplay() {
           
           regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
           
-          loop1:
-          for (i = 1 i < videos.length; i++) {
-            autoplayMixVideoUrl = data[i].match(regex);
-          loop2:
-            for (x = 1; x < videos.length; x++) {
-              if (videos[i][2] != autoplayMixVideoUrl) {
-                break loop1;
+          function inPlaylist() {
+            for (i = 1 i < 10; i++) {
+              autoplayMixVideoUrl = data[i].match(regex);
+              for (x = 1; x < videos.length; x++) {
+                if (videos[i][2] != autoplayMixVideoUrl) {
+                  inPlaylist = false;
+                  return;
+                }
               }
             }
           }
+          inPlaylist();
           
           videoUrl = "https://www.youtube.com/watch?v=" + data[1];
         } catch(err) {
