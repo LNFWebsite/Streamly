@@ -403,6 +403,13 @@ function saveAutoplay(list) {
 
 function addAutoplayVideo() {
   if (playlistAutoplay && videoIteration == videoCounter) {
+    if (typeof autoplayMixUrl == 'undefined') {
+      getAutoplayUrl();
+    }
+    if (radioVideos !== undefined && radioVideos !== null) {
+      saveAutoplay("");
+    }
+    
     radioVideoIteration++;
     if (radioVideoIteration > radioVideos.length) {
       var regex = /^.*?&list=(.+?)$/i;
@@ -551,10 +558,7 @@ var PlaylistFeatures = function() {
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (videos.length > 0) {
-      getAutoplayUrl();
-      saveAutoplay("");
       addAutoplayVideo();
-      
       videoPreviews();
     }
     $(".fa-rss").css("color", (playlistAutoplay ? "#F77F00" : "grey"));
