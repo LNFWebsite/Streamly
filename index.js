@@ -371,6 +371,8 @@ function saveAutoplay(list) {
         
         regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
         
+        console.log(data);
+        
         var notInPlaylist = true;
         for (i = 1; i <= 26; i++) {
           autoplayMixVideoUrl = data[i].match(regex)[1];
