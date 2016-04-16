@@ -82,8 +82,8 @@ function msConversion(millis) {
 function highlight(i, which) {
   $("tr:nth-child(" + i + ")").attr("id", "new-" + which);
   $("tr.selected").removeClass(which);
-  $("#newSelected").addClass(which);
-  $("#newSelected").removeAttr("id");
+  $("#new-" + which).addClass(which);
+  $("#new-" + which).removeAttr("id");
 }
 
 function addVideoToList(name, time) {
