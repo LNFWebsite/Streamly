@@ -405,21 +405,23 @@ function saveAutoplay() {
 }
 
 function addAutoplayVideo() {
-  if (playlistAutoplay && videoIteration === videoCounter) {
+  if (playlistAutoplay) {
     radioVideoIteration++;
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
       getAutoplayUrl();
     }
-    else if (radioVideoIteration < radioVideos.length) {
-      videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
-      getVideoData();
-    }
-    else {
-      console.log("refilling radio");
-      radioVideos = [];
-      radioVideoIteration = -1;
-      autoplayMixUrl = "";
-      addAutoplayVideo();
+    else if (videoIteration === videoCounter) {
+      if (radioVideoIteration < radioVideos.length) {
+        videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+        getVideoData();
+      }
+      else {
+        console.log("refilling radio");
+        radioVideos = [];
+        radioVideoIteration = -1;
+        autoplayMixUrl = "";
+        addAutoplayVideo();
+      }
     }
   }
 }
@@ -566,6 +568,7 @@ var PlaylistFeatures = function() {
       radioVideos = [];
       radioVideoIteration = -1;
       autoplayMixUrl = "";
+      $("tr").removeClass("radio");
     }
     if (videos.length > 0) {
       addAutoplayVideo();
