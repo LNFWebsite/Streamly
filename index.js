@@ -27,8 +27,9 @@ var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
 
-var useAutoplayMix;
-var autoplayMix;
+var radioVideos = [];
+var radioVideoIteration = -1;
+var autoplayMixUrl;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -78,27 +79,11 @@ function msConversion(millis) {
   return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 }
 
-var decodeEntities = (function() {
-  var element = document.createElement('div');
-  function decodeHTMLEntities (str) {
-    if(str && typeof str === 'string') {
-      // strip script/html tags
-      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
-      element.innerHTML = str;
-      str = element.textContent;
-      element.textContent = '';
-    }
-    return str;
-  }
-  return decodeHTMLEntities;
-})();
-
-function highlight(i) {
-  $("tr:nth-child(" + i + ")").attr("id", "newSelected");
-  $("tr.selected").removeClass("selected");
-  $("#newSelected").addClass("selected");
-  $("#newSelected").removeAttr("id");
+function highlight(i, which) {
+  $("tr:nth-child(" + i + ")").attr("id", "new-" + which);
+  $("tr." + which).removeClass(which);
+  $("#new-" + which).addClass(which);
+  $("#new-" + which).removeAttr("id");
 }
 
 function addVideoToList(name, time) {
@@ -153,8 +138,8 @@ function videoProgress() {
 }
 
 function playVideo() {
-  highlight(videoIteration);
-  setAutoplay();
+  highlight(videoIteration, "selected");
+  addAutoplayVideo();
   videoPreviews();
   
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
@@ -260,15 +245,10 @@ function setPlaylist() {
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
     var playlist = window.location.hash.substr(1);
-    
     $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
-    
-    //leave the following decode for compatibility 10/10/2015
-    playlist = decodeURIComponent(playlist);
     try {
       playlist = window.atob(playlist);
       playlist = JSON.parse(playlist);
-      
       videos = playlist;
       
       if (videos[0] !== undefined && videos[0] !== null) {
@@ -302,7 +282,10 @@ function getVideoData() {
         videoName = $("<div/>").html(videoName).text();
         videoName = videoName.trim();
       } catch(err) {
-        videoName = prompt("Please enter the name of the video", "");
+        setTimeout(function() {
+          getVideoData();
+          return;
+        }, 3000);
       }
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       try {
@@ -317,10 +300,10 @@ function getVideoData() {
         videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
         videoTime = +videoTime * 1000;
       } catch(err) {
-        videoTime = prompt("Please enter the length of the video", "3:00");
-        videoTime = videoTime.split(":");
-        videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
-        videoTime = videoTime * 1000;
+        setTimeout(function() {
+          getVideoData();
+          return;
+        }, 3000);
       }
     },
     complete: function(jqXHR, textStatus) {
@@ -328,111 +311,108 @@ function getVideoData() {
       addVideo();
     },
     error: function(jqXHR, textStatus, errorThrown) {
-      videoName = prompt("Please enter the name of the video", "");
-      
-      videoTime = prompt("Please enter the length of the video", "3:00");
-      videoTime = videoTime.split(":");
-      videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
-      videoTime = videoTime * 1000;
+      setTimeout(function() {
+        getVideoData();
+        return;
+      }, 3000);
     }
   });
 }
 
-function setAutoplay() {
-  if (playlistAutoplay && videoIteration == videoCounter) {
-    if (useAutoplayMix) {
-      $.ajax({
-        url: "https://www.youtube.com/watch?v=" + autoplayMix,
-        type: 'GET',
-        success: function(res) {
-          var data = res["responseText"];
-          try {
-            var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
-            var data = data.match(regex);
-            
-            regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
-            
-            var notInPlaylist = true;
-            for (i = 1; i <= 20; i++) {
-              autoplayMixVideoUrl = data[i].match(regex)[1];
-              for (x = 1; x < videos.length; x++) {
-                if (videos[x][2] == autoplayMixVideoUrl) {
-                  notInPlaylist = false;
-                }
-              }
-              if (notInPlaylist) {
-                break;
-              }
-            }
-            
-            videoUrl = "https://www.youtube.com/watch?v=" + autoplayMixVideoUrl;
-          } catch(err) {
-            setTimeout(function() {
-              setAutoplay();
-              return;
-            }, 3000);
-          }
-        },
-        complete: function(jqXHR, textStatus) {
-          useAutoplayMix = false;
-          getVideoData();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
+function getAutoplayUrl() {
+  highlight(videoIteration, "radio");
+  $.ajax({
+      url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
+      type: 'GET',
+      success: function(res) {
+        var data = res["responseText"];
+        try {
+          var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
+          autoplayMixUrl = data.match(regex);
+          autoplayMixUrl = $("<div/>").html(autoplayMixUrl[1]).text();
+        } catch(err) {
           setTimeout(function() {
-            setAutoplay();
+            getAutoplayUrl();
             return;
           }, 3000);
         }
-      });
+      },
+      complete: function(jqXHR, textStatus) {
+        saveAutoplay();
+        return;
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        setTimeout(function() {
+          getAutoplayUrl();
+          return;
+        }, 3000);
+      }
+    });
+}
+
+function saveAutoplay() {
+  $.ajax({
+    url: "https://www.youtube.com/watch?v=" + autoplayMixUrl,
+    type: 'GET',
+    success: function(res) {
+      var data = res["responseText"];
+      try {
+        var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
+        var data = data.match(regex);
+        
+        regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
+        
+        for (i = 1; i <= 25; i++) {
+          var notInPlaylist = true;
+          var autoplayMixVideoUrl = data[i].match(regex)[1];
+          for (x = 1; x < videos.length; x++) {
+            if (videos[x][2] === autoplayMixVideoUrl) {
+              notInPlaylist = false;
+            }
+          }
+          if (notInPlaylist) {
+            radioVideos.push(autoplayMixVideoUrl);
+          }
+        }
+      } catch(err) {
+        setTimeout(function() {
+          saveAutoplay();
+          return;
+        }, 3000);
+      }
+    },
+    complete: function(jqXHR, textStatus) {
+      if (videoIteration === videoCounter) {
+        videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+        getVideoData();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      setTimeout(function() {
+        saveAutoplay();
+        return;
+      }, 3000);
     }
-    else {
-      $.ajax({
-        url: "https://www.youtube.com/watch?v=" + videos[videoCounter][2],
-        type: 'GET',
-        success: function(res) {
-          var data = res["responseText"];
-          try {
-            var regex = /<div class=\"content-wrapper\">(?:.|\n)*?href=\"\/watch\?v=(.+?)\".*?title=\"(.+?)\">(?:.|\n)*?- Duration: (.+?)\./i;
-            var nextAutoplay = data.match(regex);
-            
-            regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
-            autoplayMix = data.match(regex);
-            
-            videoUrl = nextAutoplay[1];
-            videoName = nextAutoplay[2];
-            videoTime = nextAutoplay[3];
-            
-            autoplayMix = decodeEntities(autoplayMix[1]);
-            
-            videoTime = videoTime.split(":");
-            videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
-            videoTime = videoTime * 1000;
-          } catch(err) {
-            setTimeout(function() {
-              setAutoplay();
-              return;
-            }, 3000);
-          }
-          videoName = encodeURIComponent(decodeEntities(decodeEntities(videoName))).replace(/%20/g, " ");
-        },
-        complete: function(jqXHR, textStatus) {
-          for (i = 1; i < videos.length; i++) {
-            if (videos[i][2] == videoUrl) {
-              useAutoplayMix = true;
-              setAutoplay();
-              return;
-            }
-          }
-          $("#inputBox").val("").attr("placeholder", placeholder);
-          addVideo();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          setTimeout(function() {
-            setAutoplay();
-            return;
-          }, 3000);
-        }
-      });
+  });
+}
+
+function addAutoplayVideo() {
+  if (playlistAutoplay) {
+    radioVideoIteration++;
+    if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
+      getAutoplayUrl();
+    }
+    else if (videoIteration === videoCounter) {
+      if (radioVideoIteration < radioVideos.length) {
+        videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+        getVideoData();
+      }
+      else {
+        radioVideos = [];
+        radioVideoIteration = -1;
+        autoplayMixUrl = "";
+        addAutoplayVideo();
+      }
     }
   }
 }
@@ -490,7 +470,7 @@ function actionRemoveVideo(element) {
   setPlaylist();
   makeSortable();
   videoPreviews();
-  setAutoplay();
+  addAutoplayVideo();
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
@@ -504,7 +484,7 @@ function actionMoveVideo(oldIndex, newIndex) {
   else if (oldIndex > videoIteration && newIndex <= videoIteration) {
     videoIteration = changeIteration(1);
   }
-  setAutoplay();
+  addAutoplayVideo();
 }
 
 function makeSortable() {
@@ -574,8 +554,14 @@ var PlaylistFeatures = function() {
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
+    if (playlistAutoplay == false) {
+      radioVideos = [];
+      radioVideoIteration = -1;
+      autoplayMixUrl = "";
+      $("tr").removeClass("radio");
+    }
     if (videos.length > 0) {
-      setAutoplay();
+      addAutoplayVideo();
       videoPreviews();
     }
     $(".fa-rss").css("color", (playlistAutoplay ? "#F77F00" : "grey"));
@@ -603,13 +589,13 @@ function input(type) {
   var playlistNameBox = $("#playlistNameBox").val();
   switch (type) {
     case 0:
-      if (inputBox != "") {
+      if (inputBox !== "") {
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
       break;
     case 1:
-      if (inputBox != "") {
+      if (inputBox !== "") {
         inputBox = urlValidate(inputBox);
         if (inputBox) {
           videoUrl = inputBox;
@@ -625,7 +611,7 @@ function input(type) {
       }
       break;
     case 2:
-      if (playlistNameBox != "") {
+      if (playlistNameBox !== "") {
         videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
       }
       else {
