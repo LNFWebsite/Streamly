@@ -79,10 +79,10 @@ function msConversion(millis) {
   return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 }
 
-function highlight(i) {
-  $("tr:nth-child(" + i + ")").attr("id", "newSelected");
-  $("tr.selected").removeClass("selected");
-  $("#newSelected").addClass("selected");
+function highlight(i, which) {
+  $("tr:nth-child(" + i + ")").attr("id", "new-" + which);
+  $("tr.selected").removeClass(which);
+  $("#newSelected").addClass(which);
   $("#newSelected").removeAttr("id");
 }
 
@@ -138,7 +138,7 @@ function videoProgress() {
 }
 
 function playVideo() {
-  highlight(videoIteration);
+  highlight(videoIteration, "selected");
   addAutoplayVideo();
   videoPreviews();
   
@@ -324,8 +324,9 @@ function getVideoData() {
 }
 
 function getAutoplayUrl() {
+  highlight(videoIteration, "radio");
   $.ajax({
-      url: "https://www.youtube.com/watch?v=" + videos[videoCounter][2],
+      url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
       type: 'GET',
       success: function(res) {
         var data = res["responseText"];
@@ -389,8 +390,10 @@ function saveAutoplay() {
       }
     },
     complete: function(jqXHR, textStatus) {
-      videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
-      getVideoData();
+      if (videoIteration === videoCounter) {
+        videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+        getVideoData();
+      }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       setTimeout(function() {
@@ -402,7 +405,7 @@ function saveAutoplay() {
 }
 
 function addAutoplayVideo() {
-  if (playlistAutoplay && videoIteration == videoCounter) {
+  if (playlistAutoplay && videoIteration === videoCounter) {
     radioVideoIteration++;
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
       getAutoplayUrl();
