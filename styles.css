@@ -20,6 +20,9 @@ body {
   background: url("https://farm3.staticflickr.com/2407/2127348012_f2e5c18282_b.jpg") no-repeat center center fixed;
   background-size: cover;
   **/
+  /** Happy Spring! **/
+  background: url("https://upload.wikimedia.org/wikipedia/commons/9/92/Spring_in_Somerville%2C_New_Jersey.JPG") no-repeat center center fixed;
+  background-size: cover;
 }
 footer {
   background-color: #191919;
