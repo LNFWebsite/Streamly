@@ -354,14 +354,8 @@ function getAutoplayUrl() {
 }
 
 function saveAutoplay(list) {
-  if (list === "") {
-    getUrl = "https://www.youtube.com/watch?v=" + autoplayMixUrl;
-  }
-  else {
-    getUrl = "https://www.youtube.com/watch?v=" + videos[videoCounter][2] + "&list=" + list;
-  }
   $.ajax({
-    url: getUrl,
+    url: "https://www.youtube.com/watch?v=" + autoplayMixUrl,
     type: 'GET',
     success: function(res) {
       var data = res["responseText"];
@@ -419,8 +413,10 @@ function addAutoplayVideo() {
     }
     else {
       console.log("refilling radio");
-      var regex = /^.*?&list=(.+?)$/i;
-      saveAutoplay(autoplayMixUrl.match(regex)[1]);
+      radioVideos = [];
+      radioVideoIteration = -1;
+      autoplayMixUrl = "";
+      getAutoplayUrl();
     }
   }
 }
