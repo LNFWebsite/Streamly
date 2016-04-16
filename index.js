@@ -341,7 +341,7 @@ function getAutoplayUrl() {
         }
       },
       complete: function(jqXHR, textStatus) {
-        saveAutoplay("");
+        saveAutoplay();
         return;
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -353,7 +353,7 @@ function getAutoplayUrl() {
     });
 }
 
-function saveAutoplay(list) {
+function saveAutoplay() {
   $.ajax({
     url: "https://www.youtube.com/watch?v=" + autoplayMixUrl,
     type: 'GET',
@@ -416,7 +416,7 @@ function addAutoplayVideo() {
       radioVideos = [];
       radioVideoIteration = -1;
       autoplayMixUrl = "";
-      getAutoplayUrl();
+      addAutoplayVideo();
     }
   }
 }
