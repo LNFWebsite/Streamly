@@ -81,7 +81,7 @@ function msConversion(millis) {
 
 function highlight(i, which) {
   $("tr:nth-child(" + i + ")").attr("id", "new-" + which);
-  $("tr.selected").removeClass(which);
+  $("tr." + which).removeClass(which);
   $("#new-" + which).addClass(which);
   $("#new-" + which).removeAttr("id");
 }
