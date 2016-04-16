@@ -94,7 +94,10 @@ td {
   cursor: move;
 }
 .selected {
-  background-color: #fccc99
+  background-color: #fccc99 !important
+}
+.radio {
+  background-color: #ccffcc
 }
 #playlistInterface {
   margin-top: 9px;
