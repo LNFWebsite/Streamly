@@ -555,7 +555,6 @@ var PlaylistFeatures = function() {
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (playlistAutoplay == false) {
-      console.log("here");
       radioVideos = [];
       radioVideoIteration = -1;
       autoplayMixUrl = "";
