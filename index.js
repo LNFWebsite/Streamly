@@ -245,15 +245,10 @@ function setPlaylist() {
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
     var playlist = window.location.hash.substr(1);
-    
     $("#shareButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
-    
-    //leave the following decode for compatibility 10/10/2015
-    playlist = decodeURIComponent(playlist);
     try {
       playlist = window.atob(playlist);
       playlist = JSON.parse(playlist);
-      
       videos = playlist;
       
       if (videos[0] !== undefined && videos[0] !== null) {
@@ -287,7 +282,10 @@ function getVideoData() {
         videoName = $("<div/>").html(videoName).text();
         videoName = videoName.trim();
       } catch(err) {
-        videoName = prompt("Please enter the name of the video", "");
+        setTimeout(function() {
+          getVideoData();
+          return;
+        }, 3000);
       }
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       try {
@@ -302,10 +300,10 @@ function getVideoData() {
         videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
         videoTime = +videoTime * 1000;
       } catch(err) {
-        videoTime = prompt("Please enter the length of the video", "3:00");
-        videoTime = videoTime.split(":");
-        videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
-        videoTime = videoTime * 1000;
+        setTimeout(function() {
+          getVideoData();
+          return;
+        }, 3000);
       }
     },
     complete: function(jqXHR, textStatus) {
@@ -313,12 +311,10 @@ function getVideoData() {
       addVideo();
     },
     error: function(jqXHR, textStatus, errorThrown) {
-      videoName = prompt("Please enter the name of the video", "");
-      
-      videoTime = prompt("Please enter the length of the video", "3:00");
-      videoTime = videoTime.split(":");
-      videoTime = (+videoTime[0]) * 60 + (+videoTime[1]);
-      videoTime = videoTime * 1000;
+      setTimeout(function() {
+        getVideoData();
+        return;
+      }, 3000);
     }
   });
 }
@@ -366,16 +362,12 @@ function saveAutoplay() {
         
         regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
         
-        console.log(data);
-        
         for (i = 1; i <= 25; i++) {
           var notInPlaylist = true;
           var autoplayMixVideoUrl = data[i].match(regex)[1];
-          console.log(autoplayMixVideoUrl);
           for (x = 1; x < videos.length; x++) {
             if (videos[x][2] === autoplayMixVideoUrl) {
               notInPlaylist = false;
-              console.log("in playlist");
             }
           }
           if (notInPlaylist) {
@@ -416,7 +408,6 @@ function addAutoplayVideo() {
         getVideoData();
       }
       else {
-        console.log("refilling radio");
         radioVideos = [];
         radioVideoIteration = -1;
         autoplayMixUrl = "";
@@ -599,13 +590,13 @@ function input(type) {
   var playlistNameBox = $("#playlistNameBox").val();
   switch (type) {
     case 0:
-      if (inputBox != "") {
+      if (inputBox !== "") {
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
       break;
     case 1:
-      if (inputBox != "") {
+      if (inputBox !== "") {
         inputBox = urlValidate(inputBox);
         if (inputBox) {
           videoUrl = inputBox;
@@ -621,7 +612,7 @@ function input(type) {
       }
       break;
     case 2:
-      if (playlistNameBox != "") {
+      if (playlistNameBox !== "") {
         videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
       }
       else {
