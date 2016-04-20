@@ -460,7 +460,7 @@ function actionRemoveVideo(element) {
   makeSortable();
   videoPreviews();
   
-  if (index == videoIteration) {
+  if (index == videoIteration - 1) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
     }
