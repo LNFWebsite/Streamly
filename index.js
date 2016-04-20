@@ -458,6 +458,7 @@ function actionRemoveVideo(element) {
   setPlaylist();
   makeSortable();
   videoPreviews();
+  addAutoplayVideo();
   
   console.log("index: " + index + ", iteration: " + videoIteration);
   if (index === videoIteration + 1) {
