@@ -449,32 +449,31 @@ function actionPlayVideo(element) {
 
 function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
-  
-  if (index <= videoIteration) {
-    videoIteration = changeIteration(-1);
-  }
-  
-  videoCounter--;
-  videos.splice(index, 1);
-  $("tr:nth-child(" + index + ")").remove();
-  
-  setPlaylist();
-  makeSortable();
-  videoPreviews();
-  addAutoplayVideo();
-  
-  console.log("index: " + index + ", iteration: " + videoIteration);
-  if (index === videoIteration + 1) {
-    console.log("here");
+  var ranAddAutoplay = false;
+  if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
-      console.log("and here");
+      ranAddAutoplay = true;
       forwardVideo();
+      videoIteration = changeIteration(-1);
     }
     else {
       actionTimers.clear();
       $("#youtube").attr("src", "");
       document.title = "Streamly";
+      videoIteration = changeIteration(-1);
     }
+  }
+  else if (index < videoIteration) {
+    videoIteration = changeIteration(-1);
+  }
+  videoCounter--;
+  videos.splice(index, 1);
+  $("tr:nth-child(" + index + ")").remove();
+  setPlaylist();
+  makeSortable();
+  videoPreviews();
+  if (!ranAddAutoplay) {
+    addAutoplayVideo();
   }
 }
 
