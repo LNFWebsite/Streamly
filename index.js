@@ -448,8 +448,11 @@ function actionPlayVideo(element) {
 }
 
 function actionRemoveVideo(element) {
-  videoIteration = changeIteration(-1);
   var index = $(".removeButton").index(element) + 1;
+  
+  if (index <= videoIteration) {
+    videoIteration = changeIteration(-1);
+  }
   
   videoCounter--;
   videos.splice(index, 1);
