@@ -449,7 +449,6 @@ function actionPlayVideo(element) {
 
 function actionRemoveVideo(element) {
   videoIteration = changeIteration(-1);
-  
   var index = $(".removeButton").index(element) + 1;
   
   videoCounter--;
@@ -460,6 +459,7 @@ function actionRemoveVideo(element) {
   makeSortable();
   videoPreviews();
   
+  console.log("index: " + index + ", iteration: " + videoIteration);
   if (index == videoIteration - 1) {
     console.log("here");
     if (videoIteration + 1 <= videoCounter) {
