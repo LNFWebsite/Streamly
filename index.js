@@ -448,29 +448,28 @@ function actionPlayVideo(element) {
 }
 
 function actionRemoveVideo(element) {
+  videoIteration = changeIteration(-1);
+  
   var index = $(".removeButton").index(element) + 1;
+  
+  videoCounter--;
+  videos.splice(index, 1);
+  $("tr:nth-child(" + index + ")").remove();
+  
+  setPlaylist();
+  makeSortable();
+  videoPreviews();
+  
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
-      videoIteration = changeIteration(-1);
     }
     else {
       actionTimers.clear();
       $("#youtube").attr("src", "");
       document.title = "Streamly";
-      videoIteration = changeIteration(-1);
     }
   }
-  else if (index < videoIteration) {
-    videoIteration = changeIteration(-1);
-  }
-  videoCounter--;
-  videos.splice(index, 1);
-  $("tr:nth-child(" + index + ")").remove();
-  setPlaylist();
-  makeSortable();
-  videoPreviews();
-  addAutoplayVideo();
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
