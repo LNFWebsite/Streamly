@@ -460,7 +460,7 @@ function actionRemoveVideo(element) {
   videoPreviews();
   
   console.log("index: " + index + ", iteration: " + videoIteration);
-  if (index == videoIteration - 1) {
+  if (index === videoIteration + 1) {
     console.log("here");
     if (videoIteration + 1 <= videoCounter) {
       console.log("and here");
