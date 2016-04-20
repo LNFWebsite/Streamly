@@ -449,8 +449,10 @@ function actionPlayVideo(element) {
 
 function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
+  var ranAddAutoplay = false;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
+      ranAddAutoplay = true;
       forwardVideo();
       videoIteration = changeIteration(-1);
     }
@@ -470,7 +472,9 @@ function actionRemoveVideo(element) {
   setPlaylist();
   makeSortable();
   videoPreviews();
-  addAutoplayVideo();
+  if (!ranAddAutoplay) {
+    addAutoplayVideo();
+  }
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
