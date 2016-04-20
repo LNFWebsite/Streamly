@@ -461,7 +461,9 @@ function actionRemoveVideo(element) {
   videoPreviews();
   
   if (index == videoIteration - 1) {
+    console.log("here");
     if (videoIteration + 1 <= videoCounter) {
+      console.log("and here");
       forwardVideo();
     }
     else {
