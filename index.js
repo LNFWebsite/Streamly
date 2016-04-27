@@ -308,6 +308,7 @@ function getVideoData() {
       }
     },
     complete: function(jqXHR, textStatus) {
+      autoplayWorking = false;
       $("#inputBox").val("").attr("placeholder", placeholder);
       addVideo();
     },
@@ -321,7 +322,6 @@ function getVideoData() {
 }
 
 function getAutoplayUrl() {
-  autoplayWorking = true;
   highlight(videoIteration, "radio");
   $.ajax({
       url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
@@ -385,7 +385,6 @@ function saveAutoplay() {
     },
     complete: function(jqXHR, textStatus) {
       if (videoIteration === videoCounter) {
-        autoplayWorking = false;
         videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
         getVideoData();
       }
@@ -401,6 +400,7 @@ function saveAutoplay() {
 
 function addAutoplayVideo() {
   if (playlistAutoplay && !autoplayWorking) {
+    autoplayWorking = true;
     radioVideoIteration++;
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
       getAutoplayUrl();
