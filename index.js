@@ -285,7 +285,7 @@ function getVideoData() {
       } catch(err) {
         setTimeout(function() {
           getVideoData();
-          return;
+          return false;
         }, 3000);
       }
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
@@ -303,7 +303,7 @@ function getVideoData() {
       } catch(err) {
         setTimeout(function() {
           getVideoData();
-          return;
+          return false;
         }, 3000);
       }
     },
@@ -315,7 +315,7 @@ function getVideoData() {
     error: function(jqXHR, textStatus, errorThrown) {
       setTimeout(function() {
         getVideoData();
-        return;
+        return false;
       }, 3000);
     }
   });
@@ -335,7 +335,7 @@ function getAutoplayUrl() {
         } catch(err) {
           setTimeout(function() {
             getAutoplayUrl();
-            return;
+            return false;
           }, 3000);
         }
       },
@@ -346,7 +346,7 @@ function getAutoplayUrl() {
       error: function(jqXHR, textStatus, errorThrown) {
         setTimeout(function() {
           getAutoplayUrl();
-          return;
+          return false;
         }, 3000);
       }
     });
@@ -379,7 +379,7 @@ function saveAutoplay() {
       } catch(err) {
         setTimeout(function() {
           saveAutoplay();
-          return;
+          return false;
         }, 3000);
       }
     },
@@ -392,7 +392,7 @@ function saveAutoplay() {
     error: function(jqXHR, textStatus, errorThrown) {
       setTimeout(function() {
         saveAutoplay();
-        return;
+        return false;
       }, 3000);
     }
   });
