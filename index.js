@@ -30,6 +30,7 @@ var playlistAutoplay;
 var radioVideos = [];
 var radioVideoIteration = -1;
 var autoplayMixUrl;
+var autoplayWorking = false;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -320,6 +321,7 @@ function getVideoData() {
 }
 
 function getAutoplayUrl() {
+  autoplayWorking = true;
   highlight(videoIteration, "radio");
   $.ajax({
       url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
@@ -383,6 +385,7 @@ function saveAutoplay() {
     },
     complete: function(jqXHR, textStatus) {
       if (videoIteration === videoCounter) {
+        autoplayWorking = false;
         videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
         getVideoData();
       }
@@ -449,7 +452,6 @@ function actionPlayVideo(element) {
 
 function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
-  var ranAddAutoplay = false;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       ranAddAutoplay = true;
@@ -472,9 +474,7 @@ function actionRemoveVideo(element) {
   setPlaylist();
   makeSortable();
   videoPreviews();
-  if (!ranAddAutoplay) {
-    addAutoplayVideo();
-  }
+  addAutoplayVideo();
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
