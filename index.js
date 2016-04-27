@@ -272,7 +272,7 @@ function getPlaylist() {
 }
 
 function getVideoData() {
-  $.ajax({
+  var xhr = $.ajax({
     url: videoUrl,
     type: 'GET',
     success: function(res) {
@@ -285,7 +285,7 @@ function getVideoData() {
       } catch(err) {
         setTimeout(function() {
           getVideoData();
-          return false;
+          xhr.abort();
         }, 3000);
       }
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
@@ -303,7 +303,7 @@ function getVideoData() {
       } catch(err) {
         setTimeout(function() {
           getVideoData();
-          return false;
+          xhr.abort();
         }, 3000);
       }
     },
@@ -315,7 +315,7 @@ function getVideoData() {
     error: function(jqXHR, textStatus, errorThrown) {
       setTimeout(function() {
         getVideoData();
-        return false;
+        xhr.abort();
       }, 3000);
     }
   });
@@ -323,7 +323,7 @@ function getVideoData() {
 
 function getAutoplayUrl() {
   highlight(videoIteration, "radio");
-  $.ajax({
+  var xhr = $.ajax({
       url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
       type: 'GET',
       success: function(res) {
@@ -335,7 +335,7 @@ function getAutoplayUrl() {
         } catch(err) {
           setTimeout(function() {
             getAutoplayUrl();
-            return false;
+            xhr.abort();
           }, 3000);
         }
       },
@@ -346,14 +346,14 @@ function getAutoplayUrl() {
       error: function(jqXHR, textStatus, errorThrown) {
         setTimeout(function() {
           getAutoplayUrl();
-          return false;
+          xhr.abort();
         }, 3000);
       }
     });
 }
 
 function saveAutoplay() {
-  $.ajax({
+  var xhr = $.ajax({
     url: "https://www.youtube.com/watch?v=" + autoplayMixUrl,
     type: 'GET',
     success: function(res) {
@@ -379,7 +379,7 @@ function saveAutoplay() {
       } catch(err) {
         setTimeout(function() {
           saveAutoplay();
-          return false;
+          xhr.abort();
         }, 3000);
       }
     },
@@ -392,7 +392,7 @@ function saveAutoplay() {
     error: function(jqXHR, textStatus, errorThrown) {
       setTimeout(function() {
         saveAutoplay();
-        return false;
+        xhr.abort();
       }, 3000);
     }
   });
