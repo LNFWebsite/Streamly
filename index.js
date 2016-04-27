@@ -30,6 +30,7 @@ var playlistAutoplay;
 var radioVideos = [];
 var radioVideoIteration = -1;
 var autoplayMixUrl;
+var autoplayWorking = false;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -307,6 +308,7 @@ function getVideoData() {
       }
     },
     complete: function(jqXHR, textStatus) {
+      autoplayWorking = false;
       $("#inputBox").val("").attr("placeholder", placeholder);
       addVideo();
     },
@@ -397,7 +399,8 @@ function saveAutoplay() {
 }
 
 function addAutoplayVideo() {
-  if (playlistAutoplay) {
+  if (playlistAutoplay && !autoplayWorking) {
+    autoplayWorking = true;
     radioVideoIteration++;
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
       getAutoplayUrl();
@@ -449,7 +452,6 @@ function actionPlayVideo(element) {
 
 function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
-  var ranAddAutoplay = false;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       ranAddAutoplay = true;
@@ -472,9 +474,7 @@ function actionRemoveVideo(element) {
   setPlaylist();
   makeSortable();
   videoPreviews();
-  if (!ranAddAutoplay) {
-    addAutoplayVideo();
-  }
+  addAutoplayVideo();
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
