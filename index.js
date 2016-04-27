@@ -400,7 +400,7 @@ function saveAutoplay() {
 }
 
 function addAutoplayVideo() {
-  if (playlistAutoplay) {
+  if (playlistAutoplay && !autoplayWorking) {
     radioVideoIteration++;
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
       getAutoplayUrl();
