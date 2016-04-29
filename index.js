@@ -272,23 +272,21 @@ function getPlaylist() {
 }
 
 function getVideoData() {
-  var xhr = $.ajax({
+  var loadingError = false;
+  $.ajax({
     url: videoUrl,
     type: 'GET',
     success: function(res) {
-      var data = $(res.responseText);
       try {
+        var data = $(res.responseText);
         videoName = data.find("span#eow-title");
         videoName = videoName[0].textContent;
         videoName = $("<div/>").html(videoName).text();
         videoName = videoName.trim();
+        videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       } catch(err) {
-        setTimeout(function() {
-          getVideoData();
-          xhr.abort();
-        }, 3000);
+        loadingError = true;
       }
-      videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       try {
         videoTime = null;
         for (iteration in data) {
@@ -301,21 +299,24 @@ function getVideoData() {
         videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
         videoTime = +videoTime * 1000;
       } catch(err) {
-        setTimeout(function() {
-          getVideoData();
-          xhr.abort();
-        }, 3000);
+        loadingError = true;
       }
     },
     complete: function(jqXHR, textStatus) {
-      autoplayWorking = false;
-      $("#inputBox").val("").attr("placeholder", placeholder);
-      addVideo();
+      if (!loadingError) {
+        autoplayWorking = false;
+        $("#inputBox").val("").attr("placeholder", placeholder);
+        addVideo();
+      }
+      else {
+        setTimeout(function() {
+          getVideoData();
+        }, 3000);
+      }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       setTimeout(function() {
         getVideoData();
-        xhr.abort();
       }, 3000);
     }
   });
@@ -323,42 +324,46 @@ function getVideoData() {
 
 function getAutoplayUrl() {
   highlight(videoIteration, "radio");
-  var xhr = $.ajax({
-      url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
-      type: 'GET',
-      success: function(res) {
+  var loadingError = false;
+  $.ajax({
+    url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
+    type: 'GET',
+    success: function(res) {
+      try {
         var data = res["responseText"];
-        try {
-          var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
-          autoplayMixUrl = data.match(regex);
-          autoplayMixUrl = $("<div/>").html(autoplayMixUrl[1]).text();
-        } catch(err) {
-          setTimeout(function() {
-            getAutoplayUrl();
-            xhr.abort();
-          }, 3000);
-        }
-      },
-      complete: function(jqXHR, textStatus) {
+        var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
+        autoplayMixUrl = data.match(regex);
+        autoplayMixUrl = $("<div/>").html(autoplayMixUrl[1]).text();
+      } catch(err) {
+        loadingError = true;
+      }
+    },
+    complete: function(jqXHR, textStatus) {
+      if (!loadingError) {
         saveAutoplay();
-        return;
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
+      }
+      else {
         setTimeout(function() {
           getAutoplayUrl();
-          xhr.abort();
         }, 3000);
       }
-    });
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      setTimeout(function() {
+        getAutoplayUrl();
+      }, 3000);
+    }
+  });
 }
 
 function saveAutoplay() {
-  var xhr = $.ajax({
+  var loadingError = false;
+  $.ajax({
     url: "https://www.youtube.com/watch?v=" + autoplayMixUrl,
     type: 'GET',
     success: function(res) {
-      var data = res["responseText"];
       try {
+        var data = res["responseText"];
         var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
         var data = data.match(regex);
         
@@ -377,22 +382,25 @@ function saveAutoplay() {
           }
         }
       } catch(err) {
-        setTimeout(function() {
-          saveAutoplay();
-          xhr.abort();
-        }, 3000);
+        loadingError = true;
       }
     },
     complete: function(jqXHR, textStatus) {
-      if (videoIteration === videoCounter) {
-        videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
-        getVideoData();
+      if (!loadingError) {
+        if (videoIteration === videoCounter) {
+          videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+          getVideoData();
+        }
+      }
+      else {
+        setTimeout(function() {
+          saveAutoplay();
+        }, 3000);
       }
     },
     error: function(jqXHR, textStatus, errorThrown) {
       setTimeout(function() {
         saveAutoplay();
-        xhr.abort();
       }, 3000);
     }
   });
