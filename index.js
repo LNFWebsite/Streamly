@@ -391,6 +391,9 @@ function saveAutoplay() {
           videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
           getVideoData();
         }
+        else {
+          autoplayWorking = false;
+        }
       }
       else {
         setTimeout(function() {
