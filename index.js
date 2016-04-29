@@ -422,6 +422,7 @@ function addAutoplayVideo() {
         radioVideos = [];
         radioVideoIteration = -1;
         autoplayMixUrl = "";
+        autoplayWorking = false;
         addAutoplayVideo();
       }
     }
