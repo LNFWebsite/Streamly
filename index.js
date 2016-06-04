@@ -411,12 +411,14 @@ function saveAutoplay() {
 
 function addAutoplayVideo() {
   if (playlistAutoplay && !autoplayWorking) {
-    autoplayWorking = true;
-    radioVideoIteration++;
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
+      autoplayWorking = true;
+      radioVideoIteration++;
       getAutoplayUrl();
     }
     else if (videoIteration === videoCounter) {
+      autoplayWorking = true;
+      radioVideoIteration++;
       if (radioVideoIteration < radioVideos.length) {
         videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
         getVideoData();
