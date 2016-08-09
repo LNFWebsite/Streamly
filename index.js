@@ -610,6 +610,7 @@ function input(type) {
       if (inputBox !== "") {
         if (inputBox.indexOf("-option ") !== -1) {
           var option = inputBox.match(/^-option (.+?) (.+?)$/i);
+          console.log(option);
           if (option[1] !== undefined) {
             switch (option[1]) {
               case "hidevideo":
