@@ -132,6 +132,14 @@ td {
   opacity: 0;
   z-index: 2;
 }
+.hideVideo {
+  opacity: 1;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+}
 #currentTime,
 #videoTime {
   color: #fff
