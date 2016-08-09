@@ -608,8 +608,27 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox !== "") {
-        popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
-        $("#inputBox").val("").attr("placeholder", placeholder);
+        if (inputBox.indexOf("-option ") !== -1) {
+          switch (inputBox.replace("-option ", "")) {
+            case "hidevideo":
+              $("#pauseOverlay").css(
+              {
+                "opacity":"1",
+                "width":"calc(100% + 2px)",
+                "height":"calc(100% + 2px)",
+                "background-color":"black",
+                "border":"1px solid black",
+                "border-radius":"5px"
+              });
+              break;
+            case "showvideo":
+              //blah
+          }
+        }
+        else {
+          popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
+          $("#inputBox").val("").attr("placeholder", placeholder);
+        }
       }
       break;
     case 1:
