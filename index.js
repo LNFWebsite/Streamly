@@ -611,18 +611,13 @@ function input(type) {
         if (inputBox.indexOf("-option ") !== -1) {
           switch (inputBox.replace("-option ", "")) {
             case "hidevideo":
-              $("#pauseOverlay").css(
-              {
-                "opacity":"1",
-                "width":"calc(100% + 2px)",
-                "height":"calc(100% + 2px)",
-                "background-color":"black",
-                "border":"1px solid black",
-                "border-radius":"5px"
-              });
+              $("#pauseOverlay").addClass(".hideVideo");
               break;
             case "showvideo":
-              //blah
+              $("#pauseOverlay").removeClass(".hideVideo");
+              break;
+            default:
+              alert("Sorry, but that -option does not exist... yet...");
           }
         }
         else {
