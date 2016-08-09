@@ -609,15 +609,29 @@ function input(type) {
     case 0:
       if (inputBox !== "") {
         if (inputBox.indexOf("-option ") !== -1) {
-          switch (inputBox.replace("-option ", "")) {
-            case "hidevideo":
-              $("#pauseOverlay").addClass(".hideVideo");
-              break;
-            case "showvideo":
-              $("#pauseOverlay").removeClass(".hideVideo");
-              break;
-            default:
-              alert("Sorry, but that -option does not exist... yet...");
+          var option = inputBox.match(/^-option (.+?) (.+?)$/i);
+          if (option[1] !== undefined) {
+            switch (option[1]) {
+              case "hidevideo":
+                $("#pauseOverlay").addClass("hideVideo");
+                break;
+              case "unhidevideo":
+                $("#pauseOverlay").removeClass("hideVideo");
+                break;
+              case "background":
+                if (option[2] !== undefined) {
+                  $("body").css("background-color", option[2]);
+                }
+                else {
+                  alert("No color specified");
+                }
+                break;
+              default:
+                alert("Sorry, but that -option does not exist... yet...");
+            }
+          }
+          else {
+            alert("No -option specified");
           }
         }
         else {
