@@ -17,7 +17,7 @@ body {
   font-family: 'Roboto',sans-serif;
 }
 body,
-#main {
+#blurBackground {
   /** GS theme
   background-color: #f77f00;
   **/
@@ -28,6 +28,8 @@ body,
   /** Happy Spring! **/
   background: url("https://upload.wikimedia.org/wikipedia/commons/9/92/Spring_in_Somerville%2C_New_Jersey.JPG") no-repeat center center fixed;
   background-size: cover;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
 }
 footer {
   background-color: #191919;
