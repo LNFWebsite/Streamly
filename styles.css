@@ -64,8 +64,12 @@ footer {
 #shareButton {
   border: none;
   font-size: 1em;
-  position: relative;
   top: -5px;
+}
+#inputBox,
+#shareButton,
+#settingsButton {
+  position: relative;
 }
 #inputBox {
   border-radius: 999px;
@@ -73,11 +77,18 @@ footer {
   padding: 5px;
   width: 50%;
 }
-#shareButton {
+#shareButton,
+#settingsButton {
   background-color: #fff;
+  cursor: pointer;
+}
+#shareButton {
   left: 25px;
   padding: 5px 7px;
-  cursor: pointer;
+}
+#settingsButton {
+  top: 1px;
+  left: 35px;
 }
 td,
 th,
