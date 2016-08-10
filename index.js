@@ -619,9 +619,9 @@ function input(type) {
                 $("#pauseOverlay").removeClass("hideVideo");
                 break;
               case "background":
-                var color = option.match(/^.+ (.+?)$/i)[1];
-                if (typeof color != 'undefined') {
-                  $("body").css("background-color", color);
+                var color = option.match(/^.+ (.+?)$/i);
+                if (typeof color[1] != 'undefined') {
+                  $("body").css("background-color", color[1]);
                 }
                 else {
                   alert("No color specified");
