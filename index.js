@@ -609,7 +609,8 @@ function input(type) {
     case 0:
       if (inputBox !== "") {
         if (inputBox.indexOf("-option ") !== -1) {
-          var option = inputBox.match(/^-option (.+?)$/i)[1];
+          var option = inputBox.match(/^-option (.+?)$/i);
+          console.log(option);
           if (typeof option != 'undefined') {
             var subOption = option.match(/^.+ (.+?)$/i)[1];
             switch (option) {
