@@ -109,18 +109,18 @@ table {
   text-align: center;
   background: none;
 }
-#playlistNameBox ::-webkit-input-placeholder {
+#playlistNameBox::-webkit-input-placeholder {
   color: white;
 }
-#playlistNameBox :-moz-placeholder {
+#playlistNameBox:-moz-placeholder {
   color: white;
   opacity: 1;
 }
-#playlistNameBox ::-moz-placeholder {
+#playlistNameBox::-moz-placeholder {
   color: #909;
   opacity: 1;
 }
-#playlistNameBox :-ms-input-placeholder {
+#playlistNameBox:-ms-input-placeholder {
   color: #909;
 }
 td {
