@@ -40,7 +40,7 @@ body,
   z-index: -1;
 }
 footer {
-  background-color: #191919;
+  background: rgba(25,25,25,0.8);
   bottom: 0;
   height: 215px;
   left: 0;
