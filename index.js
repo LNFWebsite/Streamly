@@ -616,7 +616,7 @@ function input(type) {
             case "hidevideo":
               $("#pauseOverlay").addClass("hideVideo");
               break;
-            case "unhidevideo":
+            case "showvideo":
               $("#pauseOverlay").removeClass("hideVideo");
               break;
             case "background":
@@ -630,9 +630,6 @@ function input(type) {
               break;
             default:
               alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
-          }
-          else {
-            alert("No option specified");
           }
         }
         else {
