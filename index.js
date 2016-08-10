@@ -609,10 +609,11 @@ function input(type) {
     case 0:
       if (inputBox !== "") {
         if (inputBox.indexOf("-option ") !== -1) {
-          var option = inputBox.match(/^-option (.+?)$/i);
+          var option = inputBox.match(/^-option (.+?)$/i)[1];
           console.log(option);
           if (typeof option != 'undefined') {
             var subOption = option.match(/^.+ (.+?)$/i)[1];
+            console.log(subOption);
             switch (option) {
               case "hidevideo":
                 $("#pauseOverlay").addClass("hideVideo");
