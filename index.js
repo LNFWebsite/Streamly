@@ -610,10 +610,7 @@ function input(type) {
       if (inputBox !== "") {
         if (inputBox.indexOf("-option ") !== -1) {
           var option = inputBox.match(/^-option (.+?)$/i)[1];
-          console.log(option);
           if (typeof option != 'undefined') {
-            var subOption = option.match(/^.+ (.+?)$/i)[1];
-            console.log(subOption);
             switch (option) {
               case "hidevideo":
                 $("#pauseOverlay").addClass("hideVideo");
@@ -622,8 +619,9 @@ function input(type) {
                 $("#pauseOverlay").removeClass("hideVideo");
                 break;
               case "background":
-                if (typeof subOption != 'undefined') {
-                  $("body").css("background-color", subOption);
+                var color = option.match(/^.+ (.+?)$/i)[1];
+                if (typeof color != 'undefined') {
+                  $("body").css("background-color", color);
                 }
                 else {
                   alert("No color specified");
