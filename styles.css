@@ -14,10 +14,13 @@ header,
   z-index: 1
 }
 body {
+  font-family: 'Roboto',sans-serif;
+}
+body,
+#blurBackground {
   /** GS theme
   background-color: #f77f00;
   **/
-  font-family: 'Roboto',sans-serif;
   /** Merry Christmas!
   background: url("https://farm3.staticflickr.com/2407/2127348012_f2e5c18282_b.jpg") no-repeat center center fixed;
   background-size: cover;
@@ -25,6 +28,16 @@ body {
   /** Happy Spring! **/
   background: url("https://upload.wikimedia.org/wikipedia/commons/9/92/Spring_in_Somerville%2C_New_Jersey.JPG") no-repeat center center fixed;
   background-size: cover;
+}
+#blurBackground {
+  filter: blur(5px);
+  -webkit-filter: blur(7px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
 }
 footer {
   background-color: #191919;
@@ -76,10 +89,11 @@ th,
   border-radius: 5px
 }
 #main {
-  background: #fff;
   margin: 110px 12% 260px;
   padding: 10px;
   text-align: center;
+  position: relative;
+  background: rgba(255,255,255,0.55);
 }
 table,
 #playlistNameBox {
@@ -93,16 +107,31 @@ table {
   border: none;
   font-size: 2em;
   text-align: center;
+  background: none;
+}
+#playlistNameBox::-webkit-input-placeholder {
+  color: black;
+}
+#playlistNameBox:-moz-placeholder {
+  color: black;
+  opacity: 1;
+}
+#playlistNameBox::-moz-placeholder {
+  color: black;
+  opacity: 1;
+}
+#playlistNameBox:-ms-input-placeholder {
+  color: black;
 }
 td {
   padding: 5px;
   cursor: move;
 }
 .selected {
-  background-color: #fccc99 !important
+  background: rgba(255, 131, 0, 0.4) !important
 }
 .radio {
-  background-color: #ccffcc
+  background: rgba(0, 255, 0, 0.3)
 }
 #playlistInterface {
   margin-top: 9px;
