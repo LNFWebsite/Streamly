@@ -14,10 +14,13 @@ header,
   z-index: 1
 }
 body {
+  font-family: 'Roboto',sans-serif;
+}
+body,
+#main {
   /** GS theme
   background-color: #f77f00;
   **/
-  font-family: 'Roboto',sans-serif;
   /** Merry Christmas!
   background: url("https://farm3.staticflickr.com/2407/2127348012_f2e5c18282_b.jpg") no-repeat center center fixed;
   background-size: cover;
@@ -76,7 +79,6 @@ th,
   border-radius: 5px
 }
 #main {
-  background: #fff;
   margin: 110px 12% 260px;
   padding: 10px;
   text-align: center;
