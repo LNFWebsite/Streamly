@@ -608,11 +608,9 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox !== "") {
-        var option = inputBox.match(/^-option (.+?)$/i);
+        var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
         if (option) {
-          option = option[1];
-          var subOption = option.match(/^.+? (.+?)$/i);
-          switch (option) {
+          switch (option[1]) {
             case "hidevideo":
               $("#pauseOverlay").addClass("hideVideo");
               break;
@@ -621,8 +619,8 @@ function input(type) {
               break;
             case "background":
               var color = option.match(/^.+ (.+?)$/i);
-              if (subOption) {
-                $("body").css("background-color", subOption[1]);
+              if (typeof option[2] != 'undefined') {
+                $("body").css("background-color", option[2]);
               }
               else {
                 alert("No color specified");
