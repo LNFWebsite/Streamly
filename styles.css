@@ -110,18 +110,18 @@ table {
   background: none;
 }
 #playlistNameBox::-webkit-input-placeholder {
-  color: white;
+  color: black;
 }
 #playlistNameBox:-moz-placeholder {
-  color: white;
+  color: black;
   opacity: 1;
 }
 #playlistNameBox::-moz-placeholder {
-  color: #909;
+  color: black;
   opacity: 1;
 }
 #playlistNameBox:-ms-input-placeholder {
-  color: #909;
+  color: black;
 }
 td {
   padding: 5px;
