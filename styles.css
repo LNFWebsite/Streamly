@@ -132,7 +132,7 @@ td {
   opacity: 0;
   z-index: 2;
 }
-.hideVideo {
+#pauseOverlay.hideVideo {
   opacity: 1;
   width: calc(100% + 2px);
   height: calc(100% + 2px);
