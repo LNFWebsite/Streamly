@@ -608,31 +608,31 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox !== "") {
-        if (inputBox.indexOf("-option ") !== -1) {
-          var option = inputBox.match(/^-option (.+?)$/i)[1];
-          if (typeof option != 'undefined') {
-            switch (option) {
-              case "hidevideo":
-                $("#pauseOverlay").addClass("hideVideo");
-                break;
-              case "unhidevideo":
-                $("#pauseOverlay").removeClass("hideVideo");
-                break;
-              case "background":
-                var color = option.match(/^.+ (.+?)$/i);
-                if (typeof color[1] != 'undefined') {
-                  $("body").css("background-color", color[1]);
-                }
-                else {
-                  alert("No color specified");
-                }
-                break;
-              default:
-                alert("Sorry, but that -option does not exist... yet...");
-            }
+        var option = inputBox.match(/^-option (.+?)$/i);
+        if (option) {
+          option = option[1];
+          var subOption = option.match(/^.+? (.+?)$/i);
+          switch (option) {
+            case "hidevideo":
+              $("#pauseOverlay").addClass("hideVideo");
+              break;
+            case "unhidevideo":
+              $("#pauseOverlay").removeClass("hideVideo");
+              break;
+            case "background":
+              var color = option.match(/^.+ (.+?)$/i);
+              if (subOption) {
+                $("body").css("background-color", subOption[1]);
+              }
+              else {
+                alert("No color specified");
+              }
+              break;
+            default:
+              alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
           }
           else {
-            alert("No -option specified");
+            alert("No option specified");
           }
         }
         else {
