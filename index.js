@@ -608,8 +608,31 @@ function input(type) {
   switch (type) {
     case 0:
       if (inputBox !== "") {
-        popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
-        $("#inputBox").val("").attr("placeholder", placeholder);
+        var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
+        if (option) {
+          switch (option[1]) {
+            case "hidevideo":
+              $("#pauseOverlay").addClass("hideVideo");
+              break;
+            case "showvideo":
+              $("#pauseOverlay").removeClass("hideVideo");
+              break;
+            case "background":
+              if (typeof option[2] != 'undefined') {
+                $("body").css("background-color", option[2]);
+              }
+              else {
+                alert("No color specified");
+              }
+              break;
+            default:
+              alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
+          }
+        }
+        else {
+          popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
+          $("#inputBox").val("").attr("placeholder", placeholder);
+        }
       }
       break;
     case 1:
