@@ -49,4 +49,4 @@ Saving playlists is done by creating a [JSON](https://json.org) string of the ob
 
 ## License
 
-Streamly is licensed under a modified version of the MIT license (MIT).
+Streamly is licensed under the MIT license (MIT).
