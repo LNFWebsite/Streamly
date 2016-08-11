@@ -1,4 +1,4 @@
-//! License: MIT Adapted (as stated in the LICENSE file)
+//! License: MIT (as stated in the LICENSE file)
 
 var placeholder = "Search, drag and drop video, or paste its URL...";
 
