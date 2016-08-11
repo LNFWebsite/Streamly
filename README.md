@@ -1,23 +1,29 @@
 # Streamly
 YouTube HTML5 playlists, extremely simple.
 
-## What is Streamly?
-
-Streamly is a YouTube video player that runs entirely in your browser.
-
-Our motto is reliability which is why we do not use any external API's to manipulate YouTube's native HTML5 video frame, and we let you store the entirety of your playlist by way of a URL.
-
-Our goal is to create a simple way to consecutively play YouTube videos similar to YouTube's current playlist functionality with the difference of being able to manipulate the queue at any time.
-
-Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer.
-
-For any questions or comments, please leave an [issue](https://github.com/LNFWebsite/Streamly/issues).
-
 ## How do I use Streamly?
 
 Go to our website! <http://streamly.us.to>
 
 Or clone us into your web server...
+
+## What is Streamly?
+
+Streamly is a YouTube video player that runs entirely in your browser.
+
+That means that it builds upon YouTube's normal playlist features by allowing you to manipulate playlists on the fly while playing them.
+
+If you've been burnt by losing your playlists to projects that promise the safety of your data, you've found the right solution. Instead of storing your playlists in a huge databank like other projects, Streamly lets you store your playlist yourself in the form of a simple hyperlink. When you want to access your playlist, just go to that link! It's that simple.
+
+All of the data needed to play the playlist is in the link. That means that nothing else is requested, and the whole playlist may be easily stored with a link shortener, a bookmark on your browser, or even in a text file on your computer.
+
+Our motto is reliability which is why we do not use any external API's to manipulate YouTube's native HTML5 video frame, and we let you store the entirety of your playlist on your own.
+
+This essentially means that Streamly is not a 'service' which ties into YouTube, but is rather a 'script' that runs in your browser, accessing only what is available to the general public on the web.
+
+Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer.
+
+For any questions or comments, please leave an [issue](https://github.com/LNFWebsite/Streamly/issues).
 
 ## What makes Streamly different?
 
@@ -29,7 +35,7 @@ In the cases of other YouTube player projects that use a company key to access Y
 
 I have found it long overdue to find a project that, unlike a service, does not store any information of its own nor unnecessarily requires private parties to collect data from.
 
-## So... how does Streamly do it?
+## So... How does Streamly do it?
 
 Streamly essentially runs as a helper to the YouTube embed player. It retrieves public data about the video such as the title and time of the video readily accessible on the net. It then builds a playlist off of these values and plays each video in a native embed player.
 
@@ -39,7 +45,9 @@ And, you don't have to worry about losing anything because Streamly requires not
 
 ## No, really... How does Streamly work?
 
-Streamly gets its video metadata by using the [YQL Console](https://developer.yahoo.com/yql/console/) developed by Yahoo to parse YouTube for the video's name and length.
+*Since you asked for the geeky stuff...*
+
+Streamly gets its video metadata by using the [YQL Console](https://developer.yahoo.com/yql/console/) developed by Yahoo to parse YouTube for the video's name and length. There is no interaction between Streamly and YouTube in this step.
 
 Pausing videos is operated using an external div. Because of the [Same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) of Javascript, Streamly is unable to verify when or if you paused the video, and is unable to pause it for you. For this reason, there is an invisible div in front of the YouTube frame to pause the timer that operates the playlist.
 
@@ -49,4 +57,4 @@ Saving playlists is done by creating a [JSON](https://json.org) string of the ob
 
 ## License
 
-Streamly is licensed under a modified version of the MIT license (MIT).
+Streamly is licensed under the MIT license (MIT).
