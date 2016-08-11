@@ -619,7 +619,7 @@ function input(type) {
               break;
             case "background":
               if (typeof option[2] != 'undefined') {
-                $("body").css("background", option[2]);
+                $("body").css("background, #blurBackground", option[2]);
               }
               else {
                 alert("No background color or image specified");
