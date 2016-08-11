@@ -13,7 +13,7 @@ Streamly is a YouTube video player that runs entirely in your browser.
 
 That means that it builds upon YouTube's normal playlist features by allowing you to manipulate playlists on the fly while playing them.
 
-If you've been burnt by losing your playlists to shifty developers that promise the safety of your data, you've found the right project. Instead of storing your playlists in a huge databank like other projects, Streamly lets you store your playlist yourself in the form of a simple hyperlink. When you want to access your playlist, just go to that link! It's that simple.
+If you've been burnt by losing your playlists to projects that promise the safety of your data, you've found the right solution. Instead of storing your playlists in a huge databank like other projects, Streamly lets you store your playlist yourself in the form of a simple hyperlink. When you want to access your playlist, just go to that link! It's that simple.
 
 All of the data needed to play the playlist is in the link. That means that nothing else is requested, and the whole playlist may be easily stored with a link shortener, a bookmark on your browser, or even in a text file on your computer.
 
