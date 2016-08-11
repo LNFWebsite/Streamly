@@ -29,7 +29,7 @@ In the cases of other YouTube player projects that use a company key to access Y
 
 I have found it long overdue to find a project that, unlike a service, does not store any information of its own nor unnecessarily requires private parties to collect data from.
 
-## So... how does Streamly do it?
+## So... How does Streamly do it?
 
 Streamly essentially runs as a helper to the YouTube embed player. It retrieves public data about the video such as the title and time of the video readily accessible on the net. It then builds a playlist off of these values and plays each video in a native embed player.
 
