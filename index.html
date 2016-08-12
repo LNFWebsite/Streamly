@@ -127,7 +127,7 @@
         jsonpCallback: 'jsonCallback',
         url: suggestURL
       })
-      .success(function(data){
+      .done(function(data){
         suggestions = data[1];
         if (suggestions.length > 10) {
           suggestions.length = 10;
