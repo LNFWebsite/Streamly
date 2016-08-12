@@ -4,15 +4,15 @@
   <title>Streamly</title>
   <link rel="shortcut icon" id="favicon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAABDlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxUYW9AAAAWXRSTlMAAQIDBAUGCAkRFBUZGhscHiAhJyorLzI0ODo7PUZMTlBVVldYWVtcXV5hZHB1foKDiIuPlZiboKKlpqirr7CytcDDyMrMzs/R09Xa3N7g4ubp7e/x9/n7/Ud7aO4AAAE3SURBVBgZlcFpOxtRAIbhZ8YgltBaopZEHanamtKgtYaSklJ0xPL+/z8iGedMZq5MPrhv3mlgslzZ2aksT/aTbfpQsYMpun24UMr5OGneN3XZ9EjoO1KGA5+Yd6pMxx5OVT1sY31STwUifqg3jaF8TWn/fdo+y1oFCv+UUqLtXpahxSs/KeGOlrwcQ2TwhxJGgWU5Bit/ptgSsCfHEJu9l7ULXMkxdPgbL4r8AR7kGJLmFQmBphxD0pQiTeCvHEPC/IMiV8C+HENs7LesX8CaHIOVqyr2FZiQY4j4K8/q+Ah4TVmGtplbJYQeLRuyvgAjp0pZp63/SW/Ogtx3pT0GRErqqYh1oh6OcIKGMl0GxHKXylAfJCHYV5effaQthEoJ5+jiL94odl3yyTRc3KrV67Wt4jDv8wr7Zt73xzlZAQAAAABJRU5ErkJggg==" type="image/x-icon" />
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico|Roboto" type="text/css" />
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles.css" type="text/css" />
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css" type="text/css" />
   
-  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="//code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
   <script src="jquery.xdomainajax.js"></script>
-  <script src="//cdn.rawgit.com/johnny/jquery-sortable/35f4ffaf5802ebf61202279cbab5037edf2af82a/source/js/jquery-sortable-min.js"></script>
-  <script src="//cdn.rawgit.com/zenorocha/clipboard.js/a4c8bc5bf0d9df8519e80af2c091a9ff9527e675/dist/clipboard.min.js"></script>
+  <script src="//johnny.github.io/jquery-sortable/js/jquery-sortable-min.js"></script>
+  <script src="//cdn.rawgit.com/zenorocha/clipboard.js/v1.5.12/dist/clipboard.min.js"></script>
   <script src="index.js"></script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <a href="//github.com/LNFWebsite/Streamly/wiki/Playlists" target="_blank">Playlists Wiki</a> | 
     <a href="//lnfwebsite.github.io/Streamly-Import/" target="_blank">Import Playlists</a>
     <br>
-    <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">Check out Streamly's new Subreddit!</a>
+    <a href="javascript:shareOnRedditAd();" id="ad">Share your playlist on Reddit!</a>
   </div>
   <footer>
     <div id="previousVideo" onclick="backVideo();" title="Back">
@@ -73,10 +73,10 @@
   function streamlyRadioAd() {
     var i=0;
     var text = document.getElementById('ad');
-    text.style.color = 'white';
+    text.style.color = 'grey';
     function flash() {
       i++;
-      text.style.color = (text.style.color=='white') ? 'grey':'white';
+      text.style.color = (text.style.color=='grey') ? 'lightblue':'grey';
       if (i == 11) {
         clearInterval(clr);
       }
