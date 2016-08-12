@@ -56,18 +56,18 @@ footer {
   display: inline
 }
 #inputBox,
-#shareButton,
+#saveButton,
 #playlistNameBox {
   font-family: 'Roboto',sans-serif
 }
 #inputBox,
-#shareButton {
+#saveButton {
   border: none;
   font-size: 1em;
   top: -5px;
 }
 #inputBox,
-#shareButton,
+#saveButton,
 #settingsButton {
   position: relative;
 }
@@ -77,11 +77,11 @@ footer {
   padding: 5px;
   width: 50%;
 }
-#shareButton,
+#saveButton,
 #settingsButton {
   cursor: pointer;
 }
-#shareButton {
+#saveButton {
   left: 25px;
   padding: 5px 7px;
   background-color: #fff;
@@ -94,7 +94,7 @@ footer {
 td,
 th,
 #main,
-#shareButton,
+#saveButton,
 #youtube,
 #previousVideo,
 #nextVideo {
@@ -287,6 +287,10 @@ td {
   font-size: 1.5em !important;
   color: grey;
   cursor: pointer;
+  margin-left: 5px;
+}
+.fa-reddit {
+  color: lightblue !important;
 }
 .playButton {
   margin-top: 3px
@@ -306,9 +310,6 @@ td {
   position: absolute;
   left: 51px;
   top: 35px;
-}
-.fa-rss {
-  margin-left: 10px;
 }
 #videosTable tr {
   cursor: pointer
