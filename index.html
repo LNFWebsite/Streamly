@@ -22,7 +22,7 @@
     <form action="javascript:input(0);" method="get" id="searchForm">
       <input type="textbox" id="inputBox" placeholder="Search, drag and drop video, or paste its URL..." autofocus>
     </form>
-    <button id="shareButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="shareButton();">Share playlist</button>
+    <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();">Save playlist</button>
     <!--<span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>-->
   </header>
   <div id="main">
@@ -66,7 +66,7 @@
     <div id="settings">
       <span class="fa fa-repeat" onclick="playlistFeatures.repeat();" title="Playlist repeat"></span>
       <span class="fa fa-rss" id="ad" onclick="playlistFeatures.autoplay();" title="Streamly Radio"></span>
-      <span class="fa fa-reddit-alien" onclick="shareOnReddit();" title="Share playlist on Reddit"></span>
+      <span class="fa fa-reddit" onclick="shareOnReddit();" title="Share playlist on Reddit"></span>
     </div>
   </footer>
   <script>
@@ -142,12 +142,16 @@
     }
   });
   
-  new Clipboard("#shareButton");
-  function shareButton() {
-    $("#shareButton").text("Playlist copied to clipboard!");
+  new Clipboard("#saveButton");
+  function saveButton() {
+    $("#saveButton").text("Playlist copied to clipboard!");
     setTimeout(function() {
-      $("#shareButton").text("Share playlist");
+      $("#saveButton").text("Save playlist");
     }, 2000);
+  }
+  
+  function shareOnReddit() {
+    window.open(window.location, "_blank");
   }
   </script>
   
