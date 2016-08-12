@@ -510,7 +510,7 @@ function makeSortable() {
   var oldIndex;
   $("#videosTable").sortable({
     containerSelector: "table",
-    itemPath: "> tbody",
+    itemPath: "> tr",
     itemSelector: "tr",
     placeholder: "<tr class=\"placeholder\"/>",
     delay: 100,
