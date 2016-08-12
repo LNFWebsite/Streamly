@@ -506,9 +506,9 @@ function actionMoveVideo(oldIndex, newIndex) {
 }
 
 function makeSortable() {
-  $("#videosTable").jSortable("destroy");
+  $("#videosTable").sortable("destroy");
   var oldIndex;
-  $("#videosTable").jSortable({
+  $("#videosTable").sortable({
     containerSelector: "table",
     itemPath: "> tbody",
     itemSelector: "tr",
