@@ -505,33 +505,15 @@ function actionMoveVideo(oldIndex, newIndex) {
   addAutoplayVideo();
 }
 
-/***function makeSortable() {
-  $("#videosTable").sortable("destroy");
-  var oldIndex;
-  $("#videosTable").sortable({
-    containerSelector: "table",
-    itemPath: "> tbody",
-    itemSelector: "tr",
-    placeholder: "<tr class=\"placeholder\"/>",
-    delay: 100,
-    onDragStart: function ($item, container, _super) {
-      oldIndex = $item.index();
-    },
-    onDrop: function ($item, container, _super) {
-      actionMoveVideo(oldIndex + 1, $item.index() + 1);
-      setPlaylist();
-      videoPreviews();
-    }
-  });
-}***/
-
 function makeSortable() {
   $( "#videosTable" ).sortable({
     update: function(event, ui) {
-      console.log('update: '+ui.item.index());
+      actionMoveVideo(oldIndex + 1, ui.item.index() + 1);
+      setPlaylist();
+      videoPreviews();
     },
-    start: function(event, ui) { 
-      console.log('start: ' + ui.item.index());
+    start: function(event, ui) {
+      oldIndex = ui.item.index();
     }
   });
 }
