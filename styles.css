@@ -285,12 +285,14 @@ td {
 }
 #settings * {
   font-size: 1.5em !important;
-  color: grey;
   cursor: pointer;
   margin-left: 5px;
 }
+.fa-repeat, .fa-rss {
+  color: grey;
+}
 .fa-reddit {
-  color: lightblue !important;
+  color: lightblue;
 }
 .playButton {
   margin-top: 3px
