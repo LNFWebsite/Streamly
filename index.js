@@ -505,7 +505,7 @@ function actionMoveVideo(oldIndex, newIndex) {
   addAutoplayVideo();
 }
 
-function makeSortable() {
+/***function makeSortable() {
   $("#videosTable").sortable("destroy");
   var oldIndex;
   $("#videosTable").sortable({
@@ -521,6 +521,17 @@ function makeSortable() {
       actionMoveVideo(oldIndex + 1, $item.index() + 1);
       setPlaylist();
       videoPreviews();
+    }
+  });
+}***/
+
+function makeSortable() {
+  $( "#videosTable" ).sortable({
+    update: function(event, ui) {
+      console.log('update: '+ui.item.index());
+    },
+    start: function(event, ui) { 
+      console.log('start: ' + ui.item.index());
     }
   });
 }
