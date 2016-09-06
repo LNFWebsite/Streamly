@@ -160,8 +160,7 @@ td {
   width: 300px;
   cursor: pointer;
 }
-#youtube,
-#pauseOverlay {
+#youtube {
   display: block;
   height: 100%;
   position: absolute;
@@ -170,11 +169,7 @@ td {
 #youtube {
   border: 1px solid black;
 }
-#pauseOverlay {
-  opacity: 0;
-  z-index: 2;
-}
-#pauseOverlay.hideVideo {
+.hideVideo {
   opacity: 1;
   width: calc(100% + 2px);
   height: calc(100% + 2px);

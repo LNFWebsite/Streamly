@@ -37,6 +37,7 @@
     <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">StreamlyReddit</a>
     <br>
     <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
+    <p style="color: red;margin: 0;padding: 0;">NOTE: Streamly updated to feature single-click pausing!<br><sub>Work is being done to let you skip through videos, lower volume, and use other default features of YouTube, but doing so currently will only screw up the timeline.</sub></p>
   </div>
   <footer>
     <div id="previousVideo" onclick="backVideo();" title="Back">
@@ -46,8 +47,7 @@
       <p id="previousVideoTime"></p>
     </div>
     <div id="playlistInterface">
-      <div id="youtubeContainer" title="Double-click to pause">
-        <div id="pauseOverlay" onclick="pauseVideo();"></div>
+      <div id="youtubeContainer" title="Click to pause">
         <iframe id="youtube" src=""></iframe>
       </div>
       <div id="currentVideoTiming">
@@ -99,6 +99,22 @@
     input(2);
   });
   
+  // **BREAKTHROUGH**
+  var overiFrame = false;
+  $("#youtube").hover(function() {
+      overiFrame = true;
+  }, function() {
+      overiFrame = false;
+  });
+  $(window).blur(function() {
+      if (overiFrame === true) {
+        pauseVideo();
+      	setTimeout(function() {
+      	  $(window).focus();
+      	}, 0);
+      }
+  });
+
   $(document).keyup(function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
       switch (e.keyCode) {

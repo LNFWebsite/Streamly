@@ -202,11 +202,6 @@ function pauseVideo() {
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
   }
-  $("#pauseOverlay").css("display", "none");
-  setTimeout(function(){
-    $("#pauseOverlay").css("display", "block");
-    $("#youtube").blur();
-  }, 500);
 }
 
 function forwardVideo() {
@@ -605,10 +600,10 @@ function input(type) {
         if (option) {
           switch (option[1]) {
             case "hidevideo":
-              $("#pauseOverlay").addClass("hideVideo");
+              $("#youtubeContainer").addClass("hideVideo");
               break;
             case "showvideo":
-              $("#pauseOverlay").removeClass("hideVideo");
+              $("#youtubeContainer").removeClass("hideVideo");
               break;
             case "background":
               if (typeof option[2] != 'undefined') {
