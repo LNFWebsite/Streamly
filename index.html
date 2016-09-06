@@ -98,6 +98,22 @@
     input(2);
   });
   
+  // **BREAKTHROUGH**
+  var overiFrame = false;
+  $("#youtube").hover(function() {
+      overiFrame = true;
+  }, function() {
+      overiFrame = false;
+  });
+  $(window).blur(function() {
+      if (overiFrame === true) {
+        pauseVideo();
+      	setTimeout(function() {
+      	  $(window).focus();
+      	}, 0);
+      }
+  });
+
   $(document).keyup(function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
       switch (e.keyCode) {
