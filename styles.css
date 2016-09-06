@@ -170,12 +170,7 @@ td {
   border: 1px solid black;
 }
 .hideVideo {
-  opacity: 1;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  background-color: black;
-  border: 1px solid black;
-  border-radius: 5px;
+  opacity: 0;
 }
 #currentTime,
 #videoTime {
