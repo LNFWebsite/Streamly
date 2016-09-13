@@ -1,6 +1,8 @@
 # Streamly
 YouTube HTML5 playlists, extremely simple.
 
+## *This branch is a fork of Streamly which maintains the ability to play Streamly Playlists without using the YouTube API. Neither this nor the master branch of Streamly use anything not explicitly accessible to the general public (including API keys).*
+
 ## How do I use Streamly?
 
 Go to our website! <http://streamly.us.to>
