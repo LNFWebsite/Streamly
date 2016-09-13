@@ -146,9 +146,9 @@ function playVideo() {
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   var embedUrl = videos[videoIteration][2];
   
-  var autoplay = "";
+  var autoplay = "?enablejsapi=1";
   if (!videoPaused) {
-    autoplay = "?autoplay=1";
+    autoplay = "?enablejsapi=1&autoplay=1";
   }
   
   embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + autoplay;
