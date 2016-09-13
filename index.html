@@ -114,7 +114,46 @@
       	}, 0);
       }
   });
-
+  
+  // **BREAKTHROUGH THE GREATER!**
+  var tag = document.createElement('script');
+  tag.id = 'iframe-demo';
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  
+  var player;
+  var frame-id = "youtube";
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player(frame-id, {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+  }
+  function onPlayerReady(event) {
+    console.log("ready!");
+  }
+  function log(playerStatus) {
+    if (playerStatus == -1) {
+      console.log("unstarted");
+    } else if (playerStatus == 0) {
+      console.log("ending");
+    } else if (playerStatus == 1) {
+      console.log("playing");
+    } else if (playerStatus == 2) {
+      console.log("paused");
+    } else if (playerStatus == 3) {
+      console.log("buffering")
+    } else if (playerStatus == 5) {
+      console.log("cued");
+    }
+  }
+  function onPlayerStateChange(event) {
+    log(event.data);
+  }
+  
   $(document).keyup(function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
       switch (e.keyCode) {
