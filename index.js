@@ -148,6 +148,9 @@ function videoStatusLoop() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   
+  var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+  var currentPercent = (currentTime / time) * 100;
+  
   function statusCheck() {
     $("#progress").css("width", currentPercent + "%");
     $("#currentTime").text(msConversion(currentTime * 1000));
@@ -172,9 +175,11 @@ function videoStatusLoop() {
     }
   }
   statusCheck();
+  
   function loop() {
-    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
-    var currentPercent = (currentTime / time) * 100;
+    currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    currentPercent = (currentTime / time) * 100;
+    
     loopTimer = new Timer(function() {
       statusCheck();
     }, 500);
