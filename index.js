@@ -170,7 +170,7 @@ function loopVideo() {
       }
     }, 500);
   }
-  onPlayerReady(event) {
+  function onPlayerReady(event) {
     loop();
   }
 
