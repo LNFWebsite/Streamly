@@ -37,7 +37,7 @@
     <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">StreamlyReddit</a>
     <br>
     <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
-    <p style="color: red;margin: 0;padding: 0;">NOTE: Streamly updated to feature single-click pausing!<br><sub>Work is being done to let you skip through videos, lower volume, and use other default features of YouTube, but doing so currently will only screw up the timeline.</sub></p>
+    <p style="color: green;margin: 0;padding: 0;">UPDATE: All default features of the YouTube embed have been implemented!</p>
   </div>
   <footer>
     <div id="previousVideo" onclick="backVideo();" title="Back">
@@ -99,22 +99,53 @@
     input(2);
   });
   
-  // **BREAKTHROUGH**
-  var overiFrame = false;
-  $("#youtube").hover(function() {
-      overiFrame = true;
-  }, function() {
-      overiFrame = false;
-  });
-  $(window).blur(function() {
-      if (overiFrame === true) {
-        pauseVideo();
-      	setTimeout(function() {
-      	  $(window).focus();
-      	}, 0);
-      }
-  });
-
+  // **BREAKTHROUGH THE GREATER!**
+  var tag = document.createElement('script');
+  tag.id = 'iframe-demo';
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+  }
+  function whado(playerStatus) {
+    switch(playerStatus) {
+      //unstarted
+      case -1:
+        break;
+      //ending
+      case 0:
+        break;
+      //playing
+      case 1:
+        videoFunctions.play();
+        break;
+      //paused
+      case 2:
+        videoFunctions.pause();
+        break;
+      //buffering
+      case 3:
+        break;
+      //cued
+      case 5:
+        break;
+    }
+  }
+  function onPlayerStateChange(event) {
+    whado(event.data);
+  }
+  function onPlayerReady(event) {
+    videoStatusLoop();
+  }
+  
   $(document).keyup(function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
       switch (e.keyCode) {
