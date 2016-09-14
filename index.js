@@ -620,7 +620,7 @@ function input(type) {
                 clearInterval(checkIfClosedTimer);
               }
           }
-          var checkIfClosedTimer = setInterval(checkIfClosed(), 500);
+          var checkIfClosedTimer = setInterval(checkIfClosed, 500);
           
           $("#inputBox").val("").attr("placeholder", placeholder);
           $("#youtube").css("display", "none");
