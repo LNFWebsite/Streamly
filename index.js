@@ -104,7 +104,9 @@ var ActionTimers = function() {
     progressTimer.pause();
   }
   this.resume = function() {
-    progressTimer.resume();
+    if (progressTimer.getStateRunning() === false) {
+      progressTimer.resume();
+    }
   }
   this.clear = function() {
     resetTimer(progressTimer);
@@ -168,7 +170,7 @@ function videoProgress() {
 
 var VideoFunctions = function() {
   this.play = function() {
-    //actionTimers.resume();
+    actionTimers.resume();
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
