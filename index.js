@@ -170,7 +170,9 @@ function loopVideo() {
       }
     }, 500);
   }
-  loop();
+  onPlayerReady(event) {
+    loop();
+  }
 
   if (videoPaused) {
     actionTimers.pause();
