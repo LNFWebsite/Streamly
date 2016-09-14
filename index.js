@@ -91,12 +91,10 @@ function addVideoToList(name, time) {
 }
 
 function resetTimer(which) {
-  if (typeof which !== "undefined") {
-    if (which != 0) {
-      which.pause();
-    }
-    which = 0;
+  if (which != 0) {
+    which.pause();
   }
+  which = 0;
 }
 
 var ActionTimers = function() {
