@@ -101,11 +101,9 @@ function resetTimer(which) {
 
 var ActionTimers = function() {
   this.pause = function() {
-    console.log("pausing here");
     progressTimer.pause();
   }
   this.resume = function() {
-    console.log("resuming here");
     progressTimer.resume();
   }
   this.clear = function() {
@@ -170,7 +168,7 @@ function videoProgress() {
 
 var VideoFunctions = function() {
   this.play = function() {
-    actionTimers.resume();
+    //actionTimers.resume();
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
