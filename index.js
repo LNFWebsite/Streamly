@@ -177,7 +177,7 @@ function videoStatusLoop() {
           }
         }
       }
-    }, 500);
+    }, 100);
   }
   loop();
 }
