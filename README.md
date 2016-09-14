@@ -39,7 +39,7 @@ I have found it long overdue to find a project that, unlike a service, does not 
 
 Streamly essentially runs as a helper to the YouTube embed player. It retrieves public data about the video such as the title and time of the video readily accessible on the net. It then builds a playlist off of these values and plays each video in a native embed player.
 
-Following our policy of not using proprietary systems or storing any data on our own, the playlist you create is stored in the URL (or web address) of Streamly. This allows you to store it as a bookmark, create a short link from it by throwing it into a link shortener such as <https://tiny.cc> or <https://bit.ly>, throw it into a text file on your computer, or hand copy it down to a piece of paper (nuts but I've tried it before).
+Following our policy of not using proprietary keys or storing any data on our own, the playlist you create is stored in the URL (or web address) of Streamly. This allows you to store it as a bookmark, create a short link from it by throwing it into a link shortener such as <https://tiny.cc> or <https://bit.ly>, throw it into a text file on your computer, or hand copy it down to a piece of paper (nuts but I've tried it before).
 
 And, you don't have to worry about losing anything because Streamly requires nothing other than the playlist you create.
 
@@ -49,7 +49,7 @@ And, you don't have to worry about losing anything because Streamly requires not
 
 Streamly gets its video metadata by using the [YQL Console](https://developer.yahoo.com/yql/console/) developed by Yahoo to parse YouTube for the video's name and length. There is no interaction between Streamly and YouTube in this step.
 
-Video timing information is gathered using [YouTube's IFrame API](https://developers.google.com/youtube/iframe_api_reference) which monitors events from the YouTube embed frame. From Streamly's beginnings, it's used various unorthadox methods to monitor the user's interaction with the YouTube video player. This method of capture is an improvement in functionality, but is not a must-have, therefore, the [without-yt-api](https://github.com/LNFWebsite/Streamly/tree/without-yt-api) branch is maintained as an added backup for safety of your playlists.
+Video timing information is gathered using [YouTube's IFrame API](https://developers.google.com/youtube/iframe_api_reference) which monitors events from the YouTube embed frame. From Streamly's beginnings, it has used various unorthadox methods to monitor the user's interaction with the YouTube video player. This method of capture is an improvement in functionality, but is not a must-have, therefore, the [without-yt-api](https://github.com/LNFWebsite/Streamly/tree/without-yt-api) branch is maintained as an added backup for safety of your playlists.
 
 Going from one video to another is controlled by cycling through a two-dimensional Javascript array containing the video's title, URL, and length (in seconds) for each in the playlist.
 
