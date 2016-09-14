@@ -114,7 +114,6 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function playVideo() {
-  console.log("playVideo!");
   highlight(videoIteration, "selected");
   addAutoplayVideo();
   videoPreviews();
@@ -138,7 +137,6 @@ function playVideo() {
 }
 
 function loopVideo() {
-  console.log("loopVideo!");
   videoIteration = changeIteration(1);
   playVideo();
 
@@ -180,7 +178,6 @@ var VideoFunctions = function() {
   this.loop = function() {
     if (videoIteration < videoCounter || playlistRepeat) {
       actionTimers.clear();
-      console.log("loop message!");
       loopVideo();
     }
     else {
