@@ -150,40 +150,32 @@ function videoStatusLoop() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   
-  var currentTime = parseFloat(player.getCurrentTime()).toFixed();
-  var currentPercent = (currentTime / time) * 100;
-  
-  function statusCheck(standalone) {
-    $("#progress").css("width", currentPercent + "%");
-    $("#currentTime").text(msConversion(currentTime * 1000));
-    if (currentTime < time && !standalone) {
-      loop();
-    }
-    else {
-      if (videoIteration < videoCounter || playlistRepeat) {
-        actionTimers.clear();
-        loopVideo();
-      }
-      else {
-        actionTimers.clear();
-        $("#youtube").attr("src", "");
-        if (videos[0] !== undefined && videos[0] !== null) {
-          document.title = "Streamly - " + decodeURIComponent(videos[0]);
-        }
-        else {
-          document.title = "Streamly";
-        }
-      }
-    }
-  }
-  statusCheck(true);
-  
   function loop() {
-    currentTime = parseFloat(player.getCurrentTime()).toFixed();
-    currentPercent = (currentTime / time) * 100;
+    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    var currentPercent = (currentTime / time) * 100;
     
     loopTimer = new Timer(function() {
-      statusCheck(false);
+      $("#progress").css("width", currentPercent + "%");
+      $("#currentTime").text(msConversion(currentTime * 1000));
+      if (currentTime < time) {
+        loop();
+      }
+      else {
+        if (videoIteration < videoCounter || playlistRepeat) {
+          actionTimers.clear();
+          loopVideo();
+        }
+        else {
+          actionTimers.clear();
+          $("#youtube").attr("src", "");
+          if (videos[0] !== undefined && videos[0] !== null) {
+            document.title = "Streamly - " + decodeURIComponent(videos[0]);
+          }
+          else {
+            document.title = "Streamly";
+          }
+        }
+      }
     }, 500);
   }
   loop();
