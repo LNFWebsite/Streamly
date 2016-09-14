@@ -118,6 +118,7 @@
       //ending
       case 0:
         console.log("LOOPY!");
+        onYouTubeIframeAPIReady();
         videoFunctions.loop();
         break;
       //playing
@@ -140,6 +141,7 @@
     whado(event.data);
   }
   function onPlayerReady(event) {
+    actionTimers.clear();
     videoProgress();
   }
   
