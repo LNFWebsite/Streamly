@@ -99,22 +99,6 @@
     input(2);
   });
   
-  // **BREAKTHROUGH**
-  var overiFrame = false;
-  $("#youtube").hover(function() {
-      overiFrame = true;
-  }, function() {
-      overiFrame = false;
-  });
-  $(window).blur(function() {
-      if (overiFrame === true) {
-        pauseVideo();
-      	setTimeout(function() {
-      	  $(window).focus();
-      	}, 0);
-      }
-  });
-  
   // **BREAKTHROUGH THE GREATER!**
   var tag = document.createElement('script');
   tag.id = 'iframe-demo';
@@ -131,23 +115,32 @@
         }
     });
   }
-  function log(playerStatus) {
-    if (playerStatus == -1) {
-      console.log("unstarted");
-    } else if (playerStatus == 0) {
-      console.log("ending");
-    } else if (playerStatus == 1) {
-      console.log("playing");
-    } else if (playerStatus == 2) {
-      console.log("paused");
-    } else if (playerStatus == 3) {
-      console.log("buffering")
-    } else if (playerStatus == 5) {
-      console.log("cued");
+  function whado(playerStatus) {
+    switch(playerStatus) {
+      //unstarted
+      case -1:
+        break;
+      //ending
+      case 0:
+        break;
+      //playing
+      case 1:
+        videoFunctions.play();
+        break;
+      //paused
+      case 2:
+        videoFunctions.pause();
+        break;
+      //buffering
+      case 3:
+        break;
+      //cued
+      case 5:
+        break;
     }
   }
   function onPlayerStateChange(event) {
-    log(event.data);
+    whado(event.data);
   }
   
   $(document).keyup(function(e) {
