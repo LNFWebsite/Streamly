@@ -157,6 +157,7 @@ function videoProgress() {
       $("#progress").css("width", currentPercent + "%");
       $("#currentTime").text(msConversion(currentTime * 1000));
       if (currentTime < time) {
+        actionTimers.clear();
         loop();
       }
     }, 500);
