@@ -140,8 +140,13 @@ function playVideo() {
 function loopVideo() {
   videoIteration = changeIteration(1);
   playVideo();
-  
-  function onPlayerReady(event) {
+
+  if (videoPaused) {
+    actionTimers.pause();
+  }
+}
+
+function onPlayerReady(event) {
     var time = videos[videoIteration][1];
     $("#videoTime").text(msConversion(time));
     
@@ -174,11 +179,6 @@ function loopVideo() {
     }
     loop();
   }
-
-  if (videoPaused) {
-    actionTimers.pause();
-  }
-}
 
 var VideoFunctions = function() {
   this.play = function() {
