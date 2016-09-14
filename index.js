@@ -18,7 +18,7 @@ var videoIteration = 0;
 var videoPaused;
 var backRestart;
 
-var loopTimer;
+var progressTimer;
 
 var playlistRepeat;
 var playlistShuffle;
@@ -101,13 +101,13 @@ function resetTimer(which) {
 
 var ActionTimers = function() {
   this.pause = function() {
-    loopTimer.pause();
+    progressTimer.pause();
   }
   this.resume = function() {
-    loopTimer.resume();
+    progressTimer.resume();
   }
   this.clear = function() {
-    resetTimer(loopTimer);
+    resetTimer(progressTimer);
     $("#progress").css("width", "0%");
     $("#currentTime").text("0:00");
     $("#videoTime").text("0:00");
@@ -147,7 +147,7 @@ function loopVideo() {
   }
 }
 
-function videoStatusLoop() {
+function videoProgress() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   
@@ -155,29 +155,13 @@ function videoStatusLoop() {
     var currentTime = parseFloat(player.getCurrentTime()).toFixed();
     var currentPercent = (currentTime / time) * 100;
     
-    loopTimer = new Timer(function() {
+    progressTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
       $("#currentTime").text(msConversion(currentTime * 1000));
       if (currentTime < time) {
         loop();
       }
-      else {
-        if (videoIteration < videoCounter || playlistRepeat) {
-          actionTimers.clear();
-          loopVideo();
-        }
-        else {
-          actionTimers.clear();
-          $("#youtube").attr("src", "");
-          if (videos[0] !== undefined && videos[0] !== null) {
-            document.title = "Streamly - " + decodeURIComponent(videos[0]);
-          }
-          else {
-            document.title = "Streamly";
-          }
-        }
-      }
-    }, 100);
+    }, 500);
   }
   loop();
 }
@@ -194,6 +178,22 @@ var VideoFunctions = function() {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
     $("#favicon").attr("href", faviconPause);
+  }
+  this.loop = function() {
+    if (videoIteration < videoCounter || playlistRepeat) {
+      actionTimers.clear();
+      loopVideo();
+    }
+    else {
+      actionTimers.clear();
+      $("#youtube").attr("src", "");
+      if (videos[0] !== undefined && videos[0] !== null) {
+        document.title = "Streamly - " + decodeURIComponent(videos[0]);
+      }
+      else {
+        document.title = "Streamly";
+      }
+    }
   }
 }
 var videoFunctions = new VideoFunctions();
@@ -439,7 +439,7 @@ function addVideo() {
   makeSortable();
   videoPreviews();
 
-  if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
+  if (videoCounter === 1) {
     loopVideo();
   }
 }
