@@ -104,9 +104,7 @@ var ActionTimers = function() {
     progressTimer.pause();
   }
   this.resume = function() {
-    if (progressTimer.getStateRunning() === false) {
-      progressTimer.resume();
-    }
+    progressTimer.resume();
   }
   this.clear = function() {
     resetTimer(progressTimer);
@@ -170,13 +168,11 @@ function videoProgress() {
 
 var VideoFunctions = function() {
   this.play = function() {
-    actionTimers.resume();
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
   }
   this.pause = function() {
-    actionTimers.pause();
     videoPaused = true;
     if (videos[0] !== undefined && videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
@@ -184,7 +180,6 @@ var VideoFunctions = function() {
     $("#favicon").attr("href", faviconPause);
   }
   this.loop = function() {
-    console.log("loopy");
     if (videoIteration < videoCounter || playlistRepeat) {
       actionTimers.clear();
       loopVideo();
