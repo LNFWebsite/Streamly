@@ -255,7 +255,7 @@ function getPlaylist() {
       loopVideo();
     }
     catch(err) {
-      alert(err+"Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
       "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
       "I'm really sorry about this inconvenience.");
     }
