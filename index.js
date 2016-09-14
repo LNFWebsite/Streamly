@@ -613,6 +613,15 @@ function input(type) {
         }
         else {
           popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
+          
+          function checkIfClosed() {
+              if (popup.closed) {
+                $("#youtube").css("display", "block");
+                clearInterval(checkIfClosedTimer);
+              }
+          }
+          var checkIfClosedTimer = setInterval(checkIfClosed, 500);
+          
           $("#inputBox").val("").attr("placeholder", placeholder);
           $("#youtube").css("display", "none");
         }
