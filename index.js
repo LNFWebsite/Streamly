@@ -145,38 +145,38 @@ function loopVideo() {
 }
 
 function videoStatusLoop() {
-  var currentTime = parseFloat(player.getCurrentTime()).toFixed();
-  var currentPercent = (currentTime / time) * 100;
-  loopTimer = new Timer(function() {
-    $("#progress").css("width", currentPercent + "%");
-    $("#currentTime").text(msConversion(currentTime * 1000));
-    if (currentTime < time) {
-      videoStatusLoop();
-    }
-    else {
-      if (videoIteration < videoCounter || playlistRepeat) {
-        actionTimers.clear();
-        loopVideo();
-      }
-      else {
-        actionTimers.clear();
-        $("#youtube").attr("src", "");
-        if (videos[0] !== undefined && videos[0] !== null) {
-          document.title = "Streamly - " + decodeURIComponent(videos[0]);
-        }
-        else {
-          document.title = "Streamly";
-        }
-      }
-    }
-  }, 500);
-}
-
-function onPlayerReady(event) {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   
-  videoStatusLoop();
+  function loop() {
+    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    var currentPercent = (currentTime / time) * 100;
+    
+    loopTimer = new Timer(function() {
+      $("#progress").css("width", currentPercent + "%");
+      $("#currentTime").text(msConversion(currentTime * 1000));
+      if (currentTime < time) {
+        loop();
+      }
+      else {
+        if (videoIteration < videoCounter || playlistRepeat) {
+          actionTimers.clear();
+          loopVideo();
+        }
+        else {
+          actionTimers.clear();
+          $("#youtube").attr("src", "");
+          if (videos[0] !== undefined && videos[0] !== null) {
+            document.title = "Streamly - " + decodeURIComponent(videos[0]);
+          }
+          else {
+            document.title = "Streamly";
+          }
+        }
+      }
+    }, 500);
+  }
+  loop();
 }
 
 var VideoFunctions = function() {
