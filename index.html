@@ -145,6 +145,9 @@
   function onPlayerStateChange(event) {
     whado(event.data);
   }
+  function onPlayerReady(event) {
+    videoStatusLoop();
+  }
   
   $(document).keyup(function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
