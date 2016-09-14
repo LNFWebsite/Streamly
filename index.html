@@ -116,6 +116,9 @@
     });
   }
   function whado(playerStatus) {
+    //kill then run videoStatusLoop to update upon user interaction
+    resetTimer(loopTimer);
+    videoStatusLoop();
     switch(playerStatus) {
       //unstarted
       case -1:
