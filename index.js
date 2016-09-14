@@ -101,9 +101,11 @@ function resetTimer(which) {
 
 var ActionTimers = function() {
   this.pause = function() {
+    console.log("pausing here");
     progressTimer.pause();
   }
   this.resume = function() {
+    console.log("resuming here");
     progressTimer.resume();
   }
   this.clear = function() {
