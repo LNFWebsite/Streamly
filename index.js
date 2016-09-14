@@ -180,13 +180,11 @@ function onPlayerReady(event) {
 
 var VideoFunctions = function() {
   this.play = function() {
-    actionTimers.resume();
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
   }
   this.pause = function() {
-    actionTimers.pause();
     videoPaused = true;
     if (videos[0] !== undefined && videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
