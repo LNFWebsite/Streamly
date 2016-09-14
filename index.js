@@ -121,12 +121,12 @@ function playVideo() {
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   var embedUrl = videos[videoIteration][2];
 
-  var autoplay = "?enablejsapi=1";
+  var parameters = "?enablejsapi=1";
   if (!videoPaused) {
-    autoplay = "?enablejsapi=1&autoplay=1";
+    parameters = "?enablejsapi=1&autoplay=1";
   }
 
-  embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + autoplay;
+  embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
   $("#youtube").attr("src", embedUrl);
 
   backRestart = false;
@@ -146,7 +146,7 @@ function loopVideo() {
 
 function onPlayerReady(event) {
   var time = videos[videoIteration][1];
-  $("#videoTime").text(msConversion(time));
+  $("#videoTime").text(msConversion(time * 1000));
   
   function loop() {
     var currentTime = parseFloat(player.getCurrentTime()).toFixed();
