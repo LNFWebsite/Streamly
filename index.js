@@ -192,7 +192,7 @@ var VideoFunctions = function() {
     $("#favicon").attr("href", faviconPause);
   }
 }
-videoFunctions = new VideoFunctions();
+var videoFunctions = new VideoFunctions();
 
 function forwardVideo() {
   if (changeIteration(1) <= videoCounter) {
