@@ -14,8 +14,6 @@ var videoTime = null;
 var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
-var bufferTime = 2000;
-var waitEndTime = 1500;
 
 var videoPaused;
 var backRestart;
@@ -147,38 +145,38 @@ function loopVideo() {
 }
 
 function onPlayerReady(event) {
-    var time = videos[videoIteration][1];
-    $("#videoTime").text(msConversion(time));
-    
-    function loop() {
-      var currentTime = parseFloat(player.getCurrentTime()).toFixed();
-      var currentPercent = (currentTime / time) * 100;
-      loopTimer = new Timer(function() {
-        $("#progress").css("width", currentPercent + "%");
-        $("#currentTime").text(msConversion(currentTime));
-        if (currentTime < time) {
-          loop();
+  var time = videos[videoIteration][1];
+  $("#videoTime").text(msConversion(time));
+  
+  function loop() {
+    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    var currentPercent = (currentTime / time) * 100;
+    loopTimer = new Timer(function() {
+      $("#progress").css("width", currentPercent + "%");
+      $("#currentTime").text(msConversion(currentTime * 1000));
+      if (currentTime < time) {
+        loop();
+      }
+      else {
+        if (videoIteration < videoCounter || playlistRepeat) {
+          actionTimers.clear();
+          loopVideo();
         }
         else {
-          if (videoIteration < videoCounter || playlistRepeat) {
-            actionTimers.clear();
-            loopVideo();
+          actionTimers.clear();
+          $("#youtube").attr("src", "");
+          if (videos[0] !== undefined && videos[0] !== null) {
+            document.title = "Streamly - " + decodeURIComponent(videos[0]);
           }
           else {
-            actionTimers.clear();
-            $("#youtube").attr("src", "");
-            if (videos[0] !== undefined && videos[0] !== null) {
-              document.title = "Streamly - " + decodeURIComponent(videos[0]);
-            }
-            else {
-              document.title = "Streamly";
-            }
+            document.title = "Streamly";
           }
         }
-      }, 500);
-    }
-    loop();
+      }
+    }, 500);
   }
+  loop();
+}
 
 var VideoFunctions = function() {
   this.play = function() {
