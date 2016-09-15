@@ -159,6 +159,7 @@ function videoStatusLoop() {
       }
       else {
         if (videoIteration < videoCounter || playlistRepeat) {
+          console.log("loopVideo");
           loopVideo();
         }
         else {
