@@ -117,7 +117,6 @@
         break;
       //ending
       case 0:
-        videoFunctions.loop();
         break;
       //playing
       case 1:
@@ -139,7 +138,7 @@
     whado(event.data);
   }
   function onPlayerReady(event) {
-    //when ready
+    videoStatusLoop();
   }
   
   $(document).keyup(function(e) {
