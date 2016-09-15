@@ -141,10 +141,6 @@ function playVideo() {
 function loopVideo() {
   videoIteration = changeIteration(1);
   playVideo();
-
-  if (videoPaused) {
-    actionTimers.pause();
-  }
 }
 
 function videoStatusLoop() {
@@ -163,7 +159,6 @@ function videoStatusLoop() {
       }
       else {
         if (videoIteration < videoCounter || playlistRepeat) {
-          actionTimers.clear();
           loopVideo();
         }
         else {
@@ -200,7 +195,6 @@ var videoFunctions = new VideoFunctions();
 
 function forwardVideo() {
   if (changeIteration(1) <= videoCounter) {
-    actionTimers.clear();
     loopVideo();
   }
 }
@@ -209,13 +203,11 @@ function backVideo() {
   if (!backRestart) {
     if (changeIteration(-2) > -1) {
       videoIteration = changeIteration(-2);
-      actionTimers.clear();
       loopVideo();
     }
   }
   else {
     videoIteration = changeIteration(-1);
-    actionTimers.clear();
     loopVideo();
   }
 }
@@ -253,7 +245,7 @@ function getPlaylist() {
       loopVideo();
     }
     catch(err) {
-      alert(err+"Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
       "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
       "I'm really sorry about this inconvenience.");
     }
@@ -439,7 +431,7 @@ function addVideo() {
   makeSortable();
   videoPreviews();
 
-  if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
+  if (videoCounter === 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
   }
 }
@@ -448,7 +440,6 @@ function actionPlayVideo(element) {
   var index = $(".playButton").index(element);
   videoIteration = index;
   videoPaused = false;
-  actionTimers.clear();
   loopVideo();
   $("#favicon").attr("href", faviconPlay);
 }
