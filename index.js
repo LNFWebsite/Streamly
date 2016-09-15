@@ -141,10 +141,6 @@ function playVideo() {
 function loopVideo() {
   videoIteration = changeIteration(1);
   playVideo();
-
-  if (videoPaused) {
-    actionTimers.pause();
-  }
 }
 
 function videoStatusLoop() {
@@ -163,7 +159,6 @@ function videoStatusLoop() {
       }
       else {
         if (videoIteration < videoCounter || playlistRepeat) {
-          actionTimers.clear();
           loopVideo();
         }
         else {
@@ -200,7 +195,6 @@ var videoFunctions = new VideoFunctions();
 
 function forwardVideo() {
   if (changeIteration(1) <= videoCounter) {
-    actionTimers.clear();
     loopVideo();
   }
 }
@@ -209,13 +203,11 @@ function backVideo() {
   if (!backRestart) {
     if (changeIteration(-2) > -1) {
       videoIteration = changeIteration(-2);
-      actionTimers.clear();
       loopVideo();
     }
   }
   else {
     videoIteration = changeIteration(-1);
-    actionTimers.clear();
     loopVideo();
   }
 }
@@ -439,7 +431,7 @@ function addVideo() {
   makeSortable();
   videoPreviews();
 
-  if (videoCounter == 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
+  if (videoCounter === 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
   }
 }
@@ -448,7 +440,6 @@ function actionPlayVideo(element) {
   var index = $(".playButton").index(element);
   videoIteration = index;
   videoPaused = false;
-  actionTimers.clear();
   loopVideo();
   $("#favicon").attr("href", faviconPlay);
 }
