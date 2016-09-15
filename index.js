@@ -154,11 +154,8 @@ function videoStatusLoop() {
     loopTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
       $("#currentTime").text(msConversion(currentTime.toFixed() * 1000));
-      if (currentTime.toFixed() < time) {
-        if (checkStuckAtEnd !== currentTime && (time - currentTime) !<= 1) {
-          loop();
-        }
-        checkStuckAtEnd = currentTime;
+      if (currentTime.toFixed() < time && (checkStuckAtEnd !== currentTime && !videoPaused)) {
+        loop();
       }
       else {
         if (videoIteration < videoCounter || playlistRepeat) {
@@ -175,6 +172,7 @@ function videoStatusLoop() {
           }
         }
       }
+      checkStuckAtEnd = currentTime;
     }, 100);
   }
   loop();
