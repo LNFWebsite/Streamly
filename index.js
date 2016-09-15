@@ -178,6 +178,7 @@ var VideoFunctions = function() {
     $("#favicon").attr("href", faviconPause);
   }
   this.loop = function() {
+    console.log("videoFunctions.loop");
     if (videoIteration < videoCounter || playlistRepeat) {
       actionTimers.clear();
       loopVideo();
