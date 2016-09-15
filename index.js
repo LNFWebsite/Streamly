@@ -154,12 +154,11 @@ function videoStatusLoop() {
     loopTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
       $("#currentTime").text(msConversion(currentTime * 1000));
-      if (currentTime <= time) {
+      if (currentTime + 1 < time) {
         loop();
       }
       else {
         if (videoIteration < videoCounter || playlistRepeat) {
-          console.log("loopVideo");
           loopVideo();
         }
         else {
