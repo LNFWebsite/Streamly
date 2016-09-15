@@ -154,7 +154,7 @@ function videoStatusLoop() {
     loopTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
       $("#currentTime").text(msConversion(currentTime * 1000));
-      if (currentTime + 1 < time) {
+      if (currentTime < (time - 1)) {
         loop();
       }
       else {
