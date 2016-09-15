@@ -148,14 +148,17 @@ function videoStatusLoop() {
   $("#videoTime").text(msConversion(time * 1000));
   
   function loop() {
-    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    var currentTime = parseFloat(player.getCurrentTime());
     var currentPercent = (currentTime / time) * 100;
-    
+    var checkStuckAtEnd;
     loopTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
-      $("#currentTime").text(msConversion(currentTime * 1000));
-      if (currentTime < (time - 1)) {
-        loop();
+      $("#currentTime").text(msConversion(currentTime.toFixed() * 1000));
+      if (currentTime.toFixed() < time) {
+        if (checkStuckAtEnd !== currentTime && (time - currentTime) !<= 1) {
+          loop();
+        }
+        checkStuckAtEnd = currentTime;
       }
       else {
         if (videoIteration < videoCounter || playlistRepeat) {
