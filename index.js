@@ -146,11 +146,11 @@ function loopVideo() {
 function videoStatusLoop() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
+  var checkStuckAtEnd;
   
   function loop() {
     var currentTime = parseFloat(player.getCurrentTime());
     var currentPercent = (currentTime / time) * 100;
-    var checkStuckAtEnd;
     loopTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
       $("#currentTime").text(msConversion(currentTime.toFixed() * 1000));
