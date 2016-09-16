@@ -149,31 +149,32 @@ function videoStatusLoop() {
   var checkStuckAtEnd = -1;
   
   function loop() {
-    var currentTime = parseFloat(player.getCurrentTime());
+    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
     var currentPercent = (currentTime / time) * 100;
     loopTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
-      $("#currentTime").text(msConversion(currentTime.toFixed() * 1000));
-      console.log("currentTime: " + currentTime);
-      console.log("checkStuckAtEnd: " + checkStuckAtEnd);
-      if (currentTime.toFixed() < time && (checkStuckAtEnd !== currentTime && time - currentTime > 1 && !videoPaused)) {
-        checkStuckAtEnd = currentTime;
+      $("#currentTime").text(msConversion(currentTime * 1000));
+      //reduce one second to prevent the hang at end bug of youtube
+      if (currentTime + 1 < time) {
         loop();
       }
       else {
-        if (videoIteration < videoCounter || playlistRepeat) {
-          loopVideo();
-        }
-        else {
-          actionTimers.clear();
-          $("#youtube").attr("src", "");
-          if (videos[0] !== undefined && videos[0] !== null) {
-            document.title = "Streamly - " + decodeURIComponent(videos[0]);
+        //delay one second for further action to reverse the effect
+        setTimeout(function() {
+          if (videoIteration < videoCounter || playlistRepeat) {
+            loopVideo();
           }
           else {
-            document.title = "Streamly";
+            actionTimers.clear();
+            $("#youtube").attr("src", "");
+            if (videos[0] !== undefined && videos[0] !== null) {
+              document.title = "Streamly - " + decodeURIComponent(videos[0]);
+            }
+            else {
+              document.title = "Streamly";
+            }
           }
-        }
+        }, 1000);
       }
     }, 100);
   }
