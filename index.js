@@ -162,6 +162,8 @@ function videoStatusLoop() {
         //delay one second for further action to reverse the effect
         setTimeout(function() {
           if (videoIteration < videoCounter || playlistRepeat) {
+            $("#progress").css("width", "100%");
+            $("#currentTime").text(msConversion(time * 1000));
             loopVideo();
           }
           else {
