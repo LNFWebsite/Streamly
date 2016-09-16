@@ -146,32 +146,35 @@ function loopVideo() {
 function videoStatusLoop() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
+  var checkStuckAtEnd = -1;
   
   function loop() {
     var currentTime = parseFloat(player.getCurrentTime()).toFixed();
     var currentPercent = (currentTime / time) * 100;
-    
     loopTimer = new Timer(function() {
       $("#progress").css("width", currentPercent + "%");
       $("#currentTime").text(msConversion(currentTime * 1000));
-      if (currentTime < time) {
+      //reduce one second to prevent the hang at end bug of youtube
+      if (currentTime < (time - 1)) {
         loop();
       }
       else {
-        if (videoIteration < videoCounter || playlistRepeat) {
-          console.log("loopVideo");
-          loopVideo();
-        }
-        else {
-          actionTimers.clear();
-          $("#youtube").attr("src", "");
-          if (videos[0] !== undefined && videos[0] !== null) {
-            document.title = "Streamly - " + decodeURIComponent(videos[0]);
+        //delay one second for further action to reverse the effect
+        setTimeout(function() {
+          if (videoIteration < videoCounter || playlistRepeat) {
+            loopVideo();
           }
           else {
-            document.title = "Streamly";
+            actionTimers.clear();
+            $("#youtube").attr("src", "");
+            if (videos[0] !== undefined && videos[0] !== null) {
+              document.title = "Streamly - " + decodeURIComponent(videos[0]);
+            }
+            else {
+              document.title = "Streamly";
+            }
           }
-        }
+        }, 1000);
       }
     }, 100);
   }
