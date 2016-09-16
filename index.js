@@ -155,7 +155,7 @@ function videoStatusLoop() {
       $("#progress").css("width", currentPercent + "%");
       $("#currentTime").text(msConversion(currentTime * 1000));
       //reduce one second to prevent the hang at end bug of youtube
-      if (currentTime + 1 < time) {
+      if ((currentTime + 1) < time) {
         loop();
       }
       else {
