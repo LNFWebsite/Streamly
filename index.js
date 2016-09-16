@@ -146,7 +146,7 @@ function loopVideo() {
 function videoStatusLoop() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
-  var checkStuckAtEnd;
+  var checkStuckAtEnd = -1;
   
   function loop() {
     var currentTime = parseFloat(player.getCurrentTime());
@@ -156,7 +156,7 @@ function videoStatusLoop() {
       $("#currentTime").text(msConversion(currentTime.toFixed() * 1000));
       console.log("currentTime: " + currentTime);
       console.log("checkStuckAtEnd: " + checkStuckAtEnd);
-      if (currentTime.toFixed() < time && (checkStuckAtEnd !== currentTime && time - currentTime <= 1 && !videoPaused)) {
+      if (currentTime.toFixed() < time && (checkStuckAtEnd !== currentTime && !videoPaused)) {
         checkStuckAtEnd = currentTime;
         loop();
       }
