@@ -162,7 +162,7 @@ function videoStatusLoop() {
         //delay one second for further action to reverse the effect
         setTimeout(function() {
           if (videoIteration < videoCounter || playlistRepeat) {
-            $("#videoTime").text(msConversion(time * 1000));
+            $("#currentTime").text(msConversion(time * 1000));
             loopVideo();
           }
           else {
