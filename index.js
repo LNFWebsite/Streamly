@@ -156,7 +156,7 @@ function videoStatusLoop() {
       $("#currentTime").text(msConversion(currentTime.toFixed() * 1000));
       console.log("currentTime: " + currentTime);
       console.log("checkStuckAtEnd: " + checkStuckAtEnd);
-      if (currentTime.toFixed() < time && (checkStuckAtEnd !== currentTime && time - currentTime <= 1 && !videoPaused)) {
+      if (currentTime.toFixed() < time && (checkStuckAtEnd !== currentTime && time - currentTime > 1 && !videoPaused)) {
         checkStuckAtEnd = currentTime;
         loop();
       }
