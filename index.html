@@ -86,6 +86,10 @@
     var clr = setInterval(flash, 300);
   }
   
+  getPlaylist();
+  makeSortable();
+  videoPreviews();
+  
   $("#inputBox").on("paste", function() {
     setTimeout(function() {
       input(1);
@@ -197,10 +201,6 @@
     }
     window.open("https://www.reddit.com/r/StreamlyReddit/submit?resubmit=true&title=Playlist%20-%20" + playlistName + "&url=https://lnfwebsite.github.io/Streamly/%23" + window.location.hash.substr(1), "_blank");
   }
-  
-  getPlaylist();
-  makeSortable();
-  videoPreviews();
   </script>
   
   <!-- Start of StatCounter Code for Default Guide -->
