@@ -130,7 +130,8 @@ function playVideo() {
 
   embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
   $("#youtube").css("display", "block");
-  $("#youtube").attr("src", embedUrl);
+  player.loadVideoById(videos[videoIteration][2]);
+  //$("#youtube").attr("src", embedUrl);
 
   backRestart = false;
   window.setTimeout(function() {
