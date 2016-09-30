@@ -29,6 +29,8 @@ var radioVideoIteration = -1;
 var autoplayMixUrl;
 var autoplayWorking = false;
 
+var firstPlayVideo = true;
+
 function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
@@ -121,16 +123,21 @@ function playVideo() {
   videoPreviews();
 
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
-  var embedUrl = videos[videoIteration][2];
-
-  var parameters = "?enablejsapi=1";
-  if (!videoPaused) {
-    parameters = "?enablejsapi=1&autoplay=1";
-  }
-
-  embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
+  
   $("#youtube").css("display", "block");
-  $("#youtube").attr("src", embedUrl);
+  
+  if (firstPlayVideo) {
+    var parameters = "?enablejsapi=1";
+    if (!videoPaused) {
+      parameters = "?enablejsapi=1&autoplay=1";
+    }
+    var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
+    $("#youtube").attr("src", embedUrl);
+    firstPlayVideo = false;
+  }
+  else {
+    player.loadVideoById(videos[videoIteration][2]);
+  }
 
   backRestart = false;
   window.setTimeout(function() {
