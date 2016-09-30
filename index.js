@@ -119,7 +119,7 @@ function videoProgress() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   function progressLoop() {
-    if (typeof player !== 'undefined') {
+    if (typeof player.getCurrentTime !== 'undefined') {
       console.log("here");
       var currentTime = parseFloat(player.getCurrentTime()).toFixed();
     }
