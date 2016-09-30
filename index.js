@@ -177,7 +177,6 @@ function loopVideo() {
     playVideo();
   }
   else {
-    actionTimers.clear();
     $("#youtube").attr("src", "");
     if (videos[0] !== undefined && videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
