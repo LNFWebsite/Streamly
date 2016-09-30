@@ -101,15 +101,6 @@
   });
   
   // **BREAKTHROUGH THE GREATER!**
-  var player;
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube', {
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-    });
-  }
   function whado(playerStatus) {
     switch(playerStatus) {
       //unstarted
