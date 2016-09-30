@@ -119,6 +119,8 @@
       case 0:
         console.log("ending");
         loopVideo();
+        actionTimers.clear();
+        videoProgress();
         break;
       //playing
       case 1:
@@ -138,9 +140,7 @@
         console.log("cued");
         actionTimers.clear();
         videoProgress();
-        if (videoPaused) {
-          actionTimers.pause();
-        }
+        actionTimers.pause();
         break;
     }
   }
