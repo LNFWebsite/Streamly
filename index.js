@@ -155,7 +155,12 @@ function playVideo() {
     $("#youtube").attr("src", embedUrl);
   }
   else {
-    player.loadVideoById(videos[videoIteration][2]);
+    if (!videoPaused) {
+      player.loadVideoById(videos[videoIteration][2]);
+    }
+    else {
+      player.cueVideoById(videos[videoIteration][2]);
+    }
   }
 
   backRestart = false;
