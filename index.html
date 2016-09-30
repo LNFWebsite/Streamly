@@ -86,12 +86,9 @@
     var clr = setInterval(flash, 300);
   }
   
-  //load everything after YouTube API script loads
-  function onYouTubeIframeAPIReady() {
-    getPlaylist();
-    makeSortable();
-    videoPreviews();
-  }
+  getPlaylist();
+  makeSortable();
+  videoPreviews();
   
   $("#inputBox").on("paste", function() {
     setTimeout(function() {
@@ -102,6 +99,48 @@
   $("#playlistNameBox").on("blur", function() {
     input(2);
   });
+  
+  // **BREAKTHROUGH THE GREATER!**
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+  }
+  function whado(playerStatus) {
+    switch(playerStatus) {
+      //unstarted
+      case -1:
+        break;
+      //ending
+      case 0:
+        break;
+      //playing
+      case 1:
+        //videoFunctions.play();
+        break;
+      //paused
+      case 2:
+        //videoFunctions.pause();
+        break;
+      //buffering
+      case 3:
+        break;
+      //cued
+      case 5:
+        break;
+    }
+  }
+  function onPlayerStateChange(event) {
+    whado(event.data);
+  }
+  function onPlayerReady(event) {
+    actionTimers.clear();
+    videoStatusLoop();
+  }
   
   $(document).keyup(function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
