@@ -119,7 +119,9 @@ function videoProgress() {
   var time = videos[videoIteration][1] * 1000;
   $("#videoTime").text(msConversion(time));
   function progressLoop() {
+    console.log(player.getCurrentTime());
     var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    console.log("currentTime: " + currentTime);
     var currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
       if (currentTime > 0) {
