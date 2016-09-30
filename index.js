@@ -115,26 +115,24 @@ var ActionTimers = function() {
 }
 var actionTimers = new ActionTimers();
 
-function videoProgress(loop) {
+function videoProgress() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   function progressLoop() {
     var currentTime = parseFloat(player.getCurrentTime()).toFixed();
     var currentPercent = (currentTime / time) * 100;
-    if (loop) {
-      progressTimer = new Timer(function() {
-        if (currentTime !== "NaN") {
-          $("#progress").css("width", currentPercent + "%");
-          $("#currentTime").text(msConversion(currentTime * 1000));
-          if (currentTime < time) {
-            progressLoop();
-          }
-        }
-        else {
+    progressTimer = new Timer(function() {
+      if (currentTime !== "NaN") {
+        $("#progress").css("width", currentPercent + "%");
+        $("#currentTime").text(msConversion(currentTime * 1000));
+        if (currentTime < time) {
           progressLoop();
         }
-      }, 500);
-    }
+      }
+      else {
+        progressLoop();
+      }
+    }, 500);
   }
   progressLoop();
 }
@@ -162,7 +160,8 @@ function playVideo() {
     }
     else {
       player.cueVideoById(videos[videoIteration][2]);
-      videoProgress(false);
+      videoProgress();
+      actionTimers.pause();
     }
   }
 
