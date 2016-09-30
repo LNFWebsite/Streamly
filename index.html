@@ -86,9 +86,12 @@
     var clr = setInterval(flash, 300);
   }
   
-  getPlaylist();
-  makeSortable();
-  videoPreviews();
+  //load everything after YouTube API script loads
+  function onYouTubeIframeAPIReady() {
+    getPlaylist();
+    makeSortable();
+    videoPreviews();
+  }
   
   $("#inputBox").on("paste", function() {
     setTimeout(function() {
