@@ -117,6 +117,7 @@
         break;
       //ending
       case 0:
+        console.log("ending");
         break;
       //playing
       case 1:
@@ -140,6 +141,7 @@
     whado(event.data);
   }
   function onPlayerReady(event) {
+    console.log("onPlayerReady");
     actionTimers.clear();
     videoStatusLoop();
   }
