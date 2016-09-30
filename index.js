@@ -116,16 +116,14 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  var time = videos[videoIteration][1] * 1000;
-  $("#videoTime").text(msConversion(time));
+  var time = videos[videoIteration][1];
+  $("#videoTime").text(msConversion(time * 1000));
   function progressLoop() {
     var currentTime = parseFloat(player.getCurrentTime()).toFixed();
     var currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
-      if (currentTime > 0) {
-        $("#progress").css("width", currentPercent + "%");
-        $("#currentTime").text(msConversion(currentTime * 1000));
-      }
+      $("#progress").css("width", currentPercent + "%");
+      $("#currentTime").text(msConversion(currentTime * 1000));
       if (currentTime < time) {
         progressLoop();
       }
