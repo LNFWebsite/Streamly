@@ -119,7 +119,13 @@ function videoProgress() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   function progressLoop() {
-    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    if (typeof player !== 'undefined') {
+      console.log("here");
+      var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    }
+    else {
+      var currentTime = "NaN";
+    }
     var currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
       if (currentTime !== "NaN") {
