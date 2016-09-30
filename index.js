@@ -150,8 +150,6 @@ function playVideo() {
     }
     var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
     $("#youtube").attr("src", embedUrl);
-    
-    videoProgress();
   }
   else {
     player.loadVideoById(videos[videoIteration][2]);
