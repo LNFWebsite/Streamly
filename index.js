@@ -451,7 +451,6 @@ function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
-      ranAddAutoplay = true;
       forwardVideo();
       videoIteration = changeIteration(-1);
     }
