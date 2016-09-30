@@ -185,6 +185,7 @@ var VideoFunctions = function() {
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
+    actionTimers.resume();
   }
   this.pause = function() {
     videoPaused = true;
@@ -192,6 +193,7 @@ var VideoFunctions = function() {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
     $("#favicon").attr("href", faviconPause);
+    actionTimers.pause();
   }
 }
 var videoFunctions = new VideoFunctions();
