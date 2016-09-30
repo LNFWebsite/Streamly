@@ -100,39 +100,6 @@
     input(2);
   });
   
-  // **BREAKTHROUGH THE GREATER!**
-  function whado(playerStatus) {
-    switch(playerStatus) {
-      //unstarted
-      case -1:
-        break;
-      //ending
-      case 0:
-        break;
-      //playing
-      case 1:
-        //videoFunctions.play();
-        break;
-      //paused
-      case 2:
-        //videoFunctions.pause();
-        break;
-      //buffering
-      case 3:
-        break;
-      //cued
-      case 5:
-        break;
-    }
-  }
-  function onPlayerStateChange(event) {
-    whado(event.data);
-  }
-  function onPlayerReady(event) {
-    actionTimers.clear();
-    videoStatusLoop();
-  }
-  
   $(document).keyup(function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
       switch (e.keyCode) {
