@@ -29,8 +29,6 @@ var radioVideoIteration = -1;
 var autoplayMixUrl;
 var autoplayWorking = false;
 
-var firstPlayVideo = true;
-
 function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
@@ -103,19 +101,38 @@ function resetTimer(which) {
 
 var ActionTimers = function() {
   this.pause = function() {
-    loopTimer.pause();
+    progressTimer.pause();
   }
   this.resume = function() {
-    loopTimer.resume();
+    progressTimer.resume();
   }
   this.clear = function() {
-    resetTimer(loopTimer);
+    resetTimer(progressTimer);
     $("#progress").css("width", "0%");
     $("#currentTime").text("0:00");
     $("#videoTime").text("0:00");
   }
 }
 var actionTimers = new ActionTimers();
+
+function videoProgress() {
+  var time = videos[videoIteration][1] * 1000;
+  $("#videoTime").text(msConversion(time));
+  function progressLoop() {
+    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    var currentPercent = (currentTime / time) * 100;
+    progressTimer = new Timer(function() {
+      if (currentTime > 0) {
+        $("#progress").css("width", currentPercent + "%");
+        $("#currentTime").text(msConversion(currentTime));
+      }
+      if (currentTime < time) {
+        progressLoop();
+      }
+    }, 500);
+  }
+  progressLoop();
+}
 
 function playVideo() {
   highlight(videoIteration, "selected");
@@ -126,14 +143,15 @@ function playVideo() {
   
   $("#youtube").css("display", "block");
   
-  if (firstPlayVideo) {
+  if ($("#youtube").attr("src") === "") {
     var parameters = "?enablejsapi=1";
     if (!videoPaused) {
       parameters = "?enablejsapi=1&autoplay=1";
     }
     var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
     $("#youtube").attr("src", embedUrl);
-    firstPlayVideo = false;
+    
+    videoProgress();
   }
   else {
     player.loadVideoById(videos[videoIteration][2]);
@@ -146,48 +164,20 @@ function playVideo() {
 }
 
 function loopVideo() {
-  videoIteration = changeIteration(1);
-  playVideo();
-}
-
-function videoStatusLoop() {
-  var time = videos[videoIteration][1];
-  $("#videoTime").text(msConversion(time * 1000));
-  var checkStuckAtEnd = -1;
-  
-  function loop() {
-    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
-    var currentPercent = (currentTime / time) * 100;
-    loopTimer = new Timer(function() {
-      $("#progress").css("width", currentPercent + "%");
-      $("#currentTime").text(msConversion(currentTime * 1000));
-      //reduce one second to prevent the hang at end bug of youtube
-      if (currentTime < (time - 1)) {
-        loop();
-      }
-      else {
-        //delay one second for further action to reverse the effect
-        setTimeout(function() {
-          if (videoIteration < videoCounter || playlistRepeat) {
-            $("#progress").css("width", "100%");
-            $("#currentTime").text(msConversion(time * 1000));
-            loopVideo();
-          }
-          else {
-            actionTimers.clear();
-            $("#youtube").attr("src", "");
-            if (videos[0] !== undefined && videos[0] !== null) {
-              document.title = "Streamly - " + decodeURIComponent(videos[0]);
-            }
-            else {
-              document.title = "Streamly";
-            }
-          }
-        }, 1000);
-      }
-    }, 100);
+  if (videoIteration < videoCounter || playlistRepeat) {
+    videoIteration = changeIteration(1);
+    playVideo();
   }
-  loop();
+  else {
+    actionTimers.clear();
+    $("#youtube").attr("src", "");
+    if (videos[0] !== undefined && videos[0] !== null) {
+      document.title = "Streamly - " + decodeURIComponent(videos[0]);
+    }
+    else {
+      document.title = "Streamly";
+    }
+  }
 }
 
 var VideoFunctions = function() {
