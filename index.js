@@ -446,10 +446,8 @@ function addVideo() {
   setPlaylist();
   makeSortable();
   videoPreviews();
-
-  if (videoCounter === 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
-    loopVideo();
-  }
+  
+  loopVideo();
 }
 
 function actionPlayVideo(element) {
