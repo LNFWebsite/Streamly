@@ -29,8 +29,6 @@ var radioVideoIteration = -1;
 var autoplayMixUrl;
 var autoplayWorking = false;
 
-var player;
-
 function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
@@ -133,15 +131,6 @@ function playVideo() {
   embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
   $("#youtube").css("display", "block");
   $("#youtube").attr("src", embedUrl);
-  
-  actionTimers.clear();
-  
-  player = new YT.Player('youtube', {
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
 
   backRestart = false;
   window.setTimeout(function() {
@@ -262,7 +251,7 @@ function getPlaylist() {
       loopVideo();
     }
     catch(err) {
-      alert(err+"Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
       "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
       "I'm really sorry about this inconvenience.");
     }
@@ -675,37 +664,3 @@ document.addEventListener("drop", function(event) {
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
 });
-
-// **BREAKTHROUGH THE GREATER!**
-function whado(playerStatus) {
-  switch(playerStatus) {
-    //unstarted
-    case -1:
-      break;
-    //ending
-    case 0:
-      break;
-    //playing
-    case 1:
-      console.log("play");
-      videoFunctions.play();
-      break;
-    //paused
-    case 2:
-      console.log("pause");
-      videoFunctions.pause();
-      break;
-    //buffering
-    case 3:
-      break;
-    //cued
-    case 5:
-      break;
-  }
-}
-function onPlayerStateChange(event) {
-  whado(event.data);
-}
-function onPlayerReady(event) {
-  videoStatusLoop();
-}
