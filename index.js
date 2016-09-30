@@ -134,6 +134,8 @@ function playVideo() {
   $("#youtube").css("display", "block");
   $("#youtube").attr("src", embedUrl);
   
+  actionTimers.clear();
+  
   player = new YT.Player('youtube', {
     events: {
       'onReady': onPlayerReady,
@@ -705,6 +707,5 @@ function onPlayerStateChange(event) {
   whado(event.data);
 }
 function onPlayerReady(event) {
-  actionTimers.clear();
   videoStatusLoop();
 }
