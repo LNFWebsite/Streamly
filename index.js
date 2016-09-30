@@ -29,6 +29,8 @@ var radioVideoIteration = -1;
 var autoplayMixUrl;
 var autoplayWorking = false;
 
+var player;
+
 function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
@@ -131,6 +133,13 @@ function playVideo() {
   embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
   $("#youtube").css("display", "block");
   $("#youtube").attr("src", embedUrl);
+  
+  player = new YT.Player('youtube', {
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
 
   backRestart = false;
   window.setTimeout(function() {
