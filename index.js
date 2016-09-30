@@ -18,7 +18,7 @@ var videoIteration = 0;
 var videoPaused;
 var backRestart;
 
-var loopTimer;
+var progressTimer;
 
 var playlistRepeat;
 var playlistShuffle;
