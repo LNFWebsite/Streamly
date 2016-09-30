@@ -119,16 +119,16 @@ function videoProgress() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   function progressLoop() {
-    if (typeof player.getCurrentTime !== 'undefined') {
+    if (typeof player.getCurrentTime() === 'number') {
       console.log("here");
       var currentTime = parseFloat(player.getCurrentTime()).toFixed();
     }
     else {
-      var currentTime = "NaN";
+      var currentTime = false;
     }
     var currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
-      if (currentTime !== "NaN") {
+      if (currentTime !== false) {
         $("#progress").css("width", currentPercent + "%");
         $("#currentTime").text(msConversion(currentTime * 1000));
         if (currentTime < time) {
