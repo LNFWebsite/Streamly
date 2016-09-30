@@ -145,6 +145,8 @@
     whado(event.data);
   }
   function onPlayerReady(event) {
+    actionTimers.clear();
+    videoProgress();
   }
   
   $(document).keyup(function(e) {
