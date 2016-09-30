@@ -178,18 +178,22 @@ function loopVideo() {
 
 var VideoFunctions = function() {
   this.play = function() {
-    videoPaused = false;
-    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
-    $("#favicon").attr("href", faviconPlay);
-    actionTimers.resume();
+    if (videoPaused) {
+      videoPaused = false;
+      document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
+      $("#favicon").attr("href", faviconPlay);
+      actionTimers.resume();
+    }
   }
   this.pause = function() {
-    videoPaused = true;
-    if (videos[0] !== undefined && videos[0] !== null) {
-      document.title = "Streamly - " + decodeURIComponent(videos[0]);
+    if (!videoPaused) {
+      videoPaused = true;
+      if (videos[0] !== undefined && videos[0] !== null) {
+        document.title = "Streamly - " + decodeURIComponent(videos[0]);
+      }
+      $("#favicon").attr("href", faviconPause);
+      actionTimers.pause();
     }
-    $("#favicon").attr("href", faviconPause);
-    actionTimers.pause();
   }
 }
 var videoFunctions = new VideoFunctions();
