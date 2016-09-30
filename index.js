@@ -175,6 +175,9 @@ function loopVideo() {
   if (videoIteration < videoCounter || playlistRepeat) {
     videoIteration = changeIteration(1);
     playVideo();
+    
+    actionTimers.clear();
+    videoProgress();
   }
   else {
     actionTimers.clear();
