@@ -38,7 +38,7 @@
     <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">StreamlyReddit</a>
     <br>
     <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
-    <p style="color: grey;margin: 0;padding: 0;">NOTE: There is a known issue with playlist pausing. I have disabled this feature until I fix the issue.</p>
+    <p style="color: grey;margin: 0;padding: 0;">The playlist pausing issue has been resolved.</p>
   </div>
   <footer>
     <div id="previousVideo" onclick="backVideo();" title="Back">
@@ -117,19 +117,16 @@
         break;
       //ending
       case 0:
-        console.log("ending");
         loopVideo();
         actionTimers.clear();
         videoProgress();
         break;
       //playing
       case 1:
-        console.log("play");
         videoFunctions.play();
         break;
       //paused
       case 2:
-        console.log("pause");
         videoFunctions.pause();
         break;
       //buffering
@@ -137,7 +134,6 @@
         break;
       //cued
       case 5:
-        console.log("cued");
         actionTimers.clear();
         videoProgress();
         actionTimers.pause();
