@@ -18,7 +18,7 @@ var videoIteration = 0;
 var videoPaused;
 var backRestart;
 
-var loopTimer;
+var progressTimer;
 
 var playlistRepeat;
 var playlistShuffle;
@@ -101,13 +101,13 @@ function resetTimer(which) {
 
 var ActionTimers = function() {
   this.pause = function() {
-    loopTimer.pause();
+    progressTimer.pause();
   }
   this.resume = function() {
-    loopTimer.resume();
+    progressTimer.resume();
   }
   this.clear = function() {
-    resetTimer(loopTimer);
+    resetTimer(progressTimer);
     $("#progress").css("width", "0%");
     $("#currentTime").text("0:00");
     $("#videoTime").text("0:00");
@@ -115,22 +115,66 @@ var ActionTimers = function() {
 }
 var actionTimers = new ActionTimers();
 
+function videoProgress() {
+  var time = videos[videoIteration][1];
+  $("#videoTime").text(msConversion(time * 1000));
+  function progressLoop() {
+    try {
+      var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+    }
+    catch(e) {
+      var currentTime = "NaN";
+    }
+    var currentPercent = (currentTime / time) * 100;
+    progressTimer = new Timer(function() {
+      if (currentTime !== "NaN") {
+        $("#progress").css("width", currentPercent + "%");
+        $("#currentTime").text(msConversion(currentTime * 1000));
+        if (currentTime < time) {
+          progressLoop();
+        }
+      }
+      else {
+        progressLoop();
+      }
+    }, 500);
+  }
+  progressLoop();
+}
+
 function playVideo() {
   highlight(videoIteration, "selected");
   addAutoplayVideo();
   videoPreviews();
 
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
-  var embedUrl = videos[videoIteration][2];
-
-  var parameters = "?enablejsapi=1";
-  if (!videoPaused) {
-    parameters = "?enablejsapi=1&autoplay=1";
-  }
-
-  embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
+  
   $("#youtube").css("display", "block");
-  $("#youtube").attr("src", embedUrl);
+  
+  if ($("#youtube").attr("src") === "") {
+    var parameters = "?enablejsapi=1";
+    if (!videoPaused) {
+      parameters = "?enablejsapi=1&autoplay=1";
+    }
+    var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
+    $("#youtube").attr("src", embedUrl);
+    
+    actionTimers.clear();
+    videoProgress();
+  }
+  else {
+    if (!videoPaused) {
+      player.loadVideoById(videos[videoIteration][2]);
+      actionTimers.clear();
+      videoProgress();
+    }
+    else {
+      player.cueVideoById(videos[videoIteration][2]);
+      actionTimers.clear();
+      videoProgress();
+      actionTimers.pause();
+    }
+  }
 
   backRestart = false;
   window.setTimeout(function() {
@@ -139,62 +183,40 @@ function playVideo() {
 }
 
 function loopVideo() {
-  videoIteration = changeIteration(1);
-  playVideo();
-}
-
-function videoStatusLoop() {
-  var time = videos[videoIteration][1];
-  $("#videoTime").text(msConversion(time * 1000));
-  var checkStuckAtEnd = -1;
-  
-  function loop() {
-    var currentTime = parseFloat(player.getCurrentTime()).toFixed();
-    var currentPercent = (currentTime / time) * 100;
-    loopTimer = new Timer(function() {
-      $("#progress").css("width", currentPercent + "%");
-      $("#currentTime").text(msConversion(currentTime * 1000));
-      //reduce one second to prevent the hang at end bug of youtube
-      if (currentTime < (time - 1)) {
-        loop();
-      }
-      else {
-        //delay one second for further action to reverse the effect
-        setTimeout(function() {
-          if (videoIteration < videoCounter || playlistRepeat) {
-            $("#progress").css("width", "100%");
-            $("#currentTime").text(msConversion(time * 1000));
-            loopVideo();
-          }
-          else {
-            actionTimers.clear();
-            $("#youtube").attr("src", "");
-            if (videos[0] !== undefined && videos[0] !== null) {
-              document.title = "Streamly - " + decodeURIComponent(videos[0]);
-            }
-            else {
-              document.title = "Streamly";
-            }
-          }
-        }, 1000);
-      }
-    }, 100);
+  if (videoIteration < videoCounter || playlistRepeat) {
+    videoIteration = changeIteration(1);
+    playVideo();
   }
-  loop();
+  else {
+    actionTimers.clear();
+    $("#youtube").css("display", "none");
+    if (videos[0] !== undefined && videos[0] !== null) {
+      document.title = "Streamly - " + decodeURIComponent(videos[0]);
+    }
+    else {
+      document.title = "Streamly";
+    }
+  }
 }
 
 var VideoFunctions = function() {
   this.play = function() {
-    videoPaused = false;
-    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
-    $("#favicon").attr("href", faviconPlay);
+    if (videoPaused) {
+      videoPaused = false;
+      document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
+      $("#favicon").attr("href", faviconPlay);
+      actionTimers.resume();
+    }
   }
   this.pause = function() {
-    videoPaused = true;
-    if (videos[0] !== undefined && videos[0] !== null) {
-      document.title = "Streamly - " + decodeURIComponent(videos[0]);
+    if (!videoPaused) {
+      videoPaused = true;
+      if (videos[0] !== undefined && videos[0] !== null) {
+        document.title = "Streamly - " + decodeURIComponent(videos[0]);
+      }
+      $("#favicon").attr("href", faviconPause);
+      actionTimers.pause();
     }
-    $("#favicon").attr("href", faviconPause);
   }
 }
 var videoFunctions = new VideoFunctions();
@@ -251,7 +273,7 @@ function getPlaylist() {
       loopVideo();
     }
     catch(err) {
-      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      alert(err+"Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
       "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
       "I'm really sorry about this inconvenience.");
     }
@@ -436,8 +458,8 @@ function addVideo() {
   setPlaylist();
   makeSortable();
   videoPreviews();
-
-  if (videoCounter === 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
+  
+  if (videoCounter === 1 || (progressTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
   }
 }
@@ -454,13 +476,12 @@ function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
   if (index == videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
-      ranAddAutoplay = true;
       forwardVideo();
       videoIteration = changeIteration(-1);
     }
     else {
       actionTimers.clear();
-      $("#youtube").attr("src", "");
+      $("#youtube").css("display", "none");
       document.title = "Streamly";
       videoIteration = changeIteration(-1);
     }
