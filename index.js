@@ -157,9 +157,12 @@ function playVideo() {
   else {
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
+      actionTimers.clear();
+      videoProgress();
     }
     else {
       player.cueVideoById(videos[videoIteration][2]);
+      actionTimers.clear();
       videoProgress();
       actionTimers.pause();
     }
@@ -177,6 +180,7 @@ function loopVideo() {
     playVideo();
   }
   else {
+    actionTimers.clear();
     $("#youtube").css("display", "none");
     if (videos[0] !== undefined && videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
