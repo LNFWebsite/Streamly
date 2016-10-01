@@ -157,6 +157,7 @@ function playVideo() {
   else {
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
+      console.log("here!");
       actionTimers.clear();
       videoProgress();
     }
