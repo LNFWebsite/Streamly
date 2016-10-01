@@ -177,7 +177,7 @@ function loopVideo() {
     playVideo();
   }
   else {
-    $("#youtube").attr("src", "");
+    $("#youtube").css("display", "none");
     if (videos[0] !== undefined && videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
@@ -467,7 +467,7 @@ function actionRemoveVideo(element) {
     }
     else {
       actionTimers.clear();
-      $("#youtube").attr("src", "");
+      $("#youtube").css("display", "none");
       document.title = "Streamly";
       videoIteration = changeIteration(-1);
     }
