@@ -153,11 +153,13 @@ function playVideo() {
     }
     var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
     $("#youtube").attr("src", embedUrl);
+    
+    actionTimers.clear();
+    videoProgress();
   }
   else {
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
-      console.log("here!");
       actionTimers.clear();
       videoProgress();
     }
