@@ -86,10 +86,6 @@
     var clr = setInterval(flash, 300);
   }
   
-  getPlaylist();
-  makeSortable();
-  videoPreviews();
-  
   $("#inputBox").on("paste", function() {
     setTimeout(function() {
       input(1);
@@ -109,6 +105,9 @@
           'onStateChange': onPlayerStateChange
         }
     });
+    getPlaylist();
+    makeSortable();
+    videoPreviews();
   }
   function whado(playerStatus) {
     switch(playerStatus) {
@@ -119,10 +118,6 @@
       case 0:
         console.log("ending");
         loopVideo();
-        actionTimers.clear();
-        if (videoIteration <= videoCounter || playlistRepeat) {
-          videoProgress();
-        }
         break;
       //playing
       case 1:
@@ -137,9 +132,6 @@
         break;
       //cued
       case 5:
-        actionTimers.clear();
-        videoProgress();
-        actionTimers.pause();
         break;
     }
   }
