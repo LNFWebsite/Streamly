@@ -459,7 +459,7 @@ function addVideo() {
   makeSortable();
   videoPreviews();
   
-  if (videoCounter === 1 || (loopTimer.getStateRunning() === false && !videoPaused)) {
+  if (videoCounter === 1 || (progressTimer.getStateRunning() === false && !videoPaused)) {
     loopVideo();
   }
 }
