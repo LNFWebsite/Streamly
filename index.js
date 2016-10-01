@@ -234,7 +234,7 @@ function backVideo() {
       loopVideo();
     }
   }
-  else if (!videoPaused) {
+  else {
     videoIteration = changeIteration(-1);
     loopVideo();
   }
