@@ -120,7 +120,7 @@
         console.log("ending");
         loopVideo();
         actionTimers.clear();
-        if (videoIteration < videoCounter || playlistRepeat) {
+        if (videoIteration <= videoCounter || playlistRepeat) {
           videoProgress();
         }
         break;
