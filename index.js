@@ -292,9 +292,6 @@ function getPlaylist() {
   }
 }
 
-
-
-
 function getVideoData() {
   function loadData() {
     videoName = dataPlayer.getVideoData()["title"];
@@ -304,7 +301,7 @@ function getVideoData() {
     addVideo();
   }
   if ($("#youtube-data").attr("src") === "") {
-    var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + "?enablejsapi=1";
+    var embedUrl = "https://www.youtube.com/embed/" + videoUrl + "?enablejsapi=1";
     $("#youtube-data").attr("src", embedUrl);
     loadData();
   }
