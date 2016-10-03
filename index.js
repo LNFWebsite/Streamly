@@ -116,16 +116,28 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  var time = videos[videoIteration][1];
-  $("#videoTime").text(msConversion(time * 1000));
-  function progressLoop() {
+  function loadTime() {
     try {
-      var currentTime = parseFloat(player.getCurrentTime()).toFixed();
+      return parseFloat(player.getCurrentTime()).toFixed();
     }
     catch(e) {
-      var currentTime = "NaN";
+      return "NaN";
     }
-    var currentPercent = (currentTime / time) * 100;
+  }
+  
+  var time = videos[videoIteration][1];
+  $("#videoTime").text(msConversion(time * 1000));
+  
+  var currentTime = loadTime();
+  var currentPercent = (currentTime / time) * 100;
+  if (currentTime !== "NaN") {
+    $("#progress").css("width", currentPercent + "%");
+    $("#currentTime").text(msConversion(currentTime * 1000));
+  }
+  
+  function progressLoop() {
+    currentTime = loadTime();
+    currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
       if (currentTime !== "NaN") {
         $("#progress").css("width", currentPercent + "%");
@@ -205,7 +217,8 @@ var VideoFunctions = function() {
       videoPaused = false;
       document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
       $("#favicon").attr("href", faviconPlay);
-      actionTimers.resume();
+      actionTimers.clear();
+      videoProgress();
     }
   }
   this.pause = function() {
