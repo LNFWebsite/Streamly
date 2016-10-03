@@ -132,6 +132,8 @@ function videoProgress(loop) {
       var currentTime = "NaN";
     }
     var currentPercent = (currentTime / time) * 100;
+    console.log("time: " + currentTime);
+    console.log(currentPercent);
     if (loop) {
       progressTimer = new Timer(function() {
         if (currentTime !== "NaN") {
@@ -147,6 +149,7 @@ function videoProgress(loop) {
     }
     else {
       if (currentTime !== "NaN") {
+        console.log(currentPercent);
         setCurrent();
       }
     }
