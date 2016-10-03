@@ -115,15 +115,9 @@ var ActionTimers = function() {
 }
 var actionTimers = new ActionTimers();
 
-function videoProgress(loop) {
+function videoProgress() {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
-  
-  function setCurrent(inputPercent, inputTime) {
-    $("#progress").css("width", inputPercent + "%");
-    $("#currentTime").text(msConversion(inputTime * 1000));
-  }
-  
   function progressLoop() {
     try {
       var currentTime = parseFloat(player.getCurrentTime()).toFixed();
@@ -132,27 +126,18 @@ function videoProgress(loop) {
       var currentTime = "NaN";
     }
     var currentPercent = (currentTime / time) * 100;
-    console.log("time: " + currentTime);
-    console.log(currentPercent);
-    if (loop) {
-      progressTimer = new Timer(function() {
-        if (currentTime !== "NaN") {
-          setCurrent(currentPercent, currentTime);
-          if (currentTime < time) {
-            progressLoop();
-          }
-        }
-        else {
+    progressTimer = new Timer(function() {
+      if (currentTime !== "NaN") {
+        $("#progress").css("width", currentPercent + "%");
+        $("#currentTime").text(msConversion(currentTime * 1000));
+        if (currentTime < time) {
           progressLoop();
         }
-      }, 500);
-    }
-    else {
-      if (currentTime !== "NaN") {
-        console.log(currentPercent);
-        setCurrent(currentPercent, currentTime);
       }
-    }
+      else {
+        progressLoop();
+      }
+    }, 500);
   }
   progressLoop();
 }
@@ -175,18 +160,18 @@ function playVideo() {
     $("#youtube").attr("src", embedUrl);
     
     actionTimers.clear();
-    videoProgress(true);
+    videoProgress();
   }
   else {
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
       actionTimers.clear();
-      videoProgress(true);
+      videoProgress();
     }
     else {
       player.cueVideoById(videos[videoIteration][2]);
       actionTimers.clear();
-      videoProgress(true);
+      videoProgress();
       actionTimers.pause();
     }
   }
