@@ -145,8 +145,10 @@ function videoProgress(loop) {
         }
       }, 500);
     }
-    else if (currentTime !== "NaN") {
-      setCurrent();
+    else {
+      if (currentTime !== "NaN") {
+        setCurrent();
+      }
     }
   }
   progressLoop();
