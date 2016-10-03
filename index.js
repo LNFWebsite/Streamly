@@ -119,9 +119,9 @@ function videoProgress(loop) {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
   
-  function setCurrent() {
-    $("#progress").css("width", currentPercent + "%");
-    $("#currentTime").text(msConversion(currentTime * 1000));
+  function setCurrent(inputPercent, inputTime) {
+    $("#progress").css("width", inputPercent + "%");
+    $("#currentTime").text(msConversion(inputTime * 1000));
   }
   
   function progressLoop() {
@@ -137,7 +137,7 @@ function videoProgress(loop) {
     if (loop) {
       progressTimer = new Timer(function() {
         if (currentTime !== "NaN") {
-          setCurrent();
+          setCurrent(currentPercent, currentTime);
           if (currentTime < time) {
             progressLoop();
           }
@@ -150,7 +150,7 @@ function videoProgress(loop) {
     else {
       if (currentTime !== "NaN") {
         console.log(currentPercent);
-        setCurrent();
+        setCurrent(currentPercent, currentTime);
       }
     }
   }
