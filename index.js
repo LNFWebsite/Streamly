@@ -115,9 +115,15 @@ var ActionTimers = function() {
 }
 var actionTimers = new ActionTimers();
 
-function videoProgress() {
+function videoProgress(loop) {
   var time = videos[videoIteration][1];
   $("#videoTime").text(msConversion(time * 1000));
+  
+  function setCurrent() {
+    $("#progress").css("width", currentPercent + "%");
+    $("#currentTime").text(msConversion(currentTime * 1000));
+  }
+  
   function progressLoop() {
     try {
       var currentTime = parseFloat(player.getCurrentTime()).toFixed();
@@ -126,18 +132,22 @@ function videoProgress() {
       var currentTime = "NaN";
     }
     var currentPercent = (currentTime / time) * 100;
-    progressTimer = new Timer(function() {
-      if (currentTime !== "NaN") {
-        $("#progress").css("width", currentPercent + "%");
-        $("#currentTime").text(msConversion(currentTime * 1000));
-        if (currentTime < time) {
+    if (loop) {
+      progressTimer = new Timer(function() {
+        if (currentTime !== "NaN") {
+          setCurrent();
+          if (currentTime < time) {
+            progressLoop();
+          }
+        }
+        else {
           progressLoop();
         }
-      }
-      else {
-        progressLoop();
-      }
-    }, 500);
+      }, 500);
+    }
+    else if (currentTime !== "NaN") {
+      setCurrent();
+    }
   }
   progressLoop();
 }
@@ -160,18 +170,18 @@ function playVideo() {
     $("#youtube").attr("src", embedUrl);
     
     actionTimers.clear();
-    videoProgress();
+    videoProgress(true);
   }
   else {
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
       actionTimers.clear();
-      videoProgress();
+      videoProgress(true);
     }
     else {
       player.cueVideoById(videos[videoIteration][2]);
       actionTimers.clear();
-      videoProgress();
+      videoProgress(true);
       actionTimers.pause();
     }
   }
