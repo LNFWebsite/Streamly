@@ -217,7 +217,6 @@ var VideoFunctions = function() {
       videoPaused = false;
       document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
       $("#favicon").attr("href", faviconPlay);
-      console.log("play");
       actionTimers.clear();
       videoProgress();
     }
@@ -230,7 +229,6 @@ var VideoFunctions = function() {
       }
       $("#favicon").attr("href", faviconPause);
       actionTimers.pause();
-      console.log("pause");
     }
   }
 }
