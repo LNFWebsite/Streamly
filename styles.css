@@ -165,9 +165,10 @@ td {
   height: 100%;
   position: absolute;
   width: 100%;
-}
-#youtube {
   border: 1px solid black;
+}
+#youtube-data {
+  display: none;
 }
 .hideVideo {
   opacity: 0;
