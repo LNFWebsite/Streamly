@@ -293,6 +293,7 @@ function getPlaylist() {
 }
 
 function getVideoData() {
+  videoUrl = videoUrl.match(/https:\/\/www.youtube.com\/watch\?v=(.+)/i)[1];
   function loadData() {
     videoName = dataPlayer.getVideoData()["title"];
     videoTime = dataPlayer.getDuration();
