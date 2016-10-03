@@ -124,17 +124,16 @@ function videoProgress() {
       return "NaN";
     }
   }
-  
+  //initial load
   var time = videos[videoIteration][1];
-  $("#videoTime").text(msConversion(time * 1000));
-  
   var currentTime = loadTime();
   var currentPercent = (currentTime / time) * 100;
+  $("#videoTime").text(msConversion(time * 1000));
   if (currentTime !== "NaN") {
     $("#progress").css("width", currentPercent + "%");
     $("#currentTime").text(msConversion(currentTime * 1000));
   }
-  
+  //loop load
   function progressLoop() {
     currentTime = loadTime();
     currentPercent = (currentTime / time) * 100;
@@ -293,55 +292,25 @@ function getPlaylist() {
   }
 }
 
+
+
+
 function getVideoData() {
-  var loadingError = false;
-  $.ajax({
-    url: videoUrl,
-    type: 'GET',
-    success: function(res) {
-      try {
-        var data = $(res.responseText);
-        videoName = data.find("span#eow-title");
-        videoName = videoName[0].textContent;
-        videoName = $("<div/>").html(videoName).text();
-        videoName = videoName.trim();
-        videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-      } catch(err) {
-        loadingError = true;
-      }
-      try {
-        videoTime = null;
-        for (iteration in data) {
-          var str = data[iteration].innerHTML;
-          if (videoTime == null && typeof str != "undefined") {
-            videoTime = str.match(/,"length_seconds":"\d+",/g);
-          }
-        }
-        videoTime = videoTime[0];
-        videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
-        videoTime = +videoTime * 1000;
-      } catch(err) {
-        loadingError = true;
-      }
-    },
-    complete: function(jqXHR, textStatus) {
-      if (!loadingError) {
-        autoplayWorking = false;
-        $("#inputBox").val("").attr("placeholder", placeholder);
-        addVideo();
-      }
-      else {
-        setTimeout(function() {
-          getVideoData();
-        }, 3000);
-      }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      setTimeout(function() {
-        getVideoData();
-      }, 3000);
-    }
-  });
+  function loadData() {
+    videoName = dataPlayer.getVideoData()["title"];
+    videoTime = dataPlayer.getDuration();
+    autoplayWorking = false;
+    $("#inputBox").val("").attr("placeholder", placeholder);
+    addVideo();
+  }
+  if ($("#youtube-data").attr("src") === "") {
+    var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + "?enablejsapi=1";
+    $("#youtube-data").attr("src", embedUrl);
+    loadData();
+  }
+  else {
+    loadData();
+  }
 }
 
 function getAutoplayUrl() {
