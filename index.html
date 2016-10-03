@@ -103,6 +103,7 @@
   
   // **BREAKTHROUGH THE GREATER!**
   var player;
+  var dataPlayer;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube', {
         events: {
@@ -110,6 +111,7 @@
           'onStateChange': onPlayerStateChange
         }
     });
+    dataPlayer = new YT.Player('youtube-data');
   }
   function whado(playerStatus) {
     switch(playerStatus) {
