@@ -27,6 +27,8 @@ var radioVideoIteration = -1;
 var autoplayMixUrl;
 var autoplayWorking = false;
 
+var dataPlayer;
+
 function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
