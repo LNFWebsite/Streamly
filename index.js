@@ -118,7 +118,7 @@ var actionTimers = new ActionTimers();
 function videoProgress() {
   function loadTime() {
     try {
-      return parseFloat(player.getCurrentTime()).toFixed();
+      return Math.round(player.getCurrentTime());
     }
     catch(e) {
       return "NaN";
