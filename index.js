@@ -1,5 +1,9 @@
 //! License: MIT (as stated in the LICENSE file)
 
+/****
+ALL instances of decodeURIComponent exist for compatibility 10/04/2016
+****/
+
 var placeholder = "Search, drag and drop video, or paste its URL...";
 
 var faviconPause = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAAA/1BMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD64ociAAAAVHRSTlMAAQIDBAUGBwgJCgsPEBIUFxgbHh8iIyUrMDU/QEdKS09QUlZbXF5fYWZpb3F1e4aJmJ6go6WmqrK0tb7Aw8XHyM/R09XX2drg4unr7e/x8/X3+ftnm6MTAAABGklEQVQ4jYXTx1YCQRBG4TvCYKO2iglzxJwVA5gFs4LA//7P4mLIM9PeZfV3Tm26oC+vf9BTYu7wrib93hzMDkSCoaOG2tX2B0PA21FvjbU+YR4UquB3i5GPsJDK6Y4YjBTSU7JNbqOFdNkSG3FCWghEqhFPfhIA7EmSatYYY9JXUsYYY0wmMOsAXlWS9EbLN9cH5B1gRi6icWDbTVaACzc5AcpuUgQqblL6nzwDJTcpAOducgxsuskSMOUmY4D37SKvAAS/tj5hrbWjBSlrrbU2G5BlAPyaYvtsXstyPJlvbuU6Tpy2BP5LtLjvOsrh1yjxmKIrvxgW+QS9rdZ7QXWRUP5upQO+csmwALzprXy5Uimd5SYj3+P7A3jQxmKOfWTQAAAAAElFTkSuQmCC";
@@ -247,19 +251,22 @@ function getPlaylist() {
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
-        //$("#playlistNameBox").val(decodeURIComponent(videos[0]));
-        $("#playlistNameBox").val(videos[0]);
+        // -- Slowly move the masses to use non-encoded playlist names 10/04/2016
+        videos[0] = decodeURIComponent(videos[0]);
+        $("#playlistNameBox").val(decodeURIComponent(videos[0]));
       }
 
       for (i = 1; i < videos.length; i++) {
         videoCounter = i;
+        // -- Slowly move the masses to use non-encoded video names 10/04/2016
+        videos[videoCounter][0] = decodeURIComponent(videos[videoCounter][0]);
         var printTime = msConversion(videos[videoCounter][1] * 1000);
         addVideoToList(videos[videoCounter][0], printTime);
       }
       loopVideo();
     }
     catch(err) {
-      alert(err+"Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
       "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
       "I'm really sorry about this inconvenience.");
     }
@@ -284,7 +291,6 @@ function getVideoData() {
 function onDataPlayerReady() {
   console.log("onDataPlayerReady");
   var videoName = dataPlayer.getVideoData()["title"];
-  //videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
   var videoTime = Math.round(dataPlayer.getDuration());
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
@@ -621,7 +627,6 @@ function input(type) {
       break;
     case 2:
       if (playlistNameBox !== "") {
-        //videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
         videos[0] = playlistNameBox;
       }
       else {
