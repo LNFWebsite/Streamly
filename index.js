@@ -121,7 +121,7 @@ function videoProgress() {
       return blah;
     }
     catch(e) {
-      return "NaN";
+      return NaN;
     }
   }
   //initial load
@@ -129,7 +129,7 @@ function videoProgress() {
   var currentTime = loadTime();
   var currentPercent = (currentTime / time) * 100;
   $("#videoTime").text(msConversion(time * 1000));
-  if (currentTime !== "NaN") {
+  if (currentTime !== NaN) {
     $("#progress").css("width", currentPercent + "%");
     $("#currentTime").text(msConversion(currentTime * 1000));
   }
@@ -138,7 +138,7 @@ function videoProgress() {
     currentTime = loadTime();
     currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
-      if (currentTime !== "NaN") {
+      if (currentTime !== NaN) {
         $("#progress").css("width", currentPercent + "%");
         $("#currentTime").text(msConversion(currentTime * 1000));
         if (currentTime < time) {
