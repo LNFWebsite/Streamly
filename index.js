@@ -292,21 +292,22 @@ function getPlaylist() {
   }
 }
 
+function loadData() {
+  videoName = dataPlayer.getVideoData()["title"];
+  videoTime = dataPlayer.getDuration();
+  autoplayWorking = false;
+  $("#inputBox").val("").attr("placeholder", placeholder);
+  addVideo();
+}
+
 function getVideoData() {
   videoUrl = videoUrl.match(/https:\/\/www.youtube.com\/watch\?v=(.+)/i)[1];
-  function loadData() {
-    videoName = dataPlayer.getVideoData()["title"];
-    videoTime = dataPlayer.getDuration();
-    autoplayWorking = false;
-    $("#inputBox").val("").attr("placeholder", placeholder);
-    addVideo();
-  }
   if ($("#youtube-data").attr("src") === "") {
     var embedUrl = "https://www.youtube.com/embed/" + videoUrl + "?enablejsapi=1";
     $("#youtube-data").attr("src", embedUrl);
-    loadData();
   }
   else {
+    dataPlayer.cueVideoById(videoUrl);
     loadData();
   }
 }
