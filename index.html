@@ -125,8 +125,7 @@
     });
     dataPlayer = new YT.Player('youtube-data', {
       events: {
-        'onReady': onDataPlayerReady,
-        'onStateChange': onDataPlayerStateChange
+        'onReady': onDataPlayerReady
       }
     });
   }
@@ -161,11 +160,6 @@
     startVideoProgress();
   }
   
-  function onDataPlayerStateChange(event) {
-    if (event.data === 5) {
-      loadData();
-    }
-  }
   function onDataPlayerReady(event) {
     loadData();
   }
