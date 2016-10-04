@@ -7,9 +7,7 @@ var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAA
 
 var popup;
 
-var videoUrl;
-var videoName;
-var videoTime = null;
+var videoId;
 
 var videos = [];
 var videoCounter = 0;
@@ -293,22 +291,21 @@ function getPlaylist() {
 }
 
 function loadData() {
-  videoName = dataPlayer.getVideoData()["title"];
-  videoTime = Math.round(dataPlayer.getDuration());
+  var videoName = dataPlayer.getVideoData()["title"];
+  var videoTime = Math.round(dataPlayer.getDuration());
   console.log(videoName + " | " + videoTime);
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
-  addVideo();
+  addVideo(videoName, videoTime);
 }
 
 function getVideoData() {
-  videoUrl = videoUrl.match(/https:\/\/www.youtube.com\/watch\?v=(.+)/i)[1];
   if ($("#youtube-data").attr("src") === "") {
-    var embedUrl = "https://www.youtube.com/embed/" + videoUrl + "?enablejsapi=1";
+    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
     $("#youtube-data").attr("src", embedUrl);
   }
   else {
-    dataPlayer.cueVideoById(videoUrl);
+    dataPlayer.cueVideoById(videoId);
     loadData();
   }
 }
@@ -379,7 +376,7 @@ function saveAutoplay() {
     complete: function(jqXHR, textStatus) {
       if (!loadingError) {
         if (videoIteration === videoCounter) {
-          videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+          videoId = radioVideos[radioVideoIteration];
           getVideoData();
         }
         else {
@@ -411,7 +408,7 @@ function addAutoplayVideo() {
       autoplayWorking = true;
       radioVideoIteration++;
       if (radioVideoIteration < radioVideos.length) {
-        videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
+        videoId = radioVideos[radioVideoIteration];
         getVideoData();
       }
       else {
@@ -425,17 +422,17 @@ function addAutoplayVideo() {
   }
 }
 
-function addVideo() {
+function addVideo(name, time) {
   videoCounter++;
   var video = [];
-  video[0] = videoName;
-  video[1] = videoTime / 1000;
-  video[2] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=/i, "");
+  video[0] = name;
+  video[1] = time;
+  video[2] = videoId;
   videos[videoCounter] = video;
 
-  var printTime = msConversion(videoTime);
+  var printTime = msConversion(time);
 
-  addVideoToList(videoName, printTime);
+  addVideoToList(name, printTime);
 
   setPlaylist();
   makeSortable();
@@ -570,13 +567,9 @@ var PlaylistFeatures = function() {
 var playlistFeatures = new PlaylistFeatures;
 
 function urlValidate(url) {
-  var regex = /^(http(|s):\/\/www\.youtube\.com\/watch\?v=|http(|s):\/\/youtu.be\/)[^&.*]+/i;
-
-  url = url.trim();
-  url = url.match(regex);
-
+  var regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
+  url = url.match(regex)[1];
   if (url !== null) {
-    url = url[0].replace(/http:\/\//i, "https://").replace(/https:\/\/youtu.be\//i, "https://www.youtube.com/watch?v=");
     return url;
   }
   else {
@@ -631,12 +624,12 @@ function input(type) {
       if (inputBox !== "") {
         inputBox = urlValidate(inputBox);
         if (inputBox) {
-          videoUrl = inputBox;
+          videoId = inputBox;
+          getVideoData();
           $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
           if (typeof popup !== "undefined") {
             popup.close();
           }
-          getVideoData();
           $("#youtube").css("display", "block");
         }
         else {
