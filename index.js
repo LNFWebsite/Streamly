@@ -272,13 +272,8 @@ function loadData() {
 }
 
 function getVideoData() {
-  if ($("#youtube-data").attr("src") === "") {
-    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-    $("#youtube-data").attr("src", embedUrl);
-  }
-  else {
-    dataPlayer.cueVideoById(videoId);
-  }
+  var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+  $("#youtube-data").attr("src", embedUrl);
 }
 
 function getAutoplayUrl() {
