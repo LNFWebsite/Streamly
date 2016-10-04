@@ -293,7 +293,6 @@ function getPlaylist() {
 function loadData() {
   var videoName = dataPlayer.getVideoData()["title"];
   var videoTime = Math.round(dataPlayer.getDuration());
-  console.log(videoName + " | " + videoTime);
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
   addVideo(videoName, videoTime);
@@ -430,7 +429,7 @@ function addVideo(name, time) {
   video[2] = videoId;
   videos[videoCounter] = video;
 
-  var printTime = msConversion(time);
+  var printTime = msConversion(time * 1000);
 
   addVideoToList(name, printTime);
 
