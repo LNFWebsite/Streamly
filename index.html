@@ -111,7 +111,7 @@
           'onStateChange': onPlayerStateChange
         }
     });
-    dataPlayer = new YT.Player('youtube-data');
+    dataPlayer = new YT.Player('youtube-data', {events: {'onReady': onDataPlayerReady}});
   }
   function whado(playerStatus) {
     switch(playerStatus) {
@@ -142,6 +142,9 @@
     whado(event.data);
   }
   function onPlayerReady(event) {
+  }
+  function onDataPlayerReady(event) {
+    loadData();
   }
   
   $(document).keyup(function(e) {
