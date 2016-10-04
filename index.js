@@ -294,7 +294,8 @@ function getPlaylist() {
 
 function loadData() {
   videoName = dataPlayer.getVideoData()["title"];
-  videoTime = dataPlayer.getDuration();
+  videoTime = Math.round(dataPlayer.getDuration());
+  console.log(videoName + " | " + videoTime);
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
   addVideo();
