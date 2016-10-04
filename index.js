@@ -278,7 +278,6 @@ function getVideoData() {
   }
   else {
     dataPlayer.cueVideoById(videoId);
-    loadData();
   }
 }
 
