@@ -114,39 +114,21 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  function loadTime() {
-    try {
-      var blah = Math.round(player.getCurrentTime());
-      console.log(blah);
-      return blah;
-    }
-    catch(e) {
-      console.log(e);
-      return NaN;
-    }
-  }
   //initial load
   var time = videos[videoIteration][1];
-  var currentTime = loadTime();
+  var currentTime = Math.round(player.getCurrentTime());
   var currentPercent = (currentTime / time) * 100;
   $("#videoTime").text(msConversion(time * 1000));
-  if (currentTime !== NaN) {
-    $("#progress").css("width", currentPercent + "%");
-    $("#currentTime").text(msConversion(currentTime * 1000));
-  }
+  $("#progress").css("width", currentPercent + "%");
+  $("#currentTime").text(msConversion(currentTime * 1000));
   //loop load
   function progressLoop() {
-    currentTime = loadTime();
+    currentTime = Math.round(player.getCurrentTime());
     currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
-      if (currentTime !== NaN) {
-        $("#progress").css("width", currentPercent + "%");
-        $("#currentTime").text(msConversion(currentTime * 1000));
-        if (currentTime < time) {
-          progressLoop();
-        }
-      }
-      else {
+      $("#progress").css("width", currentPercent + "%");
+      $("#currentTime").text(msConversion(currentTime * 1000));
+      if (currentTime < time) {
         progressLoop();
       }
     }, 500);
