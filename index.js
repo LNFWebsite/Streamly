@@ -269,6 +269,13 @@ function loadData() {
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
   addVideo(videoName, videoTime);
+  
+  $("#youtube-data").attr("src", "");
+  dataPlayer = new YT.Player('youtube-data', {
+    events: {
+      'onReady': onDataPlayerReady
+    }
+  });
 }
 
 function getVideoData() {
