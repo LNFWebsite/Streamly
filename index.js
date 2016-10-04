@@ -27,6 +27,8 @@ var radioVideoIteration = -1;
 var autoplayMixUrl;
 var autoplayWorking = false;
 
+var dataPlayer;
+
 function changeIteration(which) {
   var sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
@@ -272,14 +274,18 @@ function loadData() {
 }
 
 function getVideoData() {
-  if ($("#youtube-data").attr("src") === "") {
-    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-    $("#youtube-data").attr("src", embedUrl);
-  }
-  else {
-    dataPlayer.cueVideoById(videoId);
-    loadData();
-  }
+  $("#youtube-data").attr("src", "");
+  dataPlayer = new YT.Player('youtube-data', {
+    events: {
+      'onReady': onDataPlayerReady
+    }
+  });
+  var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+  $("#youtube-data").attr("src", embedUrl);
+}
+
+function onDataPlayerReady(event) {
+  loadData();
 }
 
 function getAutoplayUrl() {

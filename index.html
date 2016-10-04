@@ -115,18 +115,16 @@
   
   // **BREAKTHROUGH THE GREATER!**
   var player;
-  var dataPlayer;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube', {
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
     });
-    dataPlayer = new YT.Player('youtube-data', {events: {'onReady': onDataPlayerReady}});
   }
-  function whado(playerStatus) {
-    switch(playerStatus) {
+  function onPlayerStateChange(event) {
+    switch(event.data) {
       //unstarted
       case -1:
         break;
@@ -152,14 +150,8 @@
         break;
     }
   }
-  function onPlayerStateChange(event) {
-    whado(event.data);
-  }
   function onPlayerReady(event) {
     startVideoProgress();
-  }
-  function onDataPlayerReady(event) {
-    loadData();
   }
   
   $(document).keyup(function(e) {
