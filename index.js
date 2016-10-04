@@ -7,7 +7,9 @@ var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAA
 
 var popup;
 
-var videoId;
+var videoUrl;
+var videoName;
+var videoTime = null;
 
 var videos = [];
 var videoCounter = 0;
@@ -114,21 +116,37 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  //initial load
+  function loadTime() {
+    try {
+      return parseFloat(player.getCurrentTime()).toFixed();
+    }
+    catch(e) {
+      return "NaN";
+    }
+  }
+  
   var time = videos[videoIteration][1];
-  var currentTime = Math.round(player.getCurrentTime());
-  var currentPercent = (currentTime / time) * 100;
   $("#videoTime").text(msConversion(time * 1000));
-  $("#progress").css("width", currentPercent + "%");
-  $("#currentTime").text(msConversion(currentTime * 1000));
-  //loop load
+  
+  var currentTime = loadTime();
+  var currentPercent = (currentTime / time) * 100;
+  if (currentTime !== "NaN") {
+    $("#progress").css("width", currentPercent + "%");
+    $("#currentTime").text(msConversion(currentTime * 1000));
+  }
+  
   function progressLoop() {
-    currentTime = Math.round(player.getCurrentTime());
+    currentTime = loadTime();
     currentPercent = (currentTime / time) * 100;
     progressTimer = new Timer(function() {
-      $("#progress").css("width", currentPercent + "%");
-      $("#currentTime").text(msConversion(currentTime * 1000));
-      if (currentTime < time) {
+      if (currentTime !== "NaN") {
+        $("#progress").css("width", currentPercent + "%");
+        $("#currentTime").text(msConversion(currentTime * 1000));
+        if (currentTime < time) {
+          progressLoop();
+        }
+      }
+      else {
         progressLoop();
       }
     }, 500);
@@ -152,13 +170,21 @@ function playVideo() {
     }
     var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
     $("#youtube").attr("src", embedUrl);
+    
+    actionTimers.clear();
+    videoProgress();
   }
   else {
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
+      actionTimers.clear();
+      videoProgress();
     }
     else {
       player.cueVideoById(videos[videoIteration][2]);
+      actionTimers.clear();
+      videoProgress();
+      actionTimers.pause();
     }
   }
 
@@ -187,19 +213,23 @@ function loopVideo() {
 
 var VideoFunctions = function() {
   this.play = function() {
-    videoPaused = false;
-    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
-    $("#favicon").attr("href", faviconPlay);
-    actionTimers.clear();
-    videoProgress();
+    if (videoPaused) {
+      videoPaused = false;
+      document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
+      $("#favicon").attr("href", faviconPlay);
+      actionTimers.clear();
+      videoProgress();
+    }
   }
   this.pause = function() {
-    videoPaused = true;
-    if (videos[0] !== undefined && videos[0] !== null) {
-      document.title = "Streamly - " + decodeURIComponent(videos[0]);
+    if (!videoPaused) {
+      videoPaused = true;
+      if (videos[0] !== undefined && videos[0] !== null) {
+        document.title = "Streamly - " + decodeURIComponent(videos[0]);
+      }
+      $("#favicon").attr("href", faviconPause);
+      actionTimers.pause();
     }
-    $("#favicon").attr("href", faviconPause);
-    actionTimers.pause();
   }
 }
 var videoFunctions = new VideoFunctions();
@@ -263,22 +293,55 @@ function getPlaylist() {
   }
 }
 
-function loadData() {
-  var videoName = dataPlayer.getVideoData()["title"];
-  var videoTime = Math.round(dataPlayer.getDuration());
-  autoplayWorking = false;
-  $("#inputBox").val("").attr("placeholder", placeholder);
-  addVideo(videoName, videoTime);
-}
-
 function getVideoData() {
-  if ($("#youtube-data").attr("src") === "") {
-    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1&version=3";
-    $("#youtube-data").attr("src", embedUrl);
-  }
-  else {
-    dataPlayer.cueVideoById(videoId);
-  }
+  var loadingError = false;
+  $.ajax({
+    url: videoUrl,
+    type: 'GET',
+    success: function(res) {
+      try {
+        var data = $(res.responseText);
+        videoName = data.find("span#eow-title");
+        videoName = videoName[0].textContent;
+        videoName = $("<div/>").html(videoName).text();
+        videoName = videoName.trim();
+        videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+      } catch(err) {
+        loadingError = true;
+      }
+      try {
+        videoTime = null;
+        for (iteration in data) {
+          var str = data[iteration].innerHTML;
+          if (videoTime == null && typeof str != "undefined") {
+            videoTime = str.match(/,"length_seconds":"\d+",/g);
+          }
+        }
+        videoTime = videoTime[0];
+        videoTime = videoTime.replace(/,"length_seconds":"/g, "").replace(/",/g, "");
+        videoTime = +videoTime * 1000;
+      } catch(err) {
+        loadingError = true;
+      }
+    },
+    complete: function(jqXHR, textStatus) {
+      if (!loadingError) {
+        autoplayWorking = false;
+        $("#inputBox").val("").attr("placeholder", placeholder);
+        addVideo();
+      }
+      else {
+        setTimeout(function() {
+          getVideoData();
+        }, 3000);
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      setTimeout(function() {
+        getVideoData();
+      }, 3000);
+    }
+  });
 }
 
 function getAutoplayUrl() {
@@ -347,7 +410,7 @@ function saveAutoplay() {
     complete: function(jqXHR, textStatus) {
       if (!loadingError) {
         if (videoIteration === videoCounter) {
-          videoId = radioVideos[radioVideoIteration];
+          videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
           getVideoData();
         }
         else {
@@ -379,7 +442,7 @@ function addAutoplayVideo() {
       autoplayWorking = true;
       radioVideoIteration++;
       if (radioVideoIteration < radioVideos.length) {
-        videoId = radioVideos[radioVideoIteration];
+        videoUrl = "https://www.youtube.com/watch?v=" + radioVideos[radioVideoIteration];
         getVideoData();
       }
       else {
@@ -393,17 +456,17 @@ function addAutoplayVideo() {
   }
 }
 
-function addVideo(name, time) {
+function addVideo() {
   videoCounter++;
   var video = [];
-  video[0] = name;
-  video[1] = time;
-  video[2] = videoId;
+  video[0] = videoName;
+  video[1] = videoTime / 1000;
+  video[2] = videoUrl.replace(/^htt(p|ps):\/\/www\.youtube\.com\/watch\?v=/i, "");
   videos[videoCounter] = video;
 
-  var printTime = msConversion(time * 1000);
+  var printTime = msConversion(videoTime);
 
-  addVideoToList(name, printTime);
+  addVideoToList(videoName, printTime);
 
   setPlaylist();
   makeSortable();
@@ -538,9 +601,13 @@ var PlaylistFeatures = function() {
 var playlistFeatures = new PlaylistFeatures;
 
 function urlValidate(url) {
-  var regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
-  url = url.match(regex)[1];
+  var regex = /^(http(|s):\/\/www\.youtube\.com\/watch\?v=|http(|s):\/\/youtu.be\/)[^&.*]+/i;
+
+  url = url.trim();
+  url = url.match(regex);
+
   if (url !== null) {
+    url = url[0].replace(/http:\/\//i, "https://").replace(/https:\/\/youtu.be\//i, "https://www.youtube.com/watch?v=");
     return url;
   }
   else {
@@ -595,12 +662,12 @@ function input(type) {
       if (inputBox !== "") {
         inputBox = urlValidate(inputBox);
         if (inputBox) {
-          videoId = inputBox;
-          getVideoData();
+          videoUrl = inputBox;
           $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
           if (typeof popup !== "undefined") {
             popup.close();
           }
+          getVideoData();
           $("#youtube").css("display", "block");
         }
         else {
