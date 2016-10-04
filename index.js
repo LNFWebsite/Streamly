@@ -247,7 +247,8 @@ function getPlaylist() {
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
-        $("#playlistNameBox").val(decodeURIComponent(videos[0]));
+        //$("#playlistNameBox").val(decodeURIComponent(videos[0]));
+        $("#playlistNameBox").val(videos[0]);
       }
 
       for (i = 1; i < videos.length; i++) {
@@ -283,7 +284,7 @@ function getVideoData() {
 function onDataPlayerReady() {
   console.log("onDataPlayerReady");
   var videoName = dataPlayer.getVideoData()["title"];
-  videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+  //videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
   var videoTime = Math.round(dataPlayer.getDuration());
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
@@ -620,7 +621,8 @@ function input(type) {
       break;
     case 2:
       if (playlistNameBox !== "") {
-        videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
+        //videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
+        videos[0] = playlistNameBox;
       }
       else {
         videos[0] = undefined;
