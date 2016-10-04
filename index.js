@@ -283,6 +283,7 @@ function getVideoData() {
 function onDataPlayerReady() {
   console.log("onDataPlayerReady");
   var videoName = dataPlayer.getVideoData()["title"];
+  videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
   var videoTime = Math.round(dataPlayer.getDuration());
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
