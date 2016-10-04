@@ -269,18 +269,21 @@ function loadData() {
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
   addVideo(videoName, videoTime);
-  
+}
+
+function getVideoData() {
   $("#youtube-data").attr("src", "");
   dataPlayer = new YT.Player('youtube-data', {
     events: {
       'onReady': onDataPlayerReady
     }
   });
-}
-
-function getVideoData() {
   var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
   $("#youtube-data").attr("src", embedUrl);
+}
+
+function onDataPlayerReady(event) {
+  loadData();
 }
 
 function getAutoplayUrl() {
