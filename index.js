@@ -121,6 +121,7 @@ function videoProgress() {
       return blah;
     }
     catch(e) {
+      console.log(e);
       return NaN;
     }
   }
