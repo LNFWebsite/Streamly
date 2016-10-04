@@ -205,23 +205,19 @@ function loopVideo() {
 
 var VideoFunctions = function() {
   this.play = function() {
-    if (videoPaused) {
-      videoPaused = false;
-      document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
-      $("#favicon").attr("href", faviconPlay);
-      actionTimers.clear();
-      videoProgress();
-    }
+    videoPaused = false;
+    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
+    $("#favicon").attr("href", faviconPlay);
+    actionTimers.clear();
+    videoProgress();
   }
   this.pause = function() {
-    if (!videoPaused) {
-      videoPaused = true;
-      if (videos[0] !== undefined && videos[0] !== null) {
-        document.title = "Streamly - " + decodeURIComponent(videos[0]);
-      }
-      $("#favicon").attr("href", faviconPause);
-      actionTimers.pause();
+    videoPaused = true;
+    if (videos[0] !== undefined && videos[0] !== null) {
+      document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
+    $("#favicon").attr("href", faviconPause);
+    actionTimers.pause();
   }
 }
 var videoFunctions = new VideoFunctions();
