@@ -38,7 +38,7 @@
     <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">StreamlyReddit</a>
     <br>
     <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
-    <p style="color: grey;margin: 0;padding: 0;">NOTE: The playlist pausing issue has been resolved</p>
+    <p style="color: green;margin: 0;padding: 0;">UPDATE: You should notice a performance increase in adding videos<br><sub>The method which was used to load video data has changed, also resulting in increased reliability.</sub></p>
   </div>
   <footer>
     <div id="previousVideo" onclick="backVideo();" title="Back">
@@ -50,6 +50,7 @@
     <div id="playlistInterface">
       <div id="youtubeContainer" title="Click to pause">
         <iframe id="youtube" src=""></iframe>
+        <iframe id="youtube-data" src=""></iframe>
       </div>
       <div id="currentVideoTiming">
         <span id="currentTime">0:00</span>
@@ -100,8 +101,21 @@
   makeSortable();
   videoPreviews();
   
+  function startVideoProgress() {
+    if (!videoPaused) {
+      actionTimers.clear();
+      videoProgress();
+    }
+    else {
+      actionTimers.clear();
+      videoProgress();
+      actionTimers.pause();
+    }
+  }
+  
   // **BREAKTHROUGH THE GREATER!**
   var player;
+  var dataPlayer;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube', {
         events: {
@@ -109,6 +123,7 @@
           'onStateChange': onPlayerStateChange
         }
     });
+    dataPlayer = new YT.Player('youtube-data', {events: {'onReady': onDataPlayerReady}});
   }
   function whado(playerStatus) {
     switch(playerStatus) {
@@ -122,6 +137,7 @@
       //playing
       case 1:
         videoFunctions.play();
+        startVideoProgress();
         break;
       //paused
       case 2:
@@ -132,6 +148,7 @@
         break;
       //cued
       case 5:
+        startVideoProgress();
         break;
     }
   }
@@ -139,6 +156,10 @@
     whado(event.data);
   }
   function onPlayerReady(event) {
+    startVideoProgress();
+  }
+  function onDataPlayerReady(event) {
+    loadData();
   }
   
   $(document).keyup(function(e) {
