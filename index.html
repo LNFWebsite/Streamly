@@ -101,6 +101,18 @@
   makeSortable();
   videoPreviews();
   
+  function startVideoProgress() {
+    if (!videoPaused) {
+      actionTimers.clear();
+      videoProgress();
+    }
+    else {
+      actionTimers.clear();
+      videoProgress();
+      actionTimers.pause();
+    }
+  }
+  
   // **BREAKTHROUGH THE GREATER!**
   var player;
   var dataPlayer;
@@ -125,6 +137,7 @@
       //playing
       case 1:
         videoFunctions.play();
+        startVideoProgress();
         break;
       //paused
       case 2:
@@ -135,6 +148,7 @@
         break;
       //cued
       case 5:
+        startVideoProgress();
         break;
     }
   }
@@ -142,15 +156,7 @@
     whado(event.data);
   }
   function onPlayerReady(event) {
-    if (!videoPaused) {
-      actionTimers.clear();
-      videoProgress();
-    }
-    else {
-      actionTimers.clear();
-      videoProgress();
-      actionTimers.pause();
-    }
+    startVideoProgress();
   }
   function onDataPlayerReady(event) {
     loadData();
