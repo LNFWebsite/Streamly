@@ -273,7 +273,7 @@ function loadData() {
 
 function getVideoData() {
   if ($("#youtube-data").attr("src") === "") {
-    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1&version=3";
     $("#youtube-data").attr("src", embedUrl);
   }
   else {
