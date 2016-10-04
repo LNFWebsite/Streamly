@@ -266,6 +266,7 @@ function getPlaylist() {
 }
 
 function getVideoData() {
+  console.log("getVideoData");
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
@@ -280,6 +281,7 @@ function getVideoData() {
 }
 
 function onDataPlayerReady() {
+  console.log("onDataPlayerReady");
   var videoName = dataPlayer.getVideoData()["title"];
   var videoTime = Math.round(dataPlayer.getDuration());
   autoplayWorking = false;
