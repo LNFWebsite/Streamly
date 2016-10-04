@@ -268,10 +268,10 @@ function getPlaylist() {
 function getVideoData() {
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
+  var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+  dataFrame.setAttribute("src", embedUrl);
   document.getElementById("dataFrameContainer").appendChild(dataFrame);
   dataPlayer = new YT.Player('dataFrame', {events: {'onReady': onDataPlayerReady}});
-  var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-  $("#youtube-data").attr("src", embedUrl);
 }
 
 function onDataPlayerReady() {
