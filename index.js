@@ -263,6 +263,8 @@ function getPlaylist() {
         var printTime = msConversion(videos[videoCounter][1] * 1000);
         addVideoToList(videos[videoCounter][0], printTime);
       }
+      // -- Need to update the playlist with non-encoded stuff 10/04/2016
+      setPlaylist();
       loopVideo();
     }
     catch(err) {
@@ -448,6 +450,7 @@ function actionRemoveVideo(element) {
     }
     else {
       actionTimers.clear();
+      player.stopVideo();
       $("#youtube").css("display", "none");
       document.title = "Streamly";
       videoIteration = changeIteration(-1);
