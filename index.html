@@ -142,6 +142,15 @@
     whado(event.data);
   }
   function onPlayerReady(event) {
+    if (!videoPaused) {
+      actionTimers.clear();
+      videoProgress();
+    }
+    else {
+      actionTimers.clear();
+      videoProgress();
+      actionTimers.pause();
+    }
   }
   function onDataPlayerReady(event) {
     loadData();
