@@ -265,6 +265,7 @@ function getPlaylist() {
       }
       // -- Need to update the playlist with non-encoded stuff 10/04/2016
       setPlaylist();
+      videoPaused = true;
       loopVideo();
     }
     catch(err) {
