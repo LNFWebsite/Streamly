@@ -47,9 +47,7 @@ And, you don't have to worry about losing anything because Streamly requires not
 
 *Since you asked for the geeky stuff...*
 
-Streamly gets its video metadata by using the [YQL Console](https://developer.yahoo.com/yql/console/) developed by Yahoo to parse YouTube for the video's name and length. There is no interaction between Streamly and YouTube in this step.
-
-Video timing information is gathered using [YouTube's IFrame API](https://developers.google.com/youtube/iframe_api_reference) which monitors events from the YouTube embed frame. From Streamly's beginnings, it has used various unorthodox methods to monitor the user's interaction with the YouTube video player. This method of capture is an improvement in functionality, but is not a must-have, therefore, the [without-yt-api](https://github.com/LNFWebsite/Streamly/tree/without-yt-api) branch is maintained as an added backup for safety of your playlists.
+Streamly gets its video metadata and timing information through the [YouTube's IFrame API](https://developers.google.com/youtube/iframe_api_reference) which both feeds the basic data needed for the playlist, and monitors events from the YouTube embed frame. From Streamly's beginnings, it has used various unorthodox methods to monitor the user's interaction with the YouTube video player. This method of capture is an improvement in functionality, but is not a must-have, therefore, the [without-yt-api](https://github.com/LNFWebsite/Streamly/tree/without-yt-api) branch is maintained as an added backup for safety of your playlists.
 
 Going from one video to another is controlled by cycling through a two-dimensional Javascript array containing the video's title, URL, and length (in seconds) for each in the playlist.
 
