@@ -251,15 +251,11 @@ function getPlaylist() {
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
-        // -- Slowly move the masses to use non-encoded playlist names 10/04/2016
-        videos[0] = decodeURIComponent(videos[0]);
         $("#playlistNameBox").val(decodeURIComponent(videos[0]));
       }
 
       for (i = 1; i < videos.length; i++) {
         videoCounter = i;
-        // -- Slowly move the masses to use non-encoded video names 10/04/2016
-        videos[videoCounter][0] = decodeURIComponent(videos[videoCounter][0]);
         var printTime = msConversion(videos[videoCounter][1] * 1000);
         addVideoToList(videos[videoCounter][0], printTime);
       }
