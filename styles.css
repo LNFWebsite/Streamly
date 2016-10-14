@@ -328,3 +328,47 @@ tr.placeholder:before {
   position: absolute;
   width: 0;
 }
+@media (max-width: 600px) {
+  #inputBox {
+    left: 5px !important;
+    width: 25% !important;
+  }
+  #saveButton {
+    content: "save";
+  }
+  #main {
+    margin: 66px 0px 260px !important;
+  }
+  body {
+    margin: 0;
+  }
+  #previousVideo, #nextVideo {
+    width: 60px !important;
+    height: 120px !important;
+    top: 10px !important;
+    transform: none !important;
+  }
+  #previousVideo {
+    left: 0 !important;
+  }
+  #nextVideo {
+    right: 0 !important;
+  }
+  .fa-backward {
+    right: 25px !important;
+    top: 45px !important;
+  }
+  .fa-forward {
+    left: 25px !important;
+    top: 45px !important;
+  }
+  #youtubeContainer {
+    height: 130px !important;
+    width: 210px !important;
+  }
+  #settings {
+    position: relative !important;
+    right: auto !important;
+    display: inline-block;
+  }
+}
