@@ -90,7 +90,7 @@ function highlight(i, which) {
 
 function addVideoToList(name, time) {
   name = decodeURIComponent(name);
-  $("#videosTable").append("<tr class=\"animated flipInX flipOutX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  $("#videosTable").append("<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
   "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>");
 }
 
@@ -440,7 +440,7 @@ function actionPlayVideo(element) {
 
 function actionRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
-  if (index == videoIteration) {
+  if (index === videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
       videoIteration = changeIteration(-1);
@@ -458,7 +458,9 @@ function actionRemoveVideo(element) {
   }
   videoCounter--;
   videos.splice(index, 1);
-  $("tr:nth-child(" + index + ")").remove();
+  $("tr:nth-child(" + index + ")").fadeOut(function() {
+    $(this).remove();
+  });
   setPlaylist();
   makeSortable();
   videoPreviews();
