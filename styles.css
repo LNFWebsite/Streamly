@@ -337,7 +337,7 @@ tr.placeholder:before {
     margin-bottom: 5px;
   }
   #inputBox {
-    width: 65% !important;
+    width: calc(100% - 120px) !important;
   }
   #forkme {
     display: none;
