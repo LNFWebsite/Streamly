@@ -345,6 +345,9 @@ tr.placeholder:before {
   #main {
     margin: 91px 0px 215px !important;
   }
+  #playlistNameBox {
+    font-size: 1.2em !important;
+  }
   body {
     margin: 0;
   }
