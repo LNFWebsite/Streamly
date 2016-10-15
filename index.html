@@ -158,20 +158,18 @@
   
   $(document).keyup(function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
-      switch (e.keyCode) {
-        case 37:
-          e.preventDefault();
+      switch (e.code) {
+        case "ArrowLeft":
           backVideo();
           break;
-        case 39:
-          e.preventDefault();
+        case "ArrowRight":
           forwardVideo();
           break;
-        case 82:
-          e.preventDefault();
+        case "KeyR":
           playlistFeatures.autoplay();
           break;
       }
+      e.preventDefault();
     }
   });
   
