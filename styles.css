@@ -329,6 +329,9 @@ tr.placeholder:before {
   width: 0;
 }
 @media (max-width: 600px) {
+  #header {
+    height: auto;
+  }
   #inputBox, #saveButton, #settingsButton {
     position: initial;
   }
