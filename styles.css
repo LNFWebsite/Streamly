@@ -330,7 +330,7 @@ tr.placeholder:before {
 }
 @media (max-width: 600px) {
   #header {
-    height: auto;
+    height: auto !important;
   }
   #inputBox, #saveButton, #settingsButton {
     position: initial;
