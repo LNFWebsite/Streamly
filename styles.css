@@ -334,10 +334,10 @@ tr.placeholder:before {
   }
   #inputBox, #saveButton, #settingsButton {
     position: initial;
+    margin-bottom: 5px;
   }
   #inputBox {
     width: 65% !important;
-    margin-bottom: 5px;
   }
   #forkme {
     display: none;
