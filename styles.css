@@ -328,3 +328,56 @@ tr.placeholder:before {
   position: absolute;
   width: 0;
 }
+@media (max-width: 600px) {
+  #header {
+    height: auto;
+  }
+  #inputBox, #saveButton, #settingsButton {
+    position: initial;
+  }
+  #inputBox {
+    width: 65% !important;
+    margin-bottom: 5px;
+  }
+  #forkme {
+    display: none;
+  }
+  #main {
+    margin: 91px 0px 215px !important;
+  }
+  body {
+    margin: 0;
+  }
+  #previousVideo, #nextVideo {
+    width: 60px !important;
+    height: 120px !important;
+    top: 10px !important;
+    transform: none !important;
+  }
+  #previousVideo {
+    left: 0 !important;
+  }
+  #previousVideoName, #previousVideoImage, #nextVideoName, #nextVideoImage {
+    display: none;
+  }
+  #nextVideo {
+    right: 0 !important;
+  }
+  .fa-backward {
+    right: 25px !important;
+    top: 45px !important;
+  }
+  .fa-forward {
+    left: 25px !important;
+    top: 45px !important;
+  }
+  #youtubeContainer {
+    height: 130px !important;
+    width: 210px !important;
+  }
+  #settings {
+    position: relative !important;
+    right: auto !important;
+    display: inline-block;
+  }
+}
