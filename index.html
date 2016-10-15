@@ -156,7 +156,7 @@
     startVideoProgress();
   }
   
-  $(document).keyup(function(e) {
+  window.addEventListener("keyup", function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
       switch (e.code) {
         case "ArrowLeft":
