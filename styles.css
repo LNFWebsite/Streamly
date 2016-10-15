@@ -329,15 +329,18 @@ tr.placeholder:before {
   width: 0;
 }
 @media (max-width: 600px) {
-  #inputBox {
-    left: 5px !important;
-    width: 25% !important;
+  #inputBox, #saveButton, #settingsButton {
+    position: initial;
   }
-  #saveButton {
-    content: "save";
+  #inputBox {
+    width: 65% !important;
+    margin-bottom: 5px;
+  }
+  #forkme {
+    display: none;
   }
   #main {
-    margin: 66px 0px 260px !important;
+    margin: 91px 0px 260px !important;
   }
   body {
     margin: 0;
