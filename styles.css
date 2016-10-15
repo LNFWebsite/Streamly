@@ -357,6 +357,9 @@ tr.placeholder:before {
   #previousVideo {
     left: 0 !important;
   }
+  #previousVideoName, #previousVideoImage, #nextVideoName, #nextVideoImage {
+    display: none;
+  }
   #nextVideo {
     right: 0 !important;
   }
