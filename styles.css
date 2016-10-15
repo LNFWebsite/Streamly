@@ -343,7 +343,11 @@ tr.placeholder:before {
     display: none;
   }
   #main {
-    margin: 91px 0px 215px !important;
+    margin: 92px 0px 215px !important;
+    padding: 5px 0px 5px 0px !important;
+  }
+  #table, #playlistNameBox {
+    width: 100% !important;
   }
   #playlistNameBox {
     font-size: 1.2em !important;
