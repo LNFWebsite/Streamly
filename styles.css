@@ -329,7 +329,7 @@ tr.placeholder:before {
   width: 0;
 }
 @media (max-width: 600px) {
-  #header {
+  header {
     height: auto !important;
   }
   #inputBox, #saveButton, #settingsButton {
