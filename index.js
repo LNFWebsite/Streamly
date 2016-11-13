@@ -307,7 +307,8 @@ function loadAutoplayData(id) {
   document.getElementById("radioDataFrameContainer").appendChild(dataFrame);
   radioDataPlayer = new YT.Player('radioDataFrame', {
     events: {
-      'onReady': onRadioDataPlayerReady
+      'onReady': onRadioDataPlayerReady,
+      'onStateChange': onRadioDataPlayerStateChange
     }
   });
   dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + baseAutoplayVideoId + "?enablejsapi=1");
@@ -317,11 +318,18 @@ function onRadioDataPlayerReady() {
   console.log("onRadioDataPlayerReady");
   var autoplayUrl = "RD" + baseAutoplayVideoId;
   radioDataPlayer.cuePlaylist({list:autoplayUrl});
-  autoplayVideos = radioDataPlayer.getPlaylist();
-  console.log("autoplayVideos: " + autoplayVideos);
-  //radioDataPlayer.destroy();
-  //baseAutoplayVideoId = null;
-  addAutoplayVideo();
+}
+
+function onRadioDataPlayerStateChange(event) {
+  console.log("statechange");
+  if (event.data === 5) {
+    autoplayVideos = radioDataPlayer.getPlaylist();
+    console.log("autoplayVideos: " + autoplayVideos);
+    if (autoplayVideos.length > 1) {
+      console.log("length > 1");
+      addAutoplayVideo();
+    }
+  }
 }
 
 function addAutoplayVideo() {
