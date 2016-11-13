@@ -15,7 +15,6 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
-var autoplayUrl;
 var autoplayVideos = [];
 var autoplayVideoIteration = 0;
 
@@ -296,6 +295,8 @@ function onDataPlayerReady() {
   dataPlayer.destroy();
 }
 
+// Start Streamly Radio
+
 function loadAutoplayData(videoId) {
   console.log("loadAutoplayData");
   var dataFrame = document.createElement("iframe");
@@ -307,7 +308,7 @@ function loadAutoplayData(videoId) {
       'onReady': onRadioDataPlayerReady
     }
   });
-  dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";);
+  dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1");
 }
 
 function onRadioDataPlayerReady() {
@@ -333,6 +334,8 @@ function addAutoplayVideo() {
     }
   }
 }
+
+// End Streamly Radio
 
 function addVideo(name, time, id) {
   videoCounter++;
@@ -467,7 +470,6 @@ var PlaylistFeatures = function() {
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (playlistAutoplay === false) {
-      autoplayUrl = "";
       autoplayVideos = [];
       autoplayVideoIteration = 0;
       $("tr").removeClass("radio");
