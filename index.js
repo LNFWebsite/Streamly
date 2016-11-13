@@ -11,11 +11,13 @@ var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAA
 
 var popup;
 
-var videoId;
-
 var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
+
+var baseAutoplayVideoId;
+var autoplayVideos = [];
+var autoplayVideoIteration = 0;
 
 var videoPaused;
 var backRestart;
@@ -26,12 +28,8 @@ var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
 
-var radioVideos = [];
-var radioVideoIteration = -1;
-var autoplayMixUrl;
-var autoplayWorking = false;
-
 var dataPlayer;
+var radioDataPlayer;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -272,8 +270,7 @@ function getPlaylist() {
   }
 }
 
-function getVideoData() {
-  console.log("getVideoData");
+function getVideoData(videoId) {
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
@@ -288,133 +285,69 @@ function getVideoData() {
 }
 
 function onDataPlayerReady() {
-  console.log("onDataPlayerReady");
+  var videoId = dataPlayer.getVideoData()["video_id"];
   var videoName = dataPlayer.getVideoData()["title"];
   var videoTime = Math.round(dataPlayer.getDuration());
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
-  addVideo(videoName, videoTime);
+  addVideo(videoName, videoTime, videoId);
   dataPlayer.destroy();
 }
 
-function getAutoplayUrl() {
-  highlight(videoIteration, "radio");
-  var loadingError = false;
-  $.ajax({
-    url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
-    type: 'GET',
-    success: function(res) {
-      try {
-        var data = res["responseText"];
-        var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
-        autoplayMixUrl = data.match(regex);
-        autoplayMixUrl = $("<div/>").html(autoplayMixUrl[1]).text();
-      } catch(err) {
-        loadingError = true;
-      }
-    },
-    complete: function(jqXHR, textStatus) {
-      if (!loadingError) {
-        saveAutoplay();
-      }
-      else {
-        setTimeout(function() {
-          getAutoplayUrl();
-        }, 3000);
-      }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      setTimeout(function() {
-        getAutoplayUrl();
-      }, 3000);
+// Start Streamly Radio
+
+function loadAutoplayData(id) {
+  baseAutoplayVideoId = id;
+  var dataFrame = document.createElement("iframe");
+  dataFrame.setAttribute("id", "radioDataFrame");
+  dataFrame.setAttribute("src", "");
+  document.getElementById("radioDataFrameContainer").appendChild(dataFrame);
+  radioDataPlayer = new YT.Player('radioDataFrame', {
+    events: {
+      'onReady': onRadioDataPlayerReady,
+      'onStateChange': onRadioDataPlayerStateChange
     }
   });
+  dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + baseAutoplayVideoId + "?enablejsapi=1");
 }
 
-function saveAutoplay() {
-  var loadingError = false;
-  $.ajax({
-    url: "https://www.youtube.com/watch?v=" + autoplayMixUrl,
-    type: 'GET',
-    success: function(res) {
-      try {
-        var data = res["responseText"];
-        var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
-        var data = data.match(regex);
+function onRadioDataPlayerReady() {
+  var autoplayUrl = "RD" + baseAutoplayVideoId;
+  radioDataPlayer.cuePlaylist({list:autoplayUrl});
+}
 
-        regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
-
-        for (i = 1; i <= 25; i++) {
-          var notInPlaylist = true;
-          var autoplayMixVideoUrl = data[i].match(regex)[1];
-          for (x = 1; x < videos.length; x++) {
-            if (videos[x][2] === autoplayMixVideoUrl) {
-              notInPlaylist = false;
-            }
-          }
-          if (notInPlaylist) {
-            radioVideos.push(autoplayMixVideoUrl);
-          }
-        }
-      } catch(err) {
-        loadingError = true;
-      }
-    },
-    complete: function(jqXHR, textStatus) {
-      if (!loadingError) {
-        if (videoIteration === videoCounter) {
-          videoId = radioVideos[radioVideoIteration];
-          getVideoData();
-        }
-        else {
-          autoplayWorking = false;
-        }
-      }
-      else {
-        setTimeout(function() {
-          saveAutoplay();
-        }, 3000);
-      }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      setTimeout(function() {
-        saveAutoplay();
-      }, 3000);
+function onRadioDataPlayerStateChange(event) {
+  if (event.data === 5) {
+    autoplayVideos = radioDataPlayer.getPlaylist();
+    radioDataPlayer.destroy();
+    if (autoplayVideos.length > 1) {
+      addAutoplayVideo();
     }
-  });
+  }
 }
 
 function addAutoplayVideo() {
-  if (playlistAutoplay && !autoplayWorking) {
-    if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
-      autoplayWorking = true;
-      radioVideoIteration++;
-      getAutoplayUrl();
+  if (playlistAutoplay && videos.length > 0) {
+    if (!autoplayVideos.length > 0) {
+      loadAutoplayData(videos[videoIteration][2]);
     }
-    else if (videoIteration === videoCounter) {
-      autoplayWorking = true;
-      radioVideoIteration++;
-      if (radioVideoIteration < radioVideos.length) {
-        videoId = radioVideos[radioVideoIteration];
-        getVideoData();
-      }
-      else {
-        radioVideos = [];
-        radioVideoIteration = -1;
-        autoplayMixUrl = "";
-        autoplayWorking = false;
-        addAutoplayVideo();
+    else {
+      if (videoIteration === videoCounter && autoplayVideoIteration < autoplayVideos.length) {
+        autoplayVideoIteration++;
+        getVideoData(autoplayVideos[autoplayVideoIteration]);
       }
     }
   }
 }
 
-function addVideo(name, time) {
+// End Streamly Radio
+
+function addVideo(name, time, id) {
   videoCounter++;
   var video = [];
   video[0] = name;
   video[1] = time;
-  video[2] = videoId;
+  video[2] = id;
   videos[videoCounter] = video;
 
   var printTime = msConversion(time * 1000);
@@ -541,13 +474,13 @@ var PlaylistFeatures = function() {
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
-    if (playlistAutoplay == false) {
-      radioVideos = [];
-      radioVideoIteration = -1;
-      autoplayMixUrl = "";
+    if (playlistAutoplay === false) {
+      autoplayVideos = [];
+      autoplayVideoIteration = 0;
       $("tr").removeClass("radio");
     }
-    if (videos.length > 0) {
+    else {
+      highlight(videoIteration, "radio");
       addAutoplayVideo();
       videoPreviews();
     }
@@ -614,8 +547,7 @@ function input(type) {
       if (inputBox !== "") {
         inputBox = urlValidate(inputBox);
         if (inputBox) {
-          videoId = inputBox;
-          getVideoData();
+          getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
           if (typeof popup !== "undefined") {
             popup.close();
