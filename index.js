@@ -295,6 +295,7 @@ function onDataPlayerReady() {
 function getAutoplayUrl() {
   highlight(videoIteration, "radio");
   var loadingError = false;
+  var autoplayMixUrl;
   $.ajax({
     url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
     type: 'GET',
@@ -302,7 +303,7 @@ function getAutoplayUrl() {
       try {
         var data = res["responseText"];
         var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
-        var autoplayMixUrl = data.match(regex);
+        autoplayMixUrl = data.match(regex);
         autoplayMixUrl = $("<div/>").html(autoplayMixUrl[1]).text();
       } catch(err) {
         loadingError = true;
