@@ -11,8 +11,6 @@ var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAA
 
 var popup;
 
-var videoId;
-
 var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
@@ -26,12 +24,8 @@ var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
 
-var radioVideos = [];
-var radioVideoIteration = -1;
-var autoplayMixUrl;
-var autoplayWorking = false;
-
 var dataPlayer;
+var radioDataPlayer;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -272,7 +266,7 @@ function getPlaylist() {
   }
 }
 
-function getVideoData() {
+function getVideoData(videoId) {
   console.log("getVideoData");
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
@@ -289,11 +283,12 @@ function getVideoData() {
 
 function onDataPlayerReady() {
   console.log("onDataPlayerReady");
+  var videoId = dataPlayer.getVideoData()["video_id"];
   var videoName = dataPlayer.getVideoData()["title"];
   var videoTime = Math.round(dataPlayer.getDuration());
   autoplayWorking = false;
   $("#inputBox").val("").attr("placeholder", placeholder);
-  addVideo(videoName, videoTime);
+  addVideo(videoName, videoTime, videoId);
   dataPlayer.destroy();
 }
 
@@ -307,7 +302,7 @@ function getAutoplayUrl() {
       try {
         var data = res["responseText"];
         var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
-        autoplayMixUrl = data.match(regex);
+        var autoplayMixUrl = data.match(regex);
         autoplayMixUrl = $("<div/>").html(autoplayMixUrl[1]).text();
       } catch(err) {
         loadingError = true;
@@ -315,7 +310,7 @@ function getAutoplayUrl() {
     },
     complete: function(jqXHR, textStatus) {
       if (!loadingError) {
-        saveAutoplay();
+        loadAutoplayData(autoplayMixUrl);
       }
       else {
         setTimeout(function() {
@@ -331,90 +326,60 @@ function getAutoplayUrl() {
   });
 }
 
-function saveAutoplay() {
-  var loadingError = false;
-  $.ajax({
-    url: "https://www.youtube.com/watch?v=" + autoplayMixUrl,
-    type: 'GET',
-    success: function(res) {
-      try {
-        var data = res["responseText"];
-        var regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\".+?\"/ig;
-        var data = data.match(regex);
 
-        regex = /<li class=\"yt-uix-scroller-scroll-unit(?:.|\n)*?data-video-id=\"(.+?)\"/i;
 
-        for (i = 1; i <= 25; i++) {
-          var notInPlaylist = true;
-          var autoplayMixVideoUrl = data[i].match(regex)[1];
-          for (x = 1; x < videos.length; x++) {
-            if (videos[x][2] === autoplayMixVideoUrl) {
-              notInPlaylist = false;
-            }
-          }
-          if (notInPlaylist) {
-            radioVideos.push(autoplayMixVideoUrl);
-          }
-        }
-      } catch(err) {
-        loadingError = true;
-      }
-    },
-    complete: function(jqXHR, textStatus) {
-      if (!loadingError) {
-        if (videoIteration === videoCounter) {
-          videoId = radioVideos[radioVideoIteration];
-          getVideoData();
-        }
-        else {
-          autoplayWorking = false;
-        }
-      }
-      else {
-        setTimeout(function() {
-          saveAutoplay();
-        }, 3000);
-      }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      setTimeout(function() {
-        saveAutoplay();
-      }, 3000);
+
+
+
+
+function loadAutoplayData(autoplayMixUrl) {
+  console.log("autoplayMixUrl: " + autoplayMixUrl);
+  var dataFrame = document.createElement("iframe");
+  dataFrame.setAttribute("id", "dataFrame");
+  dataFrame.setAttribute("src", "");
+  document.getElementById("radioDataFrameContainer").appendChild(dataFrame);
+  radioDataPlayer = new YT.Player('dataFrame', {
+    events: {
+      'onReady': addAutoplayVideo
     }
   });
+  var embedUrl = "https://www.youtube.com/embed/" + autoplayMixUrl + "?enablejsapi=1";
+  $("#dataFrame").attr("src", embedUrl);
+  addAutoplayVideo();
 }
 
 function addAutoplayVideo() {
-  if (playlistAutoplay && !autoplayWorking) {
+  if (playlistAutoplay && videos.length > 0) {
     if (typeof autoplayMixUrl == 'undefined' || autoplayMixUrl === "") {
-      autoplayWorking = true;
-      radioVideoIteration++;
       getAutoplayUrl();
     }
     else if (videoIteration === videoCounter) {
-      autoplayWorking = true;
-      radioVideoIteration++;
-      if (radioVideoIteration < radioVideos.length) {
-        videoId = radioVideos[radioVideoIteration];
-        getVideoData();
-      }
-      else {
-        radioVideos = [];
-        radioVideoIteration = -1;
-        autoplayMixUrl = "";
-        autoplayWorking = false;
-        addAutoplayVideo();
-      }
+      radioDataPlayer.nextVideo();
+      var videoId = radioDataPlayer.getVideoData()["video_id"];
+      var videoName = radioDataPlayer.getVideoData()["title"];
+      var videoTime = Math.round(radioDataPlayer.getDuration());
+      addVideo(videoName, videoTime, videoId);
     }
   }
 }
 
-function addVideo(name, time) {
+
+
+
+
+
+
+
+
+
+
+
+function addVideo(name, time, id) {
   videoCounter++;
   var video = [];
   video[0] = name;
   video[1] = time;
-  video[2] = videoId;
+  video[2] = id;
   videos[videoCounter] = video;
 
   var printTime = msConversion(time * 1000);
@@ -541,13 +506,12 @@ var PlaylistFeatures = function() {
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
-    if (playlistAutoplay == false) {
-      radioVideos = [];
-      radioVideoIteration = -1;
+    if (playlistAutoplay === false) {
+      radioDataPlayer.destroy();
       autoplayMixUrl = "";
       $("tr").removeClass("radio");
     }
-    if (videos.length > 0) {
+    else {
       addAutoplayVideo();
       videoPreviews();
     }
@@ -614,8 +578,7 @@ function input(type) {
       if (inputBox !== "") {
         inputBox = urlValidate(inputBox);
         if (inputBox) {
-          videoId = inputBox;
-          getVideoData();
+          getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
           if (typeof popup !== "undefined") {
             popup.close();
