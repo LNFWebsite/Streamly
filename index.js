@@ -296,43 +296,7 @@ function onDataPlayerReady() {
   dataPlayer.destroy();
 }
 
-function getAutoplayUrl() {
-  highlight(videoIteration, "radio");
-  var loadingError = false;
-  $.ajax({
-    url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
-    type: 'GET',
-    success: function(res) {
-      try {
-        var data = res["responseText"];
-        var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=.+?&amp;list=(.+?)\"/i;
-        autoplayUrl = data.match(regex);
-        console.log("autoplayUrl== " + autoplayUrl);
-        autoplayUrl = autoplayUrl[1];
-      } catch(err) {
-        loadingError = true;
-      }
-    },
-    complete: function(jqXHR, textStatus) {
-      if (!loadingError) {
-        loadAutoplayData();
-      }
-      else {
-        setTimeout(function() {
-          getAutoplayUrl();
-        }, 3000);
-      }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      setTimeout(function() {
-        getAutoplayUrl();
-      }, 3000);
-    }
-  });
-}
-
 function loadAutoplayData() {
-  console.log("autoplayUrl: " + autoplayUrl);
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
@@ -347,6 +311,7 @@ function loadAutoplayData() {
 }
 
 function onRadioDataPlayerReady() {
+  var autoplayUrl = "RD" + videos[videoIteration];
   player.cuePlaylist({list:autoplayUrl});
   autoplayVideos = radioDataPlayer.getPlaylist();
   console.log("autoplayVideos: " + autoplayVideos);
@@ -357,7 +322,7 @@ function onRadioDataPlayerReady() {
 function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
     if (!autoplayVideos.length > 0) {
-      getAutoplayUrl();
+      loadAutoplayData();
     }
     else {
       if (videoIteration === videoCounter && autoplayVideoIteration < autoplayVideos.length) {
