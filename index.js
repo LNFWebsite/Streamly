@@ -343,10 +343,10 @@ function loadAutoplayData() {
   });
   //var embedUrl = "https://www.youtube.com/embed/" + autoplayUrl.replace("&", "?") + "&enablejsapi=1";
   //$("#dataFrame").attr("src", embedUrl);
-  player.cuePlaylist({list:autoplayUrl});
 }
 
 function onRadioDataPlayerReady() {
+  player.cuePlaylist({list:autoplayUrl});
   autoplayVideos = radioDataPlayer.getPlaylist();
   console.log("autoplayVideos: " + autoplayVideos);
   radioDataPlayer.destroy();
