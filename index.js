@@ -324,6 +324,7 @@ function onRadioDataPlayerStateChange(event) {
   console.log("statechange");
   if (event.data === 5) {
     autoplayVideos = radioDataPlayer.getPlaylist();
+    radioDataPlayer.destroy();
     console.log("autoplayVideos: " + autoplayVideos);
     if (autoplayVideos.length > 1) {
       console.log("length > 1");
