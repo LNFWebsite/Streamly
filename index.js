@@ -347,7 +347,7 @@ function loadAutoplayData() {
       'onReady': onRadioDataPlayerReady
     }
   });
-  var embedUrl = "https://www.youtube.com/embed/" + autoplayUrl + "?enablejsapi=1";
+  var embedUrl = "https://www.youtube.com/embed/" + autoplayUrl + "&enablejsapi=1";
   $("#dataFrame").attr("src", embedUrl);
 }
 
