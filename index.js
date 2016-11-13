@@ -360,7 +360,7 @@ function onRadioDataPlayerReady() {
 
 function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
-    if (autoplayVideos.length !> 0) {
+    if (!autoplayVideos.length > 0) {
       getAutoplayUrl();
     }
     else {
