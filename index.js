@@ -15,6 +15,8 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
+var autoplayMixUrl;
+
 var videoPaused;
 var backRestart;
 
@@ -295,7 +297,6 @@ function onDataPlayerReady() {
 function getAutoplayUrl() {
   highlight(videoIteration, "radio");
   var loadingError = false;
-  var autoplayMixUrl;
   $.ajax({
     url: "https://www.youtube.com/watch?v=" + videos[videoIteration][2],
     type: 'GET',
@@ -311,7 +312,7 @@ function getAutoplayUrl() {
     },
     complete: function(jqXHR, textStatus) {
       if (!loadingError) {
-        loadAutoplayData(autoplayMixUrl);
+        loadAutoplayData();
       }
       else {
         setTimeout(function() {
@@ -333,7 +334,7 @@ function getAutoplayUrl() {
 
 
 
-function loadAutoplayData(autoplayMixUrl) {
+function loadAutoplayData() {
   console.log("autoplayMixUrl: " + autoplayMixUrl);
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
