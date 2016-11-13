@@ -307,7 +307,7 @@ function getAutoplayUrl() {
         var data = res["responseText"];
         var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=.+?&amp;list=(.+?)\"/i;
         autoplayUrl = data.match(regex);
-        console.log("autoplayUrl== " + autoplayUrl[1]);
+        console.log("autoplayUrl== " + autoplayUrl);
         autoplayUrl = autoplayUrl[1];
       } catch(err) {
         loadingError = true;
