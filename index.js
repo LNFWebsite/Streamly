@@ -15,6 +15,7 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
+var baseAutoplayVideoId;
 var autoplayVideos = [];
 var autoplayVideoIteration = 0;
 
@@ -297,8 +298,9 @@ function onDataPlayerReady() {
 
 // Start Streamly Radio
 
-function loadAutoplayData(videoId) {
+function loadAutoplayData(id) {
   console.log("loadAutoplayData");
+  baseAutoplayVideoId = id;
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "radioDataFrame");
   dataFrame.setAttribute("src", "");
@@ -308,16 +310,17 @@ function loadAutoplayData(videoId) {
       'onReady': onRadioDataPlayerReady
     }
   });
-  dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1");
+  dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + baseAutoplayVideoId + "?enablejsapi=1");
 }
 
 function onRadioDataPlayerReady() {
   console.log("onRadioDataPlayerReady");
-  var autoplayUrl = "RD" + videos[videoIteration];
+  var autoplayUrl = "RD" + baseAutoplayVideoId;
   radioDataPlayer.cuePlaylist({list:autoplayUrl});
   autoplayVideos = radioDataPlayer.getPlaylist();
   console.log("autoplayVideos: " + autoplayVideos);
-  //radioDataPlayer.destroy();
+  radioDataPlayer.destroy();
+  baseAutoplayVideoId = null;
   addAutoplayVideo();
 }
 
