@@ -296,7 +296,8 @@ function onDataPlayerReady() {
   dataPlayer.destroy();
 }
 
-function loadAutoplayData() {
+function loadAutoplayData(videoId) {
+  console.log("loadAutoplayData");
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "radioDataFrame");
   dataFrame.setAttribute("src", "");
@@ -306,6 +307,7 @@ function loadAutoplayData() {
       'onReady': onRadioDataPlayerReady
     }
   });
+  dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";);
 }
 
 function onRadioDataPlayerReady() {
@@ -321,7 +323,7 @@ function onRadioDataPlayerReady() {
 function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
     if (!autoplayVideos.length > 0) {
-      loadAutoplayData();
+      loadAutoplayData(videos[videoIteration]);
     }
     else {
       if (videoIteration === videoCounter && autoplayVideoIteration < autoplayVideos.length) {
