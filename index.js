@@ -349,8 +349,7 @@ function addAutoplayVideo() {
     }
     else {
       if (videoIteration === videoCounter) {
-        if (autoplayVideoIteration < autoplayVideos.length - 2) {
-          console.log(autoplayVideoIteration);
+        if (autoplayVideoIteration < autoplayVideos.length - 1) {
           autoplayVideoIteration++;
           getVideoData(autoplayVideos[autoplayVideoIteration]);
         }
