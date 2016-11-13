@@ -314,7 +314,7 @@ function loadAutoplayData(videoId) {
 function onRadioDataPlayerReady() {
   console.log("onRadioDataPlayerReady");
   var autoplayUrl = "RD" + videos[videoIteration];
-  player.cuePlaylist({list:autoplayUrl});
+  radioDataPlayer.cuePlaylist({list:autoplayUrl});
   autoplayVideos = radioDataPlayer.getPlaylist();
   console.log("autoplayVideos: " + autoplayVideos);
   radioDataPlayer.destroy();
