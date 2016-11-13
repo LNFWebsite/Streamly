@@ -296,8 +296,9 @@ function onDataPlayerReady() {
 
 // Start Streamly Radio
 
-function loadAutoplayData(id) {
-  baseAutoplayVideoId = id;
+function loadAutoplayData(iteration) {
+  highlight(iteration, "radio");
+  baseAutoplayVideoId = videos[iteration][2];
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "radioDataFrame");
   dataFrame.setAttribute("src", "");
@@ -318,7 +319,22 @@ function onRadioDataPlayerReady() {
 
 function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
+    var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
+    for (i = 1; i <= 25; i++) {
+      var notInPlaylist = true;
+      var autoplayVideo = autoplayVideos[i];
+      for (x = 1; x < videos.length; x++) {
+        if (videos[x][2] === autoplayVideo) {
+          notInPlaylist = false;
+        }
+      }
+      if (notInPlaylist) {
+        autoplayVideosSpare.push(autoplayVideo);
+      }
+    }
+    autoplayVideos = autoplayVideosSpare;
+    
     radioDataPlayer.destroy();
     if (autoplayVideos.length > 1) {
       addAutoplayVideo();
@@ -329,12 +345,17 @@ function onRadioDataPlayerStateChange(event) {
 function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
     if (!autoplayVideos.length > 0) {
-      loadAutoplayData(videos[videoIteration][2]);
+      loadAutoplayData(videoIteration);
     }
     else {
-      if (videoIteration === videoCounter && autoplayVideoIteration < autoplayVideos.length) {
-        autoplayVideoIteration++;
-        getVideoData(autoplayVideos[autoplayVideoIteration]);
+      if (videoIteration === videoCounter) {
+        if (autoplayVideoIteration < autoplayVideos.length - 1) {
+          autoplayVideoIteration++;
+          getVideoData(autoplayVideos[autoplayVideoIteration]);
+        }
+        else {
+          loadAutoplayData(videoIteration);
+        }
       }
     }
   }
@@ -480,7 +501,6 @@ var PlaylistFeatures = function() {
       $("tr").removeClass("radio");
     }
     else {
-      highlight(videoIteration, "radio");
       addAutoplayVideo();
       videoPreviews();
     }
