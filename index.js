@@ -298,19 +298,18 @@ function onDataPlayerReady() {
 
 function loadAutoplayData() {
   var dataFrame = document.createElement("iframe");
-  dataFrame.setAttribute("id", "dataFrame");
+  dataFrame.setAttribute("id", "radioDataFrame");
   dataFrame.setAttribute("src", "");
   document.getElementById("radioDataFrameContainer").appendChild(dataFrame);
-  radioDataPlayer = new YT.Player('dataFrame', {
+  radioDataPlayer = new YT.Player('radioDataFrame', {
     events: {
       'onReady': onRadioDataPlayerReady
     }
   });
-  //var embedUrl = "https://www.youtube.com/embed/" + autoplayUrl.replace("&", "?") + "&enablejsapi=1";
-  //$("#dataFrame").attr("src", embedUrl);
 }
 
 function onRadioDataPlayerReady() {
+  console.log("onRadioDataPlayerReady");
   var autoplayUrl = "RD" + videos[videoIteration];
   player.cuePlaylist({list:autoplayUrl});
   autoplayVideos = radioDataPlayer.getPlaylist();
