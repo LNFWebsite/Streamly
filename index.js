@@ -305,7 +305,7 @@ function getAutoplayUrl() {
     success: function(res) {
       try {
         var data = res["responseText"];
-        var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=(.+?)\"/i;
+        var regex = /<li class=\"video-list-item related-list-item  show-video-time related-list-item-compact-radio">(?:.|\n)*?href=\"\/watch\?v=.+?&list=(.+?)\"/i;
         autoplayUrl = data.match(regex);
         autoplayUrl = $("<div/>").html(autoplayUrl[1]).text();
       } catch(err) {
@@ -330,12 +330,6 @@ function getAutoplayUrl() {
   });
 }
 
-
-
-
-
-
-
 function loadAutoplayData() {
   console.log("autoplayUrl: " + autoplayUrl);
   var dataFrame = document.createElement("iframe");
@@ -347,8 +341,9 @@ function loadAutoplayData() {
       'onReady': onRadioDataPlayerReady
     }
   });
-  var embedUrl = "https://www.youtube.com/embed/" + autoplayUrl.replace("&", "?") + "&enablejsapi=1";
-  $("#dataFrame").attr("src", embedUrl);
+  //var embedUrl = "https://www.youtube.com/embed/" + autoplayUrl.replace("&", "?") + "&enablejsapi=1";
+  //$("#dataFrame").attr("src", embedUrl);
+  player.cuePlaylist({list:autoplayUrl});
 }
 
 function onRadioDataPlayerReady() {
@@ -366,22 +361,11 @@ function addAutoplayVideo() {
     else {
       if (videoIteration === videoCounter && autoplayVideoIteration < autoplayVideos.length) {
         autoplayVideoIteration++;
-        getVideoData(autoplayVideos[autoplayVideoIteration - 1]);
+        getVideoData(autoplayVideos[autoplayVideoIteration]);
       }
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 function addVideo(name, time, id) {
   videoCounter++;
