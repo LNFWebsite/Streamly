@@ -344,19 +344,15 @@ function onRadioDataPlayerStateChange(event) {
 
 function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
-    if (!autoplayVideos.length > 0) {
+    console.log("here");
+    if (!autoplayVideoIteration < autoplayVideos.length - 1) {
+      console.log("load");
       loadAutoplayData(videoIteration);
     }
-    else {
-      if (videoIteration === videoCounter) {
-        if (autoplayVideoIteration < autoplayVideos.length - 1) {
-          autoplayVideoIteration++;
-          getVideoData(autoplayVideos[autoplayVideoIteration]);
-        }
-        else {
-          loadAutoplayData(videoIteration);
-        }
-      }
+    else if (videoIteration === videoCounter) {
+      console.log("run");
+      autoplayVideoIteration++;
+      getVideoData(autoplayVideos[autoplayVideoIteration]);
     }
   }
 }
