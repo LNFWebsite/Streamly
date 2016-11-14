@@ -523,72 +523,65 @@ function urlValidate(url) {
 
 function input(type) {
   var inputBox = $("#inputBox").val();
-  var playlistNameBox = $("#playlistNameBox").val();
-  switch (type) {
-    case 0:
-      if (inputBox !== "") {
-        var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
-        if (option) {
-          switch (option[1]) {
-            case "hidevideo":
-              $("#youtubeContainer").addClass("hideVideo");
-              break;
-            case "showvideo":
-              $("#youtubeContainer").removeClass("hideVideo");
-              break;
-            case "background":
-              if (typeof option[2] != 'undefined') {
-                $("body, #blurBackground").css("background", option[2]);
-              }
-              else {
-                alert("No background color or image specified");
-              }
-              break;
-            default:
-              alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
-          }
-        }
-        else {
-          popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
-          
-          function checkIfClosed() {
-              if (popup.closed) {
-                $("#youtube").css("display", "block");
-                clearInterval(checkIfClosedTimer);
-              }
-          }
-          var checkIfClosedTimer = setInterval(checkIfClosed, 500);
-          
-          $("#inputBox").val("").attr("placeholder", placeholder);
-          $("#youtube").css("display", "none");
+  //if playlist input
+  if (type === 2) {
+    var playlistNameBox = $("#playlistNameBox").val();
+    if (playlistNameBox !== "") {
+      videos[0] = playlistNameBox;
+    }
+    else {
+      videos[0] = undefined;
+    }
+    setPlaylist();
+  }
+  else {
+    if (inputBox !== "") {
+      var isUrl = urlValidate(inputBox);
+      var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
+      if (option) {
+        switch (option[1]) {
+          case "hidevideo":
+            $("#youtubeContainer").addClass("hideVideo");
+            break;
+          case "showvideo":
+            $("#youtubeContainer").removeClass("hideVideo");
+            break;
+          case "background":
+            if (typeof option[2] != 'undefined') {
+              $("body, #blurBackground").css("background", option[2]);
+            }
+            else {
+              alert("No background color or image specified");
+            }
+            break;
+          default:
+            alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
         }
       }
-      break;
-    case 1:
-      if (inputBox !== "") {
-        inputBox = urlValidate(inputBox);
-        if (inputBox) {
-          getVideoData(inputBox);
-          $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
-          if (typeof popup !== "undefined") {
-            popup.close();
-          }
-          $("#youtube").css("display", "block");
+      else if (isUrl) {
+        inputBox = isUrl;
+        getVideoData(inputBox);
+        $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
+        if (typeof popup !== "undefined") {
+          popup.close();
         }
-        else {
-          alert("That video's URL seems broken\n\nTry copying it again, or drag and drop the video directly");
-        }
-      }
-      break;
-    case 2:
-      if (playlistNameBox !== "") {
-        videos[0] = playlistNameBox;
+        $("#youtube").css("display", "block");
       }
       else {
-        videos[0] = undefined;
+        popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
+
+        function checkIfClosed() {
+            if (popup.closed) {
+              $("#youtube").css("display", "block");
+              clearInterval(checkIfClosedTimer);
+            }
+        }
+        var checkIfClosedTimer = setInterval(checkIfClosed, 500);
+
+        $("#inputBox").val("").attr("placeholder", placeholder);
+        $("#youtube").css("display", "none");
       }
-      setPlaylist();
-      break;
+    }
   }
 }
 
