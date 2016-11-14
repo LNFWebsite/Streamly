@@ -514,7 +514,7 @@ function urlValidate(url) {
   var regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
   url = url.match(regex);
   if (url !== null && url[1] !== null) {
-    return url;
+    return url[1];
   }
   else {
     return false;
