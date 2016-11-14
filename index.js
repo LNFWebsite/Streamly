@@ -346,7 +346,7 @@ function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
     console.log("here");
     console.log(autoplayVideos);
-    console.log(autoplayVideosIteration);
+    console.log(autoplayVideoIteration);
     if (!autoplayVideos.length > 0 || !autoplayVideoIteration < autoplayVideos.length - 1) {
       console.log("load");
       loadAutoplayData(videoIteration);
