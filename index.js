@@ -347,14 +347,16 @@ function addAutoplayVideo() {
     console.log("here");
     console.log(autoplayVideos);
     console.log(autoplayVideoIteration);
-    if (!autoplayVideos.length > 0 || !autoplayVideoIteration < autoplayVideos.length - 1) {
-      console.log("load");
-      loadAutoplayData(videoIteration);
-    }
-    else if (videoIteration === videoCounter) {
-      console.log("run");
-      autoplayVideoIteration++;
-      getVideoData(autoplayVideos[autoplayVideoIteration]);
+    if (autoplayVideos.length !== 1) {
+      if (!autoplayVideos.length > 0 || !autoplayVideoIteration < autoplayVideos.length - 1) {
+        console.log("load");
+        loadAutoplayData(videoIteration);
+      }
+      else if (videoIteration === videoCounter) {
+        console.log("run");
+        autoplayVideoIteration++;
+        getVideoData(autoplayVideos[autoplayVideoIteration]);
+      }
     }
   }
 }
