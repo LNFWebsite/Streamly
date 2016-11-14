@@ -345,7 +345,7 @@ function onRadioDataPlayerStateChange(event) {
 function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
     console.log("here");
-    if (!autoplayVideoIteration < autoplayVideos.length - 1) {
+    if (!autoplayVideos.length > 0 || !autoplayVideoIteration < autoplayVideos.length - 1) {
       console.log("load");
       loadAutoplayData(videoIteration);
     }
