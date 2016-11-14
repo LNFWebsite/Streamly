@@ -347,12 +347,17 @@ function onRadioDataPlayerStateChange(event) {
 
 function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
-    if (!autoplayVideos.length > 0 || !autoplayVideoIteration < autoplayVideos.length - 1) {
+    if (!autoplayVideos.length > 0) {
       loadAutoplayData(videoIteration);
     }
     else if (videoIteration === videoCounter) {
-      autoplayVideoIteration++;
-      getVideoData(autoplayVideos[autoplayVideoIteration]);
+      if (autoplayVideoIteration < autoplayVideos.length - 1) {
+        autoplayVideoIteration++;
+        getVideoData(autoplayVideos[autoplayVideoIteration]);
+      }
+      else {
+        loadAutoplayData(videoIteration);
+      }
     }
   }
 }
