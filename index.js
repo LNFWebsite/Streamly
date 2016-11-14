@@ -297,6 +297,9 @@ function onDataPlayerReady() {
 // Start Streamly Radio
 
 function loadAutoplayData(iteration) {
+  autoplayVideos = [];
+  autoplayVideoIteration = 0;
+  
   highlight(iteration, "radio");
   baseAutoplayVideoId = videos[iteration][2];
   var dataFrame = document.createElement("iframe");
@@ -347,15 +350,13 @@ function addAutoplayVideo() {
     if (!autoplayVideos.length > 0) {
       loadAutoplayData(videoIteration);
     }
-    else {
-      if (videoIteration === videoCounter) {
-        if (autoplayVideoIteration < autoplayVideos.length - 1) {
-          autoplayVideoIteration++;
-          getVideoData(autoplayVideos[autoplayVideoIteration]);
-        }
-        else {
-          loadAutoplayData(videoIteration);
-        }
+    else if (videoIteration === videoCounter) {
+      if (autoplayVideoIteration < autoplayVideos.length - 1) {
+        autoplayVideoIteration++;
+        getVideoData(autoplayVideos[autoplayVideoIteration]);
+      }
+      else {
+        loadAutoplayData(videoIteration);
       }
     }
   }
