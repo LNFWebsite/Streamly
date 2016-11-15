@@ -194,8 +194,6 @@ var VideoFunctions = function() {
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
-    actionTimers.clear();
-    videoProgress();
   }
   this.pause = function() {
     videoPaused = true;
