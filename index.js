@@ -118,7 +118,7 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  if (typeof videos[videoIteration] !== 'undefined') {
+  if (videos[videoIteration] !== undefined && videos[videoIteration] !== null) {
     //initial load
     var time = videos[videoIteration][1];
     var currentTime = Math.round(player.getCurrentTime());
