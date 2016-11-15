@@ -118,26 +118,31 @@ var ActionTimers = function() {
 var actionTimers = new ActionTimers();
 
 function videoProgress() {
-  //initial load
-  var time = videos[videoIteration][1];
-  var currentTime = Math.round(player.getCurrentTime());
-  var currentPercent = (currentTime / time) * 100;
-  $("#videoTime").text(msConversion(time * 1000));
-  $("#progress").css("width", currentPercent + "%");
-  $("#currentTime").text(msConversion(currentTime * 1000));
-  //loop load
-  function progressLoop() {
-    currentTime = Math.round(player.getCurrentTime());
-    currentPercent = (currentTime / time) * 100;
-    progressTimer = new Timer(function() {
-      $("#progress").css("width", currentPercent + "%");
-      $("#currentTime").text(msConversion(currentTime * 1000));
-      if (currentTime < time) {
-        progressLoop();
-      }
-    }, 500);
+  if (videos[videoIteration] !== undefined && videos[videoIteration] !== null) {
+    //initial load
+    var time = videos[videoIteration][1];
+    var currentTime = Math.round(player.getCurrentTime());
+    if (currentTime === "NaN") {
+      currentTime = 0;
+    }
+    var currentPercent = (currentTime / time) * 100;
+    $("#videoTime").text(msConversion(time * 1000));
+    $("#progress").css("width", currentPercent + "%");
+    $("#currentTime").text(msConversion(currentTime * 1000));
+    //loop load
+    function progressLoop() {
+      currentTime = Math.round(player.getCurrentTime());
+      currentPercent = (currentTime / time) * 100;
+      progressTimer = new Timer(function() {
+        $("#progress").css("width", currentPercent + "%");
+        $("#currentTime").text(msConversion(currentTime * 1000));
+        if (currentTime < time) {
+          progressLoop();
+        }
+      }, 500);
+    }
+    progressLoop();
   }
-  progressLoop();
 }
 
 function playVideo() {
@@ -194,8 +199,6 @@ var VideoFunctions = function() {
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
-    actionTimers.clear();
-    videoProgress();
   }
   this.pause = function() {
     videoPaused = true;
