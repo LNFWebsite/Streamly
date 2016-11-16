@@ -225,6 +225,9 @@ td {
   padding: 5px;
   margin-left: 5px;
 }
+#previousVideoImage, #nextVideoImage {
+  height: 90px;
+}
 #previousVideoTime,
 #nextVideoTime {
   bottom: -7px;
