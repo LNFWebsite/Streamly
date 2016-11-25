@@ -289,8 +289,10 @@ function getVideoData() {
   $("#dataFrame").attr("src", embedUrl);
 }
 
+var dataPlayerErrors = 0;
 function onDataPlayerReady() {
   try {
+    dataPlayerErrors = 0;
     var data = dataPlayer.getVideoData();
     var videoName = dataPlayer.getVideoData()["title"];
     var videoTime = Math.round(dataPlayer.getDuration());
@@ -300,9 +302,12 @@ function onDataPlayerReady() {
     dataPlayer.destroy();
   }
   catch(e) {
+    dataPlayerErrors++;
     console.log(e);
-    dataPlayer.destroy();
-    getVideoData();
+    if (dataPlayerErrors <= 5) {
+      dataPlayer.destroy();
+      getVideoData();
+    }
   }
 }
 
