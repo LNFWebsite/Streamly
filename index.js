@@ -299,6 +299,7 @@ function onDataPlayerReady(videoId) {
     dataPlayer.destroy();
   }
   catch(e) {
+    console.log(e);
     getVideoData(videoId);
   }
 }
