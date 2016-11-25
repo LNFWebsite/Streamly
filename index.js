@@ -292,7 +292,6 @@ function getVideoData() {
 function onDataPlayerReady() {
   try {
     var data = dataPlayer.getVideoData();
-    
     var videoName = dataPlayer.getVideoData()["title"];
     var videoTime = Math.round(dataPlayer.getDuration());
     autoplayWorking = false;
@@ -302,6 +301,7 @@ function onDataPlayerReady() {
   }
   catch(e) {
     console.log(e);
+    dataPlayer.destroy();
     getVideoData();
   }
 }
