@@ -288,20 +288,14 @@ function getVideoData(videoId) {
 }
 
 function onDataPlayerReady(videoId) {
-  try {
-    var data = dataPlayer.getVideoData();
-    
-    var videoName = dataPlayer.getVideoData()["title"];
-    var videoTime = Math.round(dataPlayer.getDuration());
-    autoplayWorking = false;
-    $("#inputBox").val("").attr("placeholder", placeholder);
-    addVideo(videoName, videoTime, videoId);
-    dataPlayer.destroy();
-  }
-  catch(e) {
-    console.log(e);
-    getVideoData(videoId);
-  }
+  var data = dataPlayer.getVideoData();
+  
+  var videoName = dataPlayer.getVideoData()["title"];
+  var videoTime = Math.round(dataPlayer.getDuration());
+  autoplayWorking = false;
+  $("#inputBox").val("").attr("placeholder", placeholder);
+  addVideo(videoName, videoTime, videoId);
+  dataPlayer.destroy();
 }
 
 // Start Streamly Radio
