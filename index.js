@@ -134,6 +134,9 @@ function videoProgress() {
     //loop load
     function progressLoop() {
       currentTime = Math.round(player.getCurrentTime());
+      if (currentTime === "NaN") {
+        currentTime = 0;
+      }
       currentPercent = (currentTime / time) * 100;
       progressTimer = new Timer(function() {
         $("#progress").css("width", currentPercent + "%");
