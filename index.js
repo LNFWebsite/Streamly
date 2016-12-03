@@ -298,6 +298,7 @@ function onDataPlayerReady() {
     dataPlayerErrors = 0;
     var data = dataPlayer.getVideoData();
     var videoName = dataPlayer.getVideoData()["title"];
+    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(dataPlayer.getDuration());
     autoplayWorking = false;
     $("#inputBox").val("").attr("placeholder", placeholder);
@@ -548,7 +549,7 @@ function input(type) {
   if (type === 2) {
     var playlistNameBox = $("#playlistNameBox").val();
     if (playlistNameBox !== "") {
-      videos[0] = playlistNameBox;
+      videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
     }
     else {
       videos[0] = undefined;
