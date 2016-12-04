@@ -22,6 +22,7 @@ var backRestart;
 
 var progressTimer;
 
+var playlistPlayNext;
 var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
@@ -384,11 +385,18 @@ function addAutoplayVideo() {
 
 function addVideo(name, time, id) {
   videoCounter++;
+  var iteration;
+  if (playlistPlayNext) {
+    iteration = videoIteration + 1;
+  }
+  else {
+    iteration = videoCounter;
+  }
   var video = [];
   video[0] = name;
   video[1] = time;
   video[2] = id;
-  videos[videoCounter] = video;
+  videos[iteration] = video;
 
   var printTime = msConversion(time * 1000);
 
@@ -502,6 +510,10 @@ function videoPreviews() {
 }
 
 var PlaylistFeatures = function() {
+  this.playNext = function() {
+    playlistPlayNext = (playlistPlayNext ? false : true);
+    $(".fa-arrow-circle-right").css("color", (playlistPlayNext ? "#F77F00" : "grey"));
+  }
   this.repeat = function() {
     playlistRepeat = (playlistRepeat ? false : true);
     videoPreviews();
