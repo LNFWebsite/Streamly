@@ -122,7 +122,8 @@
     player = new YT.Player('youtube', {
       events: {
         'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onStateChange': onPlayerStateChange,
+        'onError': onError
       }
     });
   }
@@ -155,6 +156,10 @@
   }
   function onPlayerReady(event) {
     startVideoProgress();
+  }
+  function onError(event) {
+    $("tr:nth-child(" + videoIteration + ")").addClass("videoError");
+    forwardVideo();
   }
   
   window.addEventListener("keyup", function(e) {
