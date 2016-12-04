@@ -22,6 +22,7 @@ var backRestart;
 
 var progressTimer;
 
+var playlistPlayNext;
 var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
@@ -84,10 +85,16 @@ function highlight(i, which) {
   $("#new-" + which).removeAttr("id");
 }
 
-function addVideoToList(name, time) {
+function addVideoToList(name, time, spot) {
   name = decodeURIComponent(name);
-  $("#videosTable").append("<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>");
+  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
+  if ($("#videosTable > tr").length > 0) {
+    $("#videosTable > tr").eq(spot-2).after(trElement);
+  }
+  else {
+    $("#videosTable").append(trElement);
+  }
 }
 
 function resetTimer(which) {
@@ -259,7 +266,7 @@ function getPlaylist() {
       for (i = 1; i < videos.length; i++) {
         videoCounter = i;
         var printTime = msConversion(videos[videoCounter][1] * 1000);
-        addVideoToList(videos[videoCounter][0], printTime);
+        addVideoToList(videos[videoCounter][0], printTime, videoCounter);
       }
       // -- Need to update the playlist with non-encoded stuff 10/04/2016
       setPlaylist();
@@ -384,15 +391,22 @@ function addAutoplayVideo() {
 
 function addVideo(name, time, id) {
   videoCounter++;
+  var iteration;
+  if (playlistPlayNext) {
+    iteration = videoIteration + 1;
+  }
+  else {
+    iteration = videoCounter;
+  }
   var video = [];
   video[0] = name;
   video[1] = time;
   video[2] = id;
-  videos[videoCounter] = video;
+  videos[iteration] = video;
 
   var printTime = msConversion(time * 1000);
 
-  addVideoToList(name, printTime);
+  addVideoToList(name, printTime, iteration);
 
   setPlaylist();
   makeSortable();
@@ -502,6 +516,10 @@ function videoPreviews() {
 }
 
 var PlaylistFeatures = function() {
+  this.playNext = function() {
+    playlistPlayNext = (playlistPlayNext ? false : true);
+    $(".fa-arrow-circle-right").css("color", (playlistPlayNext ? "#F77F00" : "grey"));
+  }
   this.repeat = function() {
     playlistRepeat = (playlistRepeat ? false : true);
     videoPreviews();
