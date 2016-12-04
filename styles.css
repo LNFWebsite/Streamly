@@ -283,7 +283,7 @@ td {
   cursor: pointer;
   margin-left: 5px;
 }
-.fa-repeat, .fa-rss {
+.fa-arrow-circle-right, .fa-repeat, .fa-rss {
   color: grey;
 }
 .fa-reddit {
