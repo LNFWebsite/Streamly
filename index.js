@@ -89,7 +89,12 @@ function addVideoToList(name, time, spot) {
   name = decodeURIComponent(name);
   var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
   "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
-  $("#videosTable > tr").eq(spot-1).after(trElement);
+  if ($("#videosTable > tr").length > 0) {
+    $("#videosTable > tr").eq(spot-1).after(trElement);
+  }
+  else {
+    $("#videosTable").append(trElement);
+  }
 }
 
 function resetTimer(which) {
