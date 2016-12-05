@@ -402,7 +402,7 @@ function addVideo(name, time, id) {
   video[0] = name;
   video[1] = time;
   video[2] = id;
-  videos[iteration] = video;
+  videos.splice(iteration, 0, video);
 
   var printTime = msConversion(time * 1000);
 
