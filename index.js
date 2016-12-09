@@ -397,27 +397,16 @@ function addAutoplayVideo() {
 
 function shufflePlaylist() {
   //var playlistName = videos.shift();
-  function replaceVideoInList(replace, what) {
-    if (replace !== what) {
-      console.log("replacing " + replace + " with contents of " + what);
-      removeVideoFromList(replace);
-      addVideoToList(videos[what][0], videos[what][1], replace);
-      if (replace === videoIteration) {
-        highlight(replace, "selected");
-      }
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
     }
+    return array;
   }
-  for (var i = videos.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    console.log("i: " + i);
-    console.log("j: " + j);
-    var temp = videos[i];
-    var tempIteration = i;
-    videos[i] = videos[j];
-    //replaceVideoInList(i+1, j+1);
-    videos[j] = temp;
-    //replaceVideoInList(j+1, tempIteration+1);
-  }
+  shuffleArray(videos);
   //videos.unshift(playlistName);
 }
 
