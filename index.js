@@ -405,7 +405,7 @@ function shufflePlaylist() {
       highlight(replace, "selected");
     }
   }
-  for (var i = array.length - 1; i > 1; i--) {
+  for (var i = array.length - 2; i > 1; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];
     var tempIteration = i;
