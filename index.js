@@ -406,7 +406,8 @@ function shuffleArray(array) {
 }
 
 function shufflePlaylist() {
-  var playlistName = videos.shift();
+  var playlistName = videos[0];
+  videos.splice(0, 1);
   shuffleArray(videos);
   videos.unshift(playlistName);
 }
