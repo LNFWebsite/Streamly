@@ -399,11 +399,13 @@ function shufflePlaylist() {
   var playlistName = videos.shift();
   var array = videos;
   function replaceVideoInList(replace, what) {
-    console.log("replacing " + replace + " with contents of " + what);
-    removeVideoFromList(replace);
-    addVideoToList(array[what][0], array[what][1], replace);
-    if (replace === videoIteration) {
-      highlight(replace, "selected");
+    if (replace !== what) {
+      console.log("replacing " + replace + " with contents of " + what);
+      removeVideoFromList(replace);
+      addVideoToList(array[what][0], array[what][1], replace);
+      if (replace === videoIteration) {
+        highlight(replace, "selected");
+      }
     }
   }
   for (var i = array.length - 1; i > 0; i--) {
