@@ -405,10 +405,9 @@ function shufflePlaylist() {
       highlight(replace, "selected");
     }
   }
-  for (var i = array.length - 1; i > 1; i--) {
-    console.log("i: " + i);
-    var j = Math.floor(Math.random() * i);
-    console.log("j: " + j);
+  for (var i = array.length - 1; i > 2; i--) {
+    var j = Math.floor(Math.random() * (i + 1)) + 1;
+    console.log(j);
     var temp = array[i];
     var tempIteration = i;
     array[i] = array[j];
