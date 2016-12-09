@@ -398,6 +398,7 @@ function addAutoplayVideo() {
 function shufflePlaylist() {
   var array = videos;
   function replaceVideoInList(replace, what) {
+    console.log("replacing " + replace + " with contents of " + what);
     removeVideoFromList(replace);
     addVideoToList(array[what][0], array[what][1], replace);
     if (replace === videoIteration) {
