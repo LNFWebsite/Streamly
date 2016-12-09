@@ -396,7 +396,8 @@ function addAutoplayVideo() {
 // End Streamly Radio
 
 function shufflePlaylist() {
-  var array = videos;
+  var playlistName = videos[0];
+  var array = videos.shift();
   function replaceVideoInList(replace, what) {
     console.log("replacing " + replace + " with contents of " + what);
     removeVideoFromList(replace);
@@ -405,16 +406,17 @@ function shufflePlaylist() {
       highlight(replace, "selected");
     }
   }
-  for (var i = array.length - 1; i > 2; i--) {
-    var j = Math.floor(Math.random() * i) + 1;
+  for (var i = array.length - 1; i > 1; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
     console.log(j);
     var temp = array[i];
     var tempIteration = i;
     array[i] = array[j];
-    replaceVideoInList(i, j);
+    replaceVideoInList(i+1, j+1);
     array[j] = temp;
-    replaceVideoInList(j, tempIteration);
+    replaceVideoInList(j+1, tempIteration+1);
   }
+  videos.unshift(playlistName);
 }
 
 function addVideo(name, time, id) {
