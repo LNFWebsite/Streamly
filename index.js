@@ -97,6 +97,12 @@ function addVideoToList(name, time, spot) {
   }
 }
 
+function removeVideoFromList(index) {
+  $("tr:nth-child(" + index + ")").fadeOut(function() {
+    $(this).remove();
+  });
+}
+
 function resetTimer(which) {
   if (typeof which !== "undefined") {
     if (which != 0) {
@@ -389,6 +395,25 @@ function addAutoplayVideo() {
 
 // End Streamly Radio
 
+function shufflePlaylist() {
+  var array = videos;
+  function replaceVideoInList(replace, what) {
+    removeVideoFromList(replace);
+    addVideoToList(array[what][0], array[what][1], replace);
+    if (replace === videoIteration) {
+      highlight(replace, "selected");
+    }
+  }
+  for (var i = array.length - 1; i > 1; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    replaceVideoInList(i, j);
+    array[j] = temp;
+    replaceVideoInList(j, temp);
+  }
+}
+
 function addVideo(name, time, id) {
   videoCounter++;
   var iteration;
@@ -450,9 +475,8 @@ function actionRemoveVideo(element) {
   }
   videoCounter--;
   videos.splice(index, 1);
-  $("tr:nth-child(" + index + ")").fadeOut(function() {
-    $(this).remove();
-  });
+  removeVideoFromList(index);
+  
   setPlaylist();
   makeSortable();
   videoPreviews();
