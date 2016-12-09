@@ -396,7 +396,7 @@ function addAutoplayVideo() {
 // End Streamly Radio
 
 function shufflePlaylist() {
-  var playlistName = videos.shift();
+  //var playlistName = videos.shift();
   function replaceVideoInList(replace, what) {
     if (replace !== what) {
       console.log("replacing " + replace + " with contents of " + what);
@@ -418,7 +418,7 @@ function shufflePlaylist() {
     videos[j] = temp;
     //replaceVideoInList(j+1, tempIteration+1);
   }
-  videos.unshift(playlistName);
+  //videos.unshift(playlistName);
 }
 
 function addVideo(name, time, id) {
