@@ -417,6 +417,7 @@ function shufflePlaylist() {
     array[j] = temp;
     replaceVideoInList(j+1, tempIteration+1);
   }
+  videos = array;
   videos.unshift(playlistName);
 }
 
