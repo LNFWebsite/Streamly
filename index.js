@@ -395,19 +395,20 @@ function addAutoplayVideo() {
 
 // End Streamly Radio
 
-function shufflePlaylist() {
-  //var playlistName = videos.shift();
-  function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-    return array;
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
+  return array;
+}
+
+function shufflePlaylist() {
+  var playlistName = videos.shift();
   shuffleArray(videos);
-  //videos.unshift(playlistName);
+  videos.unshift(playlistName);
 }
 
 function addVideo(name, time, id) {
