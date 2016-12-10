@@ -429,7 +429,7 @@ function shufflePlaylist() {
   else {
     if (videos.length > videosBeforeShuffle.length) {
       var newVideos = videos.slice(videosBeforeShuffle.length, videos.length);
-      videos.push(newVideos);
+      videosBeforeShuffle.push(newVideos);
     }
     videos = videosBeforeShuffle;
     videos.splice(0, 1);
