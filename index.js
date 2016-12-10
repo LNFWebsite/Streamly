@@ -418,8 +418,8 @@ function shufflePlaylist() {
   videos.unshift(playlistName);
   
   for (var i = 1; i < videos.length; i++) {
-    var printTime = msConversion(videos[videoCounter][1] * 1000);
     removeVideoFromList(i, false);
+    var printTime = msConversion(videos[i][1] * 1000);
     addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videoIterationId) {
       highlight(i, "selected");
