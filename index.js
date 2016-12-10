@@ -13,7 +13,7 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
-var videosBeforeShuffle = [];
+var videosBeforeShuffle;
 
 var baseAutoplayVideoId;
 var autoplayVideos = [];
