@@ -427,6 +427,10 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   else {
+    if (videos.length > videosBeforeShuffle.length) {
+      var newVideos = videos.slice(videosBeforeShuffle.length, videos.length);
+      videos.push(newVideos);
+    }
     videos = videosBeforeShuffle;
     videos.splice(0, 1);
     videos.unshift(playlistName);
