@@ -416,7 +416,7 @@ function shufflePlaylist() {
   videos.splice(0, 1);
   shuffleArray(videos);
   videos.unshift(playlistName);
-  /**
+  
   for (var i = 1; i < videos.length; i++) {
     var printTime = msConversion(videos[videoCounter][1] * 1000);
     removeVideoFromList(i, false);
@@ -425,7 +425,7 @@ function shufflePlaylist() {
       highlight(i, "selected");
     }
   }
-  **/
+  
   setPlaylist();
 }
 
