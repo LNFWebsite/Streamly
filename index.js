@@ -13,7 +13,7 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
-var videosBeforeShuffle;
+var videosBeforeShuffle = [];
 
 var baseAutoplayVideoId;
 var autoplayVideos = [];
@@ -421,6 +421,7 @@ function shufflePlaylist() {
   console.log("playlistShuffle: " + playlistShuffle);
   if (playlistShuffle) {
     videosBeforeShuffle = videos.splice(0);
+    videos = videosBeforeShuffle;
     var playlistName = videos[0];
     var videoIterationId = videos[videoIteration][2];
     videos.splice(0, 1);
