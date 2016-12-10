@@ -366,10 +366,10 @@ function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
-    for (i = 1; i <= 25; i++) {
+    for (var i = 1; i <= 25; i++) {
       var notInPlaylist = true;
       var autoplayVideo = autoplayVideos[i];
-      for (x = 1; x < videos.length; x++) {
+      for (var x = 1; x < videos.length; x++) {
         if (videos[x][2] === autoplayVideo) {
           notInPlaylist = false;
         }
@@ -428,7 +428,19 @@ function shufflePlaylist() {
   }
   else {
     if (videos.length > videosBeforeShuffle.length) {
-      var newVideos = videos.slice(videosBeforeShuffle.length, videos.length);
+      var newVideos = [];
+      for (var i = 1; i < videos.length; i++) {
+        var notInPlaylist = true;
+        var newPlaylistVideo = videos[i];
+        for (var x = 1; x < videosBeforeShuffle.length; x++) {
+          if (videos[x][2] === newPlaylistVideo[2]) {
+            notInPlaylist = false;
+          }
+        }
+        if (notInPlaylist) {
+          newVideos.push(newPlaylistVideo);
+        }
+      }
       videosBeforeShuffle.push(...newVideos);
     }
     videos = videosBeforeShuffle;
