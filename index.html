@@ -160,6 +160,7 @@
     startVideoProgress();
   }
   function onError(event) {
+    videoErrorIds.push(videos[videoIteration]);
     $("tr:nth-child(" + videoIteration + ")").addClass("videoError");
     forwardVideo();
   }
