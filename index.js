@@ -444,21 +444,16 @@ function shufflePlaylist() {
   }
   
   for (var i = 1; i < videos.length; i++) {
+    var listClasses = $("tr:nth-child(" + i + ")").attr("class");
     removeVideoFromList(i, false);
     var printTime = msConversion(videos[i][1] * 1000);
     addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videoIterationId) {
-      if (videoPaused && videoIteration === 1) {
-        highlight(1, "selected");
-      }
-      else if (!playlistRepeat) {
+      if (!videoPaused && !videoIteration === 1 && !playlistRepeat) {
         videoIteration = i;
-        highlight(i, "selected");
       }
     }
-    if (videos[i][2] === baseAutoplayVideoId) {
-      highlight(i, "radio");
-    }
+    $("tr:nth-child(" + i + ")").attr("class", listClasses);
   }
   
   setPlaylist();
