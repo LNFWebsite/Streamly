@@ -417,9 +417,16 @@ function shuffleArray(array) {
   return array;
 }
 
-Array.prototype.diff = function(a) {
-    return this.filter(function(i) {return a.indexOf(i) < 0;});
-};
+function difference(a1, a2) {
+  var result = [];
+  for (var i = 0; i < a1.length; i++) {
+    if (a2.indexOf(a1[i]) === -1) {
+      result.push(a1[i]);
+    }
+  }
+  return result;
+}
+
 var diff;
 function shufflePlaylist() {
   var playlistName = videos[0];
@@ -431,7 +438,7 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   else {
-    diff = videos.diff(videosBeforeShuffle);
+    diff = difference(videos, videosBeforeShuffle);
     console.log(diff);
     if (diff.length > 0) {
       videosBeforeShuffle.push(...diff);
