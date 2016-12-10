@@ -13,6 +13,8 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
+var videosBeforeShuffle = [];
+
 var baseAutoplayVideoId;
 var autoplayVideos = [];
 var autoplayVideoIteration = 0;
@@ -416,11 +418,17 @@ function shuffleArray(array) {
 }
 
 function shufflePlaylist() {
-  var playlistName = videos[0];
-  var videoIterationId = videos[videoIteration][2];
-  videos.splice(0, 1);
-  shuffleArray(videos);
-  videos.unshift(playlistName);
+  if (playlistShuffle) {
+    videosBeforeShuffle = videos;
+    var playlistName = videos[0];
+    var videoIterationId = videos[videoIteration][2];
+    videos.splice(0, 1);
+    shuffleArray(videos);
+    videos.unshift(playlistName);
+  }
+  else {
+    videos = videosBeforeShuffle;
+  }
   
   for (var i = 1; i < videos.length; i++) {
     removeVideoFromList(i, false);
@@ -432,6 +440,9 @@ function shufflePlaylist() {
   }
   
   setPlaylist();
+  makeSortable();
+  videoPreviews();
+  addAutoplayVideo();
 }
 
 function addVideo(name, time, id) {
@@ -576,8 +587,8 @@ var PlaylistFeatures = function() {
   }
   this.shuffle = function() {
     playlistShuffle = (playlistShuffle ? false : true);
-    videoPreviews();
-    //$(".fa-shuffle").css("color", (playlistShuffle ? "#F77F00" : "grey"));
+    shufflePlaylist();
+    $(".fa-shuffle").css("color", (playlistShuffle ? "#F77F00" : "grey"));
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
