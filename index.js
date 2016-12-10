@@ -415,7 +415,7 @@ function shufflePlaylist() {
   for (var i = 1; i < videos.length; i++) {
     var printTime = msConversion(videos[videoCounter][1] * 1000);
     removeVideoFromList(i);
-    addVideoToList(videos[videoCounter][0], printTime, videoCounter);
+    addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videoIterationId) {
       highlight(i, "selected");
     }
