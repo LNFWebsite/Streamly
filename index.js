@@ -441,7 +441,6 @@ function shufflePlaylist() {
     videosBeforeShuffle = [];
     videos.splice(0, 1);
     videos.unshift(playlistName);
-    backVideo();
   }
   
   for (var i = 1; i < videos.length; i++) {
@@ -450,7 +449,6 @@ function shufflePlaylist() {
     addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videoIterationId) {
       if (videoPaused && videoIteration === 1) {
-        backVideo();
         highlight(1, "selected");
       }
       else if (!playlistRepeat) {
@@ -465,6 +463,7 @@ function shufflePlaylist() {
   
   setPlaylist();
   makeSortable();
+  backVideo();
   videoPreviews();
   addAutoplayVideo();
 }
