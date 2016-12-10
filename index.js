@@ -13,6 +13,8 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
+var videoErrorIds = [];
+
 var videosBeforeShuffle = [];
 var addedVideosWhileShuffled = [];
 
@@ -424,6 +426,7 @@ function shuffleArray(array) {
 function shufflePlaylist() {
   var playlistName = videos[0];
   var videoIterationId = videos[videoIteration][2];
+  var videosBeforeThisShuffle = [];
   if (playlistShuffle) {
     if (videosBeforeShuffle.length < 1) {
       videosBeforeShuffle = JSON.parse(JSON.stringify(videos));
@@ -458,6 +461,9 @@ function shufflePlaylist() {
     }
     if (videos[i][2] === baseAutoplayVideoId) {
       highlight(i, "radio");
+    }
+    if (videoErrorIds.indexOf(videos[i][2]) > -1) {
+      highlight(i, "videoError");
     }
   }
   
