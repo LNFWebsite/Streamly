@@ -437,7 +437,11 @@ function shufflePlaylist() {
     var printTime = msConversion(videos[i][1] * 1000);
     addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videoIterationId) {
+      videoIteration = i;
       highlight(i, "selected");
+    }
+    if (videos[i][2] === baseAutoplayVideoId) {
+      highlight(i, "radio");
     }
   }
   
