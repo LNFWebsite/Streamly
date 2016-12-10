@@ -408,7 +408,6 @@ function addAutoplayVideo() {
 // End Streamly Radio
 
 function shuffleArray(array) {
-  videosBeforeShuffle = videos;
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = array[i];
@@ -421,6 +420,7 @@ function shuffleArray(array) {
 function shufflePlaylist() {
   console.log("playlistShuffle: " + playlistShuffle);
   if (playlistShuffle) {
+    videosBeforeShuffle = videos.splice(0);
     var playlistName = videos[0];
     var videoIterationId = videos[videoIteration][2];
     videos.splice(0, 1);
@@ -428,7 +428,6 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   else {
-    console.log("here");
     videos = videosBeforeShuffle;
   }
   
