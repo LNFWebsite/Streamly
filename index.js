@@ -97,10 +97,15 @@ function addVideoToList(name, time, spot) {
   }
 }
 
-function removeVideoFromList(index) {
-  $("tr:nth-child(" + index + ")").fadeOut(function() {
-    $(this).remove();
-  });
+function removeVideoFromList(index, smooth) {
+  if (smooth === true) {
+    $("tr:nth-child(" + index + ")").fadeOut(function() {
+      $(this).remove();
+    });
+  }
+  else {
+    $("tr:nth-child(" + index + ")").remove();
+  }
 }
 
 function resetTimer(which) {
@@ -414,7 +419,7 @@ function shufflePlaylist() {
   /**
   for (var i = 1; i < videos.length; i++) {
     var printTime = msConversion(videos[videoCounter][1] * 1000);
-    removeVideoFromList(i);
+    removeVideoFromList(i, false);
     addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videoIterationId) {
       highlight(i, "selected");
@@ -485,7 +490,7 @@ function actionRemoveVideo(element) {
   }
   videoCounter--;
   videos.splice(index, 1);
-  removeVideoFromList(index);
+  removeVideoFromList(index, true);
   
   setPlaylist();
   makeSortable();
