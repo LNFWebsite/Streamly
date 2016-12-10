@@ -418,6 +418,7 @@ function shuffleArray(array) {
 }
 
 function shufflePlaylist() {
+  console.log("playlistShuffle: " + playlistShuffle);
   if (playlistShuffle) {
     videosBeforeShuffle = videos;
     var playlistName = videos[0];
@@ -588,7 +589,7 @@ var PlaylistFeatures = function() {
   this.shuffle = function() {
     playlistShuffle = (playlistShuffle ? false : true);
     shufflePlaylist();
-    $(".fa-shuffle").css("color", (playlistShuffle ? "#F77F00" : "grey"));
+    $(".fa-random").css("color", (playlistShuffle ? "#F77F00" : "grey"));
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
