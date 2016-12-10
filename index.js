@@ -425,7 +425,9 @@ function shufflePlaylist() {
   var playlistName = videos[0];
   var videoIterationId = videos[videoIteration][2];
   if (playlistShuffle) {
-    videosBeforeShuffle = JSON.parse(JSON.stringify(videos));
+    if (videosBeforeShuffle === []) {
+      videosBeforeShuffle = JSON.parse(JSON.stringify(videos));
+    }
     videos.splice(0, 1);
     shuffleArray(videos);
     videos.unshift(playlistName);
@@ -435,7 +437,8 @@ function shufflePlaylist() {
       videosBeforeShuffle.push(...addedVideosWhileShuffled);
       addedVideosWhileShuffled = [];
     }
-    videos = videosBeforeShuffle;
+    videos = JSON.parse(JSON.stringify(videosBeforeShuffle));
+    videosBeforeShuffle = [];
     videos.splice(0, 1);
     videos.unshift(playlistName);
   }
