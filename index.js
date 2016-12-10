@@ -449,6 +449,7 @@ function shufflePlaylist() {
     addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videoIterationId) {
       if (videoPaused && videoIteration === 1) {
+        backVideo();
         highlight(1, "selected");
       }
       else if (!playlistRepeat) {
