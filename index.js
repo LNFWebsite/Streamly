@@ -463,6 +463,7 @@ function shufflePlaylist() {
   
   setPlaylist();
   makeSortable();
+  backVideo();
   videoPreviews();
   addAutoplayVideo();
 }
