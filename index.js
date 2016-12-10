@@ -605,6 +605,7 @@ var PlaylistFeatures = function() {
     if (playlistAutoplay === false) {
       autoplayVideos = [];
       autoplayVideoIteration = 0;
+      baseAutoplayVideoId = null;
       $("tr").removeClass("radio");
     }
     else {
