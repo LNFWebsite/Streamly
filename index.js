@@ -462,9 +462,9 @@ function shufflePlaylist() {
     if (videos[i][2] === baseAutoplayVideoId) {
       highlight(i, "radio");
     }
-    //if (videoErrorIds.indexOf(videos[i][2]) > -1) {
-    //  highlight(i, "videoError");
-    //}
+    if (videoErrorIds.indexOf(videos[i][2]) > -1) {
+      highlight(i, "videoError");
+    }
   }
   
   setPlaylist();
