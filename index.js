@@ -441,6 +441,7 @@ function shufflePlaylist() {
     videosBeforeShuffle = [];
     videos.splice(0, 1);
     videos.unshift(playlistName);
+    backVideo();
   }
   
   for (var i = 1; i < videos.length; i++) {
