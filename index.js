@@ -425,7 +425,7 @@ function shufflePlaylist() {
   var playlistName = videos[0];
   var videoIterationId = videos[videoIteration][2];
   if (playlistShuffle) {
-    if (videosBeforeShuffle === []) {
+    if (videosBeforeShuffle.length < 1) {
       videosBeforeShuffle = JSON.parse(JSON.stringify(videos));
     }
     videos.splice(0, 1);
