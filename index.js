@@ -427,7 +427,7 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   else {
-    videos = videosBeforeShuffle;
+    videos = videosBeforeShuffle.splice(0, 1).unshift(playlistName);
   }
   
   for (var i = 1; i < videos.length; i++) {
