@@ -472,8 +472,10 @@ function shufflePlaylist() {
   videoPreviews();
   addAutoplayVideo();
   
-  videoIteration = changeIteration(-1);
-  loopVideo();
+  if (videoPaused) {
+    videoIteration = changeIteration(-1);
+    loopVideo();
+  }
 }
 
 function addVideo(name, time, id) {
