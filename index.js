@@ -472,7 +472,7 @@ function shufflePlaylist() {
   videoPreviews();
   addAutoplayVideo();
   
-  if (videoPaused) {
+  if (videos[videoIteration][2] !== videoIterationId) {
     videoIteration = changeIteration(-1);
     loopVideo();
   }
