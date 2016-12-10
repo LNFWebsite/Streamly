@@ -269,7 +269,7 @@ function getPlaylist() {
         $("#playlistNameBox").val(decodeURIComponent(videos[0]));
       }
 
-      for (i = 1; i < videos.length; i++) {
+      for (var i = 1; i < videos.length; i++) {
         videoCounter = i;
         var printTime = msConversion(videos[videoCounter][1] * 1000);
         addVideoToList(videos[videoCounter][0], printTime, videoCounter);
@@ -407,9 +407,21 @@ function shuffleArray(array) {
 
 function shufflePlaylist() {
   var playlistName = videos[0];
+  var videoIterationId = videos[videoIteration][2];
   videos.splice(0, 1);
   shuffleArray(videos);
   videos.unshift(playlistName);
+  
+  for (var i = 1; i < videos.length; i++) {
+    var printTime = msConversion(videos[videoCounter][1] * 1000);
+    removeVideoFromList(i);
+    addVideoToList(videos[videoCounter][0], printTime, videoCounter);
+    if (videos[i][2] === videoIterationId) {
+      highlight(i, "selected");
+    }
+  }
+  
+  setPlaylist();
 }
 
 function addVideo(name, time, id) {
