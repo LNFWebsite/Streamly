@@ -90,7 +90,12 @@ function addVideoToList(name, time, spot) {
   var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
   "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
-    $("#videosTable > tr").eq(spot-2).after(trElement);
+    if (spot > 1) {
+      $("#videosTable > tr").eq(spot-2).after(trElement);
+    }
+    else {
+      $(trElement).insertBefore("#videosTable > tr:first");
+    }
   }
   else {
     $("#videosTable").append(trElement);
