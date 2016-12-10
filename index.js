@@ -13,6 +13,8 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
+var videoErrorIds = [];
+
 var videosBeforeShuffle = [];
 var addedVideosWhileShuffled = [];
 
@@ -424,6 +426,7 @@ function shuffleArray(array) {
 function shufflePlaylist() {
   var playlistName = videos[0];
   var videoIterationId = videos[videoIteration][2];
+  var videosBeforeThisShuffle = [];
   if (playlistShuffle) {
     if (videosBeforeShuffle.length < 1) {
       videosBeforeShuffle = JSON.parse(JSON.stringify(videos));
@@ -444,16 +447,24 @@ function shufflePlaylist() {
   }
   
   for (var i = 1; i < videos.length; i++) {
-    var listClasses = $("tr:nth-child(" + i + ")").attr("class");
     removeVideoFromList(i, false);
     var printTime = msConversion(videos[i][1] * 1000);
     addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videoIterationId) {
-      if (!videoPaused && !videoIteration === 1 && !playlistRepeat) {
+      if (videoPaused && videoIteration === 1) {
+        highlight(1, "selected");
+      }
+      else if (!playlistRepeat) {
         videoIteration = i;
+        highlight(i, "selected");
       }
     }
-    $("tr:nth-child(" + i + ")").attr("class", listClasses);
+    if (videos[i][2] === baseAutoplayVideoId) {
+      highlight(i, "radio");
+    }
+    //if (videoErrorIds.indexOf(videos[i][2]) > -1) {
+    //  highlight(i, "videoError");
+    //}
   }
   
   setPlaylist();
