@@ -206,6 +206,9 @@ function playVideo() {
 
 function loopVideo() {
   if (videoIteration < videoCounter || playlistRepeat) {
+    if (playlistShuffle && playlistRepeat) {
+      shufflePlaylist();
+    }
     videoIteration = changeIteration(1);
     playVideo();
   }
@@ -445,7 +448,7 @@ function shufflePlaylist() {
       if (videoPaused && videoIteration === 1) {
         highlight(1, "selected");
       }
-      else {
+      else if (!playlistRepeat) {
         videoIteration = i;
         highlight(i, "selected");
       }
