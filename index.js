@@ -420,7 +420,7 @@ function shuffleArray(array) {
 Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
-
+var diff;
 function shufflePlaylist() {
   var playlistName = videos[0];
   var videoIterationId = videos[videoIteration][2];
@@ -431,7 +431,8 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   else {
-    var diff = videos.diff(videosBeforeShuffle);
+    diff = videos.diff(videosBeforeShuffle);
+    console.log(diff);
     if (diff.length > 0) {
       videosBeforeShuffle.push(...diff);
     }
