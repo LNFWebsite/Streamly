@@ -246,12 +246,12 @@ td {
   width: 123px;
 }
 #settings {
-  width: 130px;
+  width: 160px;
   height: 30px;
   padding: 5px;
   position: absolute;
   bottom: -5px;
-  right: calc(30% - 132px);
+  right: calc(30% - 162px);
   border: 1px solid white;
   border-radius: 5px;
 }
@@ -283,7 +283,7 @@ td {
   cursor: pointer;
   margin-left: 5px;
 }
-.fa-arrow-circle-right, .fa-repeat, .fa-rss {
+.fa-arrow-circle-right, .fa-random, .fa-repeat, .fa-rss {
   color: grey;
 }
 .fa-reddit {

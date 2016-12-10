@@ -13,6 +13,8 @@ var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
 
+var videosBeforeShuffle = [];
+
 var baseAutoplayVideoId;
 var autoplayVideos = [];
 var autoplayVideoIteration = 0;
@@ -90,10 +92,26 @@ function addVideoToList(name, time, spot) {
   var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
   "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
-    $("#videosTable > tr").eq(spot-2).after(trElement);
+    if (spot > 1) {
+      $("#videosTable > tr").eq(spot-2).after(trElement);
+    }
+    else {
+      $(trElement).insertBefore("#videosTable > tr:first");
+    }
   }
   else {
     $("#videosTable").append(trElement);
+  }
+}
+
+function removeVideoFromList(index, smooth) {
+  if (smooth === true) {
+    $("tr:nth-child(" + index + ")").fadeOut(function() {
+      $(this).remove();
+    });
+  }
+  else {
+    $("tr:nth-child(" + index + ")").remove();
   }
 }
 
@@ -263,7 +281,7 @@ function getPlaylist() {
         $("#playlistNameBox").val(decodeURIComponent(videos[0]));
       }
 
-      for (i = 1; i < videos.length; i++) {
+      for (var i = 1; i < videos.length; i++) {
         videoCounter = i;
         var printTime = msConversion(videos[videoCounter][1] * 1000);
         addVideoToList(videos[videoCounter][0], printTime, videoCounter);
@@ -389,6 +407,54 @@ function addAutoplayVideo() {
 
 // End Streamly Radio
 
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
+function shufflePlaylist() {
+  var playlistName = videos[0];
+  var videoIterationId = videos[videoIteration][2];
+  if (playlistShuffle) {
+    videosBeforeShuffle = JSON.parse(JSON.stringify(videos));
+    videos.splice(0, 1);
+    shuffleArray(videos);
+    videos.unshift(playlistName);
+  }
+  else {
+    if (videos.length > videosBeforeShuffle.length) {
+      var newVideos = videos.slice(videosBeforeShuffle.length, videos.length);
+      videosBeforeShuffle.push(...newVideos);
+    }
+    videos = videosBeforeShuffle;
+    videos.splice(0, 1);
+    videos.unshift(playlistName);
+  }
+  
+  for (var i = 1; i < videos.length; i++) {
+    removeVideoFromList(i, false);
+    var printTime = msConversion(videos[i][1] * 1000);
+    addVideoToList(videos[i][0], printTime, i);
+    if (videos[i][2] === videoIterationId) {
+      videoIteration = i;
+      highlight(i, "selected");
+    }
+    if (videos[i][2] === baseAutoplayVideoId) {
+      highlight(i, "radio");
+    }
+  }
+  
+  setPlaylist();
+  makeSortable();
+  videoPreviews();
+  addAutoplayVideo();
+}
+
 function addVideo(name, time, id) {
   videoCounter++;
   var iteration;
@@ -450,9 +516,8 @@ function actionRemoveVideo(element) {
   }
   videoCounter--;
   videos.splice(index, 1);
-  $("tr:nth-child(" + index + ")").fadeOut(function() {
-    $(this).remove();
-  });
+  removeVideoFromList(index, true);
+  
   setPlaylist();
   makeSortable();
   videoPreviews();
@@ -532,14 +597,15 @@ var PlaylistFeatures = function() {
   }
   this.shuffle = function() {
     playlistShuffle = (playlistShuffle ? false : true);
-    videoPreviews();
-    //$(".fa-shuffle").css("color", (playlistShuffle ? "#F77F00" : "grey"));
+    shufflePlaylist();
+    $(".fa-random").css("color", (playlistShuffle ? "#F77F00" : "grey"));
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (playlistAutoplay === false) {
       autoplayVideos = [];
       autoplayVideoIteration = 0;
+      baseAutoplayVideoId = null;
       $("tr").removeClass("radio");
     }
     else {
