@@ -14,6 +14,7 @@ var videoCounter = 0;
 var videoIteration = 0;
 
 var videosBeforeShuffle = [];
+var addedVideosWhileShuffled = [];
 
 var baseAutoplayVideoId;
 var autoplayVideos = [];
@@ -366,10 +367,10 @@ function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
-    for (i = 1; i <= 25; i++) {
+    for (var i = 1; i <= 25; i++) {
       var notInPlaylist = true;
       var autoplayVideo = autoplayVideos[i];
-      for (x = 1; x < videos.length; x++) {
+      for (var x = 1; x < videos.length; x++) {
         if (videos[x][2] === autoplayVideo) {
           notInPlaylist = false;
         }
@@ -427,9 +428,9 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   else {
-    if (videos.length > videosBeforeShuffle.length) {
-      var newVideos = videos.slice(videosBeforeShuffle.length, videos.length);
-      videosBeforeShuffle.push(...newVideos);
+    if (addedVideosWhileShuffled.length > 0) {
+      videosBeforeShuffle.push(...addedVideosWhileShuffled);
+      addedVideosWhileShuffled = [];
     }
     videos = videosBeforeShuffle;
     videos.splice(0, 1);
@@ -473,6 +474,10 @@ function addVideo(name, time, id) {
   }
   else {
     videos[iteration] = video;
+  }
+  
+  if (playlistShuffle) {
+    addedVideosWhileShuffled.push(video);
   }
 
   var printTime = msConversion(time * 1000);
