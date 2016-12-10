@@ -463,9 +463,11 @@ function shufflePlaylist() {
   
   setPlaylist();
   makeSortable();
-  backVideo();
   videoPreviews();
   addAutoplayVideo();
+  
+  videoIteration = changeIteration(-1);
+  loopVideo();
 }
 
 function addVideo(name, time, id) {
