@@ -14,6 +14,7 @@ var videoCounter = 0;
 var videoIteration = 0;
 
 var videosBeforeShuffle = [];
+var addedVideosWhileShuffled = [];
 
 var baseAutoplayVideoId;
 var autoplayVideos = [];
@@ -417,17 +418,6 @@ function shuffleArray(array) {
   return array;
 }
 
-function difference(a1, a2) {
-  var result = [];
-  for (var i = 0; i < a1.length; i++) {
-    if (a2.indexOf(a1[i]) === -1) {
-      result.push(a1[i]);
-    }
-  }
-  return result;
-}
-
-var diff;
 function shufflePlaylist() {
   var playlistName = videos[0];
   var videoIterationId = videos[videoIteration][2];
@@ -438,10 +428,8 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   else {
-    diff = difference(videos, videosBeforeShuffle);
-    console.log(diff);
-    if (diff.length > 0) {
-      videosBeforeShuffle.push(...diff);
+    if (addedVideosWhileShuffled.length > 0) {
+      videosBeforeShuffle.push(...addedVideosWhileShuffled);
     }
     videos = videosBeforeShuffle;
     videos.splice(0, 1);
@@ -485,6 +473,10 @@ function addVideo(name, time, id) {
   }
   else {
     videos[iteration] = video;
+  }
+  
+  if (playlistShuffle) {
+    addedVideosWhileShuffled.push(video);
   }
 
   var printTime = msConversion(time * 1000);
