@@ -206,7 +206,7 @@ function playVideo() {
 
 function loopVideo() {
   if (videoIteration < videoCounter || playlistRepeat) {
-    if (playlistShuffle && playlistRepeat) {
+    if (playlistShuffle && playlistRepeat && videoIteration === videoCounter) {
       shufflePlaylist();
     }
     videoIteration = changeIteration(1);
