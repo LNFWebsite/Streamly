@@ -420,8 +420,7 @@ function shuffleArray(array) {
 function shufflePlaylist() {
   console.log("playlistShuffle: " + playlistShuffle);
   if (playlistShuffle) {
-    videosBeforeShuffle = videos.splice(0);
-    videos = videosBeforeShuffle;
+    videosBeforeShuffle = [videos];
     var playlistName = videos[0];
     var videoIterationId = videos[videoIteration][2];
     videos.splice(0, 1);
@@ -429,7 +428,7 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   else {
-    videos = videosBeforeShuffle;
+    videos = videosBeforeShuffle[0];
   }
   
   for (var i = 1; i < videos.length; i++) {
