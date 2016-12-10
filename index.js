@@ -420,14 +420,17 @@ function shuffleArray(array) {
 function shufflePlaylist() {
   console.log("playlistShuffle: " + playlistShuffle);
   if (playlistShuffle) {
+    console.log(videos);
     videosBeforeShuffle = videos;
     var playlistName = videos[0];
     var videoIterationId = videos[videoIteration][2];
     videos.splice(0, 1);
     shuffleArray(videos);
     videos.unshift(playlistName);
+    console.log(videos);
   }
   else {
+    console.log("here");
     videos = videosBeforeShuffle;
   }
   
