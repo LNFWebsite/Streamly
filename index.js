@@ -418,11 +418,10 @@ function shuffleArray(array) {
 }
 
 function shufflePlaylist() {
-  console.log("playlistShuffle: " + playlistShuffle);
+  var playlistName = videos[0];
+  var videoIterationId = videos[videoIteration][2];
   if (playlistShuffle) {
     videosBeforeShuffle = JSON.parse(JSON.stringify(videos));
-    var playlistName = videos[0];
-    var videoIterationId = videos[videoIteration][2];
     videos.splice(0, 1);
     shuffleArray(videos);
     videos.unshift(playlistName);
