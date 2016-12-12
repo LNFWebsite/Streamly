@@ -175,6 +175,7 @@ function videoProgress() {
 }
 
 function playVideo() {
+  console.log("playVideo");
   highlight(videoIteration, "selected");
   addAutoplayVideo();
   videoPreviews();
@@ -394,6 +395,7 @@ function onRadioDataPlayerStateChange(event) {
 }
 
 function addAutoplayVideo() {
+  console.log("addAutoplayVideo: " + videoIteration + "|" + videoCounter);
   if (playlistAutoplay && videos.length > 0) {
     if (!autoplayVideos.length > 0) {
       loadAutoplayData(videoIteration);
@@ -403,6 +405,7 @@ function addAutoplayVideo() {
         autoplayVideoIteration++;
         videoId = autoplayVideos[autoplayVideoIteration];
         getVideoData();
+        console.log("HERE");
       }
       else {
         loadAutoplayData(videoIteration);
