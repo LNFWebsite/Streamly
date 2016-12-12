@@ -175,7 +175,6 @@ function videoProgress() {
 }
 
 function playVideo() {
-  console.log("playVideo");
   highlight(videoIteration, "selected");
   addAutoplayVideo();
   videoPreviews();
@@ -307,6 +306,7 @@ function getPlaylist() {
 }
 
 function getVideoData() {
+  console.log("getVideoData");
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
@@ -322,8 +322,8 @@ function getVideoData() {
 
 var dataPlayerErrors = 0;
 function onDataPlayerReady() {
+  console.log("onDataPlayerReady");
   try {
-    dataPlayerErrors = 0;
     var data = dataPlayer.getVideoData();
     var videoName = dataPlayer.getVideoData()["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
@@ -332,6 +332,7 @@ function onDataPlayerReady() {
     $("#inputBox").val("").attr("placeholder", placeholder);
     addVideo(videoName, videoTime, videoId);
     dataPlayer.destroy();
+    dataPlayerErrors = 0;
   }
   catch(e) {
     dataPlayerErrors++;
@@ -395,7 +396,6 @@ function onRadioDataPlayerStateChange(event) {
 }
 
 function addAutoplayVideo() {
-  console.log("addAutoplayVideo: " + videoIteration + "|" + videoCounter);
   if (playlistAutoplay && videos.length > 0) {
     if (!autoplayVideos.length > 0) {
       loadAutoplayData(videoIteration);
@@ -405,7 +405,7 @@ function addAutoplayVideo() {
         autoplayVideoIteration++;
         videoId = autoplayVideos[autoplayVideoIteration];
         getVideoData();
-        console.log("HERE");
+        console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
       }
       else {
         loadAutoplayData(videoIteration);
