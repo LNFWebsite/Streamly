@@ -306,6 +306,7 @@ function getPlaylist() {
 }
 
 function getVideoData() {
+  console.log("getVideoData");
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
@@ -321,16 +322,16 @@ function getVideoData() {
 
 var dataPlayerErrors = 0;
 function onDataPlayerReady() {
+  console.log("onDataPlayerReady");
   try {
-    dataPlayerErrors = 0;
     var data = dataPlayer.getVideoData();
     var videoName = dataPlayer.getVideoData()["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(dataPlayer.getDuration());
-    autoplayWorking = false;
     $("#inputBox").val("").attr("placeholder", placeholder);
     addVideo(videoName, videoTime, videoId);
     dataPlayer.destroy();
+    dataPlayerErrors = 0;
   }
   catch(e) {
     dataPlayerErrors++;
@@ -403,6 +404,7 @@ function addAutoplayVideo() {
         autoplayVideoIteration++;
         videoId = autoplayVideos[autoplayVideoIteration];
         getVideoData();
+        console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
       }
       else {
         loadAutoplayData(videoIteration);
