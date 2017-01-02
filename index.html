@@ -157,9 +157,7 @@
     }
   }
   function onPlayerReady(event) {
-    setTimeout({
-      startVideoProgress()
-    }, 100);
+    setTimeout(startVideoProgress(), 100);
   }
   function onError(event) {
     videoErrorIds.push(videos[videoIteration][2]);
