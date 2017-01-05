@@ -148,9 +148,11 @@ function videoProgress() {
     //initial load
     var time = videos[videoIteration][1];
     var currentTime = Math.round(player.getCurrentTime());
+    /**
     if (currentTime === "NaN") {
       currentTime = 0;
     }
+    **/
     var currentPercent = (currentTime / time) * 100;
     $("#videoTime").text(msConversion(time * 1000));
     $("#progress").css("width", currentPercent + "%");
@@ -158,9 +160,11 @@ function videoProgress() {
     //loop load
     function progressLoop() {
       currentTime = Math.round(player.getCurrentTime());
+      /**
       if (currentTime === "NaN") {
         currentTime = 0;
       }
+      **/
       currentPercent = (currentTime / time) * 100;
       progressTimer = new Timer(function() {
         $("#progress").css("width", currentPercent + "%");
