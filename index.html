@@ -102,11 +102,7 @@
     input(2);
   });
   
-  getPlaylist();
-  makeSortable();
-  videoPreviews();
-  
-  function startVideoProgress() {
+    function startVideoProgress() {
     if (!videoPaused) {
       actionTimers.clear();
       videoProgress();
@@ -128,6 +124,7 @@
         'onError': onError
       }
     });
+    console.log("Debug: Player loaded");
   }
   function onPlayerStateChange(event) {
     switch(event.data) {
@@ -157,13 +154,18 @@
     }
   }
   function onPlayerReady(event) {
-    setTimeout(startVideoProgress(), 100);
+    console.log("Debug: onPlayerReady");
+    startVideoProgress();
   }
   function onError(event) {
     videoErrorIds.push(videos[videoIteration][2]);
     $("tr:nth-child(" + videoIteration + ")").addClass("videoError");
     forwardVideo();
   }
+  
+  getPlaylist();
+  makeSortable();
+  videoPreviews();
   
   window.addEventListener("keyup", function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
