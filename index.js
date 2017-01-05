@@ -202,6 +202,7 @@ function playVideo() {
     else {
       player.cueVideoById(videos[videoIteration][2]);
     }
+    console.log("Debug: playVideo");
   }
 
   backRestart = false;
