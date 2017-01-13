@@ -15,7 +15,6 @@
   <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
   <script src="jquery.xdomainajax.js"></script>
   <script src="//cdn.rawgit.com/zenorocha/clipboard.js/v1.5.12/dist/clipboard.min.js"></script>
-  <script src="//www.youtube.com/iframe_api"></script>
   <script src="index.js"></script>
 </head>
 <body>
@@ -113,6 +112,12 @@
       actionTimers.pause();
     }
   }
+  
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   
   // **BREAKTHROUGH THE GREATER!**
   var player;
