@@ -184,6 +184,13 @@
         case "KeyR":
           playlistFeatures.autoplay();
           break;
+        case "Space":
+          if (videoPaused) {
+            player.playVideo();
+          }
+          else {
+            player.pauseVideo();
+          }
       }
       e.preventDefault();
     }

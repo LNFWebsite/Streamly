@@ -3,7 +3,7 @@ YouTube HTML5 playlists, extremely simple.
 
 ## How do I use Streamly?
 
-Go to our website! <http://streamly.us.to>
+Go to our website! <http://streamly.us.to> or <https://lnfwebsite.github.io/Streamly>
 
 Or clone us into your web server...
 
