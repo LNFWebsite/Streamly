@@ -369,9 +369,13 @@ function quickSearch(query) {
 }
 
 function onSearchDataPlayerReady(query) {
+  $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+  
   var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
   $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
-    searchDataPlayer.cuePlaylist({listType:"search", list:query});
+    setTimeout(function() {
+      searchDataPlayer.cuePlaylist({listType:"search", list:query});
+    }, 500);
   });
 }
 
@@ -382,7 +386,6 @@ function onSearchDataPlayerStateChange(event) {
     var videoName = data["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(searchDataPlayer.getDuration());
-    $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
     searchDataPlayer.destroy();
     addVideo(videoName, videoTime, videoId);
   }
