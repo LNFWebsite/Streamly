@@ -205,8 +205,8 @@
           e.preventDefault();
           var query = $("#inputBox").val();
           query = query.replace("\\", "");
-          if (query.slice(-1) === "l") {
-            query = query + " lyric";
+          if (query.slice(-2) === " l") {
+            query = query + "yric";
           }
           quickSearch(query);
           break;
