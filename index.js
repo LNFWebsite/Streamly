@@ -352,6 +352,41 @@ function onDataPlayerReady() {
   }
 }
 
+// Start Quick Search
+
+function quickSearch(query) {
+  var searchDataFrame = document.createElement("iframe");
+  searchDataFrame.setAttribute("id", "searchDataFrame");
+  searchDataFrame.setAttribute("src", "");
+  document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
+  searchDataPlayer = new YT.Player('searchDataFrame', {
+    events: {
+      'onReady': onSearchDataPlayerReady(query),
+      'onStateChange': onSearchDataPlayerStateChange
+    }
+  });
+  var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
+  $("#dataFrame").attr("src", embedUrl);
+}
+
+function onSearchDataPlayerReady(query) {
+  radioDataPlayer.cuePlaylist({listType:"search", list:query});
+}
+
+function onSearchDataPlayerStateChange(event) {
+  if (event.data === 5) {
+    var data = searchDataPlayer.getVideoData();
+    var videoName = searchDataPlayer.getVideoData()["title"];
+    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+    var videoTime = Math.round(dataPlayer.getDuration());
+    $("#inputBox").val("").attr("placeholder", placeholder);
+    dataPlayer.destroy();
+    addVideo(videoName, videoTime, videoId);
+  }
+}
+
+// End Quick Search
+
 // Start Streamly Radio
 
 function loadAutoplayData(iteration) {
