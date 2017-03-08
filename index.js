@@ -220,6 +220,7 @@ function loopVideo() {
     playVideo();
   }
   else {
+    videoPaused = true;
     actionTimers.clear();
     $("#youtube").css("display", "none");
     if (videos[0] !== undefined && videos[0] !== null) {
