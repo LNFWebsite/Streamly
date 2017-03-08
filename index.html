@@ -203,7 +203,8 @@
       switch (e.code) {
         case "Backslash":
           e.preventDefault();
-          var query = $("#inputBox").val().replace("\", "");
+          var query = $("#inputBox").val();
+          query = query.replace("\\", "");
           quickSearch(query);
           break;
       }
