@@ -36,6 +36,7 @@ var playlistAutoplay;
 
 var dataPlayer;
 var radioDataPlayer;
+var searchDataPlayer;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -319,7 +320,7 @@ function getVideoData() {
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
-  document.getElementById("dataFrameContainer").appendChild(dataFrame);
+  document.getElementById("dataFramesContainer").appendChild(dataFrame);
   dataPlayer = new YT.Player('dataFrame', {
     events: {
       'onReady': onDataPlayerReady
@@ -346,11 +347,67 @@ function onDataPlayerReady() {
     dataPlayerErrors++;
     console.log(e);
     if (dataPlayerErrors <= 5) {
-      dataPlayer.destroy();
+      try {
+        dataPlayer.destroy();
+      } catch(e) {};
       getVideoData();
     }
   }
 }
+
+// Start Quick Search
+
+function quickSearch(query) {
+  var searchDataFrame = document.createElement("iframe");
+  searchDataFrame.setAttribute("id", "searchDataFrame");
+  searchDataFrame.setAttribute("src", "");
+  document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
+  searchDataPlayer = new YT.Player('searchDataFrame', {
+    events: {
+      'onReady': onSearchDataPlayerReady(query),
+      'onStateChange': onSearchDataPlayerStateChange
+    }
+  });
+}
+
+var searchDataPlayerErrors = 0;
+function onSearchDataPlayerReady(query) {
+  $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+
+  var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
+  $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
+    setTimeout(function() {
+      try {
+        searchDataPlayer.cuePlaylist({listType:"search", list:query});
+        searchDataPlayerErrors = 0;
+      }
+      catch(e) {
+        searchDataPlayerErrors++;
+        console.log(e);
+        if (searchDataPlayerErrors <= 5) {
+          try {
+            searchDataPlayer.destroy();
+          } catch(e) {};
+          quickSearch(query);
+        }
+      }
+    }, 100);
+  });
+}
+
+function onSearchDataPlayerStateChange(event) {
+  if (event.data === 5) {
+    var data = searchDataPlayer.getVideoData();
+    videoId = data["video_id"];
+    var videoName = data["title"];
+    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+    var videoTime = Math.round(searchDataPlayer.getDuration());
+    searchDataPlayer.destroy();
+    addVideo(videoName, videoTime, videoId);
+  }
+}
+
+// End Quick Search
 
 // Start Streamly Radio
 
@@ -363,19 +420,33 @@ function loadAutoplayData(iteration) {
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "radioDataFrame");
   dataFrame.setAttribute("src", "");
-  document.getElementById("radioDataFrameContainer").appendChild(dataFrame);
+  document.getElementById("dataFramesContainer").appendChild(dataFrame);
   radioDataPlayer = new YT.Player('radioDataFrame', {
     events: {
-      'onReady': onRadioDataPlayerReady,
+      'onReady': onRadioDataPlayerReady(iteration),
       'onStateChange': onRadioDataPlayerStateChange
     }
   });
   dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + baseAutoplayVideoId + "?enablejsapi=1");
 }
 
-function onRadioDataPlayerReady() {
-  var autoplayUrl = "RD" + baseAutoplayVideoId;
-  radioDataPlayer.cuePlaylist({list:autoplayUrl});
+var radioDataPlayerErrors = 0;
+function onRadioDataPlayerReady(iteration) {
+  try {
+    var autoplayUrl = "RD" + baseAutoplayVideoId;
+    radioDataPlayer.cuePlaylist({list:autoplayUrl});
+    radioDataPlayerErrors = 0;
+  }
+  catch(e) {
+    radioDataPlayerErrors++;
+    console.log(e);
+    if (radioDataPlayerErrors <= 5) {
+      try {
+        radioDataPlayer.destroy();
+      } catch(e) {};
+      loadAutoplayData(iteration);
+    }
+  }
 }
 
 function onRadioDataPlayerStateChange(event) {
@@ -714,6 +785,9 @@ function input(type) {
         $("#youtube").css("display", "block");
       }
       else {
+        if (inputBox.slice(-2) === " l") {
+          inputBox = inputBox + "yric";
+        }
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
 
         function checkIfClosed() {
