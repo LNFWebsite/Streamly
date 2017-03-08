@@ -347,7 +347,9 @@ function onDataPlayerReady() {
     dataPlayerErrors++;
     console.log(e);
     if (dataPlayerErrors <= 5) {
-      dataPlayer.destroy();
+      try {
+        dataPlayer.destroy();
+      } catch(e) {};
       getVideoData();
     }
   }
@@ -382,7 +384,9 @@ function onSearchDataPlayerReady(query) {
     searchDataPlayerErrors++;
     console.log(e);
     if (searchDataPlayerErrors <= 5) {
-      searchDataPlayer.destroy();
+      try {
+        searchDataPlayer.destroy();
+      } catch(e) {};
       quickSearch(query);
     }
   }
@@ -434,7 +438,9 @@ function onRadioDataPlayerReady(iteration) {
     radioDataPlayerErrors++;
     console.log(e);
     if (radioDataPlayerErrors <= 5) {
-      radioDataPlayer.destroy();
+      try {
+        radioDataPlayer.destroy();
+      } catch(e) {};
       loadAutoplayData(iteration);
     }
   }
