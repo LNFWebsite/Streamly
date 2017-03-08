@@ -36,6 +36,7 @@ var playlistAutoplay;
 
 var dataPlayer;
 var radioDataPlayer;
+var searchDataPlayer;
 
 function changeIteration(which) {
   var sum = videoIteration + which;
