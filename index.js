@@ -372,24 +372,26 @@ function quickSearch(query) {
 
 var searchDataPlayerErrors = 0;
 function onSearchDataPlayerReady(query) {
-  try {
-    $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
-    
-    var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-    $("#searchDataFrame").attr("src", embedUrl);
-    searchDataPlayer.cuePlaylist({listType:"search", list:query});
-    searchDataPlayerErrors = 0;
-  }
-  catch(e) {
-    searchDataPlayerErrors++;
-    console.log(e);
-    if (searchDataPlayerErrors <= 5) {
+  $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+
+  var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
+  $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
+    setTimeout(function() {
       try {
-        searchDataPlayer.destroy();
-      } catch(e) {};
-      quickSearch(query);
-    }
-  }
+        searchDataPlayer.cuePlaylist({listType:"search", list:query});
+        searchDataPlayerErrors = 0;
+      }
+      catch(e) {
+      searchDataPlayerErrors++;
+      console.log(e);
+      if (searchDataPlayerErrors <= 5) {
+        try {
+          searchDataPlayer.destroy();
+        } catch(e) {};
+        quickSearch(query);
+      }
+    }, 100);
+  });
 }
 
 function onSearchDataPlayerStateChange(event) {
