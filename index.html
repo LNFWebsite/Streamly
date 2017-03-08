@@ -95,6 +95,10 @@
       input(1);
     }, 0);
   });
+    
+  $("#inputBox").on("focus", function() {
+    $(this).attr("placeholder", "Add \ to the end of your search for Quick Search, add 'l' to look for lyric videos");
+  });
   
   $("#playlistNameBox").on("blur", function() {
     input(2);
