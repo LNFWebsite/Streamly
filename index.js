@@ -368,15 +368,25 @@ function quickSearch(query) {
   });
 }
 
+var searchDataPlayerErrors = 0;
 function onSearchDataPlayerReady(query) {
-  $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
-  
-  var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-  $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
-    setTimeout(function() {
+  try {
+    $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+    
+    var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
+    $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
       searchDataPlayer.cuePlaylist({listType:"search", list:query});
-    }, 100);
-  });
+    });
+    searchDataPlayerErrors = 0;
+  }
+  catch(e) {
+    searchDataPlayerErrors++;
+    console.log(e);
+    if (searchDataPlayerErrors <= 5) {
+      searchDataPlayer.destroy();
+      quickSearch(query);
+    }
+  }
 }
 
 function onSearchDataPlayerStateChange(event) {
@@ -407,16 +417,28 @@ function loadAutoplayData(iteration) {
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
   radioDataPlayer = new YT.Player('radioDataFrame', {
     events: {
-      'onReady': onRadioDataPlayerReady,
+      'onReady': onRadioDataPlayerReady(iteration),
       'onStateChange': onRadioDataPlayerStateChange
     }
   });
   dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + baseAutoplayVideoId + "?enablejsapi=1");
 }
 
-function onRadioDataPlayerReady() {
-  var autoplayUrl = "RD" + baseAutoplayVideoId;
-  radioDataPlayer.cuePlaylist({list:autoplayUrl});
+var radioDataPlayerErrors = 0;
+function onRadioDataPlayerReady(iteration) {
+  try {
+    var autoplayUrl = "RD" + baseAutoplayVideoId;
+    radioDataPlayer.cuePlaylist({list:autoplayUrl});
+    radioDataPlayerErrors = 0;
+  }
+  catch(e) {
+    radioDataPlayerErrors++;
+    console.log(e);
+    if (radioDataPlayerErrors <= 5) {
+      radioDataPlayer.destroy();
+      loadAutoplayData(iteration);
+    }
+  }
 }
 
 function onRadioDataPlayerStateChange(event) {
