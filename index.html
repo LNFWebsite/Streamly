@@ -205,6 +205,9 @@
           e.preventDefault();
           var query = $("#inputBox").val();
           query = query.replace("\\", "");
+          if (query.slice(-1) === "l") {
+            query = query + " lyric";
+          }
           quickSearch(query);
           break;
       }
