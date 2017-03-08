@@ -380,9 +380,9 @@ function onSearchDataPlayerStateChange(event) {
     var data = searchDataPlayer.getVideoData();
     var videoName = searchDataPlayer.getVideoData()["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-    var videoTime = Math.round(dataPlayer.getDuration());
+    var videoTime = Math.round(searchDataPlayer.getDuration());
     $("#inputBox").val("").attr("placeholder", placeholder);
-    dataPlayer.destroy();
+    searchDataPlayer.destroy();
     addVideo(videoName, videoTime, videoId);
   }
 }
