@@ -97,7 +97,10 @@
   });
     
   $("#inputBox").on("focus", function() {
-    $(this).attr("placeholder", "Add \ to the end of your search for Quick Search, add 'l' to look for lyric videos");
+    $(this).attr("placeholder", "Add \\ to the end of your search for Quick Search, add 'l' to look for lyric videos");
+    setTimeout(function() {
+      $(this).attr("placeholder", placeholder);
+    }, 4000);
   });
   
   $("#playlistNameBox").on("blur", function() {
