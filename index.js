@@ -181,7 +181,6 @@ function videoProgress() {
 }
 
 function playVideo() {
-  videoPlaying = true;
   highlight(videoIteration, "selected");
   videoPreviews();
   addAutoplayVideo();
@@ -216,6 +215,7 @@ function playVideo() {
 
 function loopVideo() {
   if (videoIteration < videoCounter || playlistRepeat) {
+    videoPlaying = true;
     if (playlistShuffle && playlistRepeat && videoIteration === videoCounter) {
       shufflePlaylist();
     }
