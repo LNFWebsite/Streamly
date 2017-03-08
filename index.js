@@ -370,7 +370,7 @@ function quickSearch(query) {
 
 function onSearchDataPlayerReady(query) {
   var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-  $("#searchDataFrame").attr("src", embedUrl).load(function() {
+  $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
     searchDataPlayer.cuePlaylist({listType:"search", list:query});
   });
 }
