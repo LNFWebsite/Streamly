@@ -367,7 +367,7 @@ function quickSearch(query) {
     }
   });
   var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-  $("#dataFrame").attr("src", embedUrl);
+  $("#searchDataFrame").attr("src", embedUrl);
 }
 
 function onSearchDataPlayerReady(query) {
