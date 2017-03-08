@@ -199,6 +199,15 @@
       }
       e.preventDefault();
     }
+    else if ($("#inputBox").is(":focus")) {
+      switch (e.code) {
+        case "Backslash":
+          e.preventDefault();
+          var query = $("#inputBox").val().replace("\", "");
+          quickSearch(query);
+          break;
+      }
+    }
   });
   
   $("#inputBox").autocomplete({
