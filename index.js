@@ -374,9 +374,8 @@ function onSearchDataPlayerReady(query) {
     $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
     
     var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-    $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
-      searchDataPlayer.cuePlaylist({listType:"search", list:query});
-    });
+    $("#searchDataFrame").attr("src", embedUrl);
+    searchDataPlayer.cuePlaylist({listType:"search", list:query});
     searchDataPlayerErrors = 0;
   }
   catch(e) {
