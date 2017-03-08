@@ -375,7 +375,7 @@ function onSearchDataPlayerReady(query) {
   $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
     setTimeout(function() {
       searchDataPlayer.cuePlaylist({listType:"search", list:query});
-    }, 500);
+    }, 100);
   });
 }
 
