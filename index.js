@@ -408,7 +408,7 @@ function addAutoplayVideo() {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
         autoplayVideoIteration++;
         videoId = autoplayVideos[autoplayVideoIteration];
-        setTimeout(getVideoData(), 1000);
+        setTimeout(getVideoData(), 10000);
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
       }
       else {
