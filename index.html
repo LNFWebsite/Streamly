@@ -40,7 +40,7 @@
     <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">StreamlyReddit</a>
     <br>
     <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
-    <p style="color: orange;margin: 0;padding: 0;">NEW: Check out the new Quick Search feature!<br><sub>Detailed information can be found in the <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started#instructions" target="_blank">Getting Started</a> page.</sub></p>
+    <p style="color: #e27c00;margin: 0;padding: 0;">NEW: Check out the new Quick Search feature!<br><sub>Detailed information can be found in the <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started#instructions" target="_blank">Getting Started</a> page.</sub></p>
   </div>
   <footer class="animated slideInUp">
     <div id="previousVideo" onclick="backVideo();" title="Back">
@@ -97,10 +97,10 @@
   });
     
   $("#inputBox").on("focus", function() {
-    $(this).attr("placeholder", "Add \\ to the end of your search for Quick Search, add 'l' to look for lyric videos");
+    $(this).attr("placeholder", "End your search with \\ for Quick Search, add 'l' for lyric videos");
     setTimeout(function() {
-      $("#inputBox").attr("placeholder", "test");
-    }, 4000);
+      $("#inputBox").attr("placeholder", placeholder);
+    }, 2500);
   });
   
   $("#playlistNameBox").on("blur", function() {
