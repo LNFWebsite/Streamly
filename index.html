@@ -135,25 +135,31 @@
     switch(event.data) {
       //unstarted
       case -1:
+        console.log("unstarted");
         break;
       //ending
       case 0:
+        console.log("ending");
         loopVideo();
         break;
       //playing
       case 1:
+        console.log("playing");
         videoFunctions.play();
         startVideoProgress();
         break;
       //paused
       case 2:
+        console.log("paused");
         videoFunctions.pause();
         break;
       //buffering
       case 3:
+        console.log("buffering");
         break;
       //cued
       case 5:
+        console.log("cued");
         startVideoProgress();
         break;
     }
