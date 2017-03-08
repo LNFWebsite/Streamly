@@ -168,7 +168,7 @@ td {
   width: 100%;
   border: 1px solid black;
 }
-#dataFrameContainer, #radioDataFrameContainer {
+#dataFramesContainer {
   display: none;
 }
 .hideVideo {
