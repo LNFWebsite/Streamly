@@ -382,13 +382,14 @@ function onSearchDataPlayerReady(query) {
         searchDataPlayerErrors = 0;
       }
       catch(e) {
-      searchDataPlayerErrors++;
-      console.log(e);
-      if (searchDataPlayerErrors <= 5) {
-        try {
-          searchDataPlayer.destroy();
-        } catch(e) {};
-        quickSearch(query);
+        searchDataPlayerErrors++;
+        console.log(e);
+        if (searchDataPlayerErrors <= 5) {
+          try {
+            searchDataPlayer.destroy();
+          } catch(e) {};
+          quickSearch(query);
+        }
       }
     }, 100);
   });
