@@ -334,9 +334,9 @@ function onDataPlayerReady() {
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(dataPlayer.getDuration());
     $("#inputBox").val("").attr("placeholder", placeholder);
-    addVideo(videoName, videoTime, videoId);
     dataPlayer.destroy();
     dataPlayerErrors = 0;
+    addVideo(videoName, videoTime, videoId);
   }
   catch(e) {
     dataPlayerErrors++;
