@@ -180,7 +180,6 @@ function videoProgress() {
 
 function playVideo() {
   highlight(videoIteration, "selected");
-  addAutoplayVideo();
   videoPreviews();
 
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
@@ -209,6 +208,8 @@ function playVideo() {
   window.setTimeout(function() {
     backRestart = true;
   }, 3000);
+  
+  addAutoplayVideo();
 }
 
 function loopVideo() {
