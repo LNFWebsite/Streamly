@@ -23,6 +23,8 @@ var autoplayVideos = [];
 var autoplayVideoIteration = 0;
 
 var videoPaused;
+//this var is for addVideo knowing whether to loop to next video or not
+var videoPlaying;
 var backRestart;
 
 var progressTimer;
@@ -179,8 +181,10 @@ function videoProgress() {
 }
 
 function playVideo() {
+  videoPlaying = true;
   highlight(videoIteration, "selected");
   videoPreviews();
+  addAutoplayVideo();
 
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   
@@ -208,8 +212,6 @@ function playVideo() {
   window.setTimeout(function() {
     backRestart = true;
   }, 3000);
-  
-  addAutoplayVideo();
 }
 
 function loopVideo() {
@@ -221,6 +223,7 @@ function loopVideo() {
     playVideo();
   }
   else {
+    videoPlaying = false;
     actionTimers.clear();
     $("#youtube").css("display", "none");
     if (videos[0] !== undefined && videos[0] !== null) {
@@ -304,9 +307,9 @@ function getPlaylist() {
       loopVideo();
     }
     catch(err) {
-      alert(err+"Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
       "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
-      "I'm really sorry about this inconvenience.");
+      "I'm really sorry about this inconvenience.\n\nerr: " + err);
     }
   }
 }
@@ -518,7 +521,7 @@ function addVideo(name, time, id) {
   makeSortable();
   videoPreviews();
   
-  if (videoCounter === 1 || (progressTimer.getStateRunning() === false && !videoPaused && videoIteration === videoCounter - 1)) {
+  if (videoCounter === 1 || (videoPlaying === false && !videoPaused && videoIteration === videoCounter - 1)) {
     loopVideo();
   }
 }
