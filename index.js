@@ -785,6 +785,9 @@ function input(type) {
         $("#youtube").css("display", "block");
       }
       else {
+        if (inputBox.slice(-2) === " l") {
+          inputBox = inputBox + "yric";
+        }
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
 
         function checkIfClosed() {
