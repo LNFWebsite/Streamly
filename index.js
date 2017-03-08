@@ -376,9 +376,12 @@ function onSearchDataPlayerReady(query) {
 }
 
 function onSearchDataPlayerStateChange(event) {
+  console.log("here at the place");
   if (event.data === 5) {
     var data = searchDataPlayer.getVideoData();
-    var videoName = searchDataPlayer.getVideoData()["title"];
+    console.log("where magic happens: " +data);
+    videoId = data["video_id"];
+    var videoName = data["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(searchDataPlayer.getDuration());
     $("#inputBox").val("").attr("placeholder", placeholder);
