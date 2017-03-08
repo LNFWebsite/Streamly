@@ -423,30 +423,16 @@ function loadAutoplayData(iteration) {
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
   radioDataPlayer = new YT.Player('radioDataFrame', {
     events: {
-      'onReady': onRadioDataPlayerReady(iteration),
+      'onReady': onRadioDataPlayerReady,
       'onStateChange': onRadioDataPlayerStateChange
     }
   });
   dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + baseAutoplayVideoId + "?enablejsapi=1");
 }
 
-var radioDataPlayerErrors = 0;
-function onRadioDataPlayerReady(iteration) {
-  try {
-    var autoplayUrl = "RD" + baseAutoplayVideoId;
-    radioDataPlayer.cuePlaylist({list:autoplayUrl});
-    radioDataPlayerErrors = 0;
-  }
-  catch(e) {
-    radioDataPlayerErrors++;
-    console.log(e);
-    if (radioDataPlayerErrors <= 5) {
-      try {
-        radioDataPlayer.destroy();
-      } catch(e) {};
-      loadAutoplayData(iteration);
-    }
-  }
+function onRadioDataPlayerReady() {
+  var autoplayUrl = "RD" + baseAutoplayVideoId;
+  radioDataPlayer.cuePlaylist({list:autoplayUrl});
 }
 
 function onRadioDataPlayerStateChange(event) {
