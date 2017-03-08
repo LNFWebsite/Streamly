@@ -371,7 +371,7 @@ function quickSearch(query) {
 }
 
 function onSearchDataPlayerReady(query) {
-  radioDataPlayer.cuePlaylist({listType:"search", list:query});
+  searchDataPlayer.cuePlaylist({listType:"search", list:query});
 }
 
 function onSearchDataPlayerStateChange(event) {
