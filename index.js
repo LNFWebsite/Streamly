@@ -366,11 +366,12 @@ function quickSearch(query) {
       'onStateChange': onSearchDataPlayerStateChange
     }
   });
-  var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-  $("#searchDataFrame").attr("src", embedUrl);
 }
 
 function onSearchDataPlayerReady(query) {
+  var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
+  $("#searchDataFrame").attr("src", embedUrl);
+  
   searchDataPlayer.cuePlaylist({listType:"search", list:query});
 }
 
