@@ -9,7 +9,7 @@ Go to our website! <http://streamly.us.to> or <https://lnfwebsite.github.io/Stre
 
 Or clone us into your web server...
 
-***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page if you're... well... just getting started***
+***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page if you're... well... just getting started.***
 
 ## What is Streamly?
 
