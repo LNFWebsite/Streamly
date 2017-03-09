@@ -22,6 +22,9 @@ var baseAutoplayVideoId;
 var autoplayVideos = [];
 var autoplayVideoIteration = 0;
 
+var quickSearchVideos = [];
+var quickSearchVideosIteration = 0;
+
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
 var videoPlaying;
@@ -373,30 +376,41 @@ function quickSearch(query) {
 var searchDataPlayerErrors = 0;
 function onSearchDataPlayerReady(query) {
   $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
-
-  var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-  $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
-    setTimeout(function() {
-      try {
-        searchDataPlayer.cuePlaylist({listType:"search", list:query});
-        searchDataPlayerErrors = 0;
-      }
-      catch(e) {
-        searchDataPlayerErrors++;
-        console.log(e);
-        if (searchDataPlayerErrors <= 5) {
-          try {
-            searchDataPlayer.destroy();
-          } catch(e) {};
-          quickSearch(query);
+  
+  if (query !== "") {
+    var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
+    $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
+      setTimeout(function() {
+        try {
+          searchDataPlayer.cuePlaylist({listType:"search", list:query});
+          searchDataPlayerErrors = 0;
         }
-      }
-    }, 500);
-  });
+        catch(e) {
+          searchDataPlayerErrors++;
+          console.log(e);
+          if (searchDataPlayerErrors <= 5) {
+            try {
+              searchDataPlayer.destroy();
+            } catch(e) {};
+            quickSearch(query);
+          }
+        }
+      }, 500);
+    });
+  }
+  else if (quickSearchVideos[quickSearchVideosIteration] !== undefined &&
+           quickSearchVideos[quickSearchVideosIteration] !== null &&
+           quickSearchVideosIteration + 1 < quickSearchVideos.length) {
+    quickSearchVideosIteration++;
+    videoId = quickSearchVideos[quickSearchVideosIteration];
+    getVideoData();
+  }
 }
 
 function onSearchDataPlayerStateChange(event) {
   if (event.data === 5) {
+    quickSearchVideosIteration = 0;
+    quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoData();
     videoId = data["video_id"];
     var videoName = data["title"];
