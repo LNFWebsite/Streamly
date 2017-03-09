@@ -402,6 +402,9 @@ function onSearchDataPlayerReady(query) {
     quickSearchVideosIteration++;
     videoId = quickSearchVideos[quickSearchVideosIteration];
     getVideoData();
+    setTimeout(function() {
+      actionRemoveVideo(videoIteration - 1);
+    }, 1000);
   }
 }
 
