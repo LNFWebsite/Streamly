@@ -401,12 +401,9 @@ function onSearchDataPlayerReady(query) {
   else if (quickSearchVideos.length > 0) {
     quickSearchVideosIteration++;
     videoId = quickSearchVideos[quickSearchVideosIteration];
-    var originalPlaylistPlayNext = playlistPlayNext;
-    playlistPlayNext = true;
     getVideoData();
     setTimeout(function() {
       actionRemoveVideo(videoIteration - 1);
-      playlistPlayNext = originalPlaylistPlayNext;
     }, 1000);
   }
 }
