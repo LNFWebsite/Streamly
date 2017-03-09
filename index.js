@@ -399,9 +399,9 @@ function onSearchDataPlayerReady(query) {
     });
   }
   else {
+    quickSearchVideosIteration++;
     videoId = quickSearchVideos[quickSearchVideosIteration];
     getVideoData();
-    quickSearchVideosIteration++;
   }
 }
 
