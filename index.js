@@ -391,7 +391,7 @@ function onSearchDataPlayerReady(query) {
           quickSearch(query);
         }
       }
-    }, 100);
+    }, 500);
   });
 }
 
