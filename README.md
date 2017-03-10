@@ -9,7 +9,7 @@ Streamly on Desktop        | Streamly on Android
 
 Streamly is an open-source web-based YouTube video queue.
 
-This differs from YouTube's normal playlist functionality by allowing you to manipulate the playlist while playing it (thus, queue). 
+This differs from YouTube's normal playlist functionality by allowing you to manipulate the playlist while playing it (thus making it a queue).
 
 Streamly puts you in charge of your playlist by saving all video information necessarry to play (name, time, video_id) with the playlist. To save your playlist, simply bookmark the open tab of Streamly or click "Save Playlist" to copy a link to your clipboard.
 
