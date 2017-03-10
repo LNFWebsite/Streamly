@@ -384,6 +384,7 @@ function quickSearch(query) {
 }
 
 function onSearchDataPlayerReady(query) {
+  var setAVar = "Blahblah";
   searchDataPlayer.cuePlaylist({listType: "search", list: query});
 }
 
