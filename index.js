@@ -22,6 +22,7 @@ var baseAutoplayVideoId;
 var autoplayVideos = [];
 var autoplayVideoIteration = 0;
 
+var quickSearchQuery;
 var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
@@ -362,6 +363,7 @@ function onDataPlayerReady() {
 
 function quickSearch(query) {
   if (query !== "") {
+    quickSearchQuery = query;
     var searchDataFrame = document.createElement("iframe");
     searchDataFrame.setAttribute("id", "searchDataFrame");
     searchDataFrame.setAttribute("src", "");
@@ -384,7 +386,7 @@ function quickSearch(query) {
 }
 
 function onSearchDataPlayerReady() {
-  searchDataPlayer.cuePlaylist({list:"RDJn-k66pQ0H4"});
+  searchDataPlayer.cuePlaylist({listType: "search", list: quickSearchQuery});
 }
 
 function onSearchDataPlayerStateChange(event) {
