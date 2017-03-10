@@ -101,6 +101,16 @@
     setTimeout(function() {
       $("#inputBox").attr("placeholder", placeholder);
     }, 4000);
+    
+    if ($(window).width() <= 600) {
+      $("footer").css("display", "none");
+    }
+  });
+    
+  $("#inputBox").on("blur", function() {
+    if ($(window).width() <= 600) {
+      $("footer").css("display", "block");
+    }
   });
   
   $("#playlistNameBox").on("blur", function() {
