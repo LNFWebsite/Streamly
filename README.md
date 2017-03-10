@@ -13,8 +13,6 @@ Streamly can be used for a multitude of purposes, including queuing music videos
 
 This differs from YouTube's normal playlist functionality by allowing you to manipulate the playlist while playing it (thus making it a queue).
 
-**[Streamly is on Reddit](https://www.reddit.com/r/StreamlyReddit/)**
-
 Features:
 
 - Puts you in charge of your playlist by saving all video information necessarry to play (name, time, video_id) with the playlist. To save your playlist, simply bookmark the open tab of Streamly or click "Save Playlist" to copy a link to your clipboard.
@@ -22,6 +20,8 @@ Features:
 - Runs independently from any server and requires no association with YouTube (API keys, etc...).
 
 - Works on all modern browsers (Chrome, Firefox, more...) as well as browsers on Android phones/tablets.
+
+### [Streamly is on Reddit](https://www.reddit.com/r/StreamlyReddit/)
 
 ## How do I use Streamly?
 
