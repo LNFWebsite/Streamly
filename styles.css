@@ -343,8 +343,11 @@ tr.placeholder:before {
   #inputBox {
     width: calc(100% - 120px) !important;
   }
-  #forkme {
+  #forkme, #blurBackground {
     display: none;
+  }
+  body, #main {
+    background: none;
   }
   #main {
     margin: 92px 0px 216px !important;
