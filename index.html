@@ -193,6 +193,8 @@
   getPlaylist();
   makeSortable();
   videoPreviews();
+    
+  var zenMode = false;
   
   window.addEventListener("keyup", function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
@@ -205,6 +207,16 @@
           break;
         case "KeyR":
           playlistFeatures.autoplay();
+          break;
+        case "KeyZ":
+          if (zenMode)
+            zenMode = false;
+            $("header, footer, #forkme").css("display", "block");
+          }
+          else {
+            zenMode = true;
+            $("header, footer, #forkme").css("display", "none");
+          }
           break;
         case "Space":
           if (videoPaused) {
