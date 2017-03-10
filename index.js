@@ -388,21 +388,21 @@ function quickSearch(query) {
 
 function onSearchDataPlayerReady(query) {
   console.log("If by chance this works...");
-  $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
-  quickSearchVideosIteration = 0;
-  quickSearchVideos = searchDataPlayer.getPlaylist();
-  var data = searchDataPlayer.getVideoData();
-  videoId = data["video_id"];
-  var videoName = data["title"];
-  videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-  var videoTime = Math.round(searchDataPlayer.getDuration());
-  searchDataPlayer.destroy();
-  addVideo(videoName, videoTime, videoId);
 }
 
 function onSearchDataPlayerStateChange(event) {
   console.log("does it ever get here: " + event.data);
   if (event.data === 5) {
+    $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+    quickSearchVideosIteration = 0;
+    quickSearchVideos = searchDataPlayer.getPlaylist();
+    var data = searchDataPlayer.getVideoData();
+    videoId = data["video_id"];
+    var videoName = data["title"];
+    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+    var videoTime = Math.round(searchDataPlayer.getDuration());
+    //searchDataPlayer.destroy();
+    addVideo(videoName, videoTime, videoId);
   }
 }
 
