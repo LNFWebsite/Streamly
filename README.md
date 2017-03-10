@@ -9,7 +9,7 @@ Streamly on Desktop        | Streamly on Android
 
 Streamly is an open-source web-based YouTube video queue.
 
-Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer.
+Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer (or Android tablet/phone).
 
 This differs from YouTube's normal playlist functionality by allowing you to manipulate the playlist while playing it (thus making it a queue).
 
