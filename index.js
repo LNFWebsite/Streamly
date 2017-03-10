@@ -331,7 +331,7 @@ function getVideoData() {
     }
   });
   var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-  $("#dataFrame").attr("src", embedUrl);
+  dataFrame.setAttribute("src", embedUrl);
 }
 
 var dataPlayerErrors = 0;
@@ -385,12 +385,24 @@ function quickSearch(query) {
   }
 }
 
+var searchDataPlayerErrors = 0;
 function onSearchDataPlayerReady() {
-  searchDataPlayer.cuePlaylist({listType: "search", list: quickSearchQuery});
+  try {
+    searchDataPlayer.cuePlaylist({listType: "search", list: quickSearchQuery});
+  }
+  catch(e) {
+    searchDataPlayerErrors++;
+    console.log(e);
+    if (searchDataPlayerErrors <= 5) {
+      try {
+        searchDataPlayer.destroy();
+      } catch(e) {};
+      quickSearch(quickSearchQuery);
+    }
+  }
 }
 
 function onSearchDataPlayerStateChange(event) {
-  console.log("does it ever get here: " + event.data);
   if (event.data === 5) {
     $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
     quickSearchVideosIteration = 0;
@@ -400,7 +412,7 @@ function onSearchDataPlayerStateChange(event) {
     var videoName = data["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(searchDataPlayer.getDuration());
-    //searchDataPlayer.destroy();
+    searchDataPlayer.destroy();
     addVideo(videoName, videoTime, videoId);
   }
 }
