@@ -1,19 +1,30 @@
 # Streamly
-YouTube HTML5 playlists, extremely simple.
+Open-source, web-based, YouTube video queues.
 
-Streamly on Desktop        | Streamly on Mobile
+Streamly on Desktop        | Streamly on Android
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamly.jpg)  |  ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamlymobile.jpg)
 
+## Quick Summary
+
+Streamly is an open-source web-based YouTube video queue.
+
+This differs from YouTube's normal playlist functionality by allowing you to manipulate the playlist while playing it (thus, queue). 
+
+Streamly puts you in charge of your playlist by saving all video information necessarry to play (name, time, video_id) with the playlist. To save your playlist, simply bookmark the open tab of Streamly or click "Save Playlist" to copy a link to your clipboard.
+
+Streamly runs independently from any server and requires no association with YouTube (API keys, etc...).
+
+Streamly works on all modern browsers (Chrome, Firefox, more...) as well as browsers on Android phones/tablets.
+
 ## How do I use Streamly?
 
-Go to our website! <http://streamly.us.to> or <https://lnfwebsite.github.io/Streamly>
-
-Or clone us into your web server...
+Go to the website! <http://streamly.us.to> or <https://lnfwebsite.github.io/Streamly>
+Or clone into your web server...
 
 ***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page if you're... well... just getting started...***
 
-## What is Streamly?
+## What is Streamly? (In detail)
 
 Streamly is a YouTube video queue that runs entirely in your browser.
 
