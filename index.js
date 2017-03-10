@@ -364,7 +364,7 @@ function quickSearch(query) {
   if (query !== "") {
     var searchDataFrame = document.createElement("iframe");
     searchDataFrame.setAttribute("id", "searchDataFrame");
-    searchDataFrame.setAttribute("src", "");
+    searchDataFrame.setAttribute("src", "https://www.youtube.com/embed/?enablejsapi=1");
     document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
     searchDataPlayer = new YT.Player('searchDataFrame', {
       events: {
