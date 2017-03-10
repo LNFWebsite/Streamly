@@ -9,6 +9,8 @@ Streamly on Desktop        | Streamly on Android
 
 Streamly is an open-source web-based YouTube video queue.
 
+Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer.
+
 This differs from YouTube's normal playlist functionality by allowing you to manipulate the playlist while playing it (thus making it a queue).
 
 Streamly puts you in charge of your playlist by saving all video information necessarry to play (name, time, video_id) with the playlist. To save your playlist, simply bookmark the open tab of Streamly or click "Save Playlist" to copy a link to your clipboard.
@@ -37,8 +39,6 @@ All of the data needed to play the playlist is in the link. That means that no o
 Streamly's motto is reliability which is why we do not use any API keys to manipulate YouTube's native HTML5 video frame, and we let you store the entirety of your playlist on your own.
 
 This essentially means that Streamly is not a 'service' which ties into YouTube, but is rather a 'script' that runs in your browser, accessing only what is available to the general public on the web.
-
-Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer.
 
 For any questions or comments, please leave an [issue](https://github.com/LNFWebsite/Streamly/issues).
 
