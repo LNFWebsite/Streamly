@@ -1,7 +1,7 @@
 # Streamly
 YouTube HTML5 playlists, extremely simple.
 
-<img src="https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamly.jpg" style="width:300px"> ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamlymobile.jpg)
+<img src="https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamly.jpg" style="max-width:50%"> ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamlymobile.jpg)
 
 ## How do I use Streamly?
 
