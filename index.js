@@ -368,7 +368,7 @@ function quickSearch(query) {
     document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
     searchDataPlayer = new YT.Player('searchDataFrame', {
       events: {
-        'onReady': onSearchDataPlayerReady(query),
+        'onReady': onSearchDataPlayerReady,
         'onStateChange': onSearchDataPlayerStateChange
       }
     });
@@ -383,7 +383,7 @@ function quickSearch(query) {
   }
 }
 
-function onSearchDataPlayerReady(query) {
+function onSearchDataPlayerReady() {
   searchDataPlayer.cuePlaylist({list:"RDJn-k66pQ0H4"});
 }
 
