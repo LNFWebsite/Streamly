@@ -374,7 +374,7 @@ function quickSearch(query) {
         'onStateChange': onSearchDataPlayerStateChange
       }
     });
-    searchDataFrame.setAttribute("src", "https://www.youtube.com/embed/5y_KJAg8bHI?enablejsapi=1");
+    searchDataFrame.setAttribute("src", "https://www.youtube.com/embed/?enablejsapi=1");
   }
   else if (quickSearchVideos[quickSearchVideosIteration] !== undefined &&
            quickSearchVideos[quickSearchVideosIteration] !== null &&
@@ -392,7 +392,6 @@ function onSearchDataPlayerReady() {
 function onSearchDataPlayerStateChange(event) {
   console.log("does it ever get here: " + event.data);
   if (event.data === 5) {
-    /**
     $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
@@ -403,7 +402,6 @@ function onSearchDataPlayerStateChange(event) {
     var videoTime = Math.round(searchDataPlayer.getDuration());
     //searchDataPlayer.destroy();
     addVideo(videoName, videoTime, videoId);
-    **/
   }
 }
 
