@@ -364,18 +364,15 @@ function quickSearch(query) {
   if (query !== "") {
     var searchDataFrame = document.createElement("iframe");
     searchDataFrame.setAttribute("id", "searchDataFrame");
-    searchDataFrame.setAttribute("src", "https://www.youtube.com/embed/?enablejsapi=1");
+    searchDataFrame.setAttribute("src", "");
     document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
     searchDataPlayer = new YT.Player('searchDataFrame', {
       events: {
         'onReady': onSearchDataPlayerReady(query),
         'onStateChange': onSearchDataPlayerStateChange
-      },
-      playerVars: {
-        listType: "search",
-        list: query
       }
     });
+    $("#searchDataFrame").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
   }
   else if (quickSearchVideos[quickSearchVideosIteration] !== undefined &&
            quickSearchVideos[quickSearchVideosIteration] !== null &&
@@ -387,7 +384,7 @@ function quickSearch(query) {
 }
 
 function onSearchDataPlayerReady(query) {
-  console.log("If by chance this works...");
+  searchDataPlayer.cuePlaylist({listType: "search", list: query});
 }
 
 function onSearchDataPlayerStateChange(event) {
