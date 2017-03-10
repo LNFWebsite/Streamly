@@ -207,7 +207,6 @@
   
   $("header, #forkme").animateCss("slideInDown");
   $("footer").animateCss("slideInUp");
-  $("links").animateCss("fadeIn");
     
   var zenMode = false;
   
@@ -226,15 +225,15 @@
         case "KeyZ":
           if (zenMode) {
             zenMode = false;
-            $("header, #forkme").animateCss("slideInDown");
-            $("footer").animateCss("slideInUp");
-            $("links").animateCss("fadeIn");
+            $("header, #forkme").css("display", "block").animateCss("slideInDown");
+            $("footer").css("display", "block").animateCss("slideInUp");
+            $("links").css("display", "block").animateCss("fadeIn");
           }
           else {
             zenMode = true;
-            $("header, #forkme").animateCss("slideOutUp");
-            $("footer").animateCss("slideOutDown");
-            $("links").animateCss("fadeOut");
+            $("header, #forkme").animateCss("slideOutUp").css("display", "none");
+            $("footer").animateCss("slideOutDown").css("display", "none");
+            $("links").animateCss("fadeOut").css("display", "none");
           }
           break;
         case "Space":
