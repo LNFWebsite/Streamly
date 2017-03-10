@@ -361,41 +361,20 @@ function onDataPlayerReady() {
 // Start Quick Search
 
 function quickSearch(query) {
-  var searchDataFrame = document.createElement("iframe");
-  searchDataFrame.setAttribute("id", "searchDataFrame");
-  searchDataFrame.setAttribute("src", "");
-  document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
-  searchDataPlayer = new YT.Player('searchDataFrame', {
-    events: {
-      'onReady': onSearchDataPlayerReady(query),
-      'onStateChange': onSearchDataPlayerStateChange
-    }
-  });
-}
-
-var searchDataPlayerErrors = 0;
-function onSearchDataPlayerReady(query) {
-  $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
-  
   if (query !== "") {
-    var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-    $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
-      setTimeout(function() {
-        try {
-          searchDataPlayer.cuePlaylist({listType:"search", list:query});
-          searchDataPlayerErrors = 0;
-        }
-        catch(e) {
-          searchDataPlayerErrors++;
-          console.log(e);
-          if (searchDataPlayerErrors <= 5) {
-            try {
-              searchDataPlayer.destroy();
-            } catch(e) {};
-            quickSearch(query);
-          }
-        }
-      }, 500);
+    var searchDataFrame = document.createElement("iframe");
+    searchDataFrame.setAttribute("id", "searchDataFrame");
+    searchDataFrame.setAttribute("src", "");
+    document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
+    searchDataPlayer = new YT.Player('searchDataFrame', {
+      events: {
+        'onReady': onSearchDataPlayerReady(query),
+        'onStateChange': onSearchDataPlayerStateChange
+      },
+      playerVars: {
+        listType: "search",
+        list: query
+      }
     });
   }
   else if (quickSearchVideos[quickSearchVideosIteration] !== undefined &&
@@ -407,8 +386,13 @@ function onSearchDataPlayerReady(query) {
   }
 }
 
+function onSearchDataPlayerReady(query) {
+  console.log("If by chance this works...");
+}
+
 function onSearchDataPlayerStateChange(event) {
   if (event.data === 5) {
+    $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoData();
