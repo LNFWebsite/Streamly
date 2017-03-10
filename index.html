@@ -225,15 +225,15 @@
         case "KeyZ":
           if (zenMode) {
             zenMode = false;
-            $("header, #forkme").css("display", "block").animateCss("slideInDown");
-            $("footer").css("display", "block").animateCss("slideInUp");
-            $("links").css("display", "block").animateCss("fadeIn");
+            $("header, #forkme").css("opacity", "1").animateCss("slideInDown");
+            $("footer").css("opacity", "1").animateCss("slideInUp");
+            $("links").css("opacity", "1").animateCss("fadeIn");
           }
           else {
             zenMode = true;
-            $("header, #forkme").animateCss("slideOutUp").css("display", "none");
-            $("footer").animateCss("slideOutDown").css("display", "none");
-            $("links").animateCss("fadeOut").css("display", "none");
+            $("header, #forkme").animateCss("slideOutUp").css("opacity", "0");
+            $("footer").animateCss("slideOutDown").css("opacity", "0");
+            $("links").animateCss("fadeOut").css("opacity", "0");
           }
           break;
         case "Space":
