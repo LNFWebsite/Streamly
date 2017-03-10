@@ -1,7 +1,7 @@
 # Streamly
 YouTube HTML5 playlists, extremely simple.
 
-![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamly.jpg)
+![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamly.jpg) ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamlymobile.jpg)
 
 ## How do I use Streamly?
 
