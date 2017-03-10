@@ -782,7 +782,7 @@ function input(type) {
         }
         $("#youtube").css("display", "block");
       }
-      else {
+      else if ($(window).width() > 600) {
         if (inputBox.slice(-2) === " l") {
           inputBox = inputBox + "yric";
         }
@@ -798,6 +798,13 @@ function input(type) {
 
         $("#inputBox").val("").attr("placeholder", placeholder);
         $("#youtube").css("display", "none");
+      }
+      else {
+        inputBox = inputBox.replace("\\", "");
+        if (inputBox.slice(-2) === " l") {
+          inputBox = inputBox + "yric";
+        }
+        quickSearch(inputBox);
       }
     }
   }
