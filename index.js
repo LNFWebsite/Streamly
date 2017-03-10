@@ -372,7 +372,7 @@ function quickSearch(query) {
         'onStateChange': onSearchDataPlayerStateChange
       }
     });
-    $("#searchDataFrame").attr("src", "https://www.youtube.com/embed/5y_KJAg8bHI?enablejsapi=1");
+    searchDataFrame.setAttribute("src", "https://www.youtube.com/embed/5y_KJAg8bHI?enablejsapi=1");
   }
   else if (quickSearchVideos[quickSearchVideosIteration] !== undefined &&
            quickSearchVideos[quickSearchVideosIteration] !== null &&
