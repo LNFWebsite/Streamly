@@ -768,14 +768,6 @@ function input(type) {
               alert("No background color or image specified");
             }
             break;
-          case "zen":
-            if ($("header").css("display") === "none") {
-              $("header, footer, #forkme").css("display", "block");
-            }
-            else {
-              $("header, footer, #forkme").css("display", "none");
-            }
-            break;
           default:
             alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
         }
