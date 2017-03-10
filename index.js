@@ -1,6 +1,7 @@
 //! License: MIT (as stated in the LICENSE file)
 
 var placeholder = "Search, drag and drop video, or paste its URL...";
+var loadingPlaceholder = "Loading video data from YouTube...";
 
 var faviconPause = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAAA/1BMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD64ociAAAAVHRSTlMAAQIDBAUGBwgJCgsPEBIUFxgbHh8iIyUrMDU/QEdKS09QUlZbXF5fYWZpb3F1e4aJmJ6go6WmqrK0tb7Aw8XHyM/R09XX2drg4unr7e/x8/X3+ftnm6MTAAABGklEQVQ4jYXTx1YCQRBG4TvCYKO2iglzxJwVA5gFs4LA//7P4mLIM9PeZfV3Tm26oC+vf9BTYu7wrib93hzMDkSCoaOG2tX2B0PA21FvjbU+YR4UquB3i5GPsJDK6Y4YjBTSU7JNbqOFdNkSG3FCWghEqhFPfhIA7EmSatYYY9JXUsYYY0wmMOsAXlWS9EbLN9cH5B1gRi6icWDbTVaACzc5AcpuUgQqblL6nzwDJTcpAOducgxsuskSMOUmY4D37SKvAAS/tj5hrbWjBSlrrbU2G5BlAPyaYvtsXstyPJlvbuU6Tpy2BP5LtLjvOsrh1yjxmKIrvxgW+QS9rdZ7QXWRUP5upQO+csmwALzprXy5Uimd5SYj3+P7A3jQxmKOfWTQAAAAAElFTkSuQmCC";
 var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAABDlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxUYW9AAAAWXRSTlMAAQIDBAUGCAkRFBUZGhscHiAhJyorLzI0ODo7PUZMTlBVVldYWVtcXV5hZHB1foKDiIuPlZiboKKlpqirr7CytcDDyMrMzs/R09Xa3N7g4ubp7e/x9/n7/Ud7aO4AAAE3SURBVBgZlcFpOxtRAIbhZ8YgltBaopZEHanamtKgtYaSklJ0xPL+/z8iGedMZq5MPrhv3mlgslzZ2aksT/aTbfpQsYMpun24UMr5OGneN3XZ9EjoO1KGA5+Yd6pMxx5OVT1sY31STwUifqg3jaF8TWn/fdo+y1oFCv+UUqLtXpahxSs/KeGOlrwcQ2TwhxJGgWU5Bit/ptgSsCfHEJu9l7ULXMkxdPgbL4r8AR7kGJLmFQmBphxD0pQiTeCvHEPC/IMiV8C+HENs7LesX8CaHIOVqyr2FZiQY4j4K8/q+Ah4TVmGtplbJYQeLRuyvgAjp0pZp63/SW/Ogtx3pT0GRErqqYh1oh6OcIKGMl0GxHKXylAfJCHYV5effaQthEoJ5+jiL94odl3yyTRc3KrV67Wt4jDv8wr7Zt73xzlZAQAAAABJRU5ErkJggg==";
@@ -22,6 +23,7 @@ var baseAutoplayVideoId;
 var autoplayVideos = [];
 var autoplayVideoIteration = 0;
 
+var quickSearchQuery;
 var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
@@ -330,7 +332,7 @@ function getVideoData() {
     }
   });
   var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-  $("#dataFrame").attr("src", embedUrl);
+  dataFrame.setAttribute("src", embedUrl);
 }
 
 var dataPlayerErrors = 0;
@@ -361,42 +363,20 @@ function onDataPlayerReady() {
 // Start Quick Search
 
 function quickSearch(query) {
-  var searchDataFrame = document.createElement("iframe");
-  searchDataFrame.setAttribute("id", "searchDataFrame");
-  searchDataFrame.setAttribute("src", "");
-  document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
-  searchDataPlayer = new YT.Player('searchDataFrame', {
-    events: {
-      'onReady': onSearchDataPlayerReady(query),
-      'onStateChange': onSearchDataPlayerStateChange
-    }
-  });
-}
-
-var searchDataPlayerErrors = 0;
-function onSearchDataPlayerReady(query) {
-  $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
-  
+  $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
   if (query !== "") {
-    var embedUrl = "https://www.youtube.com/embed/?enablejsapi=1";
-    $("#searchDataFrame").attr("src", embedUrl).on("load", function() {
-      setTimeout(function() {
-        try {
-          searchDataPlayer.cuePlaylist({listType:"search", list:query});
-          searchDataPlayerErrors = 0;
-        }
-        catch(e) {
-          searchDataPlayerErrors++;
-          console.log(e);
-          if (searchDataPlayerErrors <= 5) {
-            try {
-              searchDataPlayer.destroy();
-            } catch(e) {};
-            quickSearch(query);
-          }
-        }
-      }, 500);
+    quickSearchQuery = query;
+    var searchDataFrame = document.createElement("iframe");
+    searchDataFrame.setAttribute("id", "searchDataFrame");
+    searchDataFrame.setAttribute("src", "");
+    document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
+    searchDataPlayer = new YT.Player('searchDataFrame', {
+      events: {
+        'onReady': onSearchDataPlayerReady,
+        'onStateChange': onSearchDataPlayerStateChange
+      }
     });
+    searchDataFrame.setAttribute("src", "https://www.youtube.com/embed/?enablejsapi=1");
   }
   else if (quickSearchVideos[quickSearchVideosIteration] !== undefined &&
            quickSearchVideos[quickSearchVideosIteration] !== null &&
@@ -407,8 +387,26 @@ function onSearchDataPlayerReady(query) {
   }
 }
 
+var searchDataPlayerErrors = 0;
+function onSearchDataPlayerReady() {
+  try {
+    searchDataPlayer.cuePlaylist({listType: "search", list: quickSearchQuery});
+  }
+  catch(e) {
+    searchDataPlayerErrors++;
+    console.log(e);
+    if (searchDataPlayerErrors <= 5) {
+      try {
+        searchDataPlayer.destroy();
+      } catch(e) {};
+      quickSearch(quickSearchQuery);
+    }
+  }
+}
+
 function onSearchDataPlayerStateChange(event) {
   if (event.data === 5) {
+    $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoData();
@@ -778,7 +776,7 @@ function input(type) {
         inputBox = isUrl;
         videoId = inputBox;
         getVideoData(inputBox);
-        $("#inputBox").val("").attr("placeholder", "Loading video data from YouTube...");
+        $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
         if (typeof popup !== "undefined") {
           popup.close();
         }
