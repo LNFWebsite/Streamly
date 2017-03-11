@@ -226,9 +226,9 @@
             $("header, #forkmeImage").removeClass("slideInDown").addClass("slideOutUp");
             $("footer").removeClass("slideInUp").addClass("slideOutDown");
             $("#links").removeClass("fadeIn").addClass("fadeOut");
-            $("#links").off().on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            $("#links").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
               $(this).css("display", "none");
-            });
+            }).off();
           }
           break;
         case "Space":
