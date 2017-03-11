@@ -219,7 +219,8 @@
             zenMode = false;
             $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
             $("footer").removeClass("slideOutDown").addClass("slideInUp");
-            $("#links").css("display", "block").removeClass("fadeOut").addClass("fadeIn");
+            $("#links").css("display", "block");
+            $("#links").removeClass("fadeOut").addClass("fadeIn");
           }
           else {
             zenMode = true;
