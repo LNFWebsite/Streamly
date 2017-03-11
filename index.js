@@ -737,7 +737,6 @@ function urlValidate(url) {
 
 function input(type) {
   var inputBox = $("#inputBox").val();
-  console.log("inputBox: " + inputBox);
   //if playlist input
   if (type === 2) {
     var playlistNameBox = $("#playlistNameBox").val();
