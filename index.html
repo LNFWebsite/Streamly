@@ -19,8 +19,8 @@
 </head>
 <body>
   <div id="dataFramesContainer"></div>
-  <a id="forkme" href="https://github.com/LNFWebsite/Streamly" target="_blank"><img style="position: absolute; top: 65px; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-  <header class="animated slideInDown">
+  <a id="forkme" href="https://github.com/LNFWebsite/Streamly" target="_blank"><img id="forkmeImage" style="position: absolute; top: 65px; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <header>
     <h1 id="title"><a href="#" style="color:white;text-decoration:none;">Streamly <span style="color:blue;">Beta</span></a></h1>
     <form action="javascript:input(0);" method="get" id="searchForm">
       <input type="textbox" id="inputBox" placeholder="Search, drag and drop video, or paste its URL..." autofocus>
@@ -34,15 +34,17 @@
       <input type="textbox" id="playlistNameBox" placeholder="Streamly Playlist" title="Enter your playlist name" />
     </form>
     <table id="videosTable"></table>
-    <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started" target="_blank">Getting Started</a> | 
-    <a href="//github.com/LNFWebsite/Streamly/wiki/Playlists" target="_blank">Playlists Wiki</a> | 
-    <a href="//lnfwebsite.github.io/Streamly-Import/" target="_blank">Import Playlists</a> | 
-    <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">StreamlyReddit</a>
-    <br>
-    <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
-    <p style="color: navy;margin: 0;padding: 0;"><i>NEW: Check out the new Quick Search feature!</i><br><sub>Detailed information can be found in the <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started#instructions" target="_blank">Getting Started</a> page.</sub></p>
+    <div id="links">
+      <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started" target="_blank">Getting Started</a> | 
+      <a href="//github.com/LNFWebsite/Streamly/wiki/Playlists" target="_blank">Playlists Wiki</a> | 
+      <a href="//lnfwebsite.github.io/Streamly-Import/" target="_blank">Import Playlists</a> | 
+      <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">StreamlyReddit</a>
+      <br>
+      <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
+      <p style="color: navy;margin: 0;padding: 0;"><i>NEW: Check out the new Quick Search feature!</i><br><sub>Detailed information can be found in the <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started#instructions" target="_blank">Getting Started</a> page.</sub></p>
+    </div>
   </div>
-  <footer class="animated slideInUp">
+  <footer>
     <div id="previousVideo" onclick="backVideo();" title="Back">
       <p id="previousVideoName"></p>
       <img id="previousVideoImage" src="" />
@@ -193,6 +195,10 @@
   getPlaylist();
   makeSortable();
   videoPreviews();
+  
+  $("header, #forkmeImage").addClass("animated slideInDown");
+  $("footer").addClass("animated slideInUp");
+  $("#links").addClass("animated fadeIn");
     
   var zenMode = false;
   
@@ -211,11 +217,15 @@
         case "KeyZ":
           if (zenMode) {
             zenMode = false;
-            $("header, footer, #forkme").css("display", "block");
+            $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
+            $("footer").removeClass("slideOutDown").addClass("slideInUp");
+            $("#links").removeClass("fadeOut").addClass("fadeIn");
           }
           else {
             zenMode = true;
-            $("header, footer, #forkme").css("display", "none");
+            $("header, #forkmeImage").removeClass("slideInDown").addClass("slideOutUp");
+            $("footer").removeClass("slideInUp").addClass("slideOutDown");
+            $("#links").removeClass("fadeIn").addClass("fadeOut");
           }
           break;
         case "Space":
