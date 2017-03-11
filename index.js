@@ -782,7 +782,7 @@ function input(type) {
         }
         $("#youtube").css("display", "block");
       }
-      else if ($(window).width() > 600 && inputBox.slice(-1) !== "\\") {
+      else if ($(window).width() > 600 && inputBox.indexOf("\\") === -1) {
         if (inputBox.slice(-2) === " l") {
           inputBox = inputBox + "yric";
         }
