@@ -737,6 +737,7 @@ function urlValidate(url) {
 
 function input(type) {
   var inputBox = $("#inputBox").val();
+  console.log("inputBox: " + inputBox);
   //if playlist input
   if (type === 2) {
     var playlistNameBox = $("#playlistNameBox").val();
@@ -782,7 +783,7 @@ function input(type) {
         }
         $("#youtube").css("display", "block");
       }
-      else if ($(window).width() > 600 && inputBox.slice(-1) !== "\\") {
+      else if ($(window).width() > 600 && inputBox.indexOf("\\") === -1) {
         if (inputBox.slice(-2) === " l") {
           inputBox = inputBox + "yric";
         }
