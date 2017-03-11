@@ -219,10 +219,7 @@
             zenMode = false;
             $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
             $("footer").removeClass("slideOutDown").addClass("slideInUp");
-            $("#links").removeClass("fadeOut").addClass("fadeIn");
-            $("#links").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-              $(this).css("display", "block");
-            });
+            $("#links").css("display", "block").removeClass("fadeOut").addClass("fadeIn");
           }
           else {
             zenMode = true;
