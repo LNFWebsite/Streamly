@@ -219,13 +219,16 @@
             zenMode = false;
             $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
             $("footer").removeClass("slideOutDown").addClass("slideInUp");
-            $("#links").removeClass("fadeOut").addClass("fadeIn");
+            $("#links").css("display", "block").removeClass("fadeOut").addClass("fadeIn");
           }
           else {
             zenMode = true;
             $("header, #forkmeImage").removeClass("slideInDown").addClass("slideOutUp");
             $("footer").removeClass("slideInUp").addClass("slideOutDown");
             $("#links").removeClass("fadeIn").addClass("fadeOut");
+            $("#links").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+              $(this).css("display", "none");
+            });
           }
           break;
         case "Space":
