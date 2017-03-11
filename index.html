@@ -219,14 +219,14 @@
             zenMode = false;
             $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
             $("footer").removeClass("slideOutDown").addClass("slideInUp");
-            $("#links").css("display", "block").removeClass("fadeOut").addClass("fadeIn");
+            $("#links").off().css("display", "block").removeClass("fadeOut").addClass("fadeIn");
           }
           else {
             zenMode = true;
             $("header, #forkmeImage").removeClass("slideInDown").addClass("slideOutUp");
             $("footer").removeClass("slideInUp").addClass("slideOutDown");
             $("#links").removeClass("fadeIn").addClass("fadeOut");
-            $("#links").off().on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            $("#links").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
               $(this).css("display", "none");
             });
           }
