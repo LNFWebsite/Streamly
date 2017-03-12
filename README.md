@@ -21,7 +21,7 @@ Features:
 
 - Works on all modern browsers (Chrome, Firefox, more...) as well as browsers on Android phones/tablets.
 
-### [Streamly is on Reddit](https://www.reddit.com/r/StreamlyReddit/)
+### [Subscribe to Streamly on Reddit!](https://www.reddit.com/r/StreamlyReddit/)
 
 ## How do I use Streamly?
 
