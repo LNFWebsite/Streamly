@@ -43,7 +43,7 @@ var dataPlayerGlobal;
 var radioDataPlayer;
 var searchDataPlayer;
 
-function random() {
+function randomGenerator() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   for( var i=0; i < 3; i++ ) {
@@ -335,7 +335,7 @@ function getVideoData() {
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
-  var random = random();
+  var random = randomGenerator();
   window[random] = new YT.Player('dataFrame', {
     events: {
       'onReady': onDataPlayerReady(random)
