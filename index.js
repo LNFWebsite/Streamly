@@ -40,6 +40,7 @@ var playlistShuffle;
 var playlistAutoplay;
 
 var dataPlayerGlobal;
+var random;
 var radioDataPlayer;
 var searchDataPlayer;
 
@@ -335,10 +336,10 @@ function getVideoData() {
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
-  var random = randomGenerator();
+  random = randomGenerator();
   window[random] = new YT.Player('dataFrame', {
     events: {
-      'onReady': onDataPlayerReady(random)
+      'onReady': onDataPlayerReady
     }
   });
   var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
@@ -346,7 +347,7 @@ function getVideoData() {
 }
 
 var dataPlayerErrors = 0;
-function onDataPlayerReady(random) {
+function onDataPlayerReady() {
   console.log("onDataPlayerReady");
   try {
     dataPlayer = window[random];
