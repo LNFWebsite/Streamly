@@ -332,6 +332,7 @@ function synchronous(doWhat, waitSign) {
         }
       }, 500);
     }
+    syncLoop();
   }
   else {
     doWhat;
