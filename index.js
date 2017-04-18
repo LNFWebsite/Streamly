@@ -333,6 +333,9 @@ function synchronous(doWhat, waitSign) {
       }, 500);
     }
   }
+  else {
+    doWhat();
+  }
 }
 
 function getVideoData() {
