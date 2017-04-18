@@ -320,10 +320,12 @@ function getPlaylist() {
   }
 }
 
+var dataPlayerRunning = false;
 function getVideoData() {
   //console.log("getVideoData");
   console.log("getVideoData dataPlayerRunning=" + dataPlayerRunning);
   if (!dataPlayerRunning) {
+    dataPlayerRunning = true;
     var dataFrame = document.createElement("iframe");
     dataFrame.setAttribute("id", "dataFrame");
     dataFrame.setAttribute("src", "");
@@ -344,9 +346,7 @@ function getVideoData() {
 }
 
 var dataPlayerErrors = 0;
-var dataPlayerRunning = false;
 function onDataPlayerReady() {
-  dataPlayerRunning = true;
   console.log("onDataPlayerReady");
   try {
     var data = dataPlayer.getVideoData();
