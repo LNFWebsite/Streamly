@@ -39,9 +39,18 @@ var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
 
-//var dataPlayer;
+var dataPlayerGlobal;
 var radioDataPlayer;
 var searchDataPlayer;
+
+function random() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for( var i=0; i < 3; i++ ) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -326,9 +335,10 @@ function getVideoData() {
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
-  var dataPlayer = new YT.Player('dataFrame', {
+  var random = random();
+  window.[random] = new YT.Player('dataFrame', {
     events: {
-      'onReady': onDataPlayerReady(dataPlayer)
+      'onReady': onDataPlayerReady(random)
     }
   });
   var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
@@ -336,9 +346,10 @@ function getVideoData() {
 }
 
 var dataPlayerErrors = 0;
-function onDataPlayerReady(dataPlayer) {
+function onDataPlayerReady(random) {
   console.log("onDataPlayerReady");
   try {
+    dataPlayer = window.[random];
     var videoName = dataPlayer.getVideoData()["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(dataPlayer.getDuration());
