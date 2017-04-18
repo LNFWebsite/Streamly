@@ -320,19 +320,30 @@ function getPlaylist() {
   }
 }
 
-function getVideoData() {
-  console.log("getVideoData");
-  var dataFrame = document.createElement("iframe");
-  dataFrame.setAttribute("id", "dataFrame");
-  dataFrame.setAttribute("src", "");
-  document.getElementById("dataFramesContainer").appendChild(dataFrame);
-  dataPlayer = new YT.Player('dataFrame', {
-    events: {
-      'onReady': onDataPlayerReady
-    }
-  });
-  var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-  dataFrame.setAttribute("src", embedUrl);
+var dataPlayerRunning = false;
+function getVideoData(id) {
+  //console.log("getVideoData");
+  console.log("getVideoData dataPlayerRunning=" + dataPlayerRunning + " videoId=" + videoId + " id=" + id);
+  if (!dataPlayerRunning) {
+    dataPlayerRunning = true;
+    videoId = id;
+    var dataFrame = document.createElement("iframe");
+    dataFrame.setAttribute("id", "dataFrame");
+    dataFrame.setAttribute("src", "");
+    document.getElementById("dataFramesContainer").appendChild(dataFrame);
+    dataPlayer = new YT.Player('dataFrame', {
+      events: {
+        'onReady': onDataPlayerReady
+      }
+    });
+    var embedUrl = "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
+    dataFrame.setAttribute("src", embedUrl);
+  }
+  else {
+    setTimeout(function() {
+      getVideoData(id);
+    }, 500);
+  }
 }
 
 var dataPlayerErrors = 0;
@@ -347,6 +358,7 @@ function onDataPlayerReady() {
     dataPlayer.destroy();
     dataPlayerErrors = 0;
     addVideo(videoName, videoTime, videoId);
+    dataPlayerRunning = false;
   }
   catch(e) {
     dataPlayerErrors++;
@@ -382,8 +394,7 @@ function quickSearch(query) {
            quickSearchVideos[quickSearchVideosIteration] !== null &&
            quickSearchVideosIteration + 1 < quickSearchVideos.length) {
     quickSearchVideosIteration++;
-    videoId = quickSearchVideos[quickSearchVideosIteration];
-    getVideoData();
+    getVideoData(quickSearchVideos[quickSearchVideosIteration]);
   }
 }
 
@@ -410,12 +421,12 @@ function onSearchDataPlayerStateChange(event) {
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoData();
-    videoId = data["video_id"];
+    var id = data["video_id"];
     var videoName = data["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(searchDataPlayer.getDuration());
     searchDataPlayer.destroy();
-    addVideo(videoName, videoTime, videoId);
+    addVideo(videoName, videoTime, id);
   }
 }
 
@@ -480,9 +491,8 @@ function addAutoplayVideo() {
     else if (videoIteration === videoCounter) {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
         autoplayVideoIteration++;
-        videoId = autoplayVideos[autoplayVideoIteration];
-        getVideoData();
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
+        getVideoData(autoplayVideos[autoplayVideoIteration]);
       }
       else {
         loadAutoplayData(videoIteration);
@@ -774,7 +784,6 @@ function input(type) {
       }
       else if (isUrl) {
         inputBox = isUrl;
-        videoId = inputBox;
         getVideoData(inputBox);
         $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
         if (typeof popup !== "undefined") {
