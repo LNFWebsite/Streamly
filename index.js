@@ -336,12 +336,12 @@ function getVideoData(id) {
         'onReady': onDataPlayerReady
       }
     });
-    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+    var embedUrl = "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
     dataFrame.setAttribute("src", embedUrl);
   }
   else {
     setTimeout(function() {
-      getVideoData();
+      getVideoData(id);
     }, 500);
   }
 }
