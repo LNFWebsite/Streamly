@@ -321,7 +321,7 @@ function getPlaylist() {
 }
 
 function getVideoData() {
-  console.log("getVideoData");
+  console.log("getVideoData: " + videoId);
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
@@ -339,10 +339,10 @@ var dataPlayerErrors = 0;
 function onDataPlayerReady() {
   console.log("onDataPlayerReady");
   try {
-    var data = dataPlayer.getVideoData();
     var videoName = dataPlayer.getVideoData()["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(dataPlayer.getDuration());
+    console.log(videoId + " | " + videoName + " | " + videoTime);
     $("#inputBox").val("").attr("placeholder", placeholder);
     dataPlayer.destroy();
     dataPlayerErrors = 0;
