@@ -336,7 +336,7 @@ function getVideoData() {
   dataFrame.setAttribute("src", "");
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
   var random = random();
-  window.[random] = new YT.Player('dataFrame', {
+  window[random] = new YT.Player('dataFrame', {
     events: {
       'onReady': onDataPlayerReady(random)
     }
@@ -349,7 +349,7 @@ var dataPlayerErrors = 0;
 function onDataPlayerReady(random) {
   console.log("onDataPlayerReady");
   try {
-    dataPlayer = window.[random];
+    dataPlayer = window[random];
     var videoName = dataPlayer.getVideoData()["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(dataPlayer.getDuration());
