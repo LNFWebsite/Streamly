@@ -39,19 +39,9 @@ var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
 
-var dataPlayerGlobal;
-var random;
+var dataPlayer;
 var radioDataPlayer;
 var searchDataPlayer;
-
-function randomGenerator() {
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for( var i=0; i < 3; i++ ) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-}
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -331,13 +321,12 @@ function getPlaylist() {
 }
 
 function getVideoData() {
-  console.log("getVideoData: " + videoId);
+  console.log("getVideoData");
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
-  random = randomGenerator();
-  window[random] = new YT.Player('dataFrame', {
+  dataPlayer = new YT.Player('dataFrame', {
     events: {
       'onReady': onDataPlayerReady
     }
@@ -350,11 +339,10 @@ var dataPlayerErrors = 0;
 function onDataPlayerReady() {
   console.log("onDataPlayerReady");
   try {
-    dataPlayer = window[random];
+    var data = dataPlayer.getVideoData();
     var videoName = dataPlayer.getVideoData()["title"];
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
     var videoTime = Math.round(dataPlayer.getDuration());
-    console.log(videoId + " | " + videoName + " | " + videoTime);
     $("#inputBox").val("").attr("placeholder", placeholder);
     dataPlayer.destroy();
     dataPlayerErrors = 0;
