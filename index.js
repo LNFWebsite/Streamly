@@ -321,7 +321,8 @@ function getPlaylist() {
 }
 
 function getVideoData() {
-  console.log("getVideoData");
+  //console.log("getVideoData");
+  console.log("getVideoData dataPlayerRunning=" + dataPlayerRunning);
   if (!dataPlayerRunning) {
     var dataFrame = document.createElement("iframe");
     dataFrame.setAttribute("id", "dataFrame");
@@ -356,6 +357,7 @@ function onDataPlayerReady() {
     dataPlayer.destroy();
     dataPlayerErrors = 0;
     addVideo(videoName, videoTime, videoId);
+    dataPlayerRunning = false;
   }
   catch(e) {
     dataPlayerErrors++;
@@ -367,7 +369,6 @@ function onDataPlayerReady() {
       getVideoData();
     }
   }
-  dataPlayerRunning = false;
 }
 
 // Start Quick Search
