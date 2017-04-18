@@ -328,13 +328,13 @@ function synchronous(doWhat, waitSign) {
           syncLoop();
         }
         else {
-          doWhat();
+          doWhat;
         }
       }, 500);
     }
   }
   else {
-    doWhat();
+    doWhat;
   }
 }
 
