@@ -322,21 +322,30 @@ function getPlaylist() {
 
 function getVideoData() {
   console.log("getVideoData");
-  var dataFrame = document.createElement("iframe");
-  dataFrame.setAttribute("id", "dataFrame");
-  dataFrame.setAttribute("src", "");
-  document.getElementById("dataFramesContainer").appendChild(dataFrame);
-  dataPlayer = new YT.Player('dataFrame', {
-    events: {
-      'onReady': onDataPlayerReady
-    }
-  });
-  var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
-  dataFrame.setAttribute("src", embedUrl);
+  if (!dataPlayerRunning) {
+    var dataFrame = document.createElement("iframe");
+    dataFrame.setAttribute("id", "dataFrame");
+    dataFrame.setAttribute("src", "");
+    document.getElementById("dataFramesContainer").appendChild(dataFrame);
+    dataPlayer = new YT.Player('dataFrame', {
+      events: {
+        'onReady': onDataPlayerReady
+      }
+    });
+    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
+    dataFrame.setAttribute("src", embedUrl);
+  }
+  else {
+    setTimeout(function() {
+      getVideoData();
+    }, 500);
+  }
 }
 
 var dataPlayerErrors = 0;
+var dataPlayerRunning = false;
 function onDataPlayerReady() {
+  dataPlayerRunning = true;
   console.log("onDataPlayerReady");
   try {
     var data = dataPlayer.getVideoData();
@@ -358,6 +367,7 @@ function onDataPlayerReady() {
       getVideoData();
     }
   }
+  dataPlayerRunning = false;
 }
 
 // Start Quick Search
