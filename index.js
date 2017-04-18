@@ -39,7 +39,7 @@ var playlistRepeat;
 var playlistShuffle;
 var playlistAutoplay;
 
-var dataPlayer;
+//var dataPlayer;
 var radioDataPlayer;
 var searchDataPlayer;
 
@@ -320,44 +320,23 @@ function getPlaylist() {
   }
 }
 
-function synchronous(doWhat, waitSign) {
-  if (waitSign) {
-    function syncLoop() {
-      setTimeout(function() {
-        if (waitSign) {
-          syncLoop();
-        }
-        else {
-          doWhat;
-        }
-      }, 500);
-    }
-    syncLoop();
-  }
-  else {
-    doWhat;
-  }
-}
-
 function getVideoData() {
   console.log("getVideoData: " + videoId);
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "dataFrame");
   dataFrame.setAttribute("src", "");
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
-  dataPlayer = new YT.Player('dataFrame', {
+  var dataPlayer = new YT.Player('dataFrame', {
     events: {
-      'onReady': synchronous(onDataPlayerReady, dataPlayerRunning)
+      'onReady': onDataPlayerReady(dataPlayer)
     }
   });
   var embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1";
   dataFrame.setAttribute("src", embedUrl);
 }
 
-var dataPlayerRunning = false;
 var dataPlayerErrors = 0;
-function onDataPlayerReady() {
-  dataPlayerRunning = true;
+function onDataPlayerReady(dataPlayer) {
   console.log("onDataPlayerReady");
   try {
     var videoName = dataPlayer.getVideoData()["title"];
@@ -379,7 +358,6 @@ function onDataPlayerReady() {
       getVideoData();
     }
   }
-  dataPlayerRunning = false;
 }
 
 // Start Quick Search
