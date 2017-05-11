@@ -848,7 +848,7 @@ function loadStation() {
     if (msgData[0] === "addvideo") {
       addVideo(msgData[1], msgData[2], msgData[3]);
     }
-  }
+  });
 }
 
 function connectStation(server) {
