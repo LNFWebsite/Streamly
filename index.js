@@ -27,6 +27,9 @@ var quickSearchQuery;
 var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
+var stationServer;
+var stationSocket;
+
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
 var videoPlaying;
@@ -826,11 +829,17 @@ document.addEventListener("dragover", function(event) {
   event.preventDefault();
 });
 
-var stationServer;
+// Start Streamly Station
+
+function sendStation(what) {
+  if (stationServer !== undefined && stationServer !== null) {
+    stationSocket.emit("msg", what);
+  }
+}
 
 function stationLoaded() {
-  var socket = io("http://" + stationServer);
-  socket.emit("msg", "testmessage");
+  stationSocket = io("http://" + stationServer);
+  alert("Streamly Station \"" + stationServer + "\" connected!");
 }
 
 function station(server) {
@@ -841,3 +850,5 @@ function station(server) {
     success: stationLoaded
   });
 }
+
+// End Streamly Station
