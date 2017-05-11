@@ -613,7 +613,7 @@ function playVideo(iteration) {
   $("#favicon").attr("href", faviconPlay);
 }
 
-function actionRemoveVideo(iteration) {
+function removeVideo(iteration) {
   if (iteration === videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
@@ -640,15 +640,13 @@ function actionRemoveVideo(iteration) {
   addAutoplayVideo();
 }
 
-function actionVideo(element, doWhat) {
-  if (doWhat === "play") {
-    var index = $("." + doWhat + "Button").index(element);
-    playVideo(index);
-  }
-  else if (doWhat === "remove") {
-    var index = $("." + doWhat + "Button").index(element) + 1;
-    removeVideo(index);
-  }
+function actionPlayVideo(element) {
+  var index = $(".playButton").index(element);
+  playVideo(index);
+}
+function actionRemoveVideo(element) {
+  var index = $("." + doWhat + "Button").index(element) + 1;
+  removeVideo(index);
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
