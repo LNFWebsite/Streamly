@@ -825,3 +825,16 @@ document.addEventListener("drop", function(event) {
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
 });
+
+function stationLoaded() {
+  var socket = io();
+  socket.emit("msg", "testmessage");
+}
+
+function station(server) {
+  $.ajax({
+    url: "http://" + server + "socket.io/socket.io.js",
+    dataType: "script",
+    success: stationLoaded
+  });
+}
