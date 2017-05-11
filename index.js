@@ -104,8 +104,8 @@ function highlight(i, which) {
 
 function addVideoToList(name, time, spot) {
   name = decodeURIComponent(name);
-  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
+  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionVideo(this, \"remove\");\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"actionVideo(this, \"play\");\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
     if (spot > 1) {
       $("#videosTable > tr").eq(spot-2).after(trElement);
@@ -640,7 +640,7 @@ function actionRemoveVideo(iteration) {
   addAutoplayVideo();
 }
 
-actionVideo(element, doWhat) {
+function actionVideo(element, doWhat) {
   if (doWhat === "play") {
     var index = $("." + doWhat + "Button").index(element);
     playVideo(index);
