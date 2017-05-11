@@ -606,17 +606,15 @@ function addVideo(name, time, id) {
   }
 }
 
-function actionPlayVideo(element) {
-  var index = $(".playButton").index(element);
-  videoIteration = index;
+function playVideo(iteration) {
+  videoIteration = iteration;
   videoPaused = false;
   loopVideo();
   $("#favicon").attr("href", faviconPlay);
 }
 
-function actionRemoveVideo(element) {
-  var index = $(".removeButton").index(element) + 1;
-  if (index === videoIteration) {
+function actionRemoveVideo(iteration) {
+  if (iteration === videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
       videoIteration = changeIteration(-1);
@@ -629,7 +627,7 @@ function actionRemoveVideo(element) {
       videoIteration = changeIteration(-1);
     }
   }
-  else if (index < videoIteration) {
+  else if (iteration < videoIteration) {
     videoIteration = changeIteration(-1);
   }
   videoCounter--;
@@ -640,6 +638,17 @@ function actionRemoveVideo(element) {
   makeSortable();
   videoPreviews();
   addAutoplayVideo();
+}
+
+actionVideo(element, doWhat) {
+  if (doWhat === "play") {
+    var index = $("." + doWhat + "Button").index(element);
+    playVideo(index);
+  }
+  else if (doWhat === "remove") {
+    var index = $("." + doWhat + "Button").index(element) + 1;
+    removeVideo(index);
+  }
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
