@@ -29,6 +29,7 @@ var quickSearchVideosIteration = 0;
 
 var stationServer;
 var stationSocket;
+var lastStationSocket;
 
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
@@ -835,6 +836,7 @@ document.addEventListener("dragover", function(event) {
 
 function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
+    lastStationSocket = what;
     stationSocket.emit("msg", what);
   }
 }
@@ -844,9 +846,11 @@ function loadStation() {
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   stationSocket.on("msg", function(msg) {
-    var msgData = msg.split(",");
-    if (msgData[0] === "addvideo") {
-      addVideo(msgData[1], msgData[2], msgData[3]);
+    if (msg !== lastStationSocket) {
+      var msgData = msg.split(",");
+      if (msgData[0] === "addvideo") {
+        addVideo(msgData[1], msgData[2], msgData[3]);
+      }
     }
   });
 }
