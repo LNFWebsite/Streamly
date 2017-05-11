@@ -842,6 +842,13 @@ function sendStation(what) {
 function loadStation() {
   stationSocket = io("http://" + stationServer);
   alert("Streamly Station \"" + stationServer + "\" connected!");
+  
+  stationSocket.on("msg", function(msg) {
+    var msgData = msg.split(",");
+    if (msgData[0] === "addvideo") {
+      addVideo(msgData[1], msgData[2], msgData[3]);
+    }
+  }
 }
 
 function connectStation(server) {
