@@ -826,14 +826,17 @@ document.addEventListener("dragover", function(event) {
   event.preventDefault();
 });
 
+var stationServer;
+
 function stationLoaded() {
-  var socket = io();
+  var socket = io("http://" + stationServer);
   socket.emit("msg", "testmessage");
 }
 
 function station(server) {
+  stationServer = server;
   $.ajax({
-    url: "http://" + server + "/socket.io/socket.io.js",
+    url: "http://" + stationServer + "/socket.io/socket.io.js",
     dataType: "script",
     success: stationLoaded
   });
