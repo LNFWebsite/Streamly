@@ -586,6 +586,8 @@ function addVideo(name, time, id) {
     videos[iteration] = video;
   }
   
+  sendStation("addvideo," + video);
+  
   if (playlistShuffle) {
     addedVideosWhileShuffled.push(video);
   }
@@ -837,17 +839,17 @@ function sendStation(what) {
   }
 }
 
-function stationLoaded() {
+function loadStation() {
   stationSocket = io("http://" + stationServer);
   alert("Streamly Station \"" + stationServer + "\" connected!");
 }
 
-function station(server) {
+function connectStation(server) {
   stationServer = server;
   $.ajax({
     url: "http://" + stationServer + "/socket.io/socket.io.js",
     dataType: "script",
-    success: stationLoaded
+    success: loadStation
   });
 }
 
