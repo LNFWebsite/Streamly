@@ -833,7 +833,7 @@ function stationLoaded() {
 
 function station(server) {
   $.ajax({
-    url: "http://" + server + "socket.io/socket.io.js",
+    url: "http://" + server + "/socket.io/socket.io.js",
     dataType: "script",
     success: stationLoaded
   });
