@@ -736,7 +736,6 @@ var PlaylistFeatures = function() {
     $(".fa-random").css("color", (playlistShuffle ? "#F77F00" : "grey"));
   }
   this.autoplay = function() {
-    sendStation("playlistfeaturesautoplay");
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (playlistAutoplay === false) {
       autoplayVideos = [];
@@ -908,9 +907,6 @@ function loadStation() {
           break;
         case "playlistfeaturesshuffle":
           playlistFeatures.shuffle();
-          break;
-        case "playlistfeaturesautoplay":
-          playlistFeatures.autoplay();
           break;
       }
     }
