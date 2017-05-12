@@ -866,7 +866,7 @@ function sendStation(what) {
 }
 
 function loadStation() {
-  stationSocket = io("//" + stationServer);
+  stationSocket = io("http://" + stationServer);
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   stationSocket.on("msg", function(msg) {
