@@ -608,6 +608,7 @@ function addVideo(name, time, id) {
 }
 
 function actionPlayVideo(iteration) {
+  console.log("ACTIONPLAYVIDEO " + iteration);
   sendStation("actionplayvideo," + iteration);
   videoIteration = iteration;
   videoPaused = false;
@@ -616,6 +617,7 @@ function actionPlayVideo(iteration) {
 }
 
 function actionRemoveVideo(iteration) {
+  console.log("ACTIONREMOVEVIDEO " + iteration);
   sendStation("actionremovevideo," + iteration);
   if (iteration === videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
