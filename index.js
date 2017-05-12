@@ -608,7 +608,6 @@ function addVideo(name, time, id) {
 }
 
 function actionPlayVideo(iteration) {
-  console.log("ACTIONPLAYVIDEO " + iteration);
   sendStation("actionplayvideo," + iteration);
   videoIteration = iteration;
   videoPaused = false;
@@ -617,7 +616,6 @@ function actionPlayVideo(iteration) {
 }
 
 function actionRemoveVideo(iteration) {
-  console.log("ACTIONREMOVEVIDEO " + iteration);
   sendStation("actionremovevideo," + iteration);
   if (iteration === videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
@@ -850,7 +848,7 @@ function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
     if (!stationRxQuiet) {
       stationTxQuiet = true;
-      console.log(what);
+      console.log("Station Tx: " + what);
       stationSocket.emit("msg", what);
     }
     else {
@@ -864,7 +862,7 @@ function loadStation() {
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   stationSocket.on("msg", function(msg) {
-    console.log(msg);
+    console.log("Station Rx: " + msg);
     
     var msgData = msg.split(",");
     if (!stationTxQuiet) {
