@@ -851,14 +851,15 @@ function sendStation(what) {
 }
 
 function loadStation() {
-  stationUniqueId = Math.floor(Math.random());
+  stationUniqueId = Math.floor(Math.random() * 100000);
   stationSocket = io("http://" + stationServer);
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   stationSocket.on("msg", function(msg) {
     console.log(msg);
-    /****
     var msgData = msg.split(",");
+    console.log("HERE: " + msgData[0] + " | " + stationUniqueId);
+    /****
     if (msgData[0] !== stationUniqueId) {
       switch (msgData[1]) {
         case "addvideo":
