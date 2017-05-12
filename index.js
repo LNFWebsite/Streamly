@@ -29,7 +29,8 @@ var quickSearchVideosIteration = 0;
 
 var stationServer;
 var stationSocket;
-var stationQuiet = false;
+var stationRxQuiet = false;
+var stationTxQuiet = false;
 
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
@@ -845,12 +846,13 @@ document.addEventListener("dragover", function(event) {
 
 function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
-    if (!stationQuiet) {
+    if (!stationRxQuiet) {
+      stationTxQuiet = true;
       console.log(what);
       stationSocket.emit("msg", what);
     }
     else {
-      stationQuiet = false;
+      stationRxQuiet = false;
     }
   }
 }
@@ -861,19 +863,24 @@ function loadStation() {
   
   stationSocket.on("msg", function(msg) {
     console.log(msg);
-    stationQuiet = true;
     
     var msgData = msg.split(",");
-    switch (msgData[0]) {
-      case "addvideo":
-        addVideo(msgData[1], msgData[2], msgData[3]);
-        break;
-      case "actionplayvideo":
-        actionPlayVideo(msgData[1]);
-        break;
-      case "actionremovevideo":
-        actionRemoveVideo(msgData[1]);
-        break;
+    if (!stationTxQuiet) {
+      stationRxQuiet = true;
+      switch (msgData[0]) {
+        case "addvideo":
+          addVideo(msgData[1], msgData[2], msgData[3]);
+          break;
+        case "actionplayvideo":
+          actionPlayVideo(msgData[1]);
+          break;
+        case "actionremovevideo":
+          actionRemoveVideo(msgData[1]);
+          break;
+      }
+    }
+    else {
+      stationTxQuiet = false;
     }
   });
 }
