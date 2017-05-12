@@ -222,7 +222,6 @@ function playVideo() {
 }
 
 function loopVideo() {
-  sendStation("loopvideo");
   if (videoIteration < videoCounter || playlistRepeat) {
     if (playlistShuffle && playlistRepeat && videoIteration === videoCounter) {
       shufflePlaylist();
@@ -880,7 +879,7 @@ function loadStation() {
         case "addvideo":
           addVideo(msgData[1], msgData[2], msgData[3]);
           break;
-        case "loopvideo":
+        case "videoending":
           loopVideo();
           break;
         case "actionplayvideo":
