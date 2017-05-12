@@ -880,10 +880,10 @@ function loadStation() {
           actionRemoveVideo(+msgData[1]);
           break;
         case "videofunctionsplay":
-          videoFunctions.play();
+          player.playVideo();
           break;
         case "videofunctionspause":
-          videoFunctions.pause();
+          player.pauseVideo();
           break;
       }
     }
