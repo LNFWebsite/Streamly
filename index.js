@@ -262,12 +262,14 @@ var VideoFunctions = function() {
 var videoFunctions = new VideoFunctions();
 
 function forwardVideo() {
+  sendStation("forwardvideo");
   if (changeIteration(1) <= videoCounter) {
     loopVideo();
   }
 }
 
 function backVideo() {
+  sendStation("backvideo");
   if (!backRestart) {
     if (changeIteration(-2) > -1) {
       videoIteration = changeIteration(-2);
@@ -878,6 +880,12 @@ function loadStation() {
           break;
         case "actionremovevideo":
           actionRemoveVideo(+msgData[1]);
+          break;
+        case "forwardvideo":
+          forwardVideo();
+          break;
+        case "backvideo":
+          backVideo();
           break;
         case "videofunctionsplay":
           player.playVideo();
