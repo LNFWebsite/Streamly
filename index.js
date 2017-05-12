@@ -719,20 +719,24 @@ function videoPreviews() {
 
 var PlaylistFeatures = function() {
   this.playNext = function() {
+    sendStation("playlistfeaturesplaynext");
     playlistPlayNext = (playlistPlayNext ? false : true);
     $(".fa-arrow-circle-right").css("color", (playlistPlayNext ? "#F77F00" : "grey"));
   }
   this.repeat = function() {
+    sendStation("playlistfeaturesrepeat");
     playlistRepeat = (playlistRepeat ? false : true);
     videoPreviews();
     $(".fa-repeat").css("color", (playlistRepeat ? "#F77F00" : "grey"));
   }
   this.shuffle = function() {
+    sendStation("playlistfeaturesshuffle");
     playlistShuffle = (playlistShuffle ? false : true);
     shufflePlaylist();
     $(".fa-random").css("color", (playlistShuffle ? "#F77F00" : "grey"));
   }
   this.autoplay = function() {
+    sendStation("playlistfeaturesautoplay");
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (playlistAutoplay === false) {
       autoplayVideos = [];
@@ -892,6 +896,18 @@ function loadStation() {
           break;
         case "videofunctionspause":
           player.pauseVideo();
+          break;
+        case "playlistfeaturesplaynext":
+          playlistFeatures.playNext();
+          break;
+        case "playlistfeaturesrepeat":
+          playlistFeatures.repeat();
+          break;
+        case "playlistfeaturesshuffle":
+          playlistFeatures.shuffle();
+          break;
+        case "playlistfeaturesautoplay":
+          playlistFeatures.autoplay();
           break;
       }
     }
