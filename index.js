@@ -872,10 +872,14 @@ function loadStation() {
           addVideo(msgData[1], msgData[2], msgData[3]);
           break;
         case "actionplayvideo":
-          actionPlayVideo(msgData[1]);
+          setTimeout(function() {
+            actionPlayVideo(msgData[1]);
+          }, 1000);
           break;
         case "actionremovevideo":
-          actionRemoveVideo(msgData[1]);
+          setTimeout(function() {
+            actionRemoveVideo(msgData[1]);
+          }, 1000);
           break;
       }
     }
