@@ -29,7 +29,7 @@ var quickSearchVideosIteration = 0;
 
 var stationServer;
 var stationSocket;
-var stationUniqueId;
+var stationQuiet = false;
 
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
@@ -845,32 +845,35 @@ document.addEventListener("dragover", function(event) {
 
 function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
-    console.log(what);
-    stationSocket.emit("msg", stationUniqueId + "," + what);
+    if (!stationQuiet) {
+      console.log(what);
+      stationSocket.emit("msg", what);
+    }
+    else {
+      stationQuiet = false;
+    }
   }
 }
 
 function loadStation() {
-  stationUniqueId = Math.floor(Math.random() * 100000);
   stationSocket = io("http://" + stationServer);
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   stationSocket.on("msg", function(msg) {
     console.log(msg);
+    stationQuiet = true;
+    
     var msgData = msg.split(",");
-    console.log("HERE: " + msgData[0] + " | " + stationUniqueId);
-    if (msgData[0] !== stationUniqueId) {
-      switch (msgData[1]) {
-        case "addvideo":
-          addVideo(msgData[2], msgData[3], msgData[4]);
-          break;
-        case "actionplayvideo":
-          actionPlayVideo(msgData[2]);
-          break;
-        case "actionremovevideo":
-          actionRemoveVideo(msgData[2]);
-          break;
-      }
+    switch (msgData[0]) {
+      case "addvideo":
+        addVideo(msgData[1], msgData[2], msgData[3]);
+        break;
+      case "actionplayvideo":
+        actionPlayVideo(msgData[1]);
+        break;
+      case "actionremovevideo":
+        actionRemoveVideo(msgData[1]);
+        break;
     }
   });
 }
