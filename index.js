@@ -857,6 +857,7 @@ function loadStation() {
   
   stationSocket.on("msg", function(msg) {
     console.log(msg);
+    /****
     var msgData = msg.split(",");
     if (msgData[0] !== stationUniqueId) {
       switch (msgData[1]) {
@@ -871,6 +872,7 @@ function loadStation() {
           break;
       }
     }
+    ****/
   });
 }
 
