@@ -244,11 +244,13 @@ function loopVideo() {
 
 var VideoFunctions = function() {
   this.play = function() {
+    sendStation("videofunctionsplay");
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
   }
   this.pause = function() {
+    sendStation("videofunctionspause");
     videoPaused = true;
     if (videos[0] !== undefined && videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
@@ -876,6 +878,12 @@ function loadStation() {
           break;
         case "actionremovevideo":
           actionRemoveVideo(+msgData[1]);
+          break;
+        case "videofunctionsplay":
+          videoFunctions.play();
+          break;
+        case "videofunctionspause":
+          videoFunctions.pause();
           break;
       }
     }
