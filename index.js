@@ -29,7 +29,7 @@ var quickSearchVideosIteration = 0;
 
 var stationServer;
 var stationSocket;
-var lastStationSocket;
+var stationQuiet;
 
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
@@ -607,6 +607,7 @@ function addVideo(name, time, id) {
 }
 
 function actionPlayVideo(iteration) {
+  sendStation("actionplayvideo," + iteration);
   videoIteration = iteration;
   videoPaused = false;
   loopVideo();
@@ -614,6 +615,7 @@ function actionPlayVideo(iteration) {
 }
 
 function actionRemoveVideo(iteration) {
+  sendStation("actionremovevideo," + iteration);
   if (iteration === videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
@@ -845,6 +847,10 @@ function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
     lastStationSocket = what;
     stationSocket.emit("msg", what);
+    stationQuiet = true;
+    setTimeout(function() {
+      stationQuiet = false;
+    }, 100);
   }
 }
 
@@ -853,10 +859,18 @@ function loadStation() {
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   stationSocket.on("msg", function(msg) {
-    if (msg !== lastStationSocket) {
+    if (!stationQuiet) {
       var msgData = msg.split(",");
-      if (msgData[0] === "addvideo") {
-        addVideo(msgData[1], msgData[2], msgData[3]);
+      switch (msgData[0]) {
+        case "addvideo":
+          addVideo(msgData[1], msgData[2], msgData[3]);
+          break;
+        case "actionPlayVideo":
+          actionPlayVideo(msgData[1]);
+          break;
+        case "actionRemoveVideo":
+          actionRemoveVideo(msgData[1]);
+          break;
       }
     }
   });
