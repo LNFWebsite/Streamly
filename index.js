@@ -865,7 +865,7 @@ function sendStation(what) {
 }
 
 function loadStation() {
-  stationSocket = io("http://" + stationServer);
+  stationSocket = io("//" + stationServer);
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   stationSocket.on("msg", function(msg) {
@@ -919,7 +919,7 @@ function loadStation() {
 function connectStation(server) {
   stationServer = server;
   $.ajax({
-    url: "http://" + stationServer + "/socket.io/socket.io.js",
+    url: "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js",
     dataType: "script",
     success: loadStation
   });
