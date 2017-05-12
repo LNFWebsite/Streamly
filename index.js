@@ -879,7 +879,7 @@ function loadStation() {
         case "addvideo":
           addVideo(msgData[1], msgData[2], msgData[3]);
           break;
-        case "videoending":
+        case "playerending":
           loopVideo();
           break;
         case "actionplayvideo":
