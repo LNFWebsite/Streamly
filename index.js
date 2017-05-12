@@ -911,7 +911,7 @@ function loadStation() {
           break;
         case "actionmovevideo":
           actionMoveVideo(+msgData[2], +msgData[3]);
-          $("li:nth-child(" + msgData[2] + ")").append("li:nth-child(" + (msgData[3] - 1) + ")");
+          $("#videosTable tr:nth-child(" + (msgData[3] - 1) + ")").after($("#videosTable tr:nth-child(" + msgData[2] + ")"));
           break;
       }
     }
