@@ -104,8 +104,8 @@ function highlight(i, which) {
 
 function addVideoToList(name, time, spot) {
   name = decodeURIComponent(name);
-  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
+  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
     if (spot > 1) {
       $("#videosTable > tr").eq(spot-2).after(trElement);
@@ -606,14 +606,14 @@ function addVideo(name, time, id) {
   }
 }
 
-function playVideo(iteration) {
+function actionPlayVideo(iteration) {
   videoIteration = iteration;
   videoPaused = false;
   loopVideo();
   $("#favicon").attr("href", faviconPlay);
 }
 
-function removeVideo(iteration) {
+function actionRemoveVideo(iteration) {
   if (iteration === videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
@@ -640,13 +640,13 @@ function removeVideo(iteration) {
   addAutoplayVideo();
 }
 
-function actionPlayVideo(element) {
+function buttonPlayVideo(element) {
   var index = $(".playButton").index(element);
-  playVideo(index);
+  actionPlayVideo(index);
 }
-function actionRemoveVideo(element) {
-  var index = $("." + doWhat + "Button").index(element) + 1;
-  removeVideo(index);
+function buttonRemoveVideo(element) {
+  var index = $(".removeButton").index(element) + 1;
+  actionRemoveVideo(index);
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
