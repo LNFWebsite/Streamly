@@ -859,7 +859,6 @@ function loadStation() {
     console.log(msg);
     var msgData = msg.split(",");
     console.log("HERE: " + msgData[0] + " | " + stationUniqueId);
-    /****
     if (msgData[0] !== stationUniqueId) {
       switch (msgData[1]) {
         case "addvideo":
@@ -873,7 +872,6 @@ function loadStation() {
           break;
       }
     }
-    ****/
   });
 }
 
