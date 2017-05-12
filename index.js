@@ -29,7 +29,7 @@ var quickSearchVideosIteration = 0;
 
 var stationServer;
 var stationSocket;
-var stationQuiet = false;
+var stationUniqueId;
 
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
@@ -846,32 +846,28 @@ document.addEventListener("dragover", function(event) {
 function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
     console.log(what);
-    lastStationSocket = what;
-    stationSocket.emit("msg", what);
-    stationQuiet = true;
-    setTimeout(function() {
-      stationQuiet = false;
-    }, 100);
+    stationSocket.emit("msg", stationUniqueId + "," + what);
   }
 }
 
 function loadStation() {
+  stationUniqueId = Math.floor(Math.random());
   stationSocket = io("http://" + stationServer);
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   stationSocket.on("msg", function(msg) {
     console.log(msg);
-    if (!stationQuiet) {
-      var msgData = msg.split(",");
-      switch (msgData[0]) {
+    var msgData = msg.split(",");
+    if (msgData[0] !== stationUniqueId) {
+      switch (msgData[1]) {
         case "addvideo":
-          addVideo(msgData[1], msgData[2], msgData[3]);
+          addVideo(msgData[2], msgData[3], msgData[4]);
           break;
         case "actionplayvideo":
-          actionPlayVideo(msgData[1]);
+          actionPlayVideo(msgData[2]);
           break;
         case "actionremovevideo":
-          actionRemoveVideo(msgData[1]);
+          actionRemoveVideo(msgData[2]);
           break;
       }
     }
