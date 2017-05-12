@@ -657,6 +657,7 @@ function buttonRemoveVideo(element) {
 }
 
 function actionMoveVideo(oldIndex, newIndex) {
+  sendStation("actionmovevideo," + oldIndex + "," + newIndex);
   videos.move(oldIndex, newIndex);
   if (oldIndex == videoIteration) {
     videoIteration = newIndex;
@@ -907,6 +908,10 @@ function loadStation() {
           break;
         case "playlistfeaturesshuffle":
           playlistFeatures.shuffle();
+          break;
+        case "actionmovevideo":
+          actionMoveVideo(+msgData[2], +msgData[3]);
+          $("li:nth-child(" + msgData[2] + ")").append("li:nth-child(" + (msgData[3] - 1) + ")");
           break;
       }
     }
