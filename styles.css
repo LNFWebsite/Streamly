@@ -114,6 +114,10 @@ footer {
   background: black;
   background-color: rgba(0, 0, 0, 0.75);
 }
+#connectStationBox {
+  width: 350px;
+  font-family: 'Roboto',sans-serif;
+}
 td,
 th,
 #main,
