@@ -858,6 +858,7 @@ function input(type) {
         }
         else if (isUrl[0] === "streamly") {
           appendPlaylist(isUrl[1]);
+          $("#inputBox").val("").attr("placeholder", placeholder);
         }
       }
       else if ($(window).width() > 600 && inputBox.indexOf("\\") === -1) {
