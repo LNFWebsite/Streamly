@@ -100,6 +100,9 @@ footer {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #2b2b2b;
+  text-align: left;
+  padding: 10px;
+  color: #ccc;
 }
 #settingsShadow {
   position: fixed;
