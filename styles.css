@@ -90,6 +90,27 @@ footer {
   left: 35px;
   color: #fff;
 }
+#settingsWindow {
+  width: 600px;
+  position: fixed;
+  background: grey;
+  height: 400px;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2b2b2b;
+}
+#settingsShadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: black;
+  background-color: rgba(0, 0, 0, 0.75);
+}
 td,
 th,
 #main,
