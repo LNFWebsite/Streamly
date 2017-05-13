@@ -912,7 +912,7 @@ function loadStation() {
         case "actionmovevideo":
           actionMoveVideo(+msgData[1], +msgData[2]);
           var from = "#videosTable tr:nth-child(" + msgData[1] + ")";
-          var to = "#videosTable tr:nth-child(" + (msgData[2] - 1) + ")";
+          var to = "#videosTable tr:nth-child(" + msgData[2] + ")";
           console.log("FROM: " + from);
           console.log("TO: " + to);
           $(to).after($(from));
