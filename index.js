@@ -986,7 +986,7 @@ function connectStation(server) {
 }
 
 function actionConnectStation() {
-  var station = $("#connectStation").val();
+  var station = $("#connectStationBox").val();
   connectStation(station);
 }
 
