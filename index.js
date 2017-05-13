@@ -985,4 +985,9 @@ function connectStation(server) {
   });
 }
 
+function actionConnectStation() {
+  var station = $("#connectStation").val();
+  connectStation(station);
+}
+
 // End Streamly Station
