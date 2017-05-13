@@ -103,6 +103,7 @@ footer {
   text-align: left;
   padding: 10px;
   color: #ccc;
+  display: none;
 }
 #settingsShadow {
   position: fixed;
@@ -113,6 +114,7 @@ footer {
   z-index: 2;
   background: black;
   background-color: rgba(0, 0, 0, 0.75);
+  display: none;
 }
 #connectStationBox {
   width: 350px;
