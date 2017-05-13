@@ -911,7 +911,11 @@ function loadStation() {
           break;
         case "actionmovevideo":
           actionMoveVideo(+msgData[2], +msgData[3]);
-          $("#videosTable tr:nth-child(" + (msgData[3] - 1) + ")").after($("#videosTable tr:nth-child(" + msgData[2] + ")"));
+          var from = "#videosTable tr:nth-child(" + msgData[2] + ")";
+          var to = "#videosTable tr:nth-child(" + (msgData[3] - 1) + ")";
+          console.log("FROM: " + from);
+          console.log("TO: " + to);
+          $(to).after($(from));
           break;
       }
     }
