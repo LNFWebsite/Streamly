@@ -924,7 +924,7 @@ function loadStation() {
 function connectStation(server) {
   stationServer = server;
   $.ajax({
-    url: "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js",
+    url: "http://" + stationServer + "/socket.io/socket.io.js",
     dataType: "script",
     success: loadStation
   });
