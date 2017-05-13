@@ -910,10 +910,9 @@ function loadStation() {
           playlistFeatures.shuffle();
           break;
         case "actionmovevideo":
-          actionMoveVideo(+msgData[2], +msgData[3]);
-          var from = "#videosTable tr:nth-child(" + msgData[2] + ")";
-          var toIteration = msgData[3] - 1;
-          var to = "#videosTable tr:nth-child(" + toIteration + ")";
+          actionMoveVideo(+msgData[1], +msgData[2]);
+          var from = "#videosTable tr:nth-child(" + msgData[1] + ")";
+          var to = "#videosTable tr:nth-child(" + (msgData[2] - 1) + ")";
           console.log("FROM: " + from);
           console.log("TO: " + to);
           $(to).after($(from));
