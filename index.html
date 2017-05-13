@@ -31,6 +31,7 @@
   <div id="main">
     <div id="settingsShadow"></div>
     <div id="settingsWindow">
+      <div id="closeSettingsWindow">Close</div>
       <h1>Settings</h1>
       <h2>Streamly Station</h2>
       <form action="javascript:actionConnectStation();" method="get">
@@ -126,8 +127,13 @@
   $("#playlistNameBox").on("blur", function() {
     input(2);
   });
+    
+  function openSettings() {
+    $("#settingsWindow").css("display", "block");
+    $("#settingsShadow").css("display", "block");
+  }
   
-    function startVideoProgress() {
+  function startVideoProgress() {
     if (!videoPaused) {
       actionTimers.clear();
       videoProgress();
