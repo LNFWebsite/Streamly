@@ -337,7 +337,7 @@ function appendPlaylist(playlist) {
     }
 
     for (var i = 1; i < playlist.length; i++) {
-      videoCounter = videoCounter + i;
+      videoCounter++;
       var printTime = msConversion(playlist[i][1] * 1000);
       addVideoToList(playlist[i][0], printTime, videoCounter);
     }
