@@ -325,6 +325,35 @@ function getPlaylist() {
   }
 }
 
+function appendPlaylist(playlist) {
+  try {
+    playlist = window.atob(playlist);
+    playlist = JSON.parse(playlist);
+
+    if (playlist[0] !== undefined && playlist[0] !== null) {
+      if (videos[0] === undefined || videos[0] === null) {
+        $("#playlistNameBox").val(decodeURIComponent(playlist[0]));
+      }
+    }
+
+    for (var i = 1; i < playlist.length; i++) {
+      videoCounter = videoCounter + i;
+      var printTime = msConversion(playlist[videoCounter][1] * 1000);
+      addVideoToList(playlist[videoCounter][0], printTime, videoCounter);
+    }
+
+    playlist.splice(0, 1);
+    videos = videos.concat(playlist);
+
+    setPlaylist();
+  }
+  catch(err) {
+    alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
+      "I'm really sorry about this inconvenience.\n\nerr: " + err);
+  }
+}
+
 var dataPlayerRunning = false;
 function getVideoData(id) {
   console.log("getVideoData dataPlayerRunning=" + dataPlayerRunning + " videoId=" + videoId + " id=" + id);
@@ -754,10 +783,26 @@ var PlaylistFeatures = function() {
 var playlistFeatures = new PlaylistFeatures;
 
 function urlValidate(url) {
-  var regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
-  url = url.match(regex);
-  if (url !== null && url[1] !== null) {
-    return url[1];
+  var youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
+  var streamlyRegex = /.*#(.+)/i;
+  
+  function checkMatch(url, regex) {
+    var doesMatch = url.match(regex);
+    if (doesMatch !== null && doesMatch[1] !== null) {
+      return doesMatch[1];
+    }
+    else {
+      return false;
+    }
+  }
+  
+  var checkoutYoutube = checkMatch(url, youtubeRegex);
+  var checkoutStreamly = checkMatch(url, streamlyRegex);
+  if (checkoutYoutube) {
+    return ["youtube", checkout];
+  }
+  else if (checkoutStreamly) {
+    return ["streamly", checkout];
   }
   else {
     return false;
@@ -802,13 +847,18 @@ function input(type) {
         }
       }
       else if (isUrl) {
-        inputBox = isUrl;
-        getVideoData(inputBox);
-        $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
-        if (typeof popup !== "undefined") {
-          popup.close();
+        if (isUrl[0] === "youtube") {
+          inputBox = isUrl;
+          getVideoData(inputBox);
+          $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
+          if (typeof popup !== "undefined") {
+            popup.close();
+          }
+          $("#youtube").css("display", "block");
         }
-        $("#youtube").css("display", "block");
+        else if (isUrl[0] === "streamly") {
+          appendPlaylist(isUrl[1]);
+        }
       }
       else if ($(window).width() > 600 && inputBox.indexOf("\\") === -1) {
         if (inputBox.slice(-2) === " l") {
