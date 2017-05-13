@@ -799,10 +799,10 @@ function urlValidate(url) {
   var checkoutYoutube = checkMatch(url, youtubeRegex);
   var checkoutStreamly = checkMatch(url, streamlyRegex);
   if (checkoutYoutube) {
-    return ["youtube", checkout];
+    return ["youtube", checkoutYoutube];
   }
   else if (checkoutStreamly) {
-    return ["streamly", checkout];
+    return ["streamly", checkoutStreamly];
   }
   else {
     return false;
