@@ -26,9 +26,13 @@
       <input type="textbox" id="inputBox" placeholder="Search, drag and drop video, or paste its URL..." autofocus>
     </form>
     <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();">Save playlist</button>
-    <!--<span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>-->
+    <span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>
   </header>
   <div id="main">
+    <div id="settingsShadow"></div>
+    <div id="settingsWindow">
+      <h1>Settings</h1>
+    </div>
     <div id="blurBackground"></div>
     <form action="javascript:input(2);" method="get">
       <input type="textbox" id="playlistNameBox" placeholder="Streamly Playlist" title="Enter your playlist name" />
