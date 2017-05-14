@@ -90,6 +90,16 @@ footer {
   left: 35px;
   color: #fff;
 }
+#settingsCloseButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 10px;
+}
+#settingsCloseButton:hover {
+  color: white;
+}
 #settingsWindow {
   width: 600px;
   position: fixed;
