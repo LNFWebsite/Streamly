@@ -387,6 +387,9 @@ tr.placeholder:before {
     left: auto;
     color: #fff;
   }
+  #settingsWindow {
+    width: auto;
+  }
   #inputBox {
     width: calc(100% - 120px) !important;
   }
