@@ -382,9 +382,9 @@ tr.placeholder:before {
     margin-bottom: 5px;
   }
   #settingsButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    float: right;
+    padding: 10px;
+    left: auto;
     color: #fff;
   }
   #inputBox {
