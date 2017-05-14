@@ -136,6 +136,9 @@
     $("#settingsWindow").css("display", "none");
     $("#settingsShadow").css("display", "none");
   }
+  if ($(window).width() <= 600) {
+    $("#title").after("#settingsButton")
+  }
   
   function startVideoProgress() {
     if (!videoPaused) {
