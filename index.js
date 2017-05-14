@@ -987,6 +987,11 @@ function connectStation(server) {
 
 function actionConnectStation() {
   var station = $("#connectStationBox").val();
+  if (window.location.protocol === "https:") {
+    alert("Note: Due to security protections, scripts on secured pages with 'https://' cannot make unsecured connections.\n" +
+         "Streamly Station runs without any onboard security, so this request will probably be blocked.\n" +
+         "In order to use Streamly Station, please replace the 'https://' with 'http://' in the URL.");
+  }
   connectStation(station);
 }
 
