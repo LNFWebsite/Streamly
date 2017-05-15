@@ -94,7 +94,6 @@ footer {
 #stationIcon {
   color: #00ff00;
   left: 45px;
-  position: relative;
   display: none;
 }
 #settingsCloseButton {
@@ -388,11 +387,11 @@ tr.placeholder:before {
     position: initial;
     margin-bottom: 5px;
   }
-  #settingsButton {
+  #settingsButton,
+  #stationIcon {
     float: right;
     padding: 10px;
     left: auto;
-    color: #fff;
   }
   #settingsWindow {
     width: auto;
