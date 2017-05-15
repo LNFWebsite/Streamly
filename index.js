@@ -848,7 +848,7 @@ function input(type) {
       }
       else if (isUrl) {
         if (isUrl[0] === "youtube") {
-          inputBox = isUrl;
+          inputBox = isUrl[1];
           getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
           if (typeof popup !== "undefined") {
