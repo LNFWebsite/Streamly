@@ -920,12 +920,20 @@ function loadStation() {
   stationSocket = io("http://" + stationServer);
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
+  $("#stationIcon").css("display", "initial");
+  
   stationSocket.on("msg", function(msg) {
     console.log("Station Rx: " + msg);
     
     var msgData = msg.split(",");
     if (!stationTxQuiet) {
       stationRxQuiet = true;
+      
+      $("#stationIcon").css("color", "red");
+      setTimeout(function() {
+        $("#stationIcon").css("color", "#00ff00");
+      }, 1000);
+      
       switch (msgData[0]) {
         case "addvideo":
           addVideo(msgData[1], msgData[2], msgData[3]);
@@ -983,6 +991,11 @@ function connectStation(server) {
     dataType: "script",
     success: loadStation
   });
+}
+
+function disconnectStation() {
+  stationSocket.disconnect();
+  $("#stationIcon").css("display", "none");
 }
 
 function actionConnectStation() {
