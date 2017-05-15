@@ -975,7 +975,7 @@ function loadStation() {
           console.log("FROM: " + from);
           console.log("TO: " + to);
           if (+msgData[2] !== 1) {
-            to = "#videosTable tr:nth-child(" + msgData[2] - 1 + ")";
+            to = "#videosTable tr:nth-child(" + (+msgData[2] - 1) + ")";
             $(to).after($(from));
           }
           else {
