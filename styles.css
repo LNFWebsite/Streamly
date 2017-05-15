@@ -78,7 +78,8 @@ footer {
   max-width: 600px;
 }
 #saveButton,
-#settingsButton {
+#settingsButton,
+#stationIcon {
   cursor: pointer;
 }
 #saveButton {
