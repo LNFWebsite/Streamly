@@ -86,6 +86,10 @@ footer {
   padding: 5px 7px;
   background-color: #fff;
 }
+#settingsButton,
+#stationIcon {
+  position: relative;
+}
 #settingsButton {
   top: 1px;
   left: 35px;
