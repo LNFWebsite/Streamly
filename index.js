@@ -998,9 +998,11 @@ function disconnectStation() {
   $("#stationIcon").css("display", "none");
 }
 
+var securityWarning = false;
 function actionConnectStation() {
   var station = $("#connectStationBox").val();
-  if (window.location.protocol === "https:") {
+  if (window.location.protocol === "https:" && securityWarning === false) {
+    securityWarning = true;
     alert("Note: Due to security protections, scripts on secured pages with 'https://' cannot make unsecured connections. " + 
           "Streamly Station runs without any onboard security, so this request will probably be blocked and you'll get a notification that the site requested unsecured scripts.\n\n" +
           "In order to use Streamly Station, either make an exception to 'Load unsafe scripts' or replace the 'https://' with 'http://' in the URL.");
