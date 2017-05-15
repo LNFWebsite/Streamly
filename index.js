@@ -974,7 +974,12 @@ function loadStation() {
           var to = "#videosTable tr:nth-child(" + msgData[2] + ")";
           console.log("FROM: " + from);
           console.log("TO: " + to);
-          $(to).after($(from));
+          if (+msgData[2] !== 1) {
+            $(to).after($(from));
+          }
+          else {
+            $(from).insertBefore($(to));
+          }
           break;
       }
     }
