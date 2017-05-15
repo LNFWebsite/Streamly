@@ -932,7 +932,7 @@ function loadStation() {
       $("#stationIcon").css("color", "red");
       setTimeout(function() {
         $("#stationIcon").css("color", "#00ff00");
-      }, 1000);
+      }, 300);
       
       switch (msgData[0]) {
         case "addvideo":
