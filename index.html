@@ -26,9 +26,21 @@
       <input type="textbox" id="inputBox" placeholder="Search, drag and drop video, or paste its URL..." autofocus>
     </form>
     <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();">Save playlist</button>
-    <!--<span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>-->
+    <span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>
+    <span class="fa fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
   </header>
   <div id="main">
+    <div id="settingsShadow"></div>
+    <div id="settingsWindow">
+      <div id="settingsCloseButton" onclick="closeSettings();">Close</div>
+      <h1>Settings</h1><hr>
+      <h2>Streamly Station</h2><hr>
+      <p><i>Connect to a Streamly Station</i></p>
+      <form action="javascript:actionConnectStation();" method="get">
+        <label for="connectStationBox">Address:</label>
+        <input type="textbox" id="connectStationBox" placeholder="Enter the Streamly Station address (ex. 192.168.0.15)..." title="Enter the Streamly Station address">
+      </form>
+    </div>
     <div id="blurBackground"></div>
     <form action="javascript:input(2);" method="get">
       <input type="textbox" id="playlistNameBox" placeholder="Streamly Playlist" title="Enter your playlist name" />
@@ -118,8 +130,21 @@
   $("#playlistNameBox").on("blur", function() {
     input(2);
   });
+    
+  function openSettings() {
+    $("#settingsWindow").css("display", "block");
+    $("#settingsShadow").css("display", "block");
+  }
+  function closeSettings() {
+    $("#settingsWindow").css("display", "none");
+    $("#settingsShadow").css("display", "none");
+  }
+  if ($(window).width() <= 600) {
+    $("#title").after($("#settingsButton"));
+    $("#settingsButton").after($("#stationIcon"));
+  }
   
-    function startVideoProgress() {
+  function startVideoProgress() {
     if (!videoPaused) {
       actionTimers.clear();
       videoProgress();
@@ -158,6 +183,7 @@
       //ending
       case 0:
         console.log("ending");
+        sendStation("playerending");
         loopVideo();
         break;
       //playing

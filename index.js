@@ -27,6 +27,11 @@ var quickSearchQuery;
 var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
+var stationServer;
+var stationSocket;
+var stationRxQuiet = false;
+var stationTxQuiet = false;
+
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
 var videoPlaying;
@@ -100,8 +105,8 @@ function highlight(i, which) {
 
 function addVideoToList(name, time, spot) {
   name = decodeURIComponent(name);
-  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"actionRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"actionPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
+  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
     if (spot > 1) {
       $("#videosTable > tr").eq(spot-2).after(trElement);
@@ -239,11 +244,13 @@ function loopVideo() {
 
 var VideoFunctions = function() {
   this.play = function() {
+    sendStation("videofunctionsplay");
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
   }
   this.pause = function() {
+    sendStation("videofunctionspause");
     videoPaused = true;
     if (videos[0] !== undefined && videos[0] !== null) {
       document.title = "Streamly - " + decodeURIComponent(videos[0]);
@@ -255,12 +262,14 @@ var VideoFunctions = function() {
 var videoFunctions = new VideoFunctions();
 
 function forwardVideo() {
+  sendStation("forwardvideo");
   if (changeIteration(1) <= videoCounter) {
     loopVideo();
   }
 }
 
 function backVideo() {
+  sendStation("backvideo");
   if (!backRestart) {
     if (changeIteration(-2) > -1) {
       videoIteration = changeIteration(-2);
@@ -313,6 +322,35 @@ function getPlaylist() {
       "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
       "I'm really sorry about this inconvenience.\n\nerr: " + err);
     }
+  }
+}
+
+function appendPlaylist(playlist) {
+  try {
+    playlist = window.atob(playlist);
+    playlist = JSON.parse(playlist);
+
+    if (playlist[0] !== undefined && playlist[0] !== null) {
+      if (videos[0] === undefined || videos[0] === null) {
+        $("#playlistNameBox").val(decodeURIComponent(playlist[0]));
+      }
+    }
+
+    for (var i = 1; i < playlist.length; i++) {
+      videoCounter++;
+      var printTime = msConversion(playlist[i][1] * 1000);
+      addVideoToList(playlist[i][0], printTime, videoCounter);
+    }
+
+    playlist.splice(0, 1);
+    videos = videos.concat(playlist);
+
+    setPlaylist();
+  }
+  catch(err) {
+    alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
+      "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
+      "I'm really sorry about this inconvenience.\n\nerr: " + err);
   }
 }
 
@@ -583,6 +621,8 @@ function addVideo(name, time, id) {
     videos[iteration] = video;
   }
   
+  sendStation("addvideo," + video);
+  
   if (playlistShuffle) {
     addedVideosWhileShuffled.push(video);
   }
@@ -600,17 +640,17 @@ function addVideo(name, time, id) {
   }
 }
 
-function actionPlayVideo(element) {
-  var index = $(".playButton").index(element);
-  videoIteration = index;
+function actionPlayVideo(iteration) {
+  sendStation("actionplayvideo," + iteration);
+  videoIteration = iteration;
   videoPaused = false;
   loopVideo();
   $("#favicon").attr("href", faviconPlay);
 }
 
-function actionRemoveVideo(element) {
-  var index = $(".removeButton").index(element) + 1;
-  if (index === videoIteration) {
+function actionRemoveVideo(iteration) {
+  sendStation("actionremovevideo," + iteration);
+  if (iteration === videoIteration) {
     if (videoIteration + 1 <= videoCounter) {
       forwardVideo();
       videoIteration = changeIteration(-1);
@@ -623,12 +663,12 @@ function actionRemoveVideo(element) {
       videoIteration = changeIteration(-1);
     }
   }
-  else if (index < videoIteration) {
+  else if (iteration < videoIteration) {
     videoIteration = changeIteration(-1);
   }
   videoCounter--;
-  videos.splice(index, 1);
-  removeVideoFromList(index, true);
+  videos.splice(iteration, 1);
+  removeVideoFromList(iteration, true);
   
   setPlaylist();
   makeSortable();
@@ -636,7 +676,17 @@ function actionRemoveVideo(element) {
   addAutoplayVideo();
 }
 
+function buttonPlayVideo(element) {
+  var index = $(".playButton").index(element);
+  actionPlayVideo(index);
+}
+function buttonRemoveVideo(element) {
+  var index = $(".removeButton").index(element) + 1;
+  actionRemoveVideo(index);
+}
+
 function actionMoveVideo(oldIndex, newIndex) {
+  sendStation("actionmovevideo," + oldIndex + "," + newIndex);
   videos.move(oldIndex, newIndex);
   if (oldIndex == videoIteration) {
     videoIteration = newIndex;
@@ -699,15 +749,18 @@ function videoPreviews() {
 
 var PlaylistFeatures = function() {
   this.playNext = function() {
+    sendStation("playlistfeaturesplaynext");
     playlistPlayNext = (playlistPlayNext ? false : true);
     $(".fa-arrow-circle-right").css("color", (playlistPlayNext ? "#F77F00" : "grey"));
   }
   this.repeat = function() {
+    sendStation("playlistfeaturesrepeat");
     playlistRepeat = (playlistRepeat ? false : true);
     videoPreviews();
     $(".fa-repeat").css("color", (playlistRepeat ? "#F77F00" : "grey"));
   }
   this.shuffle = function() {
+    sendStation("playlistfeaturesshuffle");
     playlistShuffle = (playlistShuffle ? false : true);
     shufflePlaylist();
     $(".fa-random").css("color", (playlistShuffle ? "#F77F00" : "grey"));
@@ -730,10 +783,26 @@ var PlaylistFeatures = function() {
 var playlistFeatures = new PlaylistFeatures;
 
 function urlValidate(url) {
-  var regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
-  url = url.match(regex);
-  if (url !== null && url[1] !== null) {
-    return url[1];
+  var youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
+  var streamlyRegex = /.*#(.+)/i;
+  
+  function checkMatch(url, regex) {
+    var doesMatch = url.match(regex);
+    if (doesMatch !== null && doesMatch[1] !== null) {
+      return doesMatch[1];
+    }
+    else {
+      return false;
+    }
+  }
+  
+  var checkoutYoutube = checkMatch(url, youtubeRegex);
+  var checkoutStreamly = checkMatch(url, streamlyRegex);
+  if (checkoutYoutube) {
+    return ["youtube", checkoutYoutube];
+  }
+  else if (checkoutStreamly) {
+    return ["streamly", checkoutStreamly];
   }
   else {
     return false;
@@ -778,13 +847,19 @@ function input(type) {
         }
       }
       else if (isUrl) {
-        inputBox = isUrl;
-        getVideoData(inputBox);
-        $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
-        if (typeof popup !== "undefined") {
-          popup.close();
+        if (isUrl[0] === "youtube") {
+          inputBox = isUrl[1];
+          getVideoData(inputBox);
+          $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
+          if (typeof popup !== "undefined") {
+            popup.close();
+          }
+          $("#youtube").css("display", "block");
         }
-        $("#youtube").css("display", "block");
+        else if (isUrl[0] === "streamly") {
+          appendPlaylist(isUrl[1]);
+          $("#inputBox").val("").attr("placeholder", placeholder);
+        }
       }
       else if ($(window).width() > 600 && inputBox.indexOf("\\") === -1) {
         if (inputBox.slice(-2) === " l") {
@@ -825,3 +900,114 @@ document.addEventListener("drop", function(event) {
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
 });
+
+// Start Streamly Station
+
+function sendStation(what) {
+  if (stationServer !== undefined && stationServer !== null) {
+    if (!stationRxQuiet) {
+      stationTxQuiet = true;
+      console.log("Station Tx: " + what);
+      stationSocket.emit("msg", what);
+    }
+    else {
+      stationRxQuiet = false;
+    }
+  }
+}
+
+function loadStation() {
+  stationSocket = io("http://" + stationServer);
+  alert("Streamly Station \"" + stationServer + "\" connected!");
+  
+  $("#stationIcon").css("display", "initial");
+  
+  stationSocket.on("msg", function(msg) {
+    console.log("Station Rx: " + msg);
+    
+    var msgData = msg.split(",");
+    if (!stationTxQuiet) {
+      stationRxQuiet = true;
+      
+      $("#stationIcon").css("color", "red");
+      setTimeout(function() {
+        $("#stationIcon").css("color", "#00ff00");
+      }, 300);
+      
+      switch (msgData[0]) {
+        case "addvideo":
+          addVideo(msgData[1], msgData[2], msgData[3]);
+          break;
+        case "playerending":
+          loopVideo();
+          break;
+        case "actionplayvideo":
+          actionPlayVideo(+msgData[1]);
+          break;
+        case "actionremovevideo":
+          actionRemoveVideo(+msgData[1]);
+          break;
+        case "forwardvideo":
+          forwardVideo();
+          break;
+        case "backvideo":
+          backVideo();
+          break;
+        case "videofunctionsplay":
+          player.playVideo();
+          break;
+        case "videofunctionspause":
+          player.pauseVideo();
+          break;
+        case "playlistfeaturesplaynext":
+          playlistFeatures.playNext();
+          break;
+        case "playlistfeaturesrepeat":
+          playlistFeatures.repeat();
+          break;
+        case "playlistfeaturesshuffle":
+          playlistFeatures.shuffle();
+          break;
+        case "actionmovevideo":
+          actionMoveVideo(+msgData[1], +msgData[2]);
+          var from = "#videosTable tr:nth-child(" + (+msgData[1] + 1) + ")";
+          var to = "#videosTable tr:nth-child(" + msgData[2] + ")";
+          console.log("FROM: " + from);
+          console.log("TO: " + to);
+          $(to).after($(from));
+          break;
+      }
+    }
+    else {
+      stationTxQuiet = false;
+    }
+  });
+}
+
+function connectStation(server) {
+  stationServer = server;
+  $.ajax({
+    url: "http://" + stationServer + "/socket.io/socket.io.js",
+    dataType: "script",
+    success: loadStation
+  });
+}
+
+function disconnectStation() {
+  stationSocket.disconnect();
+  $("#stationIcon").css("display", "none");
+}
+
+var securityWarning = false;
+function actionConnectStation() {
+  var station = $("#connectStationBox").val();
+  if (window.location.protocol === "https:" && securityWarning === false) {
+    securityWarning = true;
+    alert("Note: Due to security protections, scripts on secured pages with 'https://' cannot make unsecured connections. " + 
+          "Streamly Station runs without any onboard security, so this request will probably be blocked and you'll get a notification that the site requested unsecured scripts.\n\n" +
+          "In order to use Streamly Station, either make an exception to 'Load unsafe scripts' or replace the 'https://' with 'http://' in the URL.");
+  }
+  connectStation(station);
+}
+
+// End Streamly Station
