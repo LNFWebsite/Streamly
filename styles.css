@@ -74,7 +74,8 @@ footer {
   border-radius: 999px;
   left: 15px;
   padding: 5px;
-  width: 50%;
+  width: calc(100% - 450px);
+  max-width: 600px;
 }
 #saveButton,
 #settingsButton {
@@ -92,7 +93,8 @@ footer {
 }
 #stationIcon {
   color: #00ff00;
-  left: 50px;
+  left: 45px;
+  position: relative;
   display: none;
 }
 #settingsCloseButton {
