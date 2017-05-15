@@ -90,6 +90,11 @@ footer {
   left: 35px;
   color: #fff;
 }
+#stationIcon {
+  color: #00ff00;
+  left: 50px;
+  display: none;
+}
 #settingsCloseButton {
   position: absolute;
   top: 0;
