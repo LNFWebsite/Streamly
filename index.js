@@ -536,6 +536,29 @@ function addAutoplayVideo() {
 
 // End Streamly Radio
 
+function refreshVideoList() {
+  for (var i = 1; i < videos.length; i++) {
+    removeVideoFromList(i, false);
+    var printTime = msConversion(videos[i][1] * 1000);
+    addVideoToList(videos[i][0], printTime, i);
+    if (videos[i][2] === videos[videoIteration][2]) {
+      if (videoPaused && videoIteration === 1) {
+        highlight(1, "selected");
+      }
+      else if (!playlistRepeat) {
+        videoIteration = i;
+        highlight(i, "selected");
+      }
+    }
+    if (videos[i][2] === baseAutoplayVideoId) {
+      highlight(i, "radio");
+    }
+    if (videoErrorIds.indexOf(videos[i][2]) > -1) {
+      highlight(i, "videoError");
+    }
+  }
+}
+
 function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
@@ -569,27 +592,7 @@ function shufflePlaylist() {
     videos.unshift(playlistName);
   }
   
-  for (var i = 1; i < videos.length; i++) {
-    removeVideoFromList(i, false);
-    var printTime = msConversion(videos[i][1] * 1000);
-    addVideoToList(videos[i][0], printTime, i);
-    if (videos[i][2] === videoIterationId) {
-      if (videoPaused && videoIteration === 1) {
-        highlight(1, "selected");
-      }
-      else if (!playlistRepeat) {
-        videoIteration = i;
-        highlight(i, "selected");
-      }
-    }
-    if (videos[i][2] === baseAutoplayVideoId) {
-      highlight(i, "radio");
-    }
-    if (videoErrorIds.indexOf(videos[i][2]) > -1) {
-      highlight(i, "videoError");
-    }
-  }
-  
+  refreshVideoList();
   setPlaylist();
   makeSortable();
   videoPreviews();
@@ -814,6 +817,7 @@ function input(type) {
   //if playlist input
   if (type === 2) {
     var playlistNameBox = $("#playlistNameBox").val();
+    sendStation("playlistnamechange," + playlistNameBox);
     if (playlistNameBox !== "") {
       videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
     }
@@ -970,18 +974,15 @@ function loadStation() {
           break;
         case "actionmovevideo":
           actionMoveVideo(+msgData[1], +msgData[2]);
-          var from = "#videosTable tr:nth-child(" + msgData[1] + ")";
-          var to = "#videosTable tr:nth-child(" + msgData[2] + ")";
-          console.log("FROM: " + from);
-          console.log("TO: " + to);
-          if (+msgData[2] !== 1) {
-            to = "#videosTable tr:nth-child(" + (+msgData[2] - 1) + ")";
-            $(to).after($(from));
-          }
-          else {
-            $(from).insertBefore($(to));
-          }
+          refreshVideoList();
+          setPlaylist();
+          makeSortable();
+          videoPreviews();
+          addAutoplayVideo();
           break;
+        case "playlistnamechange":
+          $("#playlistNameBox").val(msgData[1]);
+          input(2);
       }
     }
     else {
