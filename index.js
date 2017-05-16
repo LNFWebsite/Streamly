@@ -980,7 +980,7 @@ function loadStation() {
           videoPreviews();
           addAutoplayVideo();
           break;
-        case "playlistNameChange":
+        case "playlistnamechange":
           $("#playlistNameBox").val(msgData[1]);
           input(2);
       }
