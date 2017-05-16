@@ -121,6 +121,7 @@ footer {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #2b2b2b;
+  box-shadow: 0px 0px 20px 1px black;
   text-align: left;
   padding: 10px;
   color: #ccc;
