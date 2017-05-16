@@ -112,9 +112,10 @@ footer {
 #settingsCloseButton:hover {
   color: white;
 }
-#settingsButton:hover, #stationIcon:hover {
+.fa:hover {
   box-shadow: 0 0 20px #ff7700;
   background-color: rgba(255, 119, 0, 0.4);
+  border-radius: 999px;
 }
 #saveButton:hover, #inputBox:hover {
   border: 1px solid #ff7700;
