@@ -401,7 +401,7 @@ tr.placeholder:before {
     left: auto;
   }
   #settingsWindow {
-    width: auto;
+    width: 85%;
   }
   #inputBox {
     width: calc(100% - 120px) !important;
