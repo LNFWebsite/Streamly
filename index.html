@@ -25,7 +25,7 @@
     <form action="javascript:input(0);" method="get" id="searchForm">
       <input type="textbox" id="inputBox" placeholder="Search, drag and drop video, or paste its URL..." autofocus>
     </form>
-    <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();">Save playlist</button>
+    <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();" title="Copy your playlist to clipboard">Save playlist</button>
     <span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>
     <span class="fa fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
   </header>
@@ -309,7 +309,7 @@
   
   new Clipboard("#saveButton");
   function saveButton() {
-    $("#saveButton").text("Playlist copied to clipboard!");
+    $("#saveButton").text("Playlist copied!");
     setTimeout(function() {
       $("#saveButton").text("Save playlist");
     }, 2000);
