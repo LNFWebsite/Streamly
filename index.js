@@ -817,6 +817,7 @@ function input(type) {
   //if playlist input
   if (type === 2) {
     var playlistNameBox = $("#playlistNameBox").val();
+    sendStation("playlistnamechange," + playlistNameBox);
     if (playlistNameBox !== "") {
       videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
     }
@@ -979,6 +980,9 @@ function loadStation() {
           videoPreviews();
           addAutoplayVideo();
           break;
+        case "playlistNameChange":
+          $("#playlistNameBox").val(msgData[1]);
+          input(2);
       }
     }
     else {
