@@ -216,12 +216,11 @@ function playVideo() {
       }
       console.log("Debug: playVideo");
     }
-
-    backRestart = false;
-    window.setTimeout(function() {
-      backRestart = true;
-    }, 3000);
   }
+  backRestart = false;
+  window.setTimeout(function() {
+    backRestart = true;
+  }, 3000);
 }
 
 function loopVideo() {
