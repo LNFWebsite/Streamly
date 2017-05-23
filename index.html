@@ -314,6 +314,19 @@
       $("#saveButton").text("Save playlist");
     }, 2000);
   }
+    
+  $("#youtubeContainer").click(function() {
+    if (streamlyRemote) {
+      if ($("#remotePauseIcon").hasClass("fa-play")) {
+        $("#remotePauseIcon").removeClass("fa-play").addClass("fa-pause");
+        sendStation("videofunctionspause");
+      }
+      else {
+        $("#remotePauseIcon").removeClass("fa-pause").addClass("fa-play");
+        sendStation("videofunctionsplay");
+      }
+    }
+  });
   
   function shareOnReddit() {
     var playlistName = $("#playlistNameBox").val();
