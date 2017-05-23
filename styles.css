@@ -218,6 +218,7 @@ td {
 #remotePauseIcon {
   color: white;
   margin-top: 70px;
+  display: none;
 }
 #youtube {
   display: block;
