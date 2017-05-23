@@ -964,7 +964,7 @@ function loadStation() {
             player.playVideo();
           }
           else {
-            $("#remotePauseIcon").removeClass("fa-pause").addClass("fa-play");
+            $("#remotePauseIcon").removeClass("fa-play").addClass("fa-pause");
           }
           break;
         case "videofunctionspause":
@@ -972,7 +972,7 @@ function loadStation() {
             player.pauseVideo();
           }
           else {
-            $("#remotePauseIcon").removeClass("fa-play").addClass("fa-pause");
+            $("#remotePauseIcon").removeClass("fa-pause").addClass("fa-play");
           }
           break;
         case "playlistfeaturesplaynext":
