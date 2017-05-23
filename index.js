@@ -960,10 +960,20 @@ function loadStation() {
           backVideo();
           break;
         case "videofunctionsplay":
-          player.playVideo();
+          if (!stationRemote) {
+            player.playVideo();
+          }
+          else {
+            $("#remotePauseIcon").removeClass("fa-pause").addClass("fa-play");
+          }
           break;
         case "videofunctionspause":
-          player.pauseVideo();
+          if (!stationRemote) {
+            player.pauseVideo();
+          }
+          else {
+            $("#remotePauseIcon").removeClass("fa-play").addClass("fa-pause");
+          }
           break;
         case "playlistfeaturesplaynext":
           playlistFeatures.playNext();
