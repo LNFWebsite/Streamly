@@ -960,10 +960,14 @@ function loadStation() {
           backVideo();
           break;
         case "videofunctionsplay":
-          player.playVideo();
+          if (!stationRemote) {
+            player.playVideo();
+          }
           break;
         case "videofunctionspause":
-          player.pauseVideo();
+          if (!stationRemote) {
+            player.pauseVideo();
+          }
           break;
         case "playlistfeaturesplaynext":
           playlistFeatures.playNext();
