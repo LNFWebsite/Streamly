@@ -1019,4 +1019,15 @@ function actionConnectStation() {
   connectStation(station);
 }
 
+function toggleRemote() {
+  if (!stationRemote) {
+    $("#remotePauseIcon").css("display", "initial");
+    $("#youtubeContainer").css("background", "black");
+  }
+  else {
+    $("#remotePauseIcon").css("display", "none");
+    $("#youtubeContainer").css("background", "none");
+  }
+}
+
 // End Streamly Station
