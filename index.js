@@ -1021,10 +1021,12 @@ function actionConnectStation() {
 
 function toggleRemote() {
   if (!stationRemote) {
+    stationRemote = true;
     $("#remotePauseIcon").css("display", "block");
     $("#youtubeContainer").css("background", "black");
   }
   else {
+    stationRemote = false;
     $("#remotePauseIcon").css("display", "none");
     $("#youtubeContainer").css("background", "none");
   }
