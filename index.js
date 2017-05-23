@@ -963,10 +963,16 @@ function loadStation() {
           if (!stationRemote) {
             player.playVideo();
           }
+          else {
+            videoPaused = false;
+          }
           break;
         case "videofunctionspause":
           if (!stationRemote) {
             player.pauseVideo();
+          }
+          else {
+            videoPaused = true;
           }
           break;
         case "playlistfeaturesplaynext":
