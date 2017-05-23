@@ -215,6 +215,11 @@ td {
   width: 300px;
   cursor: pointer;
 }
+#remotePauseIcon {
+  color: white;
+  margin-top: 70px;
+  display: none;
+}
 #youtube {
   display: block;
   height: 100%;

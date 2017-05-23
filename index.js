@@ -29,6 +29,7 @@ var quickSearchVideosIteration = 0;
 
 var stationServer;
 var stationSocket;
+var stationRemote = false;
 var stationRxQuiet = false;
 var stationTxQuiet = false;
 
@@ -197,24 +198,25 @@ function playVideo() {
   
   $("#youtube").css("display", "block");
   
-  if ($("#youtube").attr("src") === "") {
-    var parameters = "?enablejsapi=1";
-    if (!videoPaused) {
-      parameters = "?enablejsapi=1&autoplay=1";
-    }
-    var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
-    $("#youtube").attr("src", embedUrl);
-  }
-  else {
-    if (!videoPaused) {
-      player.loadVideoById(videos[videoIteration][2]);
+  if (!stationRemote) {
+    if ($("#youtube").attr("src") === "") {
+      var parameters = "?enablejsapi=1";
+      if (!videoPaused) {
+        parameters = "?enablejsapi=1&autoplay=1";
+      }
+      var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
+      $("#youtube").attr("src", embedUrl);
     }
     else {
-      player.cueVideoById(videos[videoIteration][2]);
+      if (!videoPaused) {
+        player.loadVideoById(videos[videoIteration][2]);
+      }
+      else {
+        player.cueVideoById(videos[videoIteration][2]);
+      }
+      console.log("Debug: playVideo");
     }
-    console.log("Debug: playVideo");
   }
-
   backRestart = false;
   window.setTimeout(function() {
     backRestart = true;
@@ -1015,6 +1017,19 @@ function actionConnectStation() {
           "In order to use Streamly Station, either make an exception to 'Load unsafe scripts' or replace the 'https://' with 'http://' in the URL.");
   }
   connectStation(station);
+}
+
+function toggleRemote() {
+  if (!stationRemote) {
+    stationRemote = true;
+    $("#remotePauseIcon").css("display", "block");
+    $("#youtubeContainer").css("background", "black");
+  }
+  else {
+    stationRemote = false;
+    $("#remotePauseIcon").css("display", "none");
+    $("#youtubeContainer").css("background", "none");
+  }
 }
 
 // End Streamly Station
