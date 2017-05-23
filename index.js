@@ -964,7 +964,7 @@ function loadStation() {
             player.playVideo();
           }
           else {
-            videoPaused = false;
+            $("#remotePauseIcon").removeClass("fa-pause").addClass("fa-play");
           }
           break;
         case "videofunctionspause":
@@ -972,7 +972,7 @@ function loadStation() {
             player.pauseVideo();
           }
           else {
-            videoPaused = true;
+            $("#remotePauseIcon").removeClass("fa-play").addClass("fa-pause");
           }
           break;
         case "playlistfeaturesplaynext":
