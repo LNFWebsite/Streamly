@@ -1021,7 +1021,7 @@ function actionConnectStation() {
 
 function toggleRemote() {
   if (!stationRemote) {
-    $("#remotePauseIcon").css("display", "initial");
+    $("#remotePauseIcon").css("display", "block");
     $("#youtubeContainer").css("background", "black");
   }
   else {
