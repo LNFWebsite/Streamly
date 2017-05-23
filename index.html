@@ -320,11 +320,11 @@
     if (stationRemote) {
       if ($("#remotePauseIcon").hasClass("fa-play")) {
         $("#remotePauseIcon").removeClass("fa-play").addClass("fa-pause");
-        sendStation("videofunctionspause");
+        sendStation("videofunctionsplay");
       }
       else {
         $("#remotePauseIcon").removeClass("fa-pause").addClass("fa-play");
-        sendStation("videofunctionsplay");
+        sendStation("videofunctionspause");
       }
     }
   });
