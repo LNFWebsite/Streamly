@@ -232,8 +232,6 @@
   $("header, #forkmeImage").addClass("animated slideInDown");
   $("footer").addClass("animated slideInUp");
   $("#links").addClass("animated fadeIn");
-    
-  var zenMode = false;
   
   window.addEventListener("keyup", function(e) {
     if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
@@ -248,21 +246,7 @@
           playlistFeatures.autoplay();
           break;
         case "KeyZ":
-          if (zenMode) {
-            zenMode = false;
-            $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
-            $("footer").removeClass("slideOutDown").addClass("slideInUp");
-            $("#links").off().css("display", "block").removeClass("fadeOut").addClass("fadeIn");
-          }
-          else {
-            zenMode = true;
-            $("header, #forkmeImage").removeClass("slideInDown").addClass("slideOutUp");
-            $("footer").removeClass("slideInUp").addClass("slideOutDown");
-            $("#links").removeClass("fadeIn").addClass("fadeOut");
-            $("#links").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-              $(this).css("display", "none");
-            });
-          }
+          toggleZen();
           break;
         case "Space":
           if (videoPaused) {
