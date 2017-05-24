@@ -1063,6 +1063,7 @@ function toggleZen() {
     $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
     $("footer").removeClass("slideOutDown").addClass("slideInUp");
     $("#links").off().css("display", "block").removeClass("fadeOut").addClass("fadeIn");
+    $("zenModeToggle").prop("checked", false);
   }
   else {
     zenMode = true;
@@ -1072,5 +1073,6 @@ function toggleZen() {
     $("#links").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
       $(this).css("display", "none");
     });
+    $("zenModeToggle").prop("checked", true);
   }
 }
