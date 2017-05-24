@@ -38,7 +38,9 @@
       <p><i>Connect to a Streamly Station</i></p>
       <form action="javascript:actionConnectStation();" method="get">
         <label for="connectStationBox">Address:</label>
+        <label for="stationRemote">Remote?</label>
         <input type="textbox" id="connectStationBox" placeholder="Enter the Streamly Station address (ex. 192.168.0.15)..." title="Enter the Streamly Station address">
+        <input type="checkbox" id="stationRemote" onchange="toggleRemote();">
       </form>
     </div>
     <div id="blurBackground"></div>
