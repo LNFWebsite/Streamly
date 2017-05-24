@@ -911,11 +911,19 @@ document.addEventListener("dragover", function(event) {
 
 // Start Streamly Station
 
+function flashStationIcon() {
+  $("#stationIcon").css("color", "red");
+  setTimeout(function() {
+    $("#stationIcon").css("color", "#00ff00");
+  }, 300);
+}
+
 function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
     if (!stationRxQuiet || stationRemote) {
       stationTxQuiet = true;
       console.log("Station Tx: " + what);
+      flashStationIcon();
       stationSocket.emit("msg", what);
     }
     else {
@@ -937,10 +945,7 @@ function loadStation() {
     if (!stationTxQuiet) {
       stationRxQuiet = true;
       
-      $("#stationIcon").css("color", "red");
-      setTimeout(function() {
-        $("#stationIcon").css("color", "#00ff00");
-      }, 300);
+      flashStationIcon();
       
       switch (msgData[0]) {
         case "addvideo":
