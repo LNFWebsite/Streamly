@@ -196,9 +196,9 @@ function playVideo() {
 
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   
-  $("#youtube").css("display", "block");
-  
   if (!stationRemote) {
+    $("#youtube").css("display", "block");
+    
     if ($("#youtube").attr("src") === "") {
       var parameters = "?enablejsapi=1";
       if (!videoPaused) {
@@ -661,9 +661,11 @@ function actionRemoveVideo(iteration) {
       videoIteration = changeIteration(-1);
     }
     else {
-      actionTimers.clear();
-      player.stopVideo();
-      $("#youtube").css("display", "none");
+      if (!stationRemote) {
+        actionTimers.clear();
+        player.stopVideo();
+        $("#youtube").css("display", "none");
+      }
       document.title = "Streamly";
       videoIteration = changeIteration(-1);
     }
