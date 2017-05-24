@@ -33,6 +33,8 @@ var stationRemote = false;
 var stationRxQuiet = false;
 var stationTxQuiet = false;
 
+var zenMode = false;
+
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
 var videoPlaying;
@@ -1054,3 +1056,23 @@ function toggleRemote() {
 }
 
 // End Streamly Station
+
+function toggleZen() {
+  if (zenMode) {
+    zenMode = false;
+    $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
+    $("footer").removeClass("slideOutDown").addClass("slideInUp");
+    $("#links").off().css("display", "block").removeClass("fadeOut").addClass("fadeIn");
+    $("zenModeToggle").prop("checked", false);
+  }
+  else {
+    zenMode = true;
+    $("header, #forkmeImage").removeClass("slideInDown").addClass("slideOutUp");
+    $("footer").removeClass("slideInUp").addClass("slideOutDown");
+    $("#links").removeClass("fadeIn").addClass("fadeOut");
+    $("#links").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+      $(this).css("display", "none");
+    });
+    $("zenModeToggle").prop("checked", true);
+  }
+}
