@@ -911,7 +911,7 @@ document.addEventListener("dragover", function(event) {
 
 function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
-    if (!stationRxQuiet) {
+    if (!stationRxQuiet || stationRemote) {
       stationTxQuiet = true;
       console.log("Station Tx: " + what);
       stationSocket.emit("msg", what);
