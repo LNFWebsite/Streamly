@@ -1042,14 +1042,14 @@ function toggleRemote() {
     $("#remotePauseIcon").css("display", "block");
     $("#youtubeContainer").css("background", "black");
     $("#youtube").css("display", "none");
-    $("#currentVideoTiming").css("display", "none");
+    $("#currentVideoTiming").css("opacity", "0");
   }
   else {
     stationRemote = false;
     $("#remotePauseIcon").css("display", "none");
     $("#youtubeContainer").css("background", "none");
     $("#youtube").css("display", "block");
-    $("#currentVideoTiming").css("display", "block");
+    $("#currentVideoTiming").css("opacity", "1");
   }
 }
 
