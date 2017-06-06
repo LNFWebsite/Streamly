@@ -201,7 +201,7 @@ function playVideo() {
   if (!stationRemote) {
     $("#youtube").css("display", "block");
     
-    if ($("#youtube").attr("src") === "") {
+    if ($("#youtube").attr("src") === "https://www.youtube.com/embed/?enablejsapi=1") {
       var parameters = "?enablejsapi=1";
       if (!videoPaused) {
         parameters = "?enablejsapi=1&autoplay=1";

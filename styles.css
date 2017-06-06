@@ -221,7 +221,7 @@ td {
   display: none;
 }
 #youtube {
-  display: block;
+  display: none;
   height: 100%;
   position: absolute;
   width: 100%;
