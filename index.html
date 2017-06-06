@@ -100,12 +100,10 @@
       <span class="fa fa-reddit" id="ad" onclick="shareOnReddit();" title="Share playlist on Reddit"></span>
     </div>
   </footer>
-  <div id="dialog">
-    <p>NOTE: YouTube has changed something under the hood with their IFrame API which is resulting in issues regarding loading new videos. I'm actively investigating what has been changed, but it seems like a simple fix.</p>
-    <p>For now, your playlists should still play fine. Likewise, using the <a href="https://cdn.rawgit.com/LNFWebsite/Streamly/36c414144ca178b5bd4b59ced5953702859ed87a/index.html">without-yt-api</a> branch serves as a backup for the moment. I'll fix this ASAP, sorry for the inconvenience.</p>
-  </div>
+  <div id="dialog"></div>
   <script>
-  $("#dialog").dialog();
+  //this is a standard dialog box for jquery that can be used to non-annoyingly get messages to users on-load
+  //$("#dialog").dialog();
   
   function shareOnRedditAd() {
     var i=0;
