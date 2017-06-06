@@ -201,23 +201,13 @@ function playVideo() {
   if (!stationRemote) {
     $("#youtube").css("display", "block");
     
-    if ($("#youtube").attr("src") === "https://www.youtube.com/embed/?enablejsapi=1") {
-      var parameters = "?enablejsapi=1";
-      if (!videoPaused) {
-        parameters = "?enablejsapi=1&autoplay=1";
-      }
-      var embedUrl = "https://www.youtube.com/embed/" + videos[videoIteration][2] + parameters;
-      $("#youtube").attr("src", embedUrl);
+    if (!videoPaused) {
+      player.loadVideoById(videos[videoIteration][2]);
     }
     else {
-      if (!videoPaused) {
-        player.loadVideoById(videos[videoIteration][2]);
-      }
-      else {
-        player.cueVideoById(videos[videoIteration][2]);
-      }
-      console.log("Debug: playVideo");
+      player.cueVideoById(videos[videoIteration][2]);
     }
+    console.log("Debug: playVideo");
   }
   backRestart = false;
   window.setTimeout(function() {
@@ -326,10 +316,6 @@ function getPlaylist() {
       "Make sure that you save the URL that you have now, and contact me (the administrator) by submitting an issue on Streamly's Github page.\n\n" +
       "I'm really sorry about this inconvenience.\n\nerr: " + err);
     }
-  }
-  else {
-    //need to initialize per 6/2017 YT backend change
-    $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
   }
 }
 
