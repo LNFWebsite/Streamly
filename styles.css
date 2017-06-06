@@ -276,6 +276,7 @@ td {
   background-color: white;
   border-radius: 5px;
   margin: 0 auto;
+  opacity: 0;
 }
 #previousVideoName {
   padding: 5px;
@@ -287,6 +288,7 @@ td {
 }
 #previousVideoImage, #nextVideoImage {
   height: 90px;
+  opacity: 0;
 }
 #previousVideoTime,
 #nextVideoTime {
@@ -296,6 +298,7 @@ td {
   overflow: hidden;
   position: absolute;
   text-align: right;
+  opacity: 0;
 }
 #previousVideoTime {
   right: 7px
