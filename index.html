@@ -226,6 +226,10 @@
   function onPlayerReady(event) {
     console.log("Debug: onPlayerReady");
     startVideoProgress();
+    
+    getPlaylist();
+    makeSortable();
+    videoPreviews();
   }
   function onError(event) {
     videoErrorIds.push(videos[videoIteration][2]);
@@ -235,10 +239,6 @@
   
   //need to initialize per 6/2017 YT backend change
   $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
-  
-  getPlaylist();
-  makeSortable();
-  videoPreviews();
   
   $("header, #forkmeImage").addClass("animated slideInDown");
   $("footer").addClass("animated slideInUp");
