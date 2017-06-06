@@ -327,6 +327,10 @@ function getPlaylist() {
       "I'm really sorry about this inconvenience.\n\nerr: " + err);
     }
   }
+  else {
+    //need to initialize per 6/2017 YT backend change
+    $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
+  }
 }
 
 function appendPlaylist(playlist) {
