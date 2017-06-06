@@ -233,6 +233,9 @@
     forwardVideo();
   }
   
+  //need to initialize per 6/2017 YT backend change
+  $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
+  
   getPlaylist();
   makeSortable();
   videoPreviews();
