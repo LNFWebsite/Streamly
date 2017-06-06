@@ -189,8 +189,6 @@
     });
     console.log("Debug: Player loaded");
   }
-  //need to initialize per 6/2017 YT backend change
-  $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
   function onPlayerStateChange(event) {
     switch(event.data) {
       //unstarted
@@ -234,6 +232,9 @@
     $("tr:nth-child(" + videoIteration + ")").addClass("videoError");
     forwardVideo();
   }
+  
+  //need to initialize per 6/2017 YT backend change
+  $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
   
   getPlaylist();
   makeSortable();
