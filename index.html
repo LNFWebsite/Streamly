@@ -189,9 +189,10 @@
         'onError': onError
       }
     });
-    $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
     console.log("Debug: Player loaded");
   }
+    /////////////////////////////
+  $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
   function onPlayerStateChange(event) {
     switch(event.data) {
       //unstarted
