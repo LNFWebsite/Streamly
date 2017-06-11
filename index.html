@@ -244,8 +244,11 @@
   $("footer").addClass("animated fadeIn");
   $("#links").addClass("animated fadeIn");
   
-  window.addEventListener("keydown", function(e) {
-    if ((!$("#inputBox").is(":focus") || $("#inputBox").val() == "") && !$("#playlistNameBox").is(":focus")) {
+  window.addEventListener("keyup", function(e) {
+    if ((!$("#inputBox").is(":focus")
+         || $("#inputBox").val() == ""
+         || $("#inputBox").val() == " ")
+        && !$("#playlistNameBox").is(":focus")) {
       switch (e.code) {
         case "ArrowLeft":
           backVideo();
