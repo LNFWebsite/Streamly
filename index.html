@@ -263,6 +263,9 @@
           toggleZen();
           break;
         case "Space":
+          if ($("#inputBox").val() === " ") {
+            $("#inputBox").val("");
+          }
           if (videoPaused) {
             player.playVideo();
           }
