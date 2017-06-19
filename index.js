@@ -928,9 +928,6 @@ function sendStation(what) {
       flashStationIcon();
       stationSocket.emit("msg", stationUserId + "," + what);
     }
-    else {
-      stationTxQuiet = false;
-    }
   }
 }
 
@@ -940,9 +937,8 @@ function loadStation() {
   
   $("#stationIcon").css("display", "initial");
   
-  stationTxQuiet = true;
-  
   stationSocket.on("msg", function(msg) {
+    stationTxQuiet = true;
     console.log("Station Rx: " + msg);
     
     var msgData = msg.split(",");
