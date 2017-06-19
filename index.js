@@ -30,8 +30,8 @@ var quickSearchVideosIteration = 0;
 var stationServer;
 var stationSocket;
 var stationRemote = false;
-var stationRxQuiet = false;
 var stationTxQuiet = false;
+var stationUserId;
 
 var zenMode = false;
 
@@ -50,6 +50,17 @@ var playlistAutoplay;
 var dataPlayer;
 var radioDataPlayer;
 var searchDataPlayer;
+
+function makeId() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+  for (var i=0; i < 10; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  
+  return text;
+}
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -912,20 +923,20 @@ function flashStationIcon() {
 
 function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
-    if (!stationRxQuiet || stationRemote) {
-      stationTxQuiet = true;
+    if (!stationTxQuiet) {
       console.log("Station Tx: " + what);
       flashStationIcon();
-      stationSocket.emit("msg", what);
+      stationSocket.emit("msg", stationUserId + "," + what);
     }
     else {
-      stationRxQuiet = false;
+      stationTxQuiet = false;
     }
   }
 }
 
 function loadStation() {
   stationSocket = io("http://" + stationServer);
+  stationUserId = makeId();
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   $("#stationIcon").css("display", "initial");
@@ -934,23 +945,22 @@ function loadStation() {
     console.log("Station Rx: " + msg);
     
     var msgData = msg.split(",");
-    if (!stationTxQuiet) {
-      stationRxQuiet = true;
-      
+    if (msgData[0] !== stationUserId) {
+      stationTxQuiet = true;
       flashStationIcon();
       
-      switch (msgData[0]) {
+      switch (msgData[1]) {
         case "addvideo":
-          addVideo(msgData[1], msgData[2], msgData[3]);
+          addVideo(msgData[2], msgData[3], msgData[4]);
           break;
         case "playerending":
           loopVideo();
           break;
         case "actionplayvideo":
-          actionPlayVideo(+msgData[1]);
+          actionPlayVideo(+msgData[2]);
           break;
         case "actionremovevideo":
-          actionRemoveVideo(+msgData[1]);
+          actionRemoveVideo(+msgData[2]);
           break;
         case "forwardvideo":
           forwardVideo();
@@ -984,7 +994,7 @@ function loadStation() {
           playlistFeatures.shuffle();
           break;
         case "actionmovevideo":
-          actionMoveVideo(+msgData[1], +msgData[2]);
+          actionMoveVideo(+msgData[2], +msgData[3]);
           refreshVideoList();
           setPlaylist();
           makeSortable();
@@ -992,12 +1002,9 @@ function loadStation() {
           addAutoplayVideo();
           break;
         case "playlistnamechange":
-          $("#playlistNameBox").val(msgData[1]);
+          $("#playlistNameBox").val(msgData[2]);
           input(2);
       }
-    }
-    else {
-      stationTxQuiet = false;
     }
   });
 }
