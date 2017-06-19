@@ -942,11 +942,11 @@ function loadStation() {
   $("#stationIcon").css("display", "initial");
   
   stationSocket.on("msg", function(msg) {
-    stationTxQuiet = true;
     console.log("Station Rx: " + msg);
     
     var msgData = msg.split(",");
     if (msgData[0] !== stationUserId) {
+      stationTxQuiet = true;
       flashStationIcon();
       
       switch (msgData[1]) {
