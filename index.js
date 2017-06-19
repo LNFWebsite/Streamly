@@ -928,11 +928,15 @@ function sendStation(what) {
       flashStationIcon();
       stationSocket.emit("msg", stationUserId + "," + what);
     }
+    else {
+      stationTxQuiet = false;
+    }
   }
 }
 
 function loadStation() {
   stationSocket = io("http://" + stationServer);
+  stationUserId = makeId();
   alert("Streamly Station \"" + stationServer + "\" connected!");
   
   $("#stationIcon").css("display", "initial");
@@ -1006,8 +1010,6 @@ function loadStation() {
 }
 
 function connectStation(server) {
-  stationUserId = makeId();
-  
   stationServer = server;
   $.ajax({
     url: "http://" + stationServer + "/socket.io/socket.io.js",
