@@ -530,6 +530,7 @@ function addAutoplayVideo() {
     }
     else if (videoIteration === videoCounter) {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
+        console.log("autoplayVideoIteration: " + autoplayVideoIteration);
         autoplayVideoIteration++;
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
         getVideoData(autoplayVideos[autoplayVideoIteration]);
