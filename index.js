@@ -21,7 +21,7 @@ var addedVideosWhileShuffled = [];
 
 var baseAutoplayVideoId;
 var autoplayVideos = [];
-var autoplayVideoIteration = 0;
+var autoplayVideoIteration = -1;
 
 var quickSearchQuery;
 var quickSearchVideos = [];
@@ -474,7 +474,7 @@ function onSearchDataPlayerStateChange(event) {
 
 function loadAutoplayData(iteration) {
   autoplayVideos = [];
-  autoplayVideoIteration = 0;
+  autoplayVideoIteration = -1;
   
   highlight(iteration, "radio");
   baseAutoplayVideoId = videos[iteration][2];
@@ -500,7 +500,8 @@ function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
-    for (var i = 1; i <= 25; i++) {
+    
+    for (var i = 0; i <= 25; i++) {
       var notInPlaylist = true;
       var autoplayVideo = autoplayVideos[i];
       for (var x = 1; x < videos.length; x++) {
