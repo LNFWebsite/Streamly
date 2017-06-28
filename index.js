@@ -502,6 +502,7 @@ function onRadioDataPlayerStateChange(event) {
     autoplayVideos = radioDataPlayer.getPlaylist();
     console.log(autoplayVideos); //==================================================================================
     for (var i = 0; i <= 25; i++) {
+      console.log(i);
       var notInPlaylist = true;
       var autoplayVideo = autoplayVideos[i];
       for (var x = 1; x < videos.length; x++) {
