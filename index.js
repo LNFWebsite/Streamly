@@ -474,7 +474,7 @@ function onSearchDataPlayerStateChange(event) {
 
 function loadAutoplayData(iteration) {
   autoplayVideos = [];
-  autoplayVideoIteration = 0;
+  autoplayVideoIteration = -1;
   
   highlight(iteration, "radio");
   baseAutoplayVideoId = videos[iteration][2];
@@ -501,7 +501,7 @@ function onRadioDataPlayerStateChange(event) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
     console.log(autoplayVideos); //==================================================================================
-    for (var i = 1; i <= 25; i++) {
+    for (var i = 0; i <= 24; i++) {
       var notInPlaylist = true;
       var autoplayVideo = autoplayVideos[i];
       for (var x = 1; x < videos.length; x++) {
