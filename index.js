@@ -500,9 +500,8 @@ function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
-    console.log(autoplayVideos); //==================================================================================
+    
     for (var i = 0; i <= 25; i++) {
-      console.log(i);
       var notInPlaylist = true;
       var autoplayVideo = autoplayVideos[i];
       for (var x = 1; x < videos.length; x++) {
@@ -530,7 +529,6 @@ function addAutoplayVideo() {
     }
     else if (videoIteration === videoCounter) {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
-        console.log("autoplayVideoIteration: " + autoplayVideoIteration);
         autoplayVideoIteration++;
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
         getVideoData(autoplayVideos[autoplayVideoIteration]);
