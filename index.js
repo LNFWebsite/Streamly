@@ -864,8 +864,13 @@ function input(type) {
           inputBox = isUrl[1];
           getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
-          if (typeof popup !== "undefined" && popupStayOpen !== true) {
-            popup.close();
+          if (typeof popup !== "undefined") {
+            if (popupStayOpen !== true) {
+              popup.close();
+            }
+            else {
+              popup.focus();
+            }
           }
           $("#youtube").css("display", "block");
         }
