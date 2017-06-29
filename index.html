@@ -34,6 +34,11 @@
     <div id="settingsWindow">
       <div id="settingsCloseButton" onclick="closeSettings();">Close</div>
       <h1>Settings</h1><hr>
+      <h2>General</h2><hr>
+      <p>
+        <label for="popupStayOpen">Keep search pop-up open?</label>
+        <input type="checkbox" id="popupStayOpen" onchange="togglePopupStayOpen();">
+      </p>
       <h2>Streamly Station</h2><hr>
       <p><i>Connect to a Streamly Station</i></p>
       <form action="javascript:actionConnectStation();" method="get">
