@@ -211,7 +211,9 @@ function playVideo() {
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   
   if (!stationRemote) {
-    //$("#youtube").css("display", "block");
+    if (typeof popup === "undefined" || popup.closed) {
+      $("#youtube").css("display", "block");
+    }
     
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
@@ -872,7 +874,6 @@ function input(type) {
               popup.focus();
             }
           }
-          $("#youtube").css("display", "block");
         }
         else if (isUrl[0] === "streamly") {
           appendPlaylist(isUrl[1]);
