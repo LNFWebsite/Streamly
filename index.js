@@ -213,6 +213,7 @@ function playVideo() {
   if (!stationRemote) {
     console.log(typeof popup + " | " + popup.closed);
     if (typeof popup === "undefined" || popup.closed) {
+      console.log("here");
       $("#youtube").css("display", "block");
     }
     
