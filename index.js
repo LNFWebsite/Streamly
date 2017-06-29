@@ -211,11 +211,7 @@ function playVideo() {
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   
   if (!stationRemote) {
-    console.log(typeof popup + " | " + popup.closed);
-    if (typeof popup === "undefined" || popup.closed) {
-      console.log("here");
-      $("#youtube").css("display", "block");
-    }
+    $("#youtube").css("display", "block");
     
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
