@@ -35,6 +35,7 @@ var stationTxQuiet = false;
 var stationUserId;
 
 var zenMode = false;
+var dropOverlay = false;
 
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
@@ -868,6 +869,7 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
           if (typeof popup !== "undefined") {
             if (popupClose === true) {
+              toggleDropOverlay();
               popup.close();
             }
             else {
@@ -885,9 +887,11 @@ function input(type) {
           inputBox = inputBox + "yric";
         }
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
-
+        toggleDropOverlay();
+        
         function checkIfClosed() {
             if (popup.closed) {
+              toggleDropOverlay();
               $("#youtube").css("display", "block");
               clearInterval(checkIfClosedTimer);
             }
@@ -1088,5 +1092,16 @@ function togglePopupClose() {
   }
   else {
     popupClose = false;
+  }
+}
+
+function toggleDropOverlay() {
+  if (!dropOverlay) {
+    $("#settingsShadow").css("display", "block");
+    $("dropOverlay").css("display", "block");
+  }
+  else {
+    $("#settingsShadow").css("display", "none");
+    $("dropOverlay").css("display", "none");
   }
 }
