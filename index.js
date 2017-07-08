@@ -891,14 +891,12 @@ function input(type) {
         function checkIfClosed() {
             if (popup.closed) {
               dropOverlay.close();
-              $("#youtube").css("display", "block");
               clearInterval(checkIfClosedTimer);
             }
         }
         var checkIfClosedTimer = setInterval(checkIfClosed, 500);
 
         $("#inputBox").val("").attr("placeholder", placeholder);
-        $("#youtube").css("display", "none");
       }
       else {
         inputBox = inputBox.replace("\\", "");
