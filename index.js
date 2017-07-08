@@ -1098,10 +1098,10 @@ function togglePopupClose() {
 function toggleDropOverlay() {
   if (!dropOverlay) {
     $("#settingsShadow").css("display", "block");
-    $("dropOverlay").css("display", "block");
+    $("#dropOverlay").css("display", "block");
   }
   else {
     $("#settingsShadow").css("display", "none");
-    $("dropOverlay").css("display", "none");
+    $("#dropOverlay").css("display", "none");
   }
 }
