@@ -211,9 +211,7 @@ function playVideo() {
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
   
   if (!stationRemote) {
-    if (typeof popup === "undefined" || popup.closed) {
-      $("#youtube").css("display", "block");
-    }
+    $("#youtube").css("display", "block");
     
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
@@ -891,14 +889,12 @@ function input(type) {
         function checkIfClosed() {
             if (popup.closed) {
               dropOverlay.close();
-              $("#youtube").css("display", "block");
               clearInterval(checkIfClosedTimer);
             }
         }
         var checkIfClosedTimer = setInterval(checkIfClosed, 500);
 
         $("#inputBox").val("").attr("placeholder", placeholder);
-        $("#youtube").css("display", "none");
       }
       else {
         inputBox = inputBox.replace("\\", "");
