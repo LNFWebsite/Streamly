@@ -140,6 +140,15 @@ footer {
   background-color: rgba(0, 0, 0, 0.75);
   display: none;
 }
+#dropOverlay {
+  position: fixed;
+  color: white;
+  z-index: 3;
+  top: 50%;
+  right: 25px;
+  transform: translate(0, -50%);
+  display: none;
+}
 #connectStationBox {
   width: 75%;
   font-family: 'Roboto',sans-serif;

@@ -868,6 +868,7 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
           if (typeof popup !== "undefined") {
             if (popupClose === true) {
+              dropOverlay.close();
               popup.close();
             }
             else {
@@ -885,9 +886,11 @@ function input(type) {
           inputBox = inputBox + "yric";
         }
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
-
+        dropOverlay.open();
+        
         function checkIfClosed() {
             if (popup.closed) {
+              dropOverlay.close();
               $("#youtube").css("display", "block");
               clearInterval(checkIfClosedTimer);
             }
@@ -1090,3 +1093,15 @@ function togglePopupClose() {
     popupClose = false;
   }
 }
+
+var DropOverlay = function() {
+  this.open = function() {
+    $("#settingsShadow").css("display", "block");
+    $("#dropOverlay").css("display", "block");
+  }
+  this.close = function() {
+    $("#settingsShadow").css("display", "none");
+    $("#dropOverlay").css("display", "none");
+  }
+}
+var dropOverlay = new DropOverlay();
