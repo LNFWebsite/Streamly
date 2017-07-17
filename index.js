@@ -839,6 +839,10 @@ function input(type) {
     if (inputBox !== "") {
       var isUrl = urlValidate(inputBox);
       var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
+      
+      var ua = navigator.userAgent.toLowerCase();
+      var isAndroid = ua.indexOf("android") > -1;
+      
       if (option) {
         switch (option[1]) {
           case "hidevideo":
@@ -879,7 +883,7 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
       }
-      else if ($(window).width() > 600 && inputBox.indexOf("\\") === -1) {
+      else if (($(window).width() > 600 && !isAndroid) && inputBox.indexOf("\\") === -1) {
         if (inputBox.slice(-2) === " l") {
           inputBox = inputBox + "yric";
         }
