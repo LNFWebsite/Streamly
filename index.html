@@ -250,12 +250,11 @@
   $("footer").addClass("animated fadeIn");
   $("#links").addClass("animated fadeIn");
   
-  window.addEventListener("keyup", function(e) {
+  window.addEventListener("keydown", function(e) {
     if ((!$("#inputBox").is(":focus")
          || $("#inputBox").val() == ""
          || $("#inputBox").val() == " ")
         && !$("#playlistNameBox").is(":focus")) {
-      e.preventDefault();
       switch (e.code) {
         case "ArrowLeft":
           backVideo();
@@ -280,6 +279,7 @@
             player.pauseVideo();
           }
       }
+      e.preventDefault();
     }
     else if ($("#inputBox").is(":focus")) {
       switch (e.code) {
