@@ -257,18 +257,23 @@
         && !$("#playlistNameBox").is(":focus")) {
       switch (e.code) {
         case "ArrowLeft":
+          e.preventDefault();
           backVideo();
           break;
         case "ArrowRight":
+          e.preventDefault();
           forwardVideo();
           break;
         case "KeyR":
+          e.preventDefault();
           playlistFeatures.autoplay();
           break;
         case "KeyZ":
+          e.preventDefault();
           toggleZen();
           break;
         case "Space":
+          e.preventDefault();
           if ($("#inputBox").val() === " ") {
             $("#inputBox").val("");
           }
@@ -279,7 +284,6 @@
             player.pauseVideo();
           }
       }
-      e.preventDefault();
     }
     else if ($("#inputBox").is(":focus")) {
       switch (e.code) {
