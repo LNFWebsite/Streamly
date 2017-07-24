@@ -159,7 +159,12 @@ th,
 #saveButton,
 #youtube,
 #previousVideo,
-#nextVideo {
+#previousVideoName,
+#previousVideoImage,
+#nextVideo,
+#nextVideoName,
+#nextVideoImage,
+#settings {
   border-radius: 5px
 }
 #main {
@@ -284,7 +289,6 @@ td {
 #previousVideoName,
 #nextVideoName {
   background-color: white;
-  border-radius: 5px;
   margin: 0 auto;
   opacity: 0;
 }
@@ -326,7 +330,6 @@ td {
   bottom: -5px;
   right: calc(30% - 162px);
   border: 1px solid white;
-  border-radius: 5px;
 }
 #progress {
   background-color: #f77f00;
