@@ -298,6 +298,7 @@ td {
 }
 #previousVideoImage, #nextVideoImage {
   height: 90px;
+  width: 120px;
   opacity: 0;
 }
 #previousVideoTime,
