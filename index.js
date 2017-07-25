@@ -338,8 +338,8 @@ function appendPlaylist(playlist) {
 
     if (playlist[0] !== undefined && playlist[0] !== null) {
       if (videos[0] === undefined || videos[0] === null) {
-        playlist.splice(0, 1);
         $("#playlistNameBox").val(decodeURIComponent(playlist[0]));
+        playlist.splice(0, 1);
       }
     }
 
