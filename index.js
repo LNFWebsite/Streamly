@@ -111,9 +111,11 @@ function msConversion(millis) {
   return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 }
 
-function highlight(i, which) {
+function highlight(i, which, persist) {
   $("tr:nth-child(" + i + ")").attr("id", "new-" + which);
-  $("tr." + which).removeClass(which);
+  if (!persist) {
+    $("tr." + which).removeClass(which);
+  }
   $("#new-" + which).addClass(which);
   $("#new-" + which).removeAttr("id");
 }
@@ -204,7 +206,7 @@ function videoProgress() {
 
 function playVideo() {
   videoPlaying = true;
-  highlight(videoIteration, "selected");
+  highlight(videoIteration, "selected", false);
   videoPreviews();
   addAutoplayVideo();
 
@@ -478,7 +480,7 @@ function loadAutoplayData(iteration) {
   autoplayVideos = [];
   autoplayVideoIteration = -1;
   
-  highlight(iteration, "radio");
+  highlight(iteration, "radio", false);
   baseAutoplayVideoId = videos[iteration][2];
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "radioDataFrame");
@@ -551,18 +553,18 @@ function refreshVideoList() {
     addVideoToList(videos[i][0], printTime, i);
     if (videos[i][2] === videos[videoIteration][2]) {
       if (videoPaused && videoIteration === 1) {
-        highlight(1, "selected");
+        highlight(1, "selected", false);
       }
       else if (!playlistRepeat) {
         videoIteration = i;
-        highlight(i, "selected");
+        highlight(i, "selected", false);
       }
     }
     if (videos[i][2] === baseAutoplayVideoId) {
-      highlight(i, "radio");
+      highlight(i, "radio", false);
     }
     if (videoErrorIds.indexOf(videos[i][2]) > -1) {
-      highlight(i, "videoError");
+      highlight(i, "videoError", true);
     }
   }
 }
