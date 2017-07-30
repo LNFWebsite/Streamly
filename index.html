@@ -283,9 +283,10 @@
           else {
             player.pauseVideo();
           }
+          break;
       }
     }
-    else if ($("#inputBox").is(":focus")) {
+    if ($("#inputBox").is(":focus")) {
       switch (e.code) {
         case "Backslash":
           e.preventDefault();
