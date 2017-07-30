@@ -349,6 +349,7 @@ function appendPlaylist(playlist) {
       addVideoToList(playlist[i][0], printTime, videoCounter);
     }
     
+    playlist.splice(0, 1);
     videos = videos.concat(playlist);
 
     setPlaylist();
