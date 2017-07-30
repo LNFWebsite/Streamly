@@ -341,6 +341,7 @@ function appendPlaylist(playlist) {
         $("#playlistNameBox").val(decodeURIComponent(playlist[0]));
         videos[0] = playlist[0];
       }
+      playlist.splice(0, 1);
     }
 
     for (var i = 1; i < playlist.length; i++) {
