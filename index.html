@@ -284,6 +284,10 @@
             player.pauseVideo();
           }
           break;
+      }
+    }
+    if ($("#inputBox").is(":focus")) {
+      switch (e.code) {
         case "Backslash":
           e.preventDefault();
           var query = $("#inputBox").val();
