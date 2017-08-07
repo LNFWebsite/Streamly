@@ -264,14 +264,6 @@
           e.preventDefault();
           forwardVideo();
           break;
-        case "KeyR":
-          e.preventDefault();
-          playlistFeatures.autoplay();
-          break;
-        case "KeyZ":
-          e.preventDefault();
-          toggleZen();
-          break;
         case "Space":
           e.preventDefault();
           if ($("#inputBox").val() === " ") {
@@ -296,6 +288,18 @@
             query = query + "yric";
           }
           quickSearch(query);
+          break;
+      }
+    }
+    if (!$("#inputBox").is(":focus") && !$("#playlistNameBox").is(":focus")) {
+      switch (e.code) {
+        case "KeyR":
+          e.preventDefault();
+          playlistFeatures.autoplay();
+          break;
+        case "KeyZ":
+          e.preventDefault();
+          toggleZen();
           break;
       }
     }
