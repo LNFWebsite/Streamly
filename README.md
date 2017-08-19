@@ -21,7 +21,7 @@ Features:
   
   <sub>Note: You may even use Streamly just stored on your computer, but likely YouTube will give you an error stating that the video creator did not allow the video to play on this site. The same will occur if you try to open a YouTube embed on your computer, as they don't recognize the `file://` site location as a valid website. You may resolve this easily by placing Streamly on a file hosting service that allows you to access the file without downloading (ie. forking on GitHub).<sub>
 
-- Works on all modern browsers (Chrome, Firefox, more...) as well as browsers on Android phones/tablets.
+- Works on all <u>modern</u> browsers (Chrome, Firefox, more...) as well as browsers on Android phones/tablets. (Chrome is recommended, IE is not supported)
 
 ### *[Subscribe to Streamly on Reddit for updates!](https://www.reddit.com/r/StreamlyReddit/)*
 
