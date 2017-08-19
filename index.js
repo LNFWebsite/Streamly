@@ -593,7 +593,7 @@ function shufflePlaylist() {
   }
   else {
     if (addedVideosWhileShuffled.length > 0) {
-      videosBeforeShuffle.push(...addedVideosWhileShuffled);
+      videosBeforeShuffle.push.apply(videosBeforeShuffle, addedVideosWhileShuffled);
       addedVideosWhileShuffled = [];
     }
     videos = JSON.parse(JSON.stringify(videosBeforeShuffle));
