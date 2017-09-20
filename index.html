@@ -257,14 +257,17 @@
         && !$("#playlistNameBox").is(":focus")) {
       switch (e.code) {
         case "ArrowLeft":
+        case "MediaTrackPrevious":
           e.preventDefault();
           backVideo();
           break;
         case "ArrowRight":
+        case "MediaTrackNext":
           e.preventDefault();
           forwardVideo();
           break;
         case "Space":
+        case "MediaPlayPause":
           e.preventDefault();
           if ($("#inputBox").val() === " ") {
             $("#inputBox").val("");
