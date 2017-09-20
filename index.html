@@ -38,6 +38,7 @@
       <p>
         <label for="popupClose">Close search pop-up on adding video?</label>
         <input type="checkbox" id="popupClose" onchange="togglePopupClose();">
+        <br><sup>Note: To do the reverse of this setting for one search press <code>Shift+\</code></sup>
       </p>
       <h2>Streamly Station</h2><hr>
       <p><i>Connect to a Streamly Station</i></p>
@@ -281,12 +282,20 @@
       switch (e.code) {
         case "Backslash":
           e.preventDefault();
-          var query = $("#inputBox").val();
-          query = query.replace("\\", "");
-          if (query.slice(-2) === " l") {
-            query = query + "yric";
+          if (e.key !== "|") {
+            var query = $("#inputBox").val();
+            query = query.replace("\\", "");
+            if (query.slice(-2) === " l") {
+              query = query + "yric";
+            }
+            quickSearch(query);
           }
-          quickSearch(query);
+          else {
+            //added for | hotkey for popup thing requested
+            hotkeyPopupClose = true;
+            togglePopupClose();
+            input(0);
+          }
           break;
       }
     }

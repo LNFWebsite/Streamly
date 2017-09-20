@@ -8,6 +8,7 @@ var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAA
 
 var popup;
 var popupClose = false;
+var hotkeyPopupClose = false;
 
 var videoId;
 
@@ -875,6 +876,10 @@ function input(type) {
             if (popupClose === true) {
               dropOverlay.close();
               popup.close();
+              if (hotkeyPopupClose) {
+                hotkeyPopupClose = false;
+                togglePopupClose();
+              }
             }
             else {
               popup.focus();
