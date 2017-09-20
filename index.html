@@ -281,12 +281,20 @@
       switch (e.code) {
         case "Backslash":
           e.preventDefault();
-          var query = $("#inputBox").val();
-          query = query.replace("\\", "");
-          if (query.slice(-2) === " l") {
-            query = query + "yric";
+          if (e.key !== "|") {
+            var query = $("#inputBox").val();
+            query = query.replace("\\", "");
+            if (query.slice(-2) === " l") {
+              query = query + "yric";
+            }
+            quickSearch(query);
           }
-          quickSearch(query);
+          else {
+            //added for | hotkey for popup thing requested
+            togglePopupClose();
+            input(0);
+            togglePopupClose();
+          }
           break;
       }
     }
