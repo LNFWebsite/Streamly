@@ -224,10 +224,12 @@ function playVideo() {
     }
     console.log("Debug: playVideo");
   }
-  backRestart = false;
-  window.setTimeout(function() {
-    backRestart = true;
-  }, 3000);
+  if (!videoPaused) {
+    backRestart = false;
+    window.setTimeout(function() {
+      backRestart = true;
+    }, 3000);
+  }
 }
 
 function loopVideo() {
