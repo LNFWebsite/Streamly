@@ -41,6 +41,7 @@ var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
 var videoPlaying;
 var backRestart;
+var backRestartTimer;
 
 var progressTimer;
 
@@ -225,7 +226,8 @@ function playVideo() {
     console.log("Debug: playVideo");
   }
   backRestart = false;
-  window.setTimeout(function() {
+  clearTimeout(backRestartTimer);
+  backRestartTimer = window.setTimeout(function() {
     backRestart = true;
   }, 3000);
 }
