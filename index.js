@@ -746,7 +746,7 @@ function actionPlayVideo(iteration) {
   $("#favicon").attr("href", faviconPlay);
 }
 
-// * This function removes videos
+// * This function removes videos from the playlist, skipping to the next video if it is the one removed
 // * It's primary use is the remove video button in the playlist viewer
 
 function actionRemoveVideo(iteration) {
@@ -779,6 +779,8 @@ function actionRemoveVideo(iteration) {
   addAutoplayVideo();
 }
 
+// * These functions are called when the play/remove video buttons in the playlist viewer are clicked
+
 function buttonPlayVideo(element) {
   var index = $(".playButton").index(element);
   actionPlayVideo(index);
@@ -787,6 +789,9 @@ function buttonRemoveVideo(element) {
   var index = $(".removeButton").index(element) + 1;
   actionRemoveVideo(index);
 }
+
+// * This function is called to move a video from one place in the playlist to another
+// * It is called from the sortable function below and calls the Array.move additional functionality
 
 function actionMoveVideo(oldIndex, newIndex) {
   sendStation("actionmovevideo," + oldIndex + "," + newIndex);
@@ -803,6 +808,9 @@ function actionMoveVideo(oldIndex, newIndex) {
   addAutoplayVideo();
 }
 
+// * This function makes the entire playlist viewer sortable by dragging&dropping
+// * It calls the actionMoveVideo function above
+
 function makeSortable() {
   $( "#videosTable" ).sortable({
     update: function(event, ui) {
@@ -815,6 +823,9 @@ function makeSortable() {
     }
   });
 }
+
+// * This function loads the previous and next video button's data in the playlist manipulation footer
+// * It is called whenever anything changes in the playlist or the currently playing video changes
 
 function videoPreviews() {
   function addData(which, iteration) {
@@ -849,6 +860,9 @@ function videoPreviews() {
     greyOut("previous", "grey");
   }
 }
+
+// * This object is for the settings available in the playlist manipulation footer
+// * Those buttons call their corresponding functionality here
 
 var PlaylistFeatures = function() {
   this.playNext = function() {
@@ -885,6 +899,9 @@ var PlaylistFeatures = function() {
 }
 var playlistFeatures = new PlaylistFeatures;
 
+// * This function interprets the type of URL (or whether it isn't a URL)
+// * It then specifies how to interpret this URL in the function below
+
 function urlValidate(url) {
   var youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
   var streamlyRegex = /.*#(.+)/i;
@@ -911,6 +928,13 @@ function urlValidate(url) {
     return false;
   }
 }
+
+// * This function handles all user inputs
+// * It has changed minimally throughout the history of Streamly
+// * Its 'type' parameter specifies where the input is coming from (which I'm eventually going to change)
+// * The playlist name box type number is 2
+
+// * If a YouTube video URL load video to playlist, if a Streamly playlist append it to the current one, if none of the above load search
 
 function input(type) {
   var inputBox = $("#inputBox").val();
@@ -1006,6 +1030,8 @@ function input(type) {
   }
 }
 
+// * These are the event listeners for stuff that's dragged and dropped
+
 document.addEventListener("drop", function(event) {
   event.preventDefault();
   var data = event.dataTransfer.getData("URL");
@@ -1013,12 +1039,13 @@ document.addEventListener("drop", function(event) {
   $("#inputBox").val(data);
   input(1);
 });
-
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
 });
 
 // Start Streamly Station
+
+// * This function flashes the Streamly Station icon
 
 function flashStationIcon() {
   $("#stationIcon").css("color", "red");
@@ -1026,6 +1053,8 @@ function flashStationIcon() {
     $("#stationIcon").css("color", "#00ff00");
   }, 300);
 }
+
+// * This function sends a command to the Streamly Station
 
 function sendStation(what) {
   if (stationServer !== undefined && stationServer !== null) {
@@ -1039,6 +1068,8 @@ function sendStation(what) {
     }
   }
 }
+
+// * This function begins a connection with the Streamly Station and listens for commands
 
 function loadStation() {
   stationSocket = io("http://" + stationServer);
@@ -1115,6 +1146,8 @@ function loadStation() {
   });
 }
 
+// * This function loads the Streamly Station client-side code and runs the loadStation function
+
 function connectStation(server) {
   stationServer = server;
   $.ajax({
@@ -1124,10 +1157,14 @@ function connectStation(server) {
   });
 }
 
+// * This function disconnects the station... duh.
+
 function disconnectStation() {
   stationSocket.disconnect();
   $("#stationIcon").css("display", "none");
 }
+
+// * This function handles user input and runs connectStation on being called by user
 
 var securityWarning = false;
 function actionConnectStation() {
@@ -1140,6 +1177,8 @@ function actionConnectStation() {
   }
   connectStation(station);
 }
+
+// * This function blocks out the loading of videos when in Remote mode
 
 function toggleRemote() {
   if (!stationRemote) {
@@ -1159,6 +1198,8 @@ function toggleRemote() {
 }
 
 // End Streamly Station
+
+// * This is the Zen mode function that moves and hides elements
 
 function toggleZen() {
   if (zenMode) {
@@ -1180,6 +1221,8 @@ function toggleZen() {
   }
 }
 
+// * This is the function that is called for toggling the pop-up close user preference
+
 function togglePopupClose() {
   if (!popupClose) {
     popupClose = true;
@@ -1188,6 +1231,9 @@ function togglePopupClose() {
     popupClose = false;
   }
 }
+
+// * This object loads the drop overlay over Streamly
+// * It is used primarily for when the settings window is toggled and when drag&drop searching is activated
 
 var DropOverlay = function() {
   this.open = function() {
@@ -1200,3 +1246,25 @@ var DropOverlay = function() {
   }
 }
 var dropOverlay = new DropOverlay();
+
+// * Congrats! You've made it to the bottom of the code! While you're here I should mention that I'm an amateur
+// * web developer with literally zero formal education on the subject. If you see how something could be better,
+// * please change it! Fork and submit a pull request. This is your project as much as it is mine!
+// *
+// * Bonus, I've written an ad-lib 'poem' that is totally unrelated
+// *
+// * Stirring in the wisps of wind
+// * Rings a song of thunder and rain
+// * Many have seen the falling leaves
+// * Draining summer's warmth in vain
+// *
+// * It's not in the hills and valleys
+// * Not within the breath of doves
+// * Shining brightly upon the shadows
+// * Grey dim lighting from clouds above
+// *
+// * Longing for lightning from Heaven's alleys
+// * Waiting for calm before a storm
+// * Seeing the field reflecting the shield
+// * Of winter's white colors, no dark skies above
+// *                      - LNFWebsite (9/23/2017)
