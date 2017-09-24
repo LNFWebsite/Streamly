@@ -1266,5 +1266,5 @@ var dropOverlay = new DropOverlay();
 // * Longing for lightning from Heaven's alleys
 // * Waiting for calm before a storm
 // * Seeing the field reflecting the shield
-// * Of winter's white colors, no dark skies above
+// * Of winter's white colors, no dark skies of love
 // *                      - LNFWebsite (9/23/2017)
