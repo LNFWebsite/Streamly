@@ -1,5 +1,8 @@
 //! License: MIT (as stated in the LICENSE file)
 
+// * These are global variables that are utilized in the rest of the script
+// * They exist for data that must persist for the script to work
+
 var placeholder = "Search, drag and drop video, or paste its URL...";
 var loadingPlaceholder = "Loading video data from YouTube...";
 
@@ -54,6 +57,8 @@ var dataPlayer;
 var radioDataPlayer;
 var searchDataPlayer;
 
+// * This function is for user identification in Streamly Station
+
 function makeId() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -64,6 +69,8 @@ function makeId() {
   
   return text;
 }
+
+// * This function is for iteration order changes such as playlistRepeat
 
 function changeIteration(which) {
   var sum = videoIteration + which;
@@ -77,6 +84,9 @@ function changeIteration(which) {
     return videoIteration + which;
   }
 }
+
+// * This function provides a mainframe timer for use in videoProgress
+// * It used to be used for video change timing in Streamly w/o YouTube API
 
 function Timer(callback, delay) {
   var id, started, remaining = delay, running;
@@ -103,15 +113,23 @@ function Timer(callback, delay) {
   this.resume();
 }
 
+// * This is an added function to arrays for moving elements from one spot to another
+// * It is primarily used for shuffling
+
 Array.prototype.move = function(from, to) {
   this.splice(to, 0, this.splice(from, 1)[0]);
 };
+
+// * This function converts milliseconds to "0:00"
+// * It is no longer used
 
 function msConversion(millis) {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);
   return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 }
+
+// * This function highlights playlist elements
 
 function highlight(i, which, persist) {
   $("tr:nth-child(" + i + ")").attr("id", "new-" + which);
@@ -121,6 +139,8 @@ function highlight(i, which, persist) {
   $("#new-" + which).addClass(which);
   $("#new-" + which).removeAttr("id");
 }
+
+// * This function adds video elements to the playlist
 
 function addVideoToList(name, time, spot) {
   name = decodeURIComponent(name);
@@ -139,6 +159,8 @@ function addVideoToList(name, time, spot) {
   }
 }
 
+// * This function removes video elements from the playlist
+
 function removeVideoFromList(index, smooth) {
   if (smooth === true) {
     $("tr:nth-child(" + index + ")").fadeOut(function() {
@@ -150,6 +172,9 @@ function removeVideoFromList(index, smooth) {
   }
 }
 
+// * This function resets timers
+// * It is primarily used for the progress bar and video time elements
+
 function resetTimer(which) {
   if (typeof which !== "undefined") {
     if (which != 0) {
@@ -158,6 +183,9 @@ function resetTimer(which) {
     which = 0;
   }
 }
+
+// * This object manipulates existing timers
+// * It was primarily used in video timing before the YouTube API, but is also used in the progress bar
 
 var ActionTimers = function() {
   this.pause = function() {
@@ -174,6 +202,9 @@ var ActionTimers = function() {
   }
 }
 var actionTimers = new ActionTimers();
+
+// * This function updates the video progress bar with new data
+// * It is run on an interval, using the YouTube API for video timing
 
 function videoProgress() {
   if (videos[videoIteration] !== undefined && videos[videoIteration] !== null) {
@@ -206,6 +237,8 @@ function videoProgress() {
   }
 }
 
+// * This function loads videos from the playlist into the YouTube iFrame
+
 function playVideo() {
   videoPlaying = true;
   highlight(videoIteration, "selected", false);
@@ -232,6 +265,8 @@ function playVideo() {
   }, 3000);
 }
 
+// * This function is run on video ending events, changing the current video to the next
+
 function loopVideo() {
   if (videoIteration < videoCounter || playlistRepeat) {
     if (playlistShuffle && playlistRepeat && videoIteration === videoCounter) {
@@ -253,6 +288,9 @@ function loopVideo() {
   }
 }
 
+// * This object does the extra stuff that occurs on pausing and playing videos
+// * Such as pausing the progress bar loop
+
 var VideoFunctions = function() {
   this.play = function() {
     sendStation("videofunctionsplay");
@@ -272,12 +310,16 @@ var VideoFunctions = function() {
 }
 var videoFunctions = new VideoFunctions();
 
+// * This function skips to the next video in the playlist
+
 function forwardVideo() {
   sendStation("forwardvideo");
   if (changeIteration(1) <= videoCounter) {
     loopVideo();
   }
 }
+
+// * This function skips to the previous video in the playlist (or reloads the current video)
 
 function backVideo() {
   sendStation("backvideo");
@@ -293,6 +335,8 @@ function backVideo() {
   }
 }
 
+// * This function sets the playlist in the hash parameter of the URL
+
 function setPlaylist() {
   if (videos.length > 1) {
     var playlist = JSON.stringify(videos);
@@ -304,6 +348,9 @@ function setPlaylist() {
   }
   $("#saveButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
 }
+
+// * This function gets the playlist from the hash parameter of the URL
+// * It loads videos into the videos array and the playlist viewer
 
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
@@ -336,6 +383,8 @@ function getPlaylist() {
   }
 }
 
+// * This function appends one playlist to another
+
 function appendPlaylist(playlist) {
   try {
     playlist = window.atob(playlist);
@@ -366,6 +415,8 @@ function appendPlaylist(playlist) {
   }
 }
 
+// * This function loads the video data from the video URL provided
+
 var dataPlayerRunning = false;
 function getVideoData(id) {
   console.log("getVideoData dataPlayerRunning=" + dataPlayerRunning + " videoId=" + videoId + " id=" + id);
@@ -390,6 +441,8 @@ function getVideoData(id) {
     }, 500);
   }
 }
+
+// * This function then loads that video data into the videos array and the playlist viewer
 
 var dataPlayerErrors = 0;
 function onDataPlayerReady() {
@@ -419,6 +472,8 @@ function onDataPlayerReady() {
 
 // Start Quick Search
 
+// * This function loads the video for the Quick Search functionality
+
 function quickSearch(query) {
   $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
   if (query !== "") {
@@ -443,6 +498,8 @@ function quickSearch(query) {
   }
 }
 
+// * This function cues the search results for use in the next function
+
 var searchDataPlayerErrors = 0;
 function onSearchDataPlayerReady() {
   try {
@@ -459,6 +516,8 @@ function onSearchDataPlayerReady() {
     }
   }
 }
+
+// * This function uses the search results to add the next video
 
 function onSearchDataPlayerStateChange(event) {
   if (event.data === 5) {
@@ -479,6 +538,8 @@ function onSearchDataPlayerStateChange(event) {
 
 // Start Streamly Radio
 
+// * This function loads the video for the Streamly Radio function
+
 function loadAutoplayData(iteration) {
   autoplayVideos = [];
   autoplayVideoIteration = -1;
@@ -498,10 +559,15 @@ function loadAutoplayData(iteration) {
   dataFrame.setAttribute("src", "https://www.youtube.com/embed/" + baseAutoplayVideoId + "?enablejsapi=1");
 }
 
+// * This function cues the playlist for use in the next function
+
 function onRadioDataPlayerReady() {
   var autoplayUrl = "RD" + baseAutoplayVideoId;
   radioDataPlayer.cuePlaylist({list:autoplayUrl});
 }
+
+// * This function compiles an array of videos for Streamly Radio
+// * Making sure they aren't in the current playlist already
 
 function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
@@ -529,6 +595,8 @@ function onRadioDataPlayerStateChange(event) {
   }
 }
 
+// * This function loads the latest Streamly Radio video into the playlist
+
 function addAutoplayVideo() {
   if (playlistAutoplay && videos.length > 0) {
     if (!autoplayVideos.length > 0) {
@@ -548,6 +616,9 @@ function addAutoplayVideo() {
 }
 
 // End Streamly Radio
+
+// * This function refreshes the playlist viewer with videos in the videos array
+// * It's primary use is for playlist shuffling
 
 function refreshVideoList() {
   for (var i = 1; i < videos.length; i++) {
@@ -572,6 +643,8 @@ function refreshVideoList() {
   }
 }
 
+// * This function shuffles the videos array for playlist shuffling
+
 function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
@@ -581,6 +654,9 @@ function shuffleArray(array) {
   }
   return array;
 }
+
+// * This function shuffles the playlist
+// * It's primary use is adding videos that were added during shuffle to the original playlist when un-shuffling
 
 function shufflePlaylist() {
   var playlistName = videos[0];
@@ -616,6 +692,9 @@ function shufflePlaylist() {
     loopVideo();
   }
 }
+
+// * This function adds a video to the videos array
+// * It also plays the video if it is the first video loaded
 
 function addVideo(name, time, id) {
   videoCounter++;
@@ -656,6 +735,9 @@ function addVideo(name, time, id) {
   }
 }
 
+// * This function plays videos if the play button in the playlist viewer is clicked
+// * Otherwise, videos are always played with the loopVideo function
+
 function actionPlayVideo(iteration) {
   sendStation("actionplayvideo," + iteration);
   videoIteration = iteration;
@@ -663,6 +745,9 @@ function actionPlayVideo(iteration) {
   loopVideo();
   $("#favicon").attr("href", faviconPlay);
 }
+
+// * This function removes videos
+// * It's primary use is the remove video button in the playlist viewer
 
 function actionRemoveVideo(iteration) {
   sendStation("actionremovevideo," + iteration);
