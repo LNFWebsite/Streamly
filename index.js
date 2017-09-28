@@ -120,8 +120,8 @@ Array.prototype.move = function(from, to) {
   this.splice(to, 0, this.splice(from, 1)[0]);
 };
 
-// * This function converts milliseconds to "0:00"
-// * It is no longer used
+// * This function converts milliseconds to "0:00" format
+// * It is used primarily in the videoProgress timer
 
 function msConversion(millis) {
   var minutes = Math.floor(millis / 60000);
