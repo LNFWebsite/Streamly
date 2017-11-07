@@ -36,7 +36,7 @@ Or clone into your web server...
 
 - What makes this any different from a YouTube playlist?
 
-  A normal YouTube playlist does not allow you to add videos while you are playing the list. It also does not allow you to do advanced playlist manipulation such as re-ordering while playing. Streamly exists more as a queue that you may mess with at any time while playing. This is why most other YouTube players exist as well.
+  A normal YouTube playlist does not allow you to add videos while you are playing the list. It also does not allow you to do advanced playlist manipulation such as re-ordering while playing. Streamly exists more as a queue that you may mess with at any time while playing. This is why most other YouTube players exist as well. Additionally, if a video is removed from a YouTube playlist, its name is forever gone to you. Streamly saves all video information necessary to play.
 
 - Why is there a pop-up for searching new videos to add?
 
