@@ -32,25 +32,9 @@ Or clone into your web server...
 
 ***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page if you're... well... just getting started...***
 
-## FAQ
-
-- What makes this any different from a YouTube playlist?
-
-  A normal YouTube playlist does not allow you to add videos while you are playing the list. It also does not allow you to do advanced playlist manipulation such as re-ordering while playing. Streamly exists more as a queue that you may mess with at any time while playing. This is why most other YouTube players exist as well. Additionally, if a video is removed from a YouTube playlist, its name is forever gone to you. Streamly saves all video information necessary to play.
-
-- Why is there a pop-up for searching new videos to add?
-
-  This is because YouTube requires a company key to search for videos, however, I am in the process of testing an alternative to the pop-up.
-
-- Will I lose videos that are removed from YouTube?
-
-  No. The playlist will still contain all information on the videos which are broken or removed from YouTube. Streamly will skip the video and highlight it in red to let you know that you must find a replacement. I'm looking into a method that will automatically drop in replacement videos.
-
-- Why is it so important to not use a company key to access video metadata?
-
-  This is important because it requires nothing special to operate Streamly. It is currently hosted on GitHub Pages, but may be cloned to any server and will still work the same. The safety of your playlist is achieved by knowing that you may easily run the script on your own without relying on me, GitHub, or anyone else.
-
 ## What is Streamly? (In detail)
+
+If you'd like to know why Streamly was made, head over to the [About](https://github.com/LNFWebsite/Streamly/wiki/About) page in the wiki!
 
 Streamly is a YouTube video queue that runs entirely in your browser.
 
