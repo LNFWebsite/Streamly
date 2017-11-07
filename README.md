@@ -5,7 +5,7 @@ Streamly on Desktop        | Streamly on Android
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamly.jpg)  |  ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamlymobile.jpg)
 
-## Quick Summary
+## Summary
 
 Streamly is an open-source web-based YouTube video queue.
 
@@ -32,7 +32,7 @@ Or clone into your web server...
 
 ***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page if you're... well... just getting started...***
 
-## What is Streamly? (In detail)
+## What is Streamly?
 
 If you'd like to know why Streamly was made, head over to the [About](https://github.com/LNFWebsite/Streamly/wiki/About) page in the wiki!
 
