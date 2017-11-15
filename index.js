@@ -476,17 +476,22 @@ function onDataPlayerReady() {
 
 // * Updated video data capture because of YouTube attempt #1 to shutdown
 
-function getVideoData(id) {
-  videoId = id;
-  videoTime = 0;
+function getVideoName(id) {
   var url = "https://www.youtube.com/watch?v=" + id;
   
   $.getJSON("https://noembed.com/embed",
             {format: 'json', url: url}, function(data) {
-    videoName = data.title;
-    $("#inputBox").val("").attr("placeholder", placeholder);
-    addVideo(videoName, videoTime, videoId);
+    return data.title;
   });
+}
+
+function getVideoData(id) {
+  videoId = id;
+  videoTime = 3000;
+  videoName = getVideoName(id);
+  
+  $("#inputBox").val("").attr("placeholder", placeholder);
+  addVideo(videoName, videoTime, videoId);
 }
 
 // Start Quick Search
@@ -543,11 +548,11 @@ function onSearchDataPlayerStateChange(event) {
     $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
-    var data = searchDataPlayer.getVideoData();
-    var id = data["video_id"];
-    var videoName = data["title"];
+    var data = searchDataPlayer.getVideoUrl();
+    var id = data.replace("https://www.youtube.com/watch?v=", "");
+    var videoName = getVideoName(id);
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-    var videoTime = Math.round(searchDataPlayer.getDuration());
+    var videoTime = 3000;
     searchDataPlayer.destroy();
     addVideo(videoName, videoTime, id);
   }
