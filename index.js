@@ -478,7 +478,8 @@ function onDataPlayerReady() {
 
 function getVideoName(id) {
   var url = "https://www.youtube.com/watch?v=" + id;
-  var get.url = url;
+  var get = {};
+  get.url = url;
   
   $.ajax({
     async: false,
