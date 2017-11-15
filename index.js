@@ -565,6 +565,7 @@ function onSearchDataPlayerStateChange(event) {
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoUrl();
+    console.log(data);
     console.log(urlValidate(data));
     
     getVideoName(id, function(name) {
