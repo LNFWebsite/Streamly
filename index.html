@@ -106,7 +106,11 @@
       <span class="fa fa-reddit" id="ad" onclick="shareOnReddit();" title="Share playlist on Reddit"></span>
     </div>
   </footer>
-  <div id="dialog"><p>For some reason searching is not working on Streamly right now.</p><p>I just put this message here to let you know that I'm aware of it and am currently working on it. Sorry for the inconvenience.</p></div>
+  <div id="dialog"><p>At the moment, video searching does not work.</p>
+    <p>This is because YouTube has removed the ability to retrieve video name and time via their open YouTube IFrame API (to make it hard for projects like Streamly to exist).</p>
+    <p>I just put this message here to let you know that I'm aware of it and am currently working on alternatives. Sorry for the inconvenience.</p>
+    <p>Your existing playlists should operate normally.</p>
+  </div>
   <script>
   //this is a standard dialog box for jquery that can be used to non-annoyingly get messages to users on-load
   $("#dialog").dialog();
