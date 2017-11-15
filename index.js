@@ -565,7 +565,8 @@ function onSearchDataPlayerStateChange(event) {
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoUrl();
-    var id = data.replace("https://www.youtube.com/watch?v=", "");
+    var id = urlValidate(data)[1];
+    
     getVideoName(id, function(name) {
       videoName = name;
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
