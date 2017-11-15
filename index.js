@@ -482,10 +482,9 @@ function getVideoName(id, callback) {
     url: url
   };
   
-  //use either "https://noembed.com/embed" or "https://www.youtube.com/oembed"
   $.ajax({
     dataType: "json",
-    url: "https://www.youtube.com/oembed",
+    url: "https://noembed.com/embed",
     data: get,
     success: function(result) {
       callback(result.title);
