@@ -565,8 +565,7 @@ function onSearchDataPlayerStateChange(event) {
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoUrl();
-    console.log(data);
-    console.log(urlValidate(data));
+    var id = urlValidate(data);
     
     getVideoName(id, function(name) {
       videoName = name;
@@ -947,7 +946,7 @@ var playlistFeatures = new PlaylistFeatures;
 // * It then specifies how to interpret this URL in the function below
 
 function urlValidate(url) {
-  var youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
+  var youtubeRegex = /(?:youtube\.com\/watch.+?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
   var streamlyRegex = /.*#(.+)/i;
   
   function checkMatch(url, regex) {
