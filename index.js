@@ -482,21 +482,15 @@ function getVideoName(id, callback) {
     url: url
   };
   
-  return $.ajax({
+  //use either "https://noembed.com/embed" or "https://www.youtube.com/oembed"
+  $.ajax({
     dataType: "json",
-    url: "https://noembed.com/embed",
+    url: "https://www.youtube.com/oembed",
     data: get,
     success: function(result) {
       callback(result.title);
     }
   });
-  /**
-  $.getJSON("https://noembed.com/embed",
-            {format: 'json', url: url}, function(data) {
-    console.log(data.title);
-    return data.title;
-  });
-  **/
 }
 
 function getVideoData(id) {
