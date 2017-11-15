@@ -478,11 +478,11 @@ function onDataPlayerReady() {
 
 function getVideoName(id) {
   var url = "https://www.youtube.com/watch?v=" + id;
-  var get = {};
-  get.url = url;
+  var get = {
+    url: url;
+  };
   
-  $.ajax({
-    async: false,
+  return $.ajax({
     dataType: "json",
     url: "https://noembed.com/embed",
     data: get,
