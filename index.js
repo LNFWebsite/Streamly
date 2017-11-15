@@ -417,6 +417,8 @@ function appendPlaylist(playlist) {
 
 // * This function loads the video data from the video URL provided
 
+/**********************************************
+
 var dataPlayerRunning = false;
 function getVideoData(id) {
   console.log("getVideoData dataPlayerRunning=" + dataPlayerRunning + " videoId=" + videoId + " id=" + id);
@@ -468,6 +470,23 @@ function onDataPlayerReady() {
       getVideoData();
     }
   }
+}
+
+**********************************************/
+
+// * Updated video data capture because of YouTube attempt #1 to shutdown
+
+function getVideoData(id) {
+  videoId = id;
+  videoTime = 0;
+  var url = "https://www.youtube.com/watch?v=" + id;
+  
+  $.getJSON("https://noembed.com/embed",
+            {format: 'json', url: url}, function(data) {
+    videoName = data.title;
+    $("#inputBox").val("").attr("placeholder", placeholder);
+    addVideo(videoName, videoTime, videoId);
+  });
 }
 
 // Start Quick Search
