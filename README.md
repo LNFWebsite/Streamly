@@ -5,7 +5,7 @@ Streamly on Desktop        | Streamly on Android
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamly.jpg)  |  ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/streamlymobile.jpg)
 
-## Quick Summary
+## Summary
 
 Streamly is an open-source web-based YouTube video queue.
 
@@ -19,7 +19,7 @@ Features:
 
 - Runs independently from any server and requires no association with YouTube (API keys, etc...).
   
-  <sub>Note: You may even use Streamly just stored on your computer, but likely YouTube will give you an error stating that the video creator did not allow the video to play on this site. The same will occur if you try to open a YouTube embed on your computer, as they don't recognize the `file://` site location as a valid website. You may resolve this easily by placing Streamly on a file hosting service that allows you to access the file without downloading (ie. forking on GitHub).<sub>
+  <sub>Note: You may even use Streamly just stored on your computer, but likely YouTube will give you an error stating that the video creator did not allow the video to play on this site. The same will occur if you try to open a YouTube embed on your computer, as they don't recognize the `file://` site location as a valid website. You may resolve this easily by placing Streamly on a file hosting service that allows you to access the file without downloading (ie. forking on GitHub), or your own web server.<sub>
 
 - Works on all *modern* browsers (Chrome, Firefox, more...) as well as browsers on Android phones/tablets. (Chrome is recommended, IE is not supported)
 
@@ -32,7 +32,9 @@ Or clone into your web server...
 
 ***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page if you're... well... just getting started...***
 
-## What is Streamly? (In detail)
+## What is Streamly?
+
+If you'd like to know why Streamly was made, head over to the [About](https://github.com/LNFWebsite/Streamly/wiki/About) page in the wiki!
 
 Streamly is a YouTube video queue that runs entirely in your browser.
 
