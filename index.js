@@ -516,10 +516,11 @@ function setVideoTime() {
   var name = videos[videoIteration][0];
   var time = player.getDuration();
   time = Math.round(time);
+  var printTime = msConversion(time * 1000);
   
-  videos[videoIteration][2] = time;
+  videos[videoIteration][1] = time;
   removeVideoFromList(videoIteration, false);
-  addVideoToList(name, time, videoIteration, false);
+  addVideoToList(name, printTime, videoIteration, false);
 }
 
 // Start Quick Search
