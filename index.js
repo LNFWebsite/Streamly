@@ -494,7 +494,7 @@ function getVideoName(id, callback) {
 
 function getVideoData(id) {
   videoId = id;
-  videoTime = 3000;
+  videoTime = 0;
   
   getVideoName(id, function(name) {
     videoName = name;
@@ -563,7 +563,7 @@ function onSearchDataPlayerStateChange(event) {
     getVideoName(id, function(name) {
       videoName = name;
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-      videoTime = 3000;
+      videoTime = 0;
       searchDataPlayer.destroy();
       addVideo(videoName, videoTime, id);
     });
