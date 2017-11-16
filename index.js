@@ -142,9 +142,17 @@ function highlight(i, which, persist) {
 
 // * This function adds video elements to the playlist
 
-function addVideoToList(name, time, spot) {
+function addVideoToList(name, time, spot, smooth) {
   name = decodeURIComponent(name);
-  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  
+  if (smooth) {
+    smooth = " class=\"animated flipInX\"";
+  }
+  else {
+    smooth = "";
+  }
+  
+  var trElement = "<tr" + smooth + "><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
   "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
     if (spot > 1) {
@@ -293,6 +301,7 @@ function loopVideo() {
 
 var VideoFunctions = function() {
   this.play = function() {
+    setVideoTime();
     sendStation("videofunctionsplay");
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
@@ -368,7 +377,7 @@ function getPlaylist() {
       for (var i = 1; i < videos.length; i++) {
         videoCounter = i;
         var printTime = msConversion(videos[videoCounter][1] * 1000);
-        addVideoToList(videos[videoCounter][0], printTime, videoCounter);
+        addVideoToList(videos[videoCounter][0], printTime, videoCounter, true);
       }
       // -- Need to update the playlist with non-encoded stuff 10/04/2016
       setPlaylist();
@@ -400,7 +409,7 @@ function appendPlaylist(playlist) {
     for (var i = 1; i < playlist.length; i++) {
       videoCounter++;
       var printTime = msConversion(playlist[i][1] * 1000);
-      addVideoToList(playlist[i][0], printTime, videoCounter);
+      addVideoToList(playlist[i][0], printTime, videoCounter, true);
     }
     
     playlist.splice(0, 1);
@@ -415,59 +424,52 @@ function appendPlaylist(playlist) {
   }
 }
 
-// * This function loads the video data from the video URL provided
+// * This function loads the video name
+// * Updated video data capture method because of deprecation of player.getVideoData() in API (11/15/2017)
 
-var dataPlayerRunning = false;
-function getVideoData(id) {
-  console.log("getVideoData dataPlayerRunning=" + dataPlayerRunning + " videoId=" + videoId + " id=" + id);
-  if (!dataPlayerRunning) {
-    dataPlayerRunning = true;
-    videoId = id;
-    var dataFrame = document.createElement("iframe");
-    dataFrame.setAttribute("id", "dataFrame");
-    dataFrame.setAttribute("src", "");
-    document.getElementById("dataFramesContainer").appendChild(dataFrame);
-    dataPlayer = new YT.Player('dataFrame', {
-      events: {
-        'onReady': onDataPlayerReady
-      }
-    });
-    var embedUrl = "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
-    dataFrame.setAttribute("src", embedUrl);
-  }
-  else {
-    setTimeout(function() {
-      getVideoData(id);
-    }, 500);
-  }
+function getVideoName(id, callback) {
+  var url = "https://www.youtube.com/watch?v=" + id;
+  var get = {
+    url: url
+  };
+  
+  $.ajax({
+    dataType: "json",
+    url: "https://noembed.com/embed",
+    data: get,
+    success: function(result) {
+      callback(result.title);
+    }
+  });
 }
 
-// * This function then loads that video data into the videos array and the playlist viewer
+// * This function utilizes function above to add videos with applicable data
+// * It used to handle data gathering on it's own, but stands as a wrapper to the async ajax above
 
-var dataPlayerErrors = 0;
-function onDataPlayerReady() {
-  console.log("onDataPlayerReady");
-  try {
-    var data = dataPlayer.getVideoData();
-    var videoName = dataPlayer.getVideoData()["title"];
-    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-    var videoTime = Math.round(dataPlayer.getDuration());
+function getVideoData(id) {
+  videoId = id;
+  videoTime = 0;
+  
+  getVideoName(id, function(name) {
+    videoName = name;
     $("#inputBox").val("").attr("placeholder", placeholder);
-    dataPlayer.destroy();
-    dataPlayerErrors = 0;
     addVideo(videoName, videoTime, videoId);
-    dataPlayerRunning = false;
-  }
-  catch(e) {
-    dataPlayerErrors++;
-    console.log(e);
-    if (dataPlayerErrors <= 5) {
-      try {
-        dataPlayer.destroy();
-      } catch(e) {};
-      getVideoData();
-    }
-  }
+  });
+}
+
+// * This function sets the video time on video play
+// * It is handled this way since YouTube does not set player.getDuration() until play. Screw you YouTube.
+
+function setVideoTime() {
+  var name = videos[videoIteration][0];
+  var time = player.getDuration();
+  time = Math.round(time);
+  var printTime = msConversion(time * 1000);
+  
+  videos[videoIteration][1] = time;
+  removeVideoFromList(videoIteration, false);
+  addVideoToList(name, printTime, videoIteration, false);
+  restoreHighlight(videoIteration);
 }
 
 // Start Quick Search
@@ -524,13 +526,16 @@ function onSearchDataPlayerStateChange(event) {
     $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
-    var data = searchDataPlayer.getVideoData();
-    var id = data["video_id"];
-    var videoName = data["title"];
-    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-    var videoTime = Math.round(searchDataPlayer.getDuration());
-    searchDataPlayer.destroy();
-    addVideo(videoName, videoTime, id);
+    var data = searchDataPlayer.getVideoUrl();
+    var id = urlValidate(data)[1];
+    
+    getVideoName(id, function(name) {
+      videoName = name;
+      videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+      videoTime = 0;
+      searchDataPlayer.destroy();
+      addVideo(videoName, videoTime, id);
+    });
   }
 }
 
@@ -617,6 +622,27 @@ function addAutoplayVideo() {
 
 // End Streamly Radio
 
+// * This function restores the video list highlighting as applicable
+// * It does not use stored values, but rather the state of the playlist
+
+function restoreHighlight(which) {
+  if (videos[which][2] === videos[videoIteration][2]) {
+    if (videoPaused && videoIteration === 1) {
+      highlight(1, "selected", false);
+    }
+    else if (!playlistRepeat) {
+      videoIteration = which;
+      highlight(which, "selected", false);
+    }
+  }
+  if (videos[which][2] === baseAutoplayVideoId) {
+    highlight(which, "radio", false);
+  }
+  if (videoErrorIds.indexOf(videos[which][2]) > -1) {
+    highlight(which, "videoError", true);
+  }
+}
+
 // * This function refreshes the playlist viewer with videos in the videos array
 // * It's primary use is for playlist shuffling
 
@@ -624,22 +650,8 @@ function refreshVideoList() {
   for (var i = 1; i < videos.length; i++) {
     removeVideoFromList(i, false);
     var printTime = msConversion(videos[i][1] * 1000);
-    addVideoToList(videos[i][0], printTime, i);
-    if (videos[i][2] === videos[videoIteration][2]) {
-      if (videoPaused && videoIteration === 1) {
-        highlight(1, "selected", false);
-      }
-      else if (!playlistRepeat) {
-        videoIteration = i;
-        highlight(i, "selected", false);
-      }
-    }
-    if (videos[i][2] === baseAutoplayVideoId) {
-      highlight(i, "radio", false);
-    }
-    if (videoErrorIds.indexOf(videos[i][2]) > -1) {
-      highlight(i, "videoError", true);
-    }
+    addVideoToList(videos[i][0], printTime, i, false);
+    restoreHighlight(i);
   }
 }
 
@@ -724,7 +736,7 @@ function addVideo(name, time, id) {
 
   var printTime = msConversion(time * 1000);
 
-  addVideoToList(name, printTime, iteration);
+  addVideoToList(name, printTime, iteration, true);
 
   setPlaylist();
   makeSortable();
@@ -903,7 +915,7 @@ var playlistFeatures = new PlaylistFeatures;
 // * It then specifies how to interpret this URL in the function below
 
 function urlValidate(url) {
-  var youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
+  var youtubeRegex = /(?:youtube\.com\/watch.+?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
   var streamlyRegex = /.*#(.+)/i;
   
   function checkMatch(url, regex) {
