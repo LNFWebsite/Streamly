@@ -470,6 +470,7 @@ function setVideoTime() {
   removeVideoFromList(videoIteration, false);
   addVideoToList(name, printTime, videoIteration, false);
   restoreHighlight(videoIteration);
+  setPlaylist();
 }
 
 // Start Quick Search
