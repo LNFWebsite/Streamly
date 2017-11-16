@@ -424,65 +424,7 @@ function appendPlaylist(playlist) {
   }
 }
 
-// * This function loads the video data from the video URL provided
-
-/**********************************************
-
-var dataPlayerRunning = false;
-function getVideoData(id) {
-  console.log("getVideoData dataPlayerRunning=" + dataPlayerRunning + " videoId=" + videoId + " id=" + id);
-  if (!dataPlayerRunning) {
-    dataPlayerRunning = true;
-    videoId = id;
-    var dataFrame = document.createElement("iframe");
-    dataFrame.setAttribute("id", "dataFrame");
-    dataFrame.setAttribute("src", "");
-    document.getElementById("dataFramesContainer").appendChild(dataFrame);
-    dataPlayer = new YT.Player('dataFrame', {
-      events: {
-        'onReady': onDataPlayerReady
-      }
-    });
-    var embedUrl = "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
-    dataFrame.setAttribute("src", embedUrl);
-  }
-  else {
-    setTimeout(function() {
-      getVideoData(id);
-    }, 500);
-  }
-}
-
-// * This function then loads that video data into the videos array and the playlist viewer
-
-var dataPlayerErrors = 0;
-function onDataPlayerReady() {
-  console.log("onDataPlayerReady");
-  try {
-    var data = dataPlayer.getVideoData();
-    var videoName = dataPlayer.getVideoData()["title"];
-    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-    var videoTime = Math.round(dataPlayer.getDuration());
-    $("#inputBox").val("").attr("placeholder", placeholder);
-    dataPlayer.destroy();
-    dataPlayerErrors = 0;
-    addVideo(videoName, videoTime, videoId);
-    dataPlayerRunning = false;
-  }
-  catch(e) {
-    dataPlayerErrors++;
-    console.log(e);
-    if (dataPlayerErrors <= 5) {
-      try {
-        dataPlayer.destroy();
-      } catch(e) {};
-      getVideoData();
-    }
-  }
-}
-
-**********************************************/
-
+// * This function loads the video name
 // * Updated video data capture method because of deprecation of player.getVideoData() in API (11/15/2017)
 
 function getVideoName(id, callback) {
@@ -501,6 +443,9 @@ function getVideoName(id, callback) {
   });
 }
 
+// * This function utilizes function above to add videos with applicable data
+// * It used to handle data gathering on it's own, but stands as a wrapper to the async ajax above
+
 function getVideoData(id) {
   videoId = id;
   videoTime = 0;
@@ -511,6 +456,9 @@ function getVideoData(id) {
     addVideo(videoName, videoTime, videoId);
   });
 }
+
+// * This function sets the video time on video play
+// * It is handled this way since YouTube does not set player.getDuration() until play. Screw you YouTube.
 
 function setVideoTime() {
   var name = videos[videoIteration][0];
@@ -674,31 +622,8 @@ function addAutoplayVideo() {
 
 // End Streamly Radio
 
-// * This function refreshes the playlist viewer with videos in the videos array
-// * It's primary use is for playlist shuffling
-
-function refreshVideoList() {
-  for (var i = 1; i < videos.length; i++) {
-    removeVideoFromList(i, false);
-    var printTime = msConversion(videos[i][1] * 1000);
-    addVideoToList(videos[i][0], printTime, i, false);
-    if (videos[i][2] === videos[videoIteration][2]) {
-      if (videoPaused && videoIteration === 1) {
-        highlight(1, "selected", false);
-      }
-      else if (!playlistRepeat) {
-        videoIteration = i;
-        highlight(i, "selected", false);
-      }
-    }
-    if (videos[i][2] === baseAutoplayVideoId) {
-      highlight(i, "radio", false);
-    }
-    if (videoErrorIds.indexOf(videos[i][2]) > -1) {
-      highlight(i, "videoError", true);
-    }
-  }
-}
+// * This function restores the video list highlighting as applicable
+// * It does not use stored values, but rather the state of the playlist
 
 function restoreHighlight(which) {
   if (videos[which][2] === videos[videoIteration][2]) {
@@ -715,6 +640,18 @@ function restoreHighlight(which) {
   }
   if (videoErrorIds.indexOf(videos[which][2]) > -1) {
     highlight(which, "videoError", true);
+  }
+}
+
+// * This function refreshes the playlist viewer with videos in the videos array
+// * It's primary use is for playlist shuffling
+
+function refreshVideoList() {
+  for (var i = 1; i < videos.length; i++) {
+    removeVideoFromList(i, false);
+    var printTime = msConversion(videos[i][1] * 1000);
+    addVideoToList(videos[i][0], printTime, i, false);
+    restoreHighlight(i);
   }
 }
 
