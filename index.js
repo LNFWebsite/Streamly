@@ -142,9 +142,17 @@ function highlight(i, which, persist) {
 
 // * This function adds video elements to the playlist
 
-function addVideoToList(name, time, spot) {
+function addVideoToList(name, time, spot, smooth) {
   name = decodeURIComponent(name);
-  var trElement = "<tr class=\"animated flipInX\"><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  
+  if (smooth) {
+    smooth = " class=\"animated flipInX\"";
+  }
+  else {
+    smooth = "";
+  }
+  
+  var trElement = "<tr" + smooth + "><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
   "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
     if (spot > 1) {
@@ -293,6 +301,7 @@ function loopVideo() {
 
 var VideoFunctions = function() {
   this.play = function() {
+    setVideoTime();
     sendStation("videofunctionsplay");
     videoPaused = false;
     document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
@@ -368,7 +377,7 @@ function getPlaylist() {
       for (var i = 1; i < videos.length; i++) {
         videoCounter = i;
         var printTime = msConversion(videos[videoCounter][1] * 1000);
-        addVideoToList(videos[videoCounter][0], printTime, videoCounter);
+        addVideoToList(videos[videoCounter][0], printTime, videoCounter, true);
       }
       // -- Need to update the playlist with non-encoded stuff 10/04/2016
       setPlaylist();
@@ -400,7 +409,7 @@ function appendPlaylist(playlist) {
     for (var i = 1; i < playlist.length; i++) {
       videoCounter++;
       var printTime = msConversion(playlist[i][1] * 1000);
-      addVideoToList(playlist[i][0], printTime, videoCounter);
+      addVideoToList(playlist[i][0], printTime, videoCounter, true);
     }
     
     playlist.splice(0, 1);
@@ -474,7 +483,7 @@ function onDataPlayerReady() {
 
 **********************************************/
 
-// * Updated video data capture because of YouTube attempt #1 to shutdown
+// * Updated video data capture method because of deprecation of player.getVideoData() in API (11/15/2017)
 
 function getVideoName(id, callback) {
   var url = "https://www.youtube.com/watch?v=" + id;
@@ -501,6 +510,16 @@ function getVideoData(id) {
     $("#inputBox").val("").attr("placeholder", placeholder);
     addVideo(videoName, videoTime, videoId);
   });
+}
+
+function setVideoTime() {
+  var name = videos[videoIteration][0];
+  var time = player.getDuration();
+  time = Math.round(time);
+  
+  videos[videoIteration][2] = time;
+  removeVideoFromList(videoIteration, false);
+  addVideoToList(name, time, videoIteration, false);
 }
 
 // Start Quick Search
@@ -660,7 +679,7 @@ function refreshVideoList() {
   for (var i = 1; i < videos.length; i++) {
     removeVideoFromList(i, false);
     var printTime = msConversion(videos[i][1] * 1000);
-    addVideoToList(videos[i][0], printTime, i);
+    addVideoToList(videos[i][0], printTime, i, false);
     if (videos[i][2] === videos[videoIteration][2]) {
       if (videoPaused && videoIteration === 1) {
         highlight(1, "selected", false);
@@ -760,7 +779,7 @@ function addVideo(name, time, id) {
 
   var printTime = msConversion(time * 1000);
 
-  addVideoToList(name, printTime, iteration);
+  addVideoToList(name, printTime, iteration, true);
 
   setPlaylist();
   makeSortable();
