@@ -521,6 +521,7 @@ function setVideoTime() {
   videos[videoIteration][1] = time;
   removeVideoFromList(videoIteration, false);
   addVideoToList(name, printTime, videoIteration, false);
+  restoreHighlight(videoIteration);
 }
 
 // Start Quick Search
@@ -696,6 +697,24 @@ function refreshVideoList() {
     if (videoErrorIds.indexOf(videos[i][2]) > -1) {
       highlight(i, "videoError", true);
     }
+  }
+}
+
+function restoreHighlight(which) {
+  if (videos[which][2] === videos[videoIteration][2]) {
+    if (videoPaused && videoIteration === 1) {
+      highlight(1, "selected", false);
+    }
+    else if (!playlistRepeat) {
+      videoIteration = which;
+      highlight(which, "selected", false);
+    }
+  }
+  if (videos[which][2] === baseAutoplayVideoId) {
+    highlight(which, "radio", false);
+  }
+  if (videoErrorIds.indexOf(videos[which][2]) > -1) {
+    highlight(which, "videoError", true);
   }
 }
 
