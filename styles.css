@@ -484,3 +484,29 @@ tr.placeholder:before {
     display: inline-block;
   }
 }
+/*** Side by side classes ***/
+#main .sbs {
+  margin: 75px 50% 0px 0px !important;
+}
+#playlistInterface .sbs {
+  position: fixed;
+  top: 75px;
+  right: 10px;
+  width: calc(50% - 10px) !important;
+  height: calc(100% - 105px) !important;
+  margin-top: none !important;
+}
+#youtubeContainer .sbs {
+  width: 100% !important;
+  height: 100% !important;
+}
+#currentVideoTiming .sbs {
+  background-color: black;
+  border-radius: 5px;
+}
+#progressContainer .sbs {
+  width: calc(100% - 100px) !important;
+}
+footer .sbs {
+  bottom: -215px !important;
+}
