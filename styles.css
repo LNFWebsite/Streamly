@@ -485,10 +485,10 @@ tr.placeholder:before {
   }
 }
 /*** Side by side classes ***/
-#main .sbs {
+.mainSBS {
   margin: 75px 50% 0px 0px !important;
 }
-#playlistInterface .sbs {
+.playlistInterfaceSBS {
   position: fixed;
   top: 75px;
   right: 10px;
@@ -496,17 +496,17 @@ tr.placeholder:before {
   height: calc(100% - 105px) !important;
   margin-top: none !important;
 }
-#youtubeContainer .sbs {
+.youtubeContainerSBS {
   width: 100% !important;
   height: 100% !important;
 }
-#currentVideoTiming .sbs {
+.currentVideoTimingSBS {
   background-color: black;
   border-radius: 5px;
 }
-#progressContainer .sbs {
+.progressContainerSBS {
   width: calc(100% - 100px) !important;
 }
-footer .sbs {
+.footerSBS {
   bottom: -215px !important;
 }
