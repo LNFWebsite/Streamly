@@ -39,6 +39,7 @@ var stationTxQuiet = false;
 var stationUserId;
 
 var zenMode = false;
+var sideBySide = false;
 
 var videoPaused;
 //this var is for addVideo knowing whether to loop to next video or not
@@ -1231,6 +1232,41 @@ function toggleZen() {
       $(this).css("display", "none");
     });
     $("#zenModeToggle").prop("checked", true);
+  }
+}
+
+function toggleSideBySide() {
+  function changeSBS(which, add) {
+    var className = which.replace("#", "");
+    if (add) {
+      $(which).addClass(className + "SBS");
+    }
+    else {
+      $(which).removeClass(className + "SBS");
+    }
+  }
+  var sbsElements = [
+    "#main",
+    "#playlistInterface",
+    "#youtubeContainer",
+    "#currentVideoTiming",
+    "#progressContainer",
+    "#settings",
+    "footer"
+  ];
+  if (sideBySide) {
+    sideBySide = false;
+    sbsElements.forEach(function(element) {
+      changeSBS(element, false);
+    });
+    $("#sideBySideToggle").prop("checked", false);
+  }
+  else {
+    sideBySide = true;
+    sbsElements.forEach(function(element) {
+      changeSBS(element, true);
+    });
+    $("#sideBySideToggle").prop("checked", true);
   }
 }
 

@@ -484,3 +484,34 @@ tr.placeholder:before {
     display: inline-block;
   }
 }
+/*** Side by side classes ***/
+.mainSBS {
+  margin: 75px 50% 0px 0px !important;
+}
+.playlistInterfaceSBS {
+  position: fixed;
+  top: 75px;
+  right: 10px;
+  width: calc(50% - 10px) !important;
+  height: calc(100% - 145px) !important;
+  margin-top: 0 !important;
+}
+.youtubeContainerSBS {
+  width: 100% !important;
+  height: 100% !important;
+}
+.currentVideoTimingSBS {
+  background-color: black;
+  border-radius: 5px;
+}
+.progressContainerSBS {
+  width: calc(100% - 100px) !important;
+}
+.settingsSBS {
+  position: fixed;
+  right: calc(25% - 80px);
+  background-color: black;
+}
+.footerSBS {
+  bottom: -215px !important;
+}
