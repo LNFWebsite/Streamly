@@ -494,7 +494,7 @@ tr.placeholder:before {
   right: 10px;
   width: calc(50% - 10px) !important;
   height: calc(100% - 105px) !important;
-  margin-top: none !important;
+  margin-top: 0 !important;
 }
 .youtubeContainerSBS {
   width: 100% !important;
