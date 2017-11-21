@@ -493,7 +493,7 @@ tr.placeholder:before {
   top: 75px;
   right: 10px;
   width: calc(50% - 10px) !important;
-  height: calc(100% - 105px) !important;
+  height: calc(100% - 145px) !important;
   margin-top: 0 !important;
 }
 .youtubeContainerSBS {
@@ -506,6 +506,11 @@ tr.placeholder:before {
 }
 .progressContainerSBS {
   width: calc(100% - 100px) !important;
+}
+.settingsSBS {
+  position: fixed;
+  right: calc(25% - 80px);
+  background-color: black;
 }
 .footerSBS {
   bottom: -215px !important;
