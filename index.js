@@ -1251,6 +1251,7 @@ function toggleSideBySide() {
     "#youtubeContainer",
     "#currentVideoTiming",
     "#progressContainer",
+    "#settings",
     "footer"
   ];
   if (sideBySide) {
