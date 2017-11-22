@@ -453,6 +453,8 @@ function getVideoData(id) {
   
   getVideoName(id, function(name) {
     videoName = name;
+    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+    
     $("#inputBox").val("").attr("placeholder", placeholder);
     addVideo(videoName, videoTime, videoId);
   });
