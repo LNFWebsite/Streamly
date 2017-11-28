@@ -227,6 +227,11 @@
       //buffering
       case 3:
         console.log("buffering");
+        //this is here because video errors cause a 'paused' event
+        //the same occurs when scrolling quickly through a playlist
+        //don't move the videoFunctions.play() stuff here because this is NOT triggered on un-pausing
+        //the 'buffering' event is never triggered on paused/pausing videos so this does not conflict with other things
+        videoPaused = false;
         break;
       //cued
       case 5:
@@ -244,6 +249,7 @@
     videoPreviews();
   }
   function onError(event) {
+    console.log(videoPaused);
     videoErrorIds.push(videos[videoIteration][2]);
     $("tr:nth-child(" + videoIteration + ")").addClass("videoError");
     forwardVideo();
