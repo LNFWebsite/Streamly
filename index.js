@@ -630,12 +630,12 @@ function addAutoplayVideo() {
 // * It does not use stored values, but rather the state of the playlist
 
 function restoreHighlight(which) {
-  if (videos[which][2] === videos[videoIteration][2]) {
+  //if iteration is videoIteration
+  if (which === videoIteration) {
     if (videoPaused && videoIteration === 1) {
       highlight(1, "selected", false);
     }
-    else /*if (!playlistRepeat)*/ {
-      console.log("highlighting");
+    else {
       videoIteration = which;
       highlight(which, "selected", false);
     }
