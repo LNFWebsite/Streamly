@@ -464,16 +464,18 @@ function getVideoData(id) {
 // * It is handled this way since YouTube does not set player.getDuration() until play. Screw you YouTube.
 
 function setVideoTime() {
-  var name = videos[videoIteration][0];
-  var time = player.getDuration();
-  time = Math.round(time);
-  var printTime = msConversion(time * 1000);
-  
-  videos[videoIteration][1] = time;
-  removeVideoFromList(videoIteration, false);
-  addVideoToList(name, printTime, videoIteration, false);
-  restoreHighlight(videoIteration);
-  setPlaylist();
+  if (videos[videoIteration][1] === 0) {
+    var name = videos[videoIteration][0];
+    var time = player.getDuration();
+    time = Math.round(time);
+    var printTime = msConversion(time * 1000);
+
+    videos[videoIteration][1] = time;
+    removeVideoFromList(videoIteration, false);
+    addVideoToList(name, printTime, videoIteration, false);
+    restoreHighlight(videoIteration);
+    setPlaylist();
+  }
 }
 
 // Start Quick Search
