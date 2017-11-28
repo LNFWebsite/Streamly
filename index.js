@@ -634,7 +634,8 @@ function restoreHighlight(which) {
     if (videoPaused && videoIteration === 1) {
       highlight(1, "selected", false);
     }
-    else if (!playlistRepeat) {
+    else /*if (!playlistRepeat)*/ {
+      console.log("highlighting");
       videoIteration = which;
       highlight(which, "selected", false);
     }
