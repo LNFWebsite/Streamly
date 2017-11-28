@@ -630,15 +630,8 @@ function addAutoplayVideo() {
 // * It does not use stored values, but rather the state of the playlist
 
 function restoreHighlight(which) {
-  //if iteration is videoIteration
   if (which === videoIteration) {
-    if (videoPaused && videoIteration === 1) {
-      highlight(1, "selected", false);
-    }
-    else {
-      videoIteration = which;
-      highlight(which, "selected", false);
-    }
+    highlight(which, "selected", false);
   }
   if (videos[which][2] === baseAutoplayVideoId) {
     highlight(which, "radio", false);
