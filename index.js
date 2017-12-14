@@ -781,14 +781,17 @@ function actionRemoveVideo(iteration) {
   else if (iteration < videoIteration) {
     videoIteration = changeIteration(-1);
   }
-  videoCounter--;
   videos.splice(iteration, 1);
-  removeVideoFromList(iteration, true);
+  removeVideoFromList(iteration, false);
+  //if user removed the last video in playlist with autoplay on, load next one (needed because no videos switch)
+  if (iteration === videoCounter) {
+    addAutoplayVideo();
+  }
+  videoCounter--;
   
   setPlaylist();
   makeSortable();
   videoPreviews();
-  addAutoplayVideo();
 }
 
 // * These functions are called when the play/remove video buttons in the playlist viewer are clicked
