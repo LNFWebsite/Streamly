@@ -788,7 +788,9 @@ function actionRemoveVideo(iteration) {
   setPlaylist();
   makeSortable();
   videoPreviews();
-  addAutoplayVideo();
+  if ((iteration - 1) === videoCounter) {
+    addAutoplayVideo();
+  }
 }
 
 // * These functions are called when the play/remove video buttons in the playlist viewer are clicked
