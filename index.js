@@ -448,6 +448,7 @@ function getVideoName(id, callback) {
 // * It used to handle data gathering on it's own, but stands as a wrapper to the async ajax above
 
 function getVideoData(id) {
+  console.log(videoIteration);
   videoId = id;
   videoTime = 0;
   
@@ -790,6 +791,7 @@ function actionRemoveVideo(iteration) {
   videoPreviews();
   if ((iteration - 1) === videoCounter) {
     addAutoplayVideo();
+    console.log("feakin here");
   }
 }
 
