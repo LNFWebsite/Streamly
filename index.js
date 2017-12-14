@@ -785,7 +785,7 @@ function actionRemoveVideo(iteration) {
   }
   videoCounter--;
   videos.splice(iteration, 1);
-  removeVideoFromList(iteration, true);
+  removeVideoFromList(iteration, false);
   
   setPlaylist();
   makeSortable();
