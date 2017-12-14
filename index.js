@@ -448,7 +448,6 @@ function getVideoName(id, callback) {
 // * It used to handle data gathering on it's own, but stands as a wrapper to the async ajax above
 
 function getVideoData(id) {
-  console.log(videoIteration);
   videoId = id;
   videoTime = 0;
   
@@ -738,6 +737,8 @@ function addVideo(name, time, id) {
   var printTime = msConversion(time * 1000);
 
   addVideoToList(name, printTime, iteration, true);
+  
+  console.log("addvideo iteration: " + iteration);
 
   setPlaylist();
   makeSortable();
