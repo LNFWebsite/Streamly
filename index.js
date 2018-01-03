@@ -785,15 +785,13 @@ function actionRemoveVideo(iteration) {
   videos.splice(iteration, 1);
   removeVideoFromList(iteration, false);
   
+
+  setPlaylist();
+  makeSortable();
+  videoPreviews();
   //if user removed the last video in playlist with autoplay on, load next one
   if ((iteration - 1) === videoCounter) {
     addAutoplayVideo();
-  }
-  //otherwise, run the standard update functions (if running addAutoplayVideo, no need to run these here)
-  else {
-    setPlaylist();
-    makeSortable();
-    videoPreviews();
   }
 }
 
