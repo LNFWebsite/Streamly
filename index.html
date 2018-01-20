@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="styles.css" type="text/css" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" type="text/css" />
-  
+
   <script src="//code.jquery.com/jquery-3.1.0.min.js" crossorigin="anonymous"></script>
   <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js" crossorigin="anonymous"></script>
   <script src="//cdn.rawgit.com/zenorocha/clipboard.js/v1.5.12/dist/clipboard.min.js"></script>
@@ -24,7 +24,7 @@
     <form action="javascript:input(0);" method="get" id="searchForm">
       <input type="textbox" id="inputBox" placeholder="Search, drag and drop video, or paste its URL..." autofocus>
     </form>
-    <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();" title="Copy your playlist to clipboard">Save playlist</button>
+    <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();" title="Copy your playlist to clipboard"></button>
     <span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>
     <span class="fa fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
   </header>
@@ -67,9 +67,9 @@
     </form>
     <table id="videosTable"></table>
     <div id="links">
-      <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started" target="_blank">Getting Started</a> | 
-      <a href="//github.com/LNFWebsite/Streamly/wiki/Playlists" target="_blank">Playlists Wiki</a> | 
-      <a href="//lnfwebsite.github.io/Streamly-Import/" target="_blank">Import Playlists</a> | 
+      <a href="//github.com/LNFWebsite/Streamly/wiki/Getting-Started" target="_blank">Getting Started</a> |
+      <a href="//github.com/LNFWebsite/Streamly/wiki/Playlists" target="_blank">Playlists Wiki</a> |
+      <a href="//lnfwebsite.github.io/Streamly-Import/" target="_blank">Import Playlists</a> |
       <a href="//www.reddit.com/r/StreamlyReddit/" target="_blank">StreamlyReddit</a>
       <br>
       <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
@@ -80,10 +80,16 @@
   </div>
   <footer>
     <div id="previousVideo" onclick="backVideo();" title="Back">
-      <p id="previousVideoName"></p>
-      <img id="previousVideoImage" src="" />
-      <span class="fa fa-backward"></span>
-      <p id="previousVideoTime"></p>
+      <div class="videoNameContainer">
+        <p class="videoName"></p>
+      </div>
+      <div class="videoImageContainer">
+        <div class="videoImageWrapper">
+          <img class="videoImage" src="" />
+          <span class="fa fa-backward"></span>
+          <p class="videoTime"></p>
+        </div>
+      </div>
     </div>
     <div id="playlistInterface">
       <div id="youtubeContainer" title="Click to pause">
@@ -99,10 +105,16 @@
       </div>
     </div>
     <div id="nextVideo" onclick="forwardVideo();" title="Forward">
-      <img id="nextVideoImage" src="" />
-      <p id="nextVideoName"></p>
-      <span class="fa fa-forward"></span>
-      <p id="nextVideoTime"></p>
+      <div class="videoImageContainer">
+        <div class="videoImageWrapper">
+          <img class="videoImage" src="" />
+          <span class="fa fa-forward"></span>
+          <p class="videoTime"></p>
+        </div>
+      </div>
+      <div class="videoNameContainer">
+        <p class="videoName"></p>
+      </div>
     </div>
     <div id="settings">
       <span class="fa fa-arrow-circle-right" onclick="playlistFeatures.playNext();" title="Added videos will play next"></span>
@@ -116,7 +128,7 @@
   <script>
   //this is a standard dialog box for jquery that can be used to non-annoyingly get messages to users on-load
   //$("#dialog").dialog();
-  
+
   function shareOnRedditAd() {
     var i=0;
     var text = document.getElementById('ad');
@@ -130,34 +142,34 @@
     }
     var clr = setInterval(flash, 300);
   }
-  
+
   $("#inputBox").on("paste", function() {
     setTimeout(function() {
       input(1);
     }, 0);
   });
-    
+
   $("#inputBox").on("focus", function() {
     $(this).attr("placeholder", "(End your search with \\ for Quick Search, add 'l' for lyric videos)");
     setTimeout(function() {
       $("#inputBox").attr("placeholder", placeholder);
     }, 4000);
-    
+
     if ($(window).width() <= 600) {
       $("footer").css("display", "none");
     }
   });
-    
+
   $("#inputBox").on("blur", function() {
     if ($(window).width() <= 600) {
       $("footer").css("display", "block");
     }
   });
-  
+
   $("#playlistNameBox").on("blur", function() {
     input(2);
   });
-    
+
   function openSettings() {
     $("#settingsWindow").css("display", "block");
     $("#settingsShadow").css("display", "block");
@@ -166,11 +178,7 @@
     $("#settingsWindow").css("display", "none");
     $("#settingsShadow").css("display", "none");
   }
-  if ($(window).width() <= 600) {
-    $("#title").after($("#settingsButton"));
-    $("#settingsButton").after($("#stationIcon"));
-  }
-  
+
   function startVideoProgress() {
     if (!videoPaused) {
       actionTimers.clear();
@@ -182,13 +190,13 @@
       actionTimers.pause();
     }
   }
-  
+
   var tag = document.createElement('script');
 
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  
+
   // **BREAKTHROUGH THE GREATER!**
   var player;
   function onYouTubeIframeAPIReady() {
@@ -243,7 +251,7 @@
   function onPlayerReady(event) {
     console.log("Debug: onPlayerReady");
     startVideoProgress();
-    
+
     getPlaylist();
     makeSortable();
     videoPreviews();
@@ -254,14 +262,14 @@
     $("tr:nth-child(" + videoIteration + ")").addClass("videoError");
     forwardVideo();
   }
-  
+
   //need to initialize per 6/2017 YT backend change
   $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
-  
+
   $("header, #forkmeImage").addClass("animated slideInDown");
   $("footer").addClass("animated fadeIn");
   $("#links").addClass("animated fadeIn");
-  
+
   window.addEventListener("keydown", function(e) {
     if ((!$("#inputBox").is(":focus")
          || $("#inputBox").val() == ""
@@ -327,7 +335,7 @@
       }
     }
   });
-  
+
   $("#inputBox").autocomplete({
     delay: 100,
     source: function (request, response) {
@@ -352,15 +360,25 @@
       });
     }
   });
-  
+
+  function resetSaveButton() {
+    if ($(window).width() <= 600) {
+      $("#saveButton").text("Save");
+    }
+    else {
+      $("#saveButton").text("Save playlist");
+    }
+  }
+  resetSaveButton();
+
   new Clipboard("#saveButton");
   function saveButton() {
     $("#saveButton").text("Playlist copied!");
     setTimeout(function() {
-      $("#saveButton").text("Save playlist");
+      resetSaveButton();
     }, 2000);
   }
-    
+
   $("#youtubeContainer").click(function() {
     if (stationRemote) {
       if ($("#remotePauseIcon").hasClass("fa-play")) {
@@ -373,7 +391,7 @@
       }
     }
   });
-  
+
   function shareOnReddit() {
     var playlistName = $("#playlistNameBox").val();
     if (playlistName === "") {
@@ -388,12 +406,12 @@
     }
   }
   </script>
-  
+
   <!-- Start of StatCounter Code for Default Guide -->
   <script type="text/javascript">
-  var sc_project=10543623; 
-  var sc_invisible=1; 
-  var sc_security="4c623aaf"; 
+  var sc_project=10543623;
+  var sc_invisible=1;
+  var sc_security="4c623aaf";
   var scJsHost = (("https:" == document.location.protocol) ?
   "https://secure." : "http://www.");
   document.write("<sc"+"ript type='text/javascript' src='" +
@@ -406,6 +424,6 @@
   src="http://c.statcounter.com/10543623/0/4c623aaf/1/"
   alt="web analytics"></a></div></noscript>
   <!-- End of StatCounter Code for Default Guide -->
-  
+
 </body>
 </html>
