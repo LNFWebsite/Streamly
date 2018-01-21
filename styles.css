@@ -340,8 +340,8 @@ td {
 #previousVideo .videoNameContainer {
   margin-right: 5px;
 }
-#previousVideo .videoImageContainer {
-  margin-left: auto;
+#nextVideo .videoImageContainer {
+  margin-left: 5px;
 }
 /** End Video Previews **/
 
