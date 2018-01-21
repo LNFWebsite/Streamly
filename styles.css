@@ -301,7 +301,7 @@ td {
   opacity: 0;
 }
 .videoNameContainer {
-  width: 100%;
+  width: 70%;
   display: flex;
   align-items: center;
   height: 100%;
@@ -318,6 +318,10 @@ td {
   max-height: 100%;
   display: flex;
   position: relative;
+}
+.videoImage {
+  width: 100%;
+  height: 100%;
 }
 .videoName {
   margin: 0;
