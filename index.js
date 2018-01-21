@@ -3,8 +3,14 @@
 // * These are global variables that are utilized in the rest of the script
 // * They exist for data that must persist for the script to work
 
-var placeholder = "Search, drag and drop video, or paste its URL...";
-var loadingPlaceholder = "Loading video data from YouTube...";
+if ($(window).width() <= 600) {
+  var placeholder = "Search, Paste URL...";
+  var loadingPlaceholder = "Loading...";
+}
+else {
+  var placeholder = "Search, drag and drop video, or paste its URL...";
+  var loadingPlaceholder = "Loading video data from YouTube...";
+}
 
 var faviconPause = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAAA/1BMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD64ociAAAAVHRSTlMAAQIDBAUGBwgJCgsPEBIUFxgbHh8iIyUrMDU/QEdKS09QUlZbXF5fYWZpb3F1e4aJmJ6go6WmqrK0tb7Aw8XHyM/R09XX2drg4unr7e/x8/X3+ftnm6MTAAABGklEQVQ4jYXTx1YCQRBG4TvCYKO2iglzxJwVA5gFs4LA//7P4mLIM9PeZfV3Tm26oC+vf9BTYu7wrib93hzMDkSCoaOG2tX2B0PA21FvjbU+YR4UquB3i5GPsJDK6Y4YjBTSU7JNbqOFdNkSG3FCWghEqhFPfhIA7EmSatYYY9JXUsYYY0wmMOsAXlWS9EbLN9cH5B1gRi6icWDbTVaACzc5AcpuUgQqblL6nzwDJTcpAOducgxsuskSMOUmY4D37SKvAAS/tj5hrbWjBSlrrbU2G5BlAPyaYvtsXstyPJlvbuU6Tpy2BP5LtLjvOsrh1yjxmKIrvxgW+QS9rdZ7QXWRUP5upQO+csmwALzprXy5Uimd5SYj3+P7A3jQxmKOfWTQAAAAAElFTkSuQmCC";
 var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAABDlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxUYW9AAAAWXRSTlMAAQIDBAUGCAkRFBUZGhscHiAhJyorLzI0ODo7PUZMTlBVVldYWVtcXV5hZHB1foKDiIuPlZiboKKlpqirr7CytcDDyMrMzs/R09Xa3N7g4ubp7e/x9/n7/Ud7aO4AAAE3SURBVBgZlcFpOxtRAIbhZ8YgltBaopZEHanamtKgtYaSklJ0xPL+/z8iGedMZq5MPrhv3mlgslzZ2aksT/aTbfpQsYMpun24UMr5OGneN3XZ9EjoO1KGA5+Yd6pMxx5OVT1sY31STwUifqg3jaF8TWn/fdo+y1oFCv+UUqLtXpahxSs/KeGOlrwcQ2TwhxJGgWU5Bit/ptgSsCfHEJu9l7ULXMkxdPgbL4r8AR7kGJLmFQmBphxD0pQiTeCvHEPC/IMiV8C+HENs7LesX8CaHIOVqyr2FZiQY4j4K8/q+Ah4TVmGtplbJYQeLRuyvgAjp0pZp63/SW/Ogtx3pT0GRErqqYh1oh6OcIKGMl0GxHKXylAfJCHYV5effaQthEoJ5+jiL94odl3yyTRc3KrV67Wt4jDv8wr7Zt73xzlZAQAAAABJRU5ErkJggg==";
@@ -63,11 +69,11 @@ var searchDataPlayer;
 function makeId() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  
+
   for (var i=0; i < 10; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
-  
+
   return text;
 }
 
@@ -145,14 +151,14 @@ function highlight(i, which, persist) {
 
 function addVideoToList(name, time, spot, smooth) {
   name = decodeURIComponent(name);
-  
+
   if (smooth) {
     smooth = " class=\"animated flipInX\"";
   }
   else {
     smooth = "";
   }
-  
+
   var trElement = "<tr" + smooth + "><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
   "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
@@ -255,10 +261,10 @@ function playVideo() {
   addAutoplayVideo();
 
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
-  
+
   if (!stationRemote) {
     $("#youtube").css("display", "block");
-    
+
     if (!videoPaused) {
       player.loadVideoById(videos[videoIteration][2]);
     }
@@ -412,7 +418,7 @@ function appendPlaylist(playlist) {
       var printTime = msConversion(playlist[i][1] * 1000);
       addVideoToList(playlist[i][0], printTime, videoCounter, true);
     }
-    
+
     playlist.splice(0, 1);
     videos = videos.concat(playlist);
 
@@ -433,7 +439,7 @@ function getVideoName(id, callback) {
   var get = {
     url: url
   };
-  
+
   $.ajax({
     dataType: "json",
     url: "https://noembed.com/embed",
@@ -450,11 +456,11 @@ function getVideoName(id, callback) {
 function getVideoData(id) {
   videoId = id;
   videoTime = 0;
-  
+
   getVideoName(id, function(name) {
     videoName = name;
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-    
+
     $("#inputBox").val("").attr("placeholder", placeholder);
     addVideo(videoName, videoTime, videoId);
   });
@@ -534,7 +540,7 @@ function onSearchDataPlayerStateChange(event) {
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoUrl();
     var id = urlValidate(data)[1];
-    
+
     getVideoName(id, function(name) {
       videoName = name;
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
@@ -554,7 +560,7 @@ function onSearchDataPlayerStateChange(event) {
 function loadAutoplayData(iteration) {
   autoplayVideos = [];
   autoplayVideoIteration = -1;
-  
+
   highlight(iteration, "radio", false);
   baseAutoplayVideoId = videos[iteration][2];
   var dataFrame = document.createElement("iframe");
@@ -584,7 +590,7 @@ function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
-    
+
     for (var i = 0; i <= 25; i++) {
       var notInPlaylist = true;
       var autoplayVideo = autoplayVideos[i];
@@ -598,7 +604,7 @@ function onRadioDataPlayerStateChange(event) {
       }
     }
     autoplayVideos = autoplayVideosSpare;
-    
+
     radioDataPlayer.destroy();
     if (autoplayVideos.length > 1) {
       addAutoplayVideo();
@@ -692,13 +698,13 @@ function shufflePlaylist() {
     videos.splice(0, 1);
     videos.unshift(playlistName);
   }
-  
+
   refreshVideoList();
   setPlaylist();
   makeSortable();
   videoPreviews();
   addAutoplayVideo();
-  
+
   if (videos[videoIteration][2] !== videoIterationId) {
     videoIteration = changeIteration(-1);
     loopVideo();
@@ -727,9 +733,9 @@ function addVideo(name, time, id) {
   else {
     videos[iteration] = video;
   }
-  
+
   sendStation("addvideo," + video);
-  
+
   if (playlistShuffle) {
     addedVideosWhileShuffled.push(video);
   }
@@ -741,7 +747,7 @@ function addVideo(name, time, id) {
   setPlaylist();
   makeSortable();
   videoPreviews();
-  
+
   if (videoCounter === 1 || (videoPlaying === false && !videoPaused && videoIteration === videoCounter - 1)) {
     loopVideo();
   }
@@ -784,7 +790,7 @@ function actionRemoveVideo(iteration) {
   videoCounter--;
   videos.splice(iteration, 1);
   removeVideoFromList(iteration, false);
-  
+
 
   setPlaylist();
   makeSortable();
@@ -845,12 +851,12 @@ function makeSortable() {
 
 function videoPreviews() {
   function addData(which, iteration) {
-    $("#" + which + "VideoName").text(decodeURIComponent(videos[iteration][0]));
-    $("#" + which + "VideoTime").text(msConversion(videos[iteration][1] * 1000));
-    $("#" + which + "VideoImage").attr("src", "https://i.ytimg.com/vi/" + videos[iteration][2] + "/default.jpg");
+    $("#" + which + "Video .videoName").text(decodeURIComponent(videos[iteration][0]));
+    $("#" + which + "Video .videoTime").text(msConversion(videos[iteration][1] * 1000));
+    $("#" + which + "Video .videoImage").attr("src", "https://i.ytimg.com/vi/" + videos[iteration][2] + "/default.jpg");
   }
   function changeOpacity(which, amount) {
-    $("#" + which + "VideoName, #" + which + "VideoTime, #" + which + "VideoImage").css("opacity", amount);
+    $("#" + which + "Video .videoName, #" + which + "Video .videoImage, #" + which + "Video .videoTime").css("opacity", amount);
   }
   function greyOut(which, color) {
     $("#" + which + "Video").css("background-color", color);
@@ -921,7 +927,7 @@ var playlistFeatures = new PlaylistFeatures;
 function urlValidate(url) {
   var youtubeRegex = /(?:youtube\.com\/watch.+?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
   var streamlyRegex = /.*#(.+)/i;
-  
+
   function checkMatch(url, regex) {
     var doesMatch = url.match(regex);
     if (doesMatch !== null && doesMatch[1] !== null) {
@@ -931,7 +937,7 @@ function urlValidate(url) {
       return false;
     }
   }
-  
+
   var checkoutYoutube = checkMatch(url, youtubeRegex);
   var checkoutStreamly = checkMatch(url, streamlyRegex);
   if (checkoutYoutube) {
@@ -970,10 +976,10 @@ function input(type) {
     if (inputBox !== "") {
       var isUrl = urlValidate(inputBox);
       var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
-      
+
       var ua = navigator.userAgent.toLowerCase();
       var isAndroid = ua.indexOf("android") > -1;
-      
+
       if (option) {
         switch (option[1]) {
           case "hidevideo":
@@ -1024,7 +1030,7 @@ function input(type) {
         }
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         dropOverlay.open();
-        
+
         function checkIfClosed() {
             if (popup.closed) {
               dropOverlay.close();
@@ -1091,17 +1097,17 @@ function loadStation() {
   stationSocket = io("http://" + stationServer);
   stationUserId = makeId();
   alert("Streamly Station \"" + stationServer + "\" connected!");
-  
+
   $("#stationIcon").css("display", "initial");
-  
+
   stationSocket.on("msg", function(msg) {
     console.log("Station Rx: " + msg);
-    
+
     var msgData = msg.split(",");
     if (msgData[0] !== stationUserId) {
       stationTxQuiet = true;
       flashStationIcon();
-      
+
       switch (msgData[1]) {
         case "addvideo":
           addVideo(msgData[2], msgData[3], msgData[4]);
@@ -1187,7 +1193,7 @@ function actionConnectStation() {
   var station = $("#connectStationBox").val();
   if (window.location.protocol === "https:" && securityWarning === false) {
     securityWarning = true;
-    alert("Note: Due to security protections, scripts on secured pages with 'https://' cannot make unsecured connections. " + 
+    alert("Note: Due to security protections, scripts on secured pages with 'https://' cannot make unsecured connections. " +
           "Streamly Station runs without any onboard security, so this request will probably be blocked and you'll get a notification that the site requested unsecured scripts.\n\n" +
           "In order to use Streamly Station, either make an exception to 'Load unsafe scripts' or replace the 'https://' with 'http://' in the URL.");
   }
