@@ -336,6 +336,7 @@ td {
   color: white;
   margin: 0;
   font-size: 0.8em;
+  text-shadow: 0px 1px 1px black;
 }
 #previousVideo .videoNameContainer {
   margin-right: 5px;
@@ -403,6 +404,7 @@ td {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+  text-shadow: 0px 1px 20px rgba(135, 135, 135, 0.5);
 }
 #videosTable tr {
   cursor: pointer
