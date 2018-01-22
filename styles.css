@@ -258,6 +258,10 @@ td {
 .hideVideo {
   opacity: 0;
 }
+#currentVideoTiming {
+  display: flex;
+  align-items: center;
+}
 #currentTime,
 #videoTime {
   color: #fff
@@ -273,7 +277,8 @@ td {
   border-radius: 999px;
   height: 4px;
   overflow: hidden;
-  width: calc(100% - 85px);
+  width: 100%;
+  margin: 0px 5px;
 }
 #playlistInterface,
 #youtubeContainer,
