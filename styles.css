@@ -273,7 +273,7 @@ td {
   border-radius: 999px;
   height: 4px;
   overflow: hidden;
-  width: calc(100% - 80px);
+  width: calc(100% - 85px);
 }
 #playlistInterface,
 #youtubeContainer,
