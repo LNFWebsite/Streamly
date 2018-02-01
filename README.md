@@ -84,4 +84,4 @@ Saving playlists is done by creating a [JSON](https://json.org) string of the ar
 
 ## License
 
-Streamly is licensed under the MIT license (MIT).
+Streamly is licensed under the Apache 2.0 License (Apache).
