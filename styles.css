@@ -207,8 +207,12 @@ table {
   color: black;
 }
 td {
+  position: relative;
   padding: 5px;
   cursor: move;
+}
+.tableLeft {
+  padding-right: 70px;
 }
 .selected {
   background: rgba(255, 131, 0, 0.4) !important
@@ -373,6 +377,12 @@ td {
   -o-transition: .2s;
   -webkit-transition: .2s;
   transition: .2s;
+}
+.tableButtonDiv {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .tableButton:hover {
   opacity: 1

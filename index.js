@@ -160,8 +160,8 @@ function addVideoToList(name, time, spot, smooth) {
     smooth = "";
   }
 
-  var trElement = "<tr" + smooth + "><td>" + name + "<button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></td><td>" + time + "</td></tr>";
+  var trElement = "<tr" + smooth + "><td class=\"tableLeft\">" + name + "<div class=\"tableButtonDiv\"><button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></div></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
     if (spot > 1) {
       $("#videosTable > tr").eq(spot-2).after(trElement);
