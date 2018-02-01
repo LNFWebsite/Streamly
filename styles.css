@@ -541,18 +541,20 @@ tr.placeholder:before {
   margin: 75px 50% 0px 0px !important;
 }
 .playlistInterfaceSBS {
-  position: fixed;
-  top: 75px;
-  right: 10px;
+  position: fixed !important;
+  top: 75px !important;
+  left: auto !important;
   width: calc(50% - 10px) !important;
   height: calc(100% - 145px) !important;
-  margin-top: 0 !important;
+  margin-right: initial !important;
+  transform: initial;
 }
 .youtubeContainerSBS {
   width: 100% !important;
   height: 100% !important;
 }
 .currentVideoTimingSBS {
+  display: initial !important;
   background-color: black;
   border-radius: 5px;
 }
@@ -565,5 +567,5 @@ tr.placeholder:before {
   background-color: black;
 }
 .footerSBS {
-  bottom: -215px !important;
+  bottom: -35% !important;
 }
