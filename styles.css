@@ -160,7 +160,6 @@ footer {
   font-family: 'Roboto',sans-serif;
 }
 td,
-th,
 #main,
 #saveButton,
 #youtube,
@@ -214,13 +213,13 @@ td {
 .tableLeft {
   padding-right: 70px;
 }
-.selected {
+.selected td {
   background: rgba(255, 131, 0, 0.4) !important
 }
-.radio {
+.radio td {
   background: rgba(0, 255, 0, 0.3)
 }
-.videoError {
+.videoError td {
   background: rgba(255, 0, 0, 0.5)
 }
 #playlistInterface {
