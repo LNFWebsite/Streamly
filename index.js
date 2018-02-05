@@ -1,4 +1,4 @@
-//! License: MIT (as stated in the LICENSE file)
+//! License: Apache v2.0 (as stated in the LICENSE file)
 
 // * These are global variables that are utilized in the rest of the script
 // * They exist for data that must persist for the script to work
