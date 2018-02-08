@@ -511,7 +511,7 @@ function setVideoTime() {
 // Start Quick Search
 
 function addSearchResult(name, id) {
-  $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"" + loadSearchResult(searchResultsIteration) + "\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
+  $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(" + searchResultsIteration + ");\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
 }
 
 function loadSearchResult(which) {
