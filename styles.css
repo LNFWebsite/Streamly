@@ -481,6 +481,11 @@ tr.placeholder:before {
 .searchResult .right {
   width: 40%;
 }
+.searchResult p {
+  margin: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
 
 /** Mobile Interface **/
 @media (max-width: 600px) {
