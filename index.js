@@ -602,7 +602,7 @@ function onSearchDataPlayerStateChange(event) {
         addVideo(videoName, videoTime, id);
       }
       else {
-        $("#searchResultsWindow").empty();
+        $(".searchResult").remove();
         searchResultsIteration = 0;
         addSearchResult(decodeURIComponent(videoName), id);
         searchResults();
