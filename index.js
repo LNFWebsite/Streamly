@@ -522,9 +522,6 @@ function loadSearchResult(element) {
   if (searchClose && !hotkeySearchClose) {
     toggleMenu("searchResults");
   }
-  else if (hotkeySearchClose) {
-    hotkeySearchClose = false;
-  }
 }
 
 function searchResults() {
@@ -1369,6 +1366,9 @@ function toggleMenu(which) {
   }
   $(window).css("display", state);
   $(shadow).css("display", state);
+  if (which === "searchResults" && state === "none") {
+    hotkeySearchClose = false;
+  }
 }
 
 // * This object loads the drop overlay over Streamly
