@@ -515,6 +515,7 @@ function addSearchResult(name, id) {
 }
 
 function loadSearchResult(which) {
+  inBoxSearch = false;
   which = quickSearchVideos[which];
   getVideoData(which);
   toggleMenu("searchResults");
@@ -528,7 +529,6 @@ function searchResults() {
   }
   else {
     toggleMenu("searchResults");
-    inBoxSearch = false;
   }
 }
 
