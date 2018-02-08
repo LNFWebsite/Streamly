@@ -531,7 +531,10 @@ function searchResults() {
     searchResults();
   }
   else {
-    toggleMenu("searchResults");
+    //as long as not open already (trying to search twice will close on second)
+    if ($("#searchResultsWindow").css("display") !== "block") {
+      toggleMenu("searchResults");
+    }
     $("#inputBox").val("").attr("placeholder", placeholder).blur();
   }
 }
@@ -1356,15 +1359,15 @@ function toggleSearchClose() {
 }
 
 function toggleMenu(which) {
-  var window = "#" + which + "Window";
+  var menu = "#" + which + "Window";
   var shadow = "#" + which + "Shadow";
-  if ($(window).css("display") !== "none") {
+  if ($(menu).css("display") !== "none") {
     state = "none";
   }
   else {
     state = "block";
   }
-  $(window).css("display", state);
+  $(menu).css("display", state);
   $(shadow).css("display", state);
   if (which === "searchResults" && state === "none") {
     hotkeySearchClose = false;
