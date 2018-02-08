@@ -1328,15 +1328,17 @@ function togglePopupClose() {
   }
 }
 
-function toggleMenu(which, state) {
-  if (state) {
-    state = "block";
-  }
-  else {
+function toggleMenu(which) {
+  var window = "#" + which + "Window";
+  var shadow = "#" + which + "Shadow";
+  if ($(window).css("display") !== "none") {
     state = "none";
   }
-  $("#" + which + "Window").css("display", state);
-  $("#" + which + "Shadow").css("display", state);
+  else {
+    state = "block";
+  }
+  $(window).css("display", state);
+  $(shadow).css("display", state);
 }
 
 // * This object loads the drop overlay over Streamly
