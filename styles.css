@@ -469,6 +469,9 @@ tr.placeholder:before {
   border: 1px solid;
   border-radius: 5px;
 }
+.searchResult:hover {
+  background-color: #4B4B4B;
+}
 .searchResult .left, .searchResult .right {
   height 100%;
   display: flex;
@@ -485,6 +488,9 @@ tr.placeholder:before {
   margin: 0;
   max-height: 100%;
   overflow: hidden;
+}
+.searchResult img {
+  border-radius: 5px;
 }
 
 /** Mobile Interface **/
