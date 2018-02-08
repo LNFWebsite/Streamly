@@ -53,6 +53,10 @@ var quickSearchQuery;
 var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
+var inBoxSearch = true;
+var searchResultsCount = 5;
+var searchResultsIteration = 0;
+
 var stationServer;
 var stationSocket;
 var stationRemote = false;
@@ -477,7 +481,12 @@ function getVideoData(id) {
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
 
     $("#inputBox").val("").attr("placeholder", placeholder);
-    addVideo(videoName, videoTime, videoId);
+    if (!inBoxSearch) {
+      addVideo(videoName, videoTime, videoId);
+    }
+    else {
+      $("#searchResults").append("<p>" + videoName + "</p>");
+    }
   });
 }
 
@@ -500,6 +509,15 @@ function setVideoTime() {
 }
 
 // Start Quick Search
+
+var searchResultsIteration = 0;
+function searchResults() {
+  searchResultsIteration++;
+  quickSearch("");
+  if (searchResultsIteration < searchResultsCount) {
+    searchResults();
+  }
+}
 
 // * This function loads the video for the Quick Search functionality
 
@@ -561,7 +579,13 @@ function onSearchDataPlayerStateChange(event) {
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       videoTime = 0;
       searchDataPlayer.destroy();
-      addVideo(videoName, videoTime, id);
+      if (!inBoxSearch) {
+        addVideo(videoName, videoTime, id);
+      }
+      else {
+        $("#searchResults").append("<p>" + videoName + "</p>");
+        searchResults();
+      }
     });
   }
 }
