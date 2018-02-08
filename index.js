@@ -485,7 +485,7 @@ function getVideoData(id) {
       addVideo(videoName, videoTime, videoId);
     }
     else {
-      $("#searchResults").append("<p>" + videoName + "</p>");
+      $("#searchResultsDiv").append("<p>" + videoName + "</p>");
     }
   });
 }
@@ -583,7 +583,7 @@ function onSearchDataPlayerStateChange(event) {
         addVideo(videoName, videoTime, id);
       }
       else {
-        $("#searchResults").append("<p>" + videoName + "</p>");
+        $("#searchResultsDiv").append("<p>" + videoName + "</p>");
         searchResults();
       }
     });
