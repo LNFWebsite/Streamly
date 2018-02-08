@@ -58,8 +58,8 @@
           <input type="checkbox" id="sideBySideToggle" onchange="toggleSideBySide();">
       </p>
       <p>
-        <label for="popupClose">Close search pop-up on adding video?</label>
-        <input type="checkbox" id="popupClose" onchange="togglePopupClose();">
+        <label for="searchClose">Close search window on adding video?</label>
+        <input type="checkbox" id="searchClose" onchange="toggleSearchClose();">
         <br><sup>Note: To do the reverse of this setting for one search press <code>Shift+\</code></sup>
       </p>
       <h2>Streamly Station</h2><hr>
@@ -323,9 +323,9 @@
             quickSearch(query);
           }
           else {
-            //added for | hotkey for popup thing requested
-            hotkeyPopupClose = true;
-            togglePopupClose();
+            //added for | hotkey for popup (now search) thing requested
+            hotkeySearchClose = true;
+            toggleSearchClose();
             input(0);
           }
           break;
