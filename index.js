@@ -485,7 +485,7 @@ function getVideoData(id) {
       addVideo(videoName, videoTime, videoId);
     }
     else {
-      $("#searchResultsWindow").append("<p>" + videoName + "</p>");
+      $("#searchResultsWindow").append("<div class=\"searchResult\"><div id=\"left\"><p id=\"videoName\">" + videoName + "</p></div><div id=\"right\"><img id=\"videoImage\" src=\"https://i.ytimg.com/vi/" + videoId + "/default.jpg\" /></div></div>");
     }
   });
 }
