@@ -485,7 +485,7 @@ function getVideoData(id) {
       addVideo(videoName, videoTime, videoId);
     }
     else {
-      addSearchResult(videoName, id);
+      addSearchResult(decodeURIComponent(name), id);
     }
   });
 }
@@ -591,7 +591,7 @@ function onSearchDataPlayerStateChange(event) {
       }
       else {
         $("#searchResultsWindow").empty();
-        addSearchResult(videoName, id);
+        addSearchResult(decodeURIComponent(name), id);
         searchResults();
       }
     });
