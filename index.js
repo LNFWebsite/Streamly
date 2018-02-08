@@ -479,9 +479,9 @@ function getVideoData(id) {
   getVideoName(id, function(name) {
     videoName = name;
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-
-    $("#inputBox").val("").attr("placeholder", placeholder);
+    
     if (!inBoxSearch) {
+      $("#inputBox").val("").attr("placeholder", placeholder);
       addVideo(videoName, videoTime, videoId);
     }
     else {
@@ -530,6 +530,7 @@ function searchResults() {
   }
   else {
     toggleMenu("searchResults");
+    $("#inputBox").val("").attr("placeholder", placeholder);
   }
 }
 
@@ -582,7 +583,9 @@ function onSearchDataPlayerReady() {
 
 function onSearchDataPlayerStateChange(event) {
   if (event.data === 5) {
-    $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+    if (!inBoxSearch) {
+      $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+    }
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoUrl();
