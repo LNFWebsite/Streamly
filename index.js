@@ -515,6 +515,7 @@ function addSearchResult(name, id) {
 }
 
 function loadSearchResult(which) {
+  which = quickSearchVideos[which];
   inBoxSearch = false;
   getVideoData(which);
   inBoxSearch = true;
