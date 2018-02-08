@@ -32,7 +32,7 @@ var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAA
 
 var popup;
 var searchClose = true;
-var hotkeyPopupClose = false;
+var hotkeySearchClose = false;
 
 var videoId;
 
@@ -519,8 +519,11 @@ function loadSearchResult(element) {
   which = quickSearchVideos[which];
   inBoxSearch = false;
   getVideoData(which);
-  if (searchClose) {
+  if (searchClose && !hotkeySearchClose) {
     toggleMenu("searchResults");
+  }
+  else if (hotkeySearchClose) {
+    hotkeySearchClose = false;
   }
 }
 
