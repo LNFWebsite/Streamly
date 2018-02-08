@@ -53,7 +53,7 @@ var quickSearchQuery;
 var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
-var inBoxSearch = true;
+var inBoxSearch = false;
 var searchResultsCount = 5;
 var searchResultsIteration = 0;
 
@@ -516,9 +516,7 @@ function addSearchResult(name, id) {
 
 function loadSearchResult(which) {
   which = quickSearchVideos[which];
-  inBoxSearch = false;
   getVideoData(which);
-  inBoxSearch = true;
   toggleMenu("searchResults");
 }
 
@@ -530,6 +528,7 @@ function searchResults() {
   }
   else {
     toggleMenu("searchResults");
+    inBoxSearch = false;
   }
 }
 
@@ -1083,6 +1082,7 @@ function input(type) {
         if (inputBox.slice(-2) === " l") {
           inputBox = inputBox + "yric";
         }
+        /***
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         dropOverlay.open();
 
@@ -1093,6 +1093,9 @@ function input(type) {
             }
         }
         var checkIfClosedTimer = setInterval(checkIfClosed, 500);
+        ***/
+        inBoxSearch = true;
+        quickSearch(inputBox);
 
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
