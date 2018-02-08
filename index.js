@@ -532,7 +532,7 @@ function searchResults() {
   }
   else {
     toggleMenu("searchResults");
-    $("#inputBox").val("").attr("placeholder", placeholder);
+    $("#inputBox").val("").attr("placeholder", placeholder).blur();
   }
 }
 
