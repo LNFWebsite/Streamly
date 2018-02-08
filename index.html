@@ -46,9 +46,11 @@
   <div id="main">
     <div id="floatingMenuShadow"></div>
     <div id="dropOverlay"><p>(Drag &amp; drop videos here)</p></div>
-    <div id="searchResultsDiv" class="floatingMenu"></div>
+    <div id="searchResultsDiv" class="floatingMenu">
+      <div class="floatingMenuCloseButton" onclick="closeSearchResults();">Close</div>
+    </div>
     <div id="settingsWindow" class="floatingMenu">
-      <div id="settingsCloseButton" onclick="closeSettings();">Close</div>
+      <div class="floatingMenuCloseButton" onclick="closeSettings();">Close</div>
       <h1>Settings</h1><hr>
       <h2>General</h2><hr>
       <p>
