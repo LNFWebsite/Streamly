@@ -517,6 +517,9 @@ function searchResults() {
   if (searchResultsIteration < searchResultsCount) {
     searchResults();
   }
+  else {
+    toggleMenu("searchResults");
+  }
 }
 
 // * This function loads the video for the Quick Search functionality
