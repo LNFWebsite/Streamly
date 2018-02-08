@@ -519,7 +519,7 @@ function loadSearchResult(element) {
   which = quickSearchVideos[which];
   inBoxSearch = false;
   getVideoData(which);
-  if (searchClose && !hotkeySearchClose) {
+  if (searchClose) {
     toggleMenu("searchResults");
   }
 }
@@ -1371,6 +1371,7 @@ function toggleMenu(which) {
   $(shadow).css("display", state);
   if (which === "searchResults" && state === "none") {
     hotkeySearchClose = false;
+    toggleSearchClose();
   }
 }
 
