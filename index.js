@@ -485,7 +485,7 @@ function getVideoData(id) {
       addVideo(videoName, videoTime, videoId);
     }
     else {
-      addSearchResult(videoName, videoId);
+      addSearchResult(videoName, id);
     }
   });
 }
