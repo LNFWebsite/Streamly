@@ -590,6 +590,7 @@ function onSearchDataPlayerStateChange(event) {
         addVideo(videoName, videoTime, id);
       }
       else {
+        $("#searchResultsWindow").empty();
         addSearchResult(videoName, id);
         searchResults();
       }
