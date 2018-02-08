@@ -31,7 +31,7 @@ var faviconPause = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAA
 var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAABDlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxUYW9AAAAWXRSTlMAAQIDBAUGCAkRFBUZGhscHiAhJyorLzI0ODo7PUZMTlBVVldYWVtcXV5hZHB1foKDiIuPlZiboKKlpqirr7CytcDDyMrMzs/R09Xa3N7g4ubp7e/x9/n7/Ud7aO4AAAE3SURBVBgZlcFpOxtRAIbhZ8YgltBaopZEHanamtKgtYaSklJ0xPL+/z8iGedMZq5MPrhv3mlgslzZ2aksT/aTbfpQsYMpun24UMr5OGneN3XZ9EjoO1KGA5+Yd6pMxx5OVT1sY31STwUifqg3jaF8TWn/fdo+y1oFCv+UUqLtXpahxSs/KeGOlrwcQ2TwhxJGgWU5Bit/ptgSsCfHEJu9l7ULXMkxdPgbL4r8AR7kGJLmFQmBphxD0pQiTeCvHEPC/IMiV8C+HENs7LesX8CaHIOVqyr2FZiQY4j4K8/q+Ah4TVmGtplbJYQeLRuyvgAjp0pZp63/SW/Ogtx3pT0GRErqqYh1oh6OcIKGMl0GxHKXylAfJCHYV5effaQthEoJ5+jiL94odl3yyTRc3KrV67Wt4jDv8wr7Zt73xzlZAQAAAABJRU5ErkJggg==";
 
 var popup;
-var popupClose = false;
+var searchClose = true;
 var hotkeyPopupClose = false;
 
 var videoId;
@@ -519,7 +519,9 @@ function loadSearchResult(element) {
   which = quickSearchVideos[which];
   inBoxSearch = false;
   getVideoData(which);
-  toggleMenu("searchResults");
+  if (searchClose) {
+    toggleMenu("searchResults");
+  }
 }
 
 function searchResults() {
@@ -1063,6 +1065,7 @@ function input(type) {
           inputBox = isUrl[1];
           getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
+          /***
           if (typeof popup !== "undefined") {
             if (popupClose === true) {
               dropOverlay.close();
@@ -1076,6 +1079,7 @@ function input(type) {
               popup.focus();
             }
           }
+          ***/
         }
         else if (isUrl[0] === "streamly") {
           appendPlaylist(isUrl[1]);
@@ -1342,12 +1346,12 @@ function toggleSideBySide() {
 
 // * This is the function that is called for toggling the pop-up close user preference
 
-function togglePopupClose() {
-  if (!popupClose) {
-    popupClose = true;
+function toggleSearchClose() {
+  if (!searchClose) {
+    searchClose = true;
   }
   else {
-    popupClose = false;
+    searchClose = false;
   }
 }
 
