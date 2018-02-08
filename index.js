@@ -1328,6 +1328,17 @@ function togglePopupClose() {
   }
 }
 
+function toggleMenu(which, state) {
+  if (state) {
+    state = "block";
+  }
+  else {
+    state = "none";
+  }
+  $("#" + which + "Window").css("display", state);
+  $("#" + which + "Shadow").css("display", state);
+}
+
 // * This object loads the drop overlay over Streamly
 // * It is used primarily for when the settings window is toggled and when drag&drop searching is activated
 
