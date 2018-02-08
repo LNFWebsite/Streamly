@@ -476,10 +476,10 @@ tr.placeholder:before {
   justify-content: center;
 }
 .searchResult .left {
-  width: 70%;
+  width: 75%;
 }
 .searchResult .right {
-  width: 40%;
+  width: 25%;
 }
 .searchResult p {
   margin: 0;
