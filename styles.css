@@ -461,6 +461,9 @@ tr.placeholder:before {
 }
 
 /** In-box Search Results **/
+#searchResultsWindow h2 {
+  margin-top: 0;
+}
 .searchResult {
   display: flex;
   padding: 5px;
