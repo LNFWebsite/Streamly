@@ -40,7 +40,7 @@
       <input type="textbox" id="inputBox" title="Search, drag and drop video, or paste its URL here" autofocus>
     </form>
     <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();" title="Copy your playlist to clipboard"></button>
-    <span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>
+    <span class="fa fa-cog" id="settingsButton" onclick="toggleMenu('settings');" title="Settings"></span>
     <span class="fa fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
   </header>
   <div id="main">
@@ -187,15 +187,6 @@
   $("#playlistNameBox").on("blur", function() {
     input(2);
   });
-
-  function openSettings() {
-    $("#settingsWindow").css("display", "block");
-    $("#settingsShadow").css("display", "block");
-  }
-  function closeSettings() {
-    $("#settingsWindow").css("display", "none");
-    $("#settingsShadow").css("display", "none");
-  }
 
   function startVideoProgress() {
     if (!videoPaused) {
