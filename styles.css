@@ -460,6 +460,28 @@ tr.placeholder:before {
   width: 0;
 }
 
+/** In-box Search Results **/
+.searchResult {
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+  height: 25%;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.searchResult .left, .searchResult .right {
+  height 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.searchResult .left {
+  width: 70%;
+}
+.searchResult .right {
+  width: 40%;
+}
+
 /** Mobile Interface **/
 @media (max-width: 600px) {
   header {
