@@ -31,8 +31,8 @@ var faviconPause = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAA
 var faviconPlay = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAABDlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxUYW9AAAAWXRSTlMAAQIDBAUGCAkRFBUZGhscHiAhJyorLzI0ODo7PUZMTlBVVldYWVtcXV5hZHB1foKDiIuPlZiboKKlpqirr7CytcDDyMrMzs/R09Xa3N7g4ubp7e/x9/n7/Ud7aO4AAAE3SURBVBgZlcFpOxtRAIbhZ8YgltBaopZEHanamtKgtYaSklJ0xPL+/z8iGedMZq5MPrhv3mlgslzZ2aksT/aTbfpQsYMpun24UMr5OGneN3XZ9EjoO1KGA5+Yd6pMxx5OVT1sY31STwUifqg3jaF8TWn/fdo+y1oFCv+UUqLtXpahxSs/KeGOlrwcQ2TwhxJGgWU5Bit/ptgSsCfHEJu9l7ULXMkxdPgbL4r8AR7kGJLmFQmBphxD0pQiTeCvHEPC/IMiV8C+HENs7LesX8CaHIOVqyr2FZiQY4j4K8/q+Ah4TVmGtplbJYQeLRuyvgAjp0pZp63/SW/Ogtx3pT0GRErqqYh1oh6OcIKGMl0GxHKXylAfJCHYV5effaQthEoJ5+jiL94odl3yyTRc3KrV67Wt4jDv8wr7Zt73xzlZAQAAAABJRU5ErkJggg==";
 
 var popup;
-var popupClose = false;
-var hotkeyPopupClose = false;
+var searchClose = true;
+var hotkeySearchClose = false;
 
 var videoId;
 
@@ -52,6 +52,10 @@ var autoplayVideoIteration = -1;
 var quickSearchQuery;
 var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
+
+var inBoxSearch = false;
+var searchResultsCount = 5;
+var searchResultsIteration = 0;
 
 var stationServer;
 var stationSocket;
@@ -475,9 +479,14 @@ function getVideoData(id) {
   getVideoName(id, function(name) {
     videoName = name;
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-
-    $("#inputBox").val("").attr("placeholder", placeholder);
-    addVideo(videoName, videoTime, videoId);
+    
+    if (!inBoxSearch) {
+      $("#inputBox").val("").attr("placeholder", placeholder);
+      addVideo(videoName, videoTime, videoId);
+    }
+    else {
+      addSearchResult(decodeURIComponent(videoName), id);
+    }
   });
 }
 
@@ -500,6 +509,35 @@ function setVideoTime() {
 }
 
 // Start Quick Search
+
+function addSearchResult(name, id) {
+  $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
+}
+
+function loadSearchResult(element) {
+  var which = $(".searchResult").index(element);
+  which = quickSearchVideos[which];
+  inBoxSearch = false;
+  getVideoData(which);
+  if (searchClose) {
+    toggleMenu("searchResults");
+  }
+}
+
+function searchResults() {
+  searchResultsIteration++;
+  quickSearch("");
+  if (searchResultsIteration < searchResultsCount) {
+    searchResults();
+  }
+  else {
+    //as long as not open already (trying to search twice will close on second)
+    if ($("#searchResultsWindow").css("display") !== "block") {
+      toggleMenu("searchResults");
+    }
+    $("#inputBox").val("").attr("placeholder", placeholder).blur();
+  }
+}
 
 // * This function loads the video for the Quick Search functionality
 
@@ -550,7 +588,9 @@ function onSearchDataPlayerReady() {
 
 function onSearchDataPlayerStateChange(event) {
   if (event.data === 5) {
-    $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+    if (!inBoxSearch) {
+      $("#inputBox").val("").attr("placeholder", placeholder).blur().focus();
+    }
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
     var data = searchDataPlayer.getVideoUrl();
@@ -561,7 +601,15 @@ function onSearchDataPlayerStateChange(event) {
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
       videoTime = 0;
       searchDataPlayer.destroy();
-      addVideo(videoName, videoTime, id);
+      if (!inBoxSearch) {
+        addVideo(videoName, videoTime, id);
+      }
+      else {
+        $(".searchResult").remove();
+        searchResultsIteration = 0;
+        addSearchResult(decodeURIComponent(videoName), id);
+        searchResults();
+      }
     });
   }
 }
@@ -992,8 +1040,8 @@ function input(type) {
       var isUrl = urlValidate(inputBox);
       var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
 
-      var ua = navigator.userAgent.toLowerCase();
-      var isAndroid = ua.indexOf("android") > -1;
+      //var ua = navigator.userAgent.toLowerCase();
+      //var isAndroid = ua.indexOf("android") > -1;
 
       if (option) {
         switch (option[1]) {
@@ -1020,6 +1068,7 @@ function input(type) {
           inputBox = isUrl[1];
           getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
+          /***
           if (typeof popup !== "undefined") {
             if (popupClose === true) {
               dropOverlay.close();
@@ -1033,16 +1082,18 @@ function input(type) {
               popup.focus();
             }
           }
+          ***/
         }
         else if (isUrl[0] === "streamly") {
           appendPlaylist(isUrl[1]);
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
       }
-      else if (($(window).width() > 600 && !isAndroid) && inputBox.indexOf("\\") === -1) {
+      else if (inputBox.indexOf("\\") === -1) {
         if (inputBox.slice(-2) === " l") {
           inputBox = inputBox + "yric";
         }
+        /***
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         dropOverlay.open();
 
@@ -1053,6 +1104,9 @@ function input(type) {
             }
         }
         var checkIfClosedTimer = setInterval(checkIfClosed, 500);
+        ***/
+        inBoxSearch = true;
+        quickSearch(inputBox);
 
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
@@ -1295,12 +1349,29 @@ function toggleSideBySide() {
 
 // * This is the function that is called for toggling the pop-up close user preference
 
-function togglePopupClose() {
-  if (!popupClose) {
-    popupClose = true;
+function toggleSearchClose() {
+  if (!searchClose) {
+    searchClose = true;
   }
   else {
-    popupClose = false;
+    searchClose = false;
+  }
+}
+
+function toggleMenu(which) {
+  var menu = "#" + which + "Window";
+  var shadow = "#" + which + "Shadow";
+  if ($(menu).css("display") !== "none") {
+    state = "none";
+  }
+  else {
+    state = "block";
+  }
+  $(menu).css("display", state);
+  $(shadow).css("display", state);
+  if (hotkeySearchClose) {
+    hotkeySearchClose = false;
+    toggleSearchClose();
   }
 }
 

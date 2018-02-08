@@ -40,14 +40,18 @@
       <input type="textbox" id="inputBox" title="Search, drag and drop video, or paste its URL here" autofocus>
     </form>
     <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();" title="Copy your playlist to clipboard"></button>
-    <span class="fa fa-cog" id="settingsButton" onclick="openSettings();" title="Settings"></span>
+    <span class="fa fa-cog" id="settingsButton" onclick="toggleMenu('settings');" title="Settings"></span>
     <span class="fa fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
   </header>
   <div id="main">
-    <div id="settingsShadow"></div>
+    <div id="floatingMenuShadow"></div>
     <div id="dropOverlay"><p>(Drag &amp; drop videos here)</p></div>
-    <div id="settingsWindow">
-      <div id="settingsCloseButton" onclick="closeSettings();">Close</div>
+    <div id="searchResultsWindow" class="floatingMenu">
+      <h2>Search Results:</h2>
+      <div class="floatingMenuCloseButton" onclick="toggleMenu('searchResults');">Close</div>
+    </div>
+    <div id="settingsWindow" class="floatingMenu">
+      <div class="floatingMenuCloseButton" onclick="toggleMenu('settings');">Close</div>
       <h1>Settings</h1><hr>
       <h2>General</h2><hr>
       <p>
@@ -55,8 +59,8 @@
           <input type="checkbox" id="sideBySideToggle" onchange="toggleSideBySide();">
       </p>
       <p>
-        <label for="popupClose">Close search pop-up on adding video?</label>
-        <input type="checkbox" id="popupClose" onchange="togglePopupClose();">
+        <label for="searchClose">Leave search window open on adding video?</label>
+        <input type="checkbox" id="searchClose" onchange="toggleSearchClose();">
         <br><sup>Note: To do the reverse of this setting for one search press <code>Shift+\</code></sup>
       </p>
       <h2>Streamly Station</h2><hr>
@@ -89,7 +93,7 @@
       <br>
       <a href="javascript:shareOnRedditAd();">Share your playlist on Reddit!</a>
       <p style="margin: 0;padding: 0;">
-        <a style="color:orangered" target="_blank" href="//spaceflightnow.com/2018/02/05/falcon-heavy-demo-flight-mission-status-center/">Falcon Heavy Successful Launch!</a>
+        <a style="color:orangered" target="_blank" href="//www.reddit.com/r/StreamlyReddit/comments/7w7pyd/inbox_searching_has_finally_been_released_no_more/?st=jdexukqi&sh=eda014d3">In-box searching has been released! No more pop-ups!</a>
       </p>
     </div>
   </div>
@@ -184,15 +188,6 @@
   $("#playlistNameBox").on("blur", function() {
     input(2);
   });
-
-  function openSettings() {
-    $("#settingsWindow").css("display", "block");
-    $("#settingsShadow").css("display", "block");
-  }
-  function closeSettings() {
-    $("#settingsWindow").css("display", "none");
-    $("#settingsShadow").css("display", "none");
-  }
 
   function startVideoProgress() {
     if (!videoPaused) {
@@ -329,9 +324,9 @@
             quickSearch(query);
           }
           else {
-            //added for | hotkey for popup thing requested
-            hotkeyPopupClose = true;
-            togglePopupClose();
+            //added for | hotkey for popup (now search) thing requested
+            hotkeySearchClose = true;
+            toggleSearchClose();
             input(0);
           }
           break;

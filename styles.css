@@ -123,17 +123,17 @@ footer {
   left: 45px;
   display: none;
 }
-#settingsCloseButton {
+.floatingMenuCloseButton {
   position: absolute;
   top: 0;
   right: 0;
   cursor: pointer;
   padding: 10px;
 }
-#settingsCloseButton:hover {
+.floatingMenuCloseButton:hover {
   color: white;
 }
-#settingsWindow {
+.floatingMenu {
   width: 600px;
   position: fixed;
   background: grey;
@@ -150,7 +150,7 @@ footer {
   overflow-y: scroll;
   display: none;
 }
-#settingsShadow {
+#floatingMenuShadow {
   position: fixed;
   top: 0;
   left: 0;
@@ -458,6 +458,43 @@ tr.placeholder:before {
   margin-top: -5px;
   position: absolute;
   width: 0;
+}
+
+/** In-box Search Results **/
+#searchResultsWindow h2 {
+  margin-top: 0;
+}
+.searchResult {
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+  height: 25%;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.searchResult:hover {
+  background-color: #4B4B4B;
+}
+.searchResult .left, .searchResult .right {
+  height 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.searchResult .left {
+  width: 75%;
+}
+.searchResult .right {
+  width: 25%;
+}
+.searchResult p {
+  margin: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+.searchResult img {
+  border-radius: 5px;
 }
 
 /** Mobile Interface **/
