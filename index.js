@@ -485,7 +485,7 @@ function getVideoData(id) {
       addVideo(videoName, videoTime, videoId);
     }
     else {
-      $("#searchResultsWindow").append("<div class=\"searchResult\"><div id=\"left\"><p id=\"videoName\">" + videoName + "</p></div><div id=\"right\"><img id=\"videoImage\" src=\"https://i.ytimg.com/vi/" + videoId + "/default.jpg\" /></div></div>");
+      addSearchResult(videoName, videoId);
     }
   });
 }
@@ -509,6 +509,10 @@ function setVideoTime() {
 }
 
 // Start Quick Search
+
+function addSearchResult(name, id) {
+  $("#searchResultsWindow").append("<div class=\"searchResult\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
+}
 
 var searchResultsIteration = 0;
 function searchResults() {
@@ -586,7 +590,7 @@ function onSearchDataPlayerStateChange(event) {
         addVideo(videoName, videoTime, id);
       }
       else {
-        $("#searchResultsWindow").append("<p>" + videoName + "</p>");
+        addSearchResult(videoName, id);
         searchResults();
       }
     });
