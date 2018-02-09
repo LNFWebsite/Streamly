@@ -522,8 +522,7 @@ function loadSearchResult(element) {
   inBoxSearch = false;
   //getVideoData(which);
   
-  
-  videoId = id;
+  videoId = which;
   videoTime = 0;
   videoName = searchResultsNameStorage[which];
   $("#inputBox").val("").attr("placeholder", placeholder);
