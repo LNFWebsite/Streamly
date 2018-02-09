@@ -496,6 +496,7 @@ tr.placeholder:before {
 }
 .searchResult img {
   border-radius: 5px;
+  max-width: 100%;
 }
 
 /** Mobile Interface **/
