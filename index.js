@@ -525,7 +525,6 @@ function loadSearchResult(element) {
   videoId = id;
   videoTime = 0;
   videoName = searchResultsNameStorage[iteration];
-  $("#inputBox").val("").attr("placeholder", placeholder);
   addVideo(videoName, videoTime, videoId);
   
   if (searchClose) {
@@ -540,18 +539,20 @@ function searchResults() {
     searchResults();
   }
   else {
+    $("#inputBox").val("").attr("placeholder", placeholder);
     //as long as not open already (trying to search twice will close on second)
     if ($("#searchResultsWindow").css("display") !== "block") {
       toggleMenu("searchResults");
     }
-    $("#inputBox").val("").attr("placeholder", placeholder).blur();
   }
 }
 
 // * This function loads the video for the Quick Search functionality
 
 function quickSearch(query) {
-  $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
+  if (!inBoxSearch) {
+    $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
+  }
   if (query !== "") {
     quickSearchQuery = query;
     var searchDataFrame = document.createElement("iframe");
@@ -614,6 +615,7 @@ function onSearchDataPlayerStateChange(event) {
         addVideo(videoName, videoTime, id);
       }
       else {
+        $("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
         $(".searchResult").remove();
         searchResultsIteration = 0;
         searchResultsNameStorage = [];
