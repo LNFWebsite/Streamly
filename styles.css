@@ -134,7 +134,8 @@ footer {
   color: white;
 }
 .floatingMenu {
-  width: 600px;
+  max-width: 600px;
+  width: 90%;
   position: fixed;
   background: grey;
   height: 400px;

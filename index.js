@@ -56,6 +56,7 @@ var quickSearchVideosIteration = 0;
 var inBoxSearch = false;
 var searchResultsCount = 5;
 var searchResultsIteration = 0;
+var searchResultsNameStorage = [];
 
 var stationServer;
 var stationSocket;
@@ -511,14 +512,21 @@ function setVideoTime() {
 // Start Quick Search
 
 function addSearchResult(name, id) {
+  searchResultsNameStorage.push(name);
   $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
 }
 
 function loadSearchResult(element) {
-  var which = $(".searchResult").index(element);
-  which = quickSearchVideos[which];
+  var iteration = $(".searchResult").index(element);
+  var id = quickSearchVideos[iteration];
   inBoxSearch = false;
-  getVideoData(which);
+  
+  //getVideoData function equivalent without reloading video names
+  videoId = id;
+  videoTime = 0;
+  videoName = searchResultsNameStorage[iteration];
+  addVideo(videoName, videoTime, videoId);
+  
   if (searchClose) {
     toggleMenu("searchResults");
   }
@@ -531,18 +539,20 @@ function searchResults() {
     searchResults();
   }
   else {
+    $("#inputBox").val("").attr("placeholder", placeholder);
     //as long as not open already (trying to search twice will close on second)
     if ($("#searchResultsWindow").css("display") !== "block") {
       toggleMenu("searchResults");
     }
-    $("#inputBox").val("").attr("placeholder", placeholder).blur();
   }
 }
 
 // * This function loads the video for the Quick Search functionality
 
 function quickSearch(query) {
-  $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
+  if (!inBoxSearch) {
+    $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
+  }
   if (query !== "") {
     quickSearchQuery = query;
     var searchDataFrame = document.createElement("iframe");
@@ -607,6 +617,7 @@ function onSearchDataPlayerStateChange(event) {
       else {
         $(".searchResult").remove();
         searchResultsIteration = 0;
+        searchResultsNameStorage = [];
         addSearchResult(decodeURIComponent(videoName), id);
         searchResults();
       }
@@ -1107,8 +1118,7 @@ function input(type) {
         ***/
         inBoxSearch = true;
         quickSearch(inputBox);
-
-        $("#inputBox").val("").attr("placeholder", placeholder);
+        $("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
       }
       else {
         inputBox = inputBox.replace("\\", "");
