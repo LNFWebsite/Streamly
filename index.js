@@ -615,7 +615,6 @@ function onSearchDataPlayerStateChange(event) {
         addVideo(videoName, videoTime, id);
       }
       else {
-        $("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
         $(".searchResult").remove();
         searchResultsIteration = 0;
         searchResultsNameStorage = [];
@@ -1119,8 +1118,7 @@ function input(type) {
         ***/
         inBoxSearch = true;
         quickSearch(inputBox);
-
-        $("#inputBox").val("").attr("placeholder", placeholder);
+        $("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
       }
       else {
         inputBox = inputBox.replace("\\", "");
