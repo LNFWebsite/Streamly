@@ -56,6 +56,7 @@ var quickSearchVideosIteration = 0;
 var inBoxSearch = false;
 var searchResultsCount = 5;
 var searchResultsIteration = 0;
+var searchResultsNameStorage = [];
 
 var stationServer;
 var stationSocket;
@@ -511,6 +512,7 @@ function setVideoTime() {
 // Start Quick Search
 
 function addSearchResult(name, id) {
+  searchResultsNameStorage.push(name);
   $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
 }
 
@@ -518,7 +520,15 @@ function loadSearchResult(element) {
   var which = $(".searchResult").index(element);
   which = quickSearchVideos[which];
   inBoxSearch = false;
-  getVideoData(which);
+  //getVideoData(which);
+  
+  
+  videoId = id;
+  videoTime = 0;
+  videoName = searchResultsNameStorage[which];
+  $("#inputBox").val("").attr("placeholder", placeholder);
+  addVideo(videoName, videoTime, videoId);
+  
   if (searchClose) {
     toggleMenu("searchResults");
   }
@@ -607,6 +617,7 @@ function onSearchDataPlayerStateChange(event) {
       else {
         $(".searchResult").remove();
         searchResultsIteration = 0;
+        searchResultsNameStorage = [];
         addSearchResult(decodeURIComponent(videoName), id);
         searchResults();
       }
