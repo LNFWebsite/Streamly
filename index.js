@@ -517,14 +517,14 @@ function addSearchResult(name, id) {
 }
 
 function loadSearchResult(element) {
-  var which = $(".searchResult").index(element);
-  which = quickSearchVideos[which];
+  var iteration = $(".searchResult").index(element);
+  var id = quickSearchVideos[iteration];
   inBoxSearch = false;
-  //getVideoData(which);
   
-  videoId = which;
+  //getVideoData function equivalent without reloading video names
+  videoId = id;
   videoTime = 0;
-  videoName = searchResultsNameStorage[which];
+  videoName = searchResultsNameStorage[iteration];
   $("#inputBox").val("").attr("placeholder", placeholder);
   addVideo(videoName, videoTime, videoId);
   
