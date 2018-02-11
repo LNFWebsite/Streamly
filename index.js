@@ -54,7 +54,7 @@ var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
 var inBoxSearch = false;
-var searchResultsCount = 10;
+//var searchResultsCount = 10;
 var searchResultsIteration = 0;
 var searchResultsNameStorage = [];
 
@@ -530,17 +530,17 @@ function loadSearchResult(element) {
   
   if (searchClose) {
     toggleMenu("searchResults");
+    $("#inputBox").val("").focus();
   }
 }
 
 function searchResults() {
   searchResultsIteration++;
   quickSearch("");
-  if (searchResultsIteration < searchResultsCount) {
+  if (searchResultsIteration < quickSearchVideos.length) {
     searchResults();
   }
   else {
-    $("#inputBox").val("").attr("placeholder", placeholder);
     //as long as not open already (trying to search twice will close on second)
     if ($("#searchResultsWindow").css("display") !== "block") {
       toggleMenu("searchResults");
@@ -1119,7 +1119,8 @@ function input(type) {
         ***/
         inBoxSearch = true;
         quickSearch(inputBox);
-        $("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
+        //$("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
+        $("#inputBox").blur().focus();
       }
       else {
         inputBox = inputBox.replace("\\", "");
