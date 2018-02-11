@@ -540,7 +540,7 @@ function searchResults() {
     searchResults();
   }
   else {
-    $("#inputBox").val("").attr("placeholder", placeholder);
+    //$("#inputBox").val("").attr("placeholder", placeholder);
     //as long as not open already (trying to search twice will close on second)
     if ($("#searchResultsWindow").css("display") !== "block") {
       toggleMenu("searchResults");
@@ -1119,7 +1119,8 @@ function input(type) {
         ***/
         inBoxSearch = true;
         quickSearch(inputBox);
-        $("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
+        //$("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
+        $("#inputBox").blur().focus();
       }
       else {
         inputBox = inputBox.replace("\\", "");
