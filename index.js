@@ -54,7 +54,7 @@ var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
 var inBoxSearch = false;
-var searchResultsCount = 10;
+//var searchResultsCount = 10;
 var searchResultsIteration = 0;
 var searchResultsNameStorage = [];
 
@@ -537,7 +537,7 @@ function loadSearchResult(element) {
 function searchResults() {
   searchResultsIteration++;
   quickSearch("");
-  if (searchResultsIteration < searchResultsCount) {
+  if (searchResultsIteration < quickSearchVideos.length) {
     searchResults();
   }
   else {
