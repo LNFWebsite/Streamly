@@ -54,7 +54,7 @@ var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
 var inBoxSearch = false;
-var searchResultsCount = 5;
+var searchResultsCount = 10;
 var searchResultsIteration = 0;
 var searchResultsNameStorage = [];
 
@@ -519,6 +519,7 @@ function addSearchResult(name, id) {
 function loadSearchResult(element) {
   var iteration = $(".searchResult").index(element);
   var id = quickSearchVideos[iteration];
+  console.log("i:" + iteration + ",id:" + id);
   inBoxSearch = false;
   
   //getVideoData function equivalent without reloading video names
