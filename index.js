@@ -530,6 +530,7 @@ function loadSearchResult(element) {
   
   if (searchClose) {
     toggleMenu("searchResults");
+    $("#inputBox").val("").focus();
   }
 }
 
@@ -540,7 +541,6 @@ function searchResults() {
     searchResults();
   }
   else {
-    //$("#inputBox").val("").attr("placeholder", placeholder);
     //as long as not open already (trying to search twice will close on second)
     if ($("#searchResultsWindow").css("display") !== "block") {
       toggleMenu("searchResults");
