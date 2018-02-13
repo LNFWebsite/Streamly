@@ -489,7 +489,7 @@ function getVideoData(id) {
       addSearchResult(decodeURIComponent(videoName), id);
       searchResultsIteration++;
       console.log("probe:" + searchResultsIteration);
-      if (searchResultsIteration < quickSearchVideos.length) {
+      if (searchResultsIteration < quickSearchVideos.length - 1) {
         quickSearch("");
         console.log("search");
       }
