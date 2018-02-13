@@ -491,6 +491,9 @@ function getVideoData(id) {
       if (searchResultsIteration < quickSearchVideos.length - 1) {
         quickSearch("");
       }
+      else {
+        inBoxSearch = false;
+      }
     }
   });
 }
@@ -524,7 +527,6 @@ function loadSearchResult(element) {
   var iteration = $(".searchResult").index(element);
   var id = quickSearchVideos[iteration];
   console.log("i:" + iteration + ",id:" + id);
-  inBoxSearch = false;
   
   //getVideoData function equivalent without reloading video names
   videoId = id;
