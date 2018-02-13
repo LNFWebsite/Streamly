@@ -474,19 +474,14 @@ function getVideoName(id, callback) {
 // * It used to handle data gathering on it's own, but stands as a wrapper to the async ajax above
 
 function getVideoData(id) {
-  videoId = id;
-  videoTime = 0;
-
   getVideoName(id, function(name) {
-    videoName = name;
-    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-    
+    name = encodeURIComponent(name).replace(/%20/g, " ");
     if (!inBoxSearch) {
       $("#inputBox").val("").attr("placeholder", placeholder);
-      addVideo(videoName, videoTime, videoId);
+      addVideo(name, 0, id);
     }
     else {
-      addSearchResult(decodeURIComponent(videoName), id);
+      addSearchResult(decodeURIComponent(name), id);
     }
   });
 }
