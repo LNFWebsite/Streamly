@@ -488,13 +488,17 @@ function getVideoData(id) {
     else {
       addSearchResult(decodeURIComponent(videoName), id);
       searchResultsIteration++;
+      console.log("probe:" + searchResultsIteration);
       if (searchResultsIteration < quickSearchVideos.length) {
         quickSearch("");
+        console.log("search");
       }
       else {
+        console.log("stop, open window");
         //as long as not open already (trying to search twice will close on second)
         if ($("#searchResultsWindow").css("display") !== "block") {
           toggleMenu("searchResults");
+          console.log("toggle");
         }
       }
     }
