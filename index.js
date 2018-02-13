@@ -474,14 +474,23 @@ function getVideoName(id, callback) {
 // * It used to handle data gathering on it's own, but stands as a wrapper to the async ajax above
 
 function getVideoData(id) {
+  videoId = id;
+  videoTime = 0;
+
   getVideoName(id, function(name) {
-    name = encodeURIComponent(name).replace(/%20/g, " ");
+    videoName = name;
+    videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
+    
     if (!inBoxSearch) {
       $("#inputBox").val("").attr("placeholder", placeholder);
-      addVideo(name, 0, id);
+      addVideo(videoName, videoTime, videoId);
     }
     else {
-      addSearchResult(decodeURIComponent(name), id);
+      addSearchResult(decodeURIComponent(videoName), id);
+      searchResultsIteration++;
+      if (searchResultsIteration < quickSearchVideos.length - 1) {
+        quickSearch("");
+      }
     }
   });
 }
@@ -526,20 +535,6 @@ function loadSearchResult(element) {
   if (searchClose) {
     toggleMenu("searchResults");
     $("#inputBox").val("").focus();
-  }
-}
-
-function searchResults() {
-  searchResultsIteration++;
-  quickSearch("");
-  if (searchResultsIteration < quickSearchVideos.length) {
-    searchResults();
-  }
-  else {
-    //as long as not open already (trying to search twice will close on second)
-    if ($("#searchResultsWindow").css("display") !== "block") {
-      toggleMenu("searchResults");
-    }
   }
 }
 
@@ -615,7 +610,11 @@ function onSearchDataPlayerStateChange(event) {
         searchResultsIteration = 0;
         searchResultsNameStorage = [];
         addSearchResult(decodeURIComponent(videoName), id);
-        searchResults();
+        quickSearch("");
+        //as long as not open already (trying to search twice will close on second)
+        if ($("#searchResultsWindow").css("display") !== "block") {
+          toggleMenu("searchResults");
+        }
       }
     });
   }
