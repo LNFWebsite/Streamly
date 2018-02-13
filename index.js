@@ -481,7 +481,7 @@ function getVideoData(id) {
       addVideo(name, 0, id);
     }
     else {
-      addSearchResult(decodeURIComponent(videoName), id);
+      addSearchResult(decodeURIComponent(name), id);
     }
   });
 }
