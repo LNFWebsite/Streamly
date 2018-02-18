@@ -536,7 +536,6 @@ function loadSearchResult(element) {
   
   if (searchClose) {
     toggleMenu("searchResults");
-    $("#inputBox").val("").focus();
   }
 }
 
@@ -1377,9 +1376,13 @@ function toggleMenu(which) {
   }
   $(menu).css("display", state);
   $(shadow).css("display", state);
-  if (hotkeySearchClose) {
-    hotkeySearchClose = false;
-    toggleSearchClose();
+  
+  if (which === "searchResults" && state === "none") {
+    $("#inputBox").val("").focus();
+    if (hotkeySearchClose) {
+      hotkeySearchClose = false;
+      toggleSearchClose();
+    }
   }
 }
 
