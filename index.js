@@ -1377,7 +1377,7 @@ function toggleMenu(which) {
   }
   $(menu).css("display", state);
   $(shadow).css("display", state);
-  if (hotkeySearchClose) {
+  if (hotkeySearchClose && state === "none") {
     hotkeySearchClose = false;
     toggleSearchClose();
   }
