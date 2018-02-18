@@ -5,9 +5,9 @@ Streamly on Desktop        | Streamly on Android
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/01212018/streamly.jpg)  |  ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/01212018/streamlymobile.jpg)
 
-## Summary
+## What is Streamly?
 
-Streamly is an open-source web-based YouTube video queue.
+Streamly is an open-source, web-based YouTube video queue.
 
 Streamly can be used for a multitude of purposes, including queuing music videos, listening to lectures or audiobooks, or just simply creating a playlist of videos that can be accessed from any computer (or Android tablet/phone).
 
@@ -21,38 +21,40 @@ Features:
   
   <sub>Note: You may even use Streamly just stored on your computer, but likely YouTube will give you an error stating that the video creator did not allow the video to play on this site. The same will occur if you try to open a YouTube embed on your computer, as they don't recognize the `file://` site location as a valid website. You may resolve this easily by placing Streamly on a file hosting service that allows you to access the file without downloading (ie. forking on GitHub), or your own web server.<sub>
 
-- Works on all *modern* browsers (Firefox, Chrome, more...) as well as browsers on Android phones/tablets. (Latest Firefox is recommended, IE is not supported)
+- Works on all modern browsers (Firefox, Chrome, more...) as well as browsers on Android phones/tablets. (Latest Firefox is recommended, IE is not supported)
 
-### *[Subscribe to Streamly on Reddit for updates!](https://www.reddit.com/r/StreamlyReddit/)*
+### *[Subscribe to Streamly on Reddit for updates](https://www.reddit.com/r/StreamlyReddit/)*
 
 ## How do I use Streamly?
 
 Go to the website! <http://streamly.us.to> or <https://lnfwebsite.github.io/Streamly>
 Or clone into your web server...
 
-***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page if you're... well... just getting started...***
+***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page***
 
-## What is Streamly?
+## FAQ
 
-If you'd like to know why Streamly was made, head over to the [About](https://github.com/LNFWebsite/Streamly/wiki/About) page in the wiki!
+- What makes this any different from a YouTube playlist?
 
-Streamly is a YouTube video queue that runs entirely in your browser.
+  A normal YouTube playlist does not allow you to add videos while you are playing the list. It also does not allow you to do advanced playlist manipulation such as re-ordering while playing. Streamly exists more as a queue that you may mess with at any time while playing. This is why most other YouTube players exist as well.
 
-That means that it builds upon YouTube's normal playlist features by allowing you to manipulate playlists on the fly while playing them.
+- Will I lose videos that are removed from YouTube?
 
-If you've been burnt by losing your playlists to projects that promise the safety of your data, you've found the right solution. Instead of locking you into storing your playlists in a huge databank like other projects (or even YouTube themselves), Streamly lets you store your playlist on your own in the form of a simple hyperlink. When you want to access your playlist, just go to that link! It's that simple.
+  No. The playlist will still contain all information on the videos which are broken or removed from YouTube. Streamly will skip the video and highlight it in red to let you know that you must find a replacement. I'm looking into a method that will automatically drop in replacement videos.
 
-All of the data needed to play the playlist is in the link. That means that no other video information is requested, and the whole playlist may be easily stored with a link shortener, a bookmark on your browser, or even in a text file on your computer.
+- Why is it so important not using a company key to access video metadata?
 
-Streamly's motto is reliability which is why we do not use any API keys to manipulate YouTube's native HTML5 video frame, and we let you store the entirety of your playlist on your own.
+  This is important because it requires nothing special to operate Streamly. It is currently hosted on GitHub Pages, but may be cloned to any server and will still work the same. The safety of your playlist is achieved by knowing that you may easily run the script on your own without relying on me, GitHub, or anyone else.
+  
+- Does Streamly work on Mac/iPhone?
 
-This essentially means that Streamly is not a 'service' which ties into YouTube, but is rather a 'script' that runs in your browser, accessing only what is available to the general public on the web.
+  Yes/Maybe. Streamly should work just fine on Mac; however, I'm not sure it will work on iOS devices. Back when Streamly started, iOS did not allow some functionalities of the YouTube iFrame API. I'm not sure whether they are compatible now as I don't have a newer iOS device to test on, so your milage may vary. (If you have a newer iOS device, please let me know whether anything has changed)
 
-For any questions or comments, please leave an [issue](https://github.com/LNFWebsite/Streamly/issues).
+Thanks for taking the time to read! I hope that you will find Streamly as useful as I have. Happy Streaming!
 
 ## What makes Streamly different?
 
-Streamly is the first ever online YouTube video queue that prides itself in not using a single API key! This essentially means that Streamly runs entirely in your browser and only accesses what is publicly available to anyone on the internet.
+Streamly is the first ever online YouTube video queue that prides itself in not using an API key.
 
 ## Why does that matter?
 
@@ -60,27 +62,15 @@ This matters greatly for reliability. Streamly incurs no operational cost here o
 
 You, as either a user or a developer, may easily copy all of the Streamly files into your own server/repository and use Streamly out-of-the-box.
 
-Additionally, in the cases of other YouTube player projects that use a company key to access YouTube content, the product has been proven to be short-lived in that it is hard to upkeep with changing standards in the often-complicated world of specifications given by YouTube for doing simple tasks.
-
-I have found it long overdue to find a project that, unlike a service, does not store any information of its own nor unnecessarily requires private parties to collect data from.
-
-## So... How does Streamly do it?
+## How does Streamly do it?
 
 Streamly essentially runs as a helper to the YouTube embed player. It retrieves public data about the video such as the title and time of the video readily accessible on the net. It then builds a playlist off of these values and plays each video in a native embed player.
 
-Following our policy of not using proprietary keys or storing any data on our own, the playlist you create is stored in the URL (or web address) of Streamly. This allows you to store it as a bookmark, create a short link from it by throwing it into a link shortener such as <https://tiny.cc> or <https://bit.ly>, throw it into a text file on your computer, or hand copy it down to a piece of paper (nuts but I've tried it before).
+The playlist you create is stored in the URL (or web address) of Streamly. This allows you to store it as a bookmark, create a short link from it by throwing it into a link shortener such as <https://tiny.cc> or <https://bit.ly>, throw it into a text file on your computer, or store it any way you like.
 
 And, you don't have to worry about losing anything because Streamly requires nothing other than the playlist you create.
 
-## No, really... How does Streamly work?
-
-*Since you asked for the geeky stuff...*
-
-Streamly gets its video metadata and timing information through the [YouTube IFrame API](https://developers.google.com/youtube/iframe_api_reference) which both feeds the basic data needed for the playlist, and monitors events from the YouTube embed frame. This API does not require an API key and may be operated by anyone. From Streamly's beginnings, it has used various unorthodox methods to monitor the user's interaction with the YouTube video player. This method of capture is an improvement in functionality, but is not a must-have, therefore, the [without-yt-api](https://github.com/LNFWebsite/Streamly/tree/without-yt-api) branch is maintained as an added backup for safety of your playlists.
-
-Going from one video to another is controlled by cycling through a two-dimensional Javascript array containing the video's title, URL, and length (in seconds) for each in the playlist.
-
-Saving playlists is done by creating a [JSON](https://json.org) string of the array containing video properties, then encoding it into [Base64](https://en.wikipedia.org/wiki/Base64), and finally running that into the hash parameter of the URL.
+If you'd like to know why Streamly was made, head over to the [About](https://github.com/LNFWebsite/Streamly/wiki/About) page in the wiki!
 
 ## License
 
