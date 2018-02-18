@@ -23,14 +23,14 @@ Features:
 
 - Works on all modern browsers (Firefox, Chrome, more...) as well as browsers on Android phones/tablets. (Latest Firefox is recommended, IE is not supported)
 
-### *[Subscribe to Streamly on Reddit for updates](https://www.reddit.com/r/StreamlyReddit/)*
+### *[Subscribe to Streamly on Reddit for updates.](https://www.reddit.com/r/StreamlyReddit/)*
 
 ## How do I use Streamly?
 
 Go to the website! <http://streamly.us.to> or <https://lnfwebsite.github.io/Streamly>
 Or clone into your web server...
 
-***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page***
+***Be sure to read the [Getting Started](https://github.com/LNFWebsite/Streamly/wiki/Getting-Started) page.***
 
 ## FAQ
 
