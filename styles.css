@@ -609,8 +609,9 @@ tr.placeholder:before {
 }
 .currentVideoTimingSBS {
   display: initial !important;
-  background-color: black;
+  background-color: rgba(0,0,0,0.8);
   border-radius: 5px;
+  padding: 2px;
 }
 .progressContainerSBS {
   width: calc(100% - 100px) !important;
@@ -618,7 +619,7 @@ tr.placeholder:before {
 .settingsSBS {
   position: fixed !important;
   right: calc(25% - 80px) !important;
-  background-color: black;
+  background-color: rgba(0,0,0,0.8);
 }
 .footerSBS {
   bottom: -35% !important;
