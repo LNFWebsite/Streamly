@@ -1,35 +1,50 @@
+<!--
+  Copyright 2018 LNFWebsite
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
 <!doctype html>
 <html>
 <head>
-  <!--
-    Copyright 2018 LNFWebsite
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-  -->
   <title>Streamly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Portable, independent, web-based, simple streaming YouTube video queues and playlists for music videos, audiobooks, etc." />
+
   <link rel="shortcut icon" id="favicon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAABDlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxUYW9AAAAWXRSTlMAAQIDBAUGCAkRFBUZGhscHiAhJyorLzI0ODo7PUZMTlBVVldYWVtcXV5hZHB1foKDiIuPlZiboKKlpqirr7CytcDDyMrMzs/R09Xa3N7g4ubp7e/x9/n7/Ud7aO4AAAE3SURBVBgZlcFpOxtRAIbhZ8YgltBaopZEHanamtKgtYaSklJ0xPL+/z8iGedMZq5MPrhv3mlgslzZ2aksT/aTbfpQsYMpun24UMr5OGneN3XZ9EjoO1KGA5+Yd6pMxx5OVT1sY31STwUifqg3jaF8TWn/fdo+y1oFCv+UUqLtXpahxSs/KeGOlrwcQ2TwhxJGgWU5Bit/ptgSsCfHEJu9l7ULXMkxdPgbL4r8AR7kGJLmFQmBphxD0pQiTeCvHEPC/IMiV8C+HENs7LesX8CaHIOVqyr2FZiQY4j4K8/q+Ah4TVmGtplbJYQeLRuyvgAjp0pZp63/SW/Ogtx3pT0GRErqqYh1oh6OcIKGMl0GxHKXylAfJCHYV5effaQthEoJ5+jiL94odl3yyTRc3KrV67Wt4jDv8wr7Zt73xzlZAQAAAABJRU5ErkJggg==" type="image/x-icon" />
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico|Roboto" type="text/css" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="styles.css" type="text/css" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" type="text/css" />
 
   <script src="//code.jquery.com/jquery-3.1.0.min.js" crossorigin="anonymous"></script>
   <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js" crossorigin="anonymous"></script>
   <script src="//cdn.rawgit.com/zenorocha/clipboard.js/v1.5.12/dist/clipboard.min.js"></script>
-  <script src="index.js"></script>
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="res/css/styles.css" type="text/css" />
+
+  <!-- JS Backend -->
+  <script src="res/js/back/global.js"></script>
+  <script src="res/js/back/base.js"></script>
+  <script src="res/js/back/playlistBack.js"></script>
+  <script src="res/js/back/playlistFront.js"></script>
+  <script src="res/js/back/data.js"></script>
+  <script src="res/js/back/progress.js"></script>
+  <script src="res/js/back/input.js"></script>
+  <script src="res/js/back/search.js"></script>
+  <script src="res/js/back/radio.js"></script>
+  <script src="res/js/back/station.js"></script>
+  <script src="res/js/back/toggles.js"></script>
 </head>
 <body>
   <div id="dataFramesContainer"></div>
@@ -143,282 +158,18 @@
       <span class="fa fa-reddit" id="ad" onclick="shareOnReddit();" title="Share playlist on Reddit"></span>
     </div>
   </footer>
+  <!--
   <div id="dialog"></div>
   <script>
   //this is a standard dialog box for jquery that can be used to non-annoyingly get messages to users on-load
-  //$("#dialog").dialog();
-
-  function shareOnRedditAd() {
-    var i=0;
-    var text = document.getElementById('ad');
-    text.style.color = 'grey';
-    function flash() {
-      i++;
-      text.style.color = (text.style.color=='grey') ? 'lightblue':'grey';
-      if (i == 11) {
-        clearInterval(clr);
-      }
-    }
-    var clr = setInterval(flash, 300);
-  }
-
-  $("#inputBox").on("paste", function() {
-    setTimeout(function() {
-      input(1);
-    }, 0);
-  });
-
-  $("#inputBox").on("focus", function() {
-    $(this).attr("placeholder", "(End your search with \\ for Quick Search, add 'l' for lyric videos)");
-    setTimeout(function() {
-      $("#inputBox").attr("placeholder", placeholder);
-    }, 4000);
-
-    if ($(window).width() <= 600) {
-      $("footer").css("display", "none");
-    }
-  });
-
-  $("#inputBox").on("blur", function() {
-    if ($(window).width() <= 600) {
-      $("footer").css("display", "block");
-    }
-  });
-
-  $("#playlistNameBox").on("blur", function() {
-    input(2);
-  });
-
-  function startVideoProgress() {
-    if (!videoPaused) {
-      actionTimers.clear();
-      videoProgress();
-    }
-    else {
-      actionTimers.clear();
-      videoProgress();
-      actionTimers.pause();
-    }
-  }
-
-  var tag = document.createElement('script');
-
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-  // **BREAKTHROUGH THE GREATER!**
-  var player;
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube', {
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange,
-        'onError': onError
-      }
-    });
-    console.log("Debug: Player loaded");
-  }
-  function onPlayerStateChange(event) {
-    switch(event.data) {
-      //unstarted
-      case -1:
-        console.log("unstarted");
-        break;
-      //ending
-      case 0:
-        console.log("ending");
-        sendStation("playerending");
-        loopVideo();
-        break;
-      //playing
-      case 1:
-        console.log("playing");
-        videoFunctions.play();
-        startVideoProgress();
-        break;
-      //paused
-      case 2:
-        console.log("paused");
-        videoFunctions.pause();
-        break;
-      //buffering
-      case 3:
-        console.log("buffering");
-        //this is here because video errors cause a 'paused' event
-        //the same occurs when scrolling quickly through a playlist
-        //don't move the videoFunctions.play() stuff here because this is NOT triggered on un-pausing
-        //the 'buffering' event is never triggered on paused/pausing videos so this does not conflict with other things
-        videoPaused = false;
-        break;
-      //cued
-      case 5:
-        console.log("cued");
-        startVideoProgress();
-        break;
-    }
-  }
-  function onPlayerReady(event) {
-    console.log("Debug: onPlayerReady");
-    startVideoProgress();
-
-    getPlaylist();
-    makeSortable();
-    videoPreviews();
-  }
-  function onError(event) {
-    console.log(videoPaused);
-    videoErrorIds.push(videos[videoIteration][2]);
-    $("tr:nth-child(" + videoIteration + ")").addClass("videoError");
-    forwardVideo();
-  }
-
-  //need to initialize per 6/2017 YT backend change
-  $("#youtube").attr("src", "https://www.youtube.com/embed/?enablejsapi=1");
-
-  $("header, #forkmeImage").addClass("animated slideInDown");
-  $("footer").addClass("animated fadeIn");
-  $("#links").addClass("animated fadeIn");
-
-  window.addEventListener("keydown", function(e) {
-    if ((!$("#inputBox").is(":focus")
-         || $("#inputBox").val() == ""
-         || $("#inputBox").val() == " ")
-        && !$("#playlistNameBox").is(":focus")) {
-      switch (e.code) {
-        case "ArrowLeft":
-        case "MediaTrackPrevious":
-          e.preventDefault();
-          backVideo();
-          break;
-        case "ArrowRight":
-        case "MediaTrackNext":
-          e.preventDefault();
-          forwardVideo();
-          break;
-        case "Space":
-        case "MediaPlayPause":
-          e.preventDefault();
-          if ($("#inputBox").val() === " ") {
-            $("#inputBox").val("");
-          }
-          if (videoPaused) {
-            player.playVideo();
-          }
-          else {
-            player.pauseVideo();
-          }
-          break;
-      }
-    }
-    if ($("#inputBox").is(":focus")) {
-      switch (e.code) {
-        case "Backslash":
-          e.preventDefault();
-          if (e.key !== "|") {
-            var query = $("#inputBox").val();
-            query = query.replace("\\", "");
-            if (query.slice(-2) === " l") {
-              query = query + "yric";
-            }
-            quickSearch(query);
-          }
-          else {
-            //added for | hotkey for popup (now search) thing requested
-            hotkeySearchClose = true;
-            toggleSearchClose();
-            input(0);
-          }
-          break;
-        case "Enter":
-          input(0);
-          break;
-      }
-    }
-    if (!$("#inputBox").is(":focus") && !$("#playlistNameBox").is(":focus")) {
-      switch (e.code) {
-        case "KeyR":
-          e.preventDefault();
-          playlistFeatures.autoplay();
-          break;
-        case "KeyZ":
-          e.preventDefault();
-          toggleZen();
-          break;
-      }
-    }
-  });
-
-  $("#inputBox").autocomplete({
-    delay: 100,
-    source: function (request, response) {
-      var suggestURL = "//suggestqueries.google.com/complete/search?hl=en&ds=yt&q=" + request.term + "&client=chrome";
-      $.ajax({
-        method: 'GET',
-        dataType: 'jsonp',
-        jsonpCallback: 'jsonCallback',
-        url: suggestURL
-      })
-      .done(function(data){
-        suggestions = data[1];
-        if (suggestions.length > 10) {
-          suggestions.length = 10;
-        }
-        for (var i = suggestions.length - 1; i > -1; i--) {
-          if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
-            suggestions.splice(i, 1);
-          }
-        }
-        response(suggestions);
-      });
-    }
-  });
-
-  function resetSaveButton() {
-    if ($(window).width() <= 600) {
-      $("#saveButton").text("Save");
-    }
-    else {
-      $("#saveButton").text("Save playlist");
-    }
-  }
-  resetSaveButton();
-
-  new Clipboard("#saveButton");
-  function saveButton() {
-    $("#saveButton").text("Playlist copied!");
-    setTimeout(function() {
-      resetSaveButton();
-    }, 2000);
-  }
-
-  $("#youtubeContainer").click(function() {
-    if (stationRemote) {
-      if ($("#remotePauseIcon").hasClass("fa-play")) {
-        $("#remotePauseIcon").removeClass("fa-play").addClass("fa-pause");
-        sendStation("videofunctionsplay");
-      }
-      else {
-        $("#remotePauseIcon").removeClass("fa-pause").addClass("fa-play");
-        sendStation("videofunctionspause");
-      }
-    }
-  });
-
-  function shareOnReddit() {
-    var playlistName = $("#playlistNameBox").val();
-    if (playlistName === "") {
-      playlistName = $("#playlistNameBox").attr("placeholder");
-    }
-    if (window.location.hash.substr(1).length <= 10000) {
-      window.open("https://www.reddit.com/r/StreamlyReddit/submit?resubmit=true&title=Playlist%20-%20" + playlistName + "&url=https://lnfwebsite.github.io/Streamly/%23" + window.location.hash.substr(1), "_blank");
-    }
-    else {
-      alert("The playlist you are sharing is too long to automatically post, so please copy your Streamly Playlist URL and paste it into the open Reddit tab (you can copy by clicking the \"Save Playlist\" button).\n\nSorry for this inconvenience.");
-      window.open("https://www.reddit.com/r/StreamlyReddit/submit?resubmit=true&title=Playlist%20-%20" + playlistName + "&url=%5BPaste+shortened+link+here%5D", "_blank");
-    }
-  }
+  $("#dialog").dialog();
   </script>
+  -->
+  <!-- JS Frontend -->
+  <script src="res/js/front/initialize.js"></script>
+  <script src="res/js/front/youtube.js"></script>
+  <script src="res/js/front/share.js"></script>
+  <script src="res/js/front/events.js"></script>
 
   <!-- Start of StatCounter Code for Default Guide -->
   <script type="text/javascript">
@@ -437,6 +188,5 @@
   src="http://c.statcounter.com/10543623/0/4c623aaf/1/"
   alt="web analytics"></a></div></noscript>
   <!-- End of StatCounter Code for Default Guide -->
-
 </body>
 </html>
