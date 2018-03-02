@@ -413,7 +413,7 @@ td {
   cursor: pointer;
   margin-left: 5px;
 }
-.fa-arrow-circle-right, .fa-random, .fa-repeat, .fa-rss {
+.fa-arrow-circle-right, .fa-random, .fa-redo-alt, .fa-rss {
   color: grey;
 }
 .fa-reddit {
