@@ -378,6 +378,7 @@ td {
   bottom: -5px;
   right: calc(30% - 162px);
   border: 1px solid white;
+  cursor: default;
 }
 #progress {
   background-color: #f77f00;
@@ -409,12 +410,9 @@ td {
   opacity: .1;
 }
 #settings * {
-  font-size: 1.5em !important;
+  font-size: 1.5em;
   cursor: pointer;
-  margin-left: 5px;
-}
-.fa-arrow-circle-right {
-    margin-left: 0px !important;
+  padding: 2px;
 }
 .fa-cog {
   font-size: 2em;
