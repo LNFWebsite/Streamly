@@ -413,20 +413,24 @@ td {
   cursor: pointer;
   margin-left: 5px;
 }
-.fa-arrow-circle-right, .fa-random, .fa-repeat, .fa-rss {
+.fa-arrow-circle-right {
+    margin-left: 0px !important;
+}
+.fa-cog {
+  font-size: 2em;
+}
+.fa-arrow-circle-right, .fa-random, .fa-redo-alt, .fa-rss {
   color: grey;
 }
 .fa-reddit {
   color: lightblue;
 }
-.playButton {
-  margin-top: 3px
-}
-.fa {
-  font-size: 2em
-}
 .fa-play {
-  font-size: 1.6em
+  font-size: 1.5em;
+  margin-top: 3px;
+}
+.fa-times {
+  font-size: 2em;
 }
 .fa-backward, .fa-forward {
   position: absolute;
@@ -435,6 +439,7 @@ td {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   text-shadow: 0px 1px 20px rgba(135, 135, 135, 0.5);
+  font-size: 2em;
 }
 #videosTable tr {
   cursor: pointer

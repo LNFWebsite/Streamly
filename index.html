@@ -22,13 +22,13 @@
 
   <link rel="shortcut icon" id="favicon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAABDlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxUYW9AAAAWXRSTlMAAQIDBAUGCAkRFBUZGhscHiAhJyorLzI0ODo7PUZMTlBVVldYWVtcXV5hZHB1foKDiIuPlZiboKKlpqirr7CytcDDyMrMzs/R09Xa3N7g4ubp7e/x9/n7/Ud7aO4AAAE3SURBVBgZlcFpOxtRAIbhZ8YgltBaopZEHanamtKgtYaSklJ0xPL+/z8iGedMZq5MPrhv3mlgslzZ2aksT/aTbfpQsYMpun24UMr5OGneN3XZ9EjoO1KGA5+Yd6pMxx5OVT1sY31STwUifqg3jaF8TWn/fdo+y1oFCv+UUqLtXpahxSs/KeGOlrwcQ2TwhxJGgWU5Bit/ptgSsCfHEJu9l7ULXMkxdPgbL4r8AR7kGJLmFQmBphxD0pQiTeCvHEPC/IMiV8C+HENs7LesX8CaHIOVqyr2FZiQY4j4K8/q+Ah4TVmGtplbJYQeLRuyvgAjp0pZp63/SW/Ogtx3pT0GRErqqYh1oh6OcIKGMl0GxHKXylAfJCHYV5effaQthEoJ5+jiL94odl3yyTRc3KrV67Wt4jDv8wr7Zt73xzlZAQAAAABJRU5ErkJggg==" type="image/x-icon" />
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico|Roboto" type="text/css" />
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" type="text/css" />
 
   <script src="//code.jquery.com/jquery-3.1.0.min.js" crossorigin="anonymous"></script>
   <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js" crossorigin="anonymous"></script>
   <script src="//cdn.rawgit.com/zenorocha/clipboard.js/v1.5.12/dist/clipboard.min.js"></script>
+  <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="res/css/styles.css" type="text/css" />
@@ -55,8 +55,8 @@
       <input type="text" id="inputBox" title="Search, drag and drop video, or paste its URL here" autofocus>
     </form>
     <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();" title="Copy your playlist to clipboard"></button>
-    <span class="fa fa-cog" id="settingsButton" onclick="toggleMenu('settings');" title="Settings"></span>
-    <span class="fa fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
+    <span class="fas fa-cog" id="settingsButton" onclick="toggleMenu('settings');" title="Settings"></span>
+    <span class="fas fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
   </header>
   <div id="main">
     <div id="floatingMenuShadow"></div>
@@ -120,14 +120,14 @@
       <div class="videoImageContainer">
         <div class="videoImageWrapper">
           <img class="videoImage" src="" />
-          <span class="fa fa-backward"></span>
+          <span class="fas fa-backward"></span>
           <p class="videoTime"></p>
         </div>
       </div>
     </div>
     <div id="playlistInterface">
       <div id="youtubeContainer" title="Click to pause">
-        <span id="remotePauseIcon" class="fa fa-play"></span>
+        <span id="remotePauseIcon" class="fas fa-play"></span>
         <iframe id="youtube" src="" allowfullscreen></iframe>
       </div>
       <div id="currentVideoTiming">
@@ -142,7 +142,7 @@
       <div class="videoImageContainer">
         <div class="videoImageWrapper">
           <img class="videoImage" src="" />
-          <span class="fa fa-forward"></span>
+          <span class="fas fa-forward"></span>
           <p class="videoTime"></p>
         </div>
       </div>
@@ -151,11 +151,11 @@
       </div>
     </div>
     <div id="settings">
-      <span class="fa fa-arrow-circle-right" onclick="playlistFeatures.playNext();" title="Added videos will play next"></span>
-      <span class="fa fa-random" onclick="playlistFeatures.shuffle();" title="Playlist shuffle"></span>
-      <span class="fa fa-repeat" onclick="playlistFeatures.repeat();" title="Playlist repeat"></span>
-      <span class="fa fa-rss" onclick="playlistFeatures.autoplay();" title="Streamly Radio"></span>
-      <span class="fa fa-reddit" id="ad" onclick="shareOnReddit();" title="Share playlist on Reddit"></span>
+      <span class="fas fa-arrow-circle-right" onclick="playlistFeatures.playNext();" title="Added videos will play next"></span>
+      <span class="fas fa-random" onclick="playlistFeatures.shuffle();" title="Playlist shuffle"></span>
+      <span class="fas fa-redo-alt" onclick="playlistFeatures.repeat();" title="Playlist repeat"></span>
+      <span class="fas fa-rss" onclick="playlistFeatures.autoplay();" title="Streamly Radio"></span>
+      <span class="fab fa-reddit" id="ad" onclick="shareOnReddit();" title="Share playlist on Reddit"></span>
     </div>
   </footer>
   <!--
