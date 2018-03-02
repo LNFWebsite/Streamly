@@ -413,6 +413,9 @@ td {
   cursor: pointer;
   margin-left: 5px;
 }
+.fa-arrow-circle-right {
+    margin-left: 0px !important;
+}
 .fa-cog {
   font-size: 2em;
 }
