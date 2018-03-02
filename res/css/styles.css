@@ -413,6 +413,9 @@ td {
   cursor: pointer;
   margin-left: 5px;
 }
+.fa-cog {
+  font-size: 2em;
+}
 .fa-arrow-circle-right, .fa-random, .fa-redo-alt, .fa-rss {
   color: grey;
 }
