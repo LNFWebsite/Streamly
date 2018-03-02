@@ -129,7 +129,7 @@ var PlaylistFeatures = function() {
     sendStation("playlistfeaturesrepeat");
     playlistRepeat = (playlistRepeat ? false : true);
     videoPreviews();
-    $(".fa-repeat").css("color", (playlistRepeat ? "#F77F00" : "grey"));
+    $(".fa-redo-alt").css("color", (playlistRepeat ? "#F77F00" : "grey"));
   }
   this.shuffle = function() {
     sendStation("playlistfeaturesshuffle");
