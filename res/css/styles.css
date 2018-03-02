@@ -422,6 +422,9 @@ td {
 .fa-arrow-circle-right, .fa-random, .fa-redo-alt, .fa-rss {
   color: grey;
 }
+.fa-arrow-circle-right:hover, .fa-random:hover, .fa-redo-alt:hover, .fa-rss:hover, .fa-reddit:hover {
+  color: white;
+}
 .fa-reddit {
   color: lightblue;
 }
