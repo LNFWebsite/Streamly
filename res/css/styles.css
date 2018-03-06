@@ -29,7 +29,7 @@ header,
   z-index: 1
 }
 body {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 body,
 #blurBackground {
@@ -69,7 +69,7 @@ footer {
   width: 100%;
 }
 #title {
-  font-family: 'Pacifico',cursive;
+  font-family: 'Pacifico', sans-serif;
 }
 #title,
 #searchForm {
@@ -78,7 +78,7 @@ footer {
 #inputBox,
 #saveButton,
 #playlistNameBox {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 #inputBox,
 #saveButton {
