@@ -94,7 +94,6 @@ function appendPlaylist(playlist) {
     
     //and highlight & cue up the first video
     if (!videosInitialized) {
-      videos = videos.concat(playlist);
       for (var i = 1; i < videos.length; i++) {
         restoreHighlight(i);
       }
