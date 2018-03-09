@@ -80,10 +80,7 @@ function appendPlaylist(playlist) {
     }
     
     //don't splice off playlist[0] if videos array is uninitialized (use value from appended playlist)
-    var videosInitialized = false;
     if (videos.length !== 0) {
-      console.log("probe");
-      videosInitialized = true;
       playlist.splice(0, 1);
     }
     videos = videos.concat(playlist);
@@ -93,9 +90,8 @@ function appendPlaylist(playlist) {
     videoPreviews();
     addAutoplayVideo();
     
-    //and highlight & cue up the first video
-    if (!videosInitialized) {
-      console.log("other probe");
+    //if playlist hasn't been initialized, highlight & cue up the first video
+    if (videoIteration === 0) {
       for (var i = 1; i < videos.length; i++) {
         restoreHighlight(i);
       }
