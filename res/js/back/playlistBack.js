@@ -81,8 +81,11 @@ function appendPlaylist(playlist) {
 
     playlist.splice(0, 1);
     videos = videos.concat(playlist);
-
+    
     setPlaylist();
+    makeSortable();
+    videoPreviews();
+    addAutoplayVideo();
   }
   catch(err) {
     alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
