@@ -82,6 +82,7 @@ function appendPlaylist(playlist) {
     //don't splice off playlist[0] if videos array is uninitialized (use value from appended playlist)
     if (videos.length !== 0) {
       playlist.splice(0, 1);
+      videoPaused = true;
       loopVideo();
     }
     videos = videos.concat(playlist);
