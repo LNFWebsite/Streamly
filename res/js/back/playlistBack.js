@@ -80,12 +80,18 @@ function appendPlaylist(playlist) {
     }
     
     //don't splice off playlist[0] if videos array is uninitialized (use value from appended playlist)
-    //and highlight & cue up the first video
     if (videos.length !== 0) {
       playlist.splice(0, 1);
-      videos = videos.concat(playlist);
     }
-    else {
+    videos = videos.concat(playlist);
+    
+    setPlaylist();
+    makeSortable();
+    videoPreviews();
+    addAutoplayVideo();
+    
+    //and highlight & cue up the first video
+    if (videos.length !== 0) {
       videos = videos.concat(playlist);
       for (var i = 1; i < videos.length; i++) {
         restoreHighlight(i);
@@ -93,11 +99,6 @@ function appendPlaylist(playlist) {
       videoPaused = true;
       loopVideo();
     }
-    
-    setPlaylist();
-    makeSortable();
-    videoPreviews();
-    addAutoplayVideo();
   }
   catch(err) {
     alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +
