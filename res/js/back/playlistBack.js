@@ -80,7 +80,9 @@ function appendPlaylist(playlist) {
     }
     
     //don't splice off playlist[0] if videos array is uninitialized (use value from appended playlist)
+    var videosInitialized = false;
     if (videos.length !== 0) {
+      videosInitialized = true;
       playlist.splice(0, 1);
     }
     videos = videos.concat(playlist);
@@ -91,7 +93,7 @@ function appendPlaylist(playlist) {
     addAutoplayVideo();
     
     //and highlight & cue up the first video
-    if (videos.length !== 0) {
+    if (!videosInitialized) {
       videos = videos.concat(playlist);
       for (var i = 1; i < videos.length; i++) {
         restoreHighlight(i);
