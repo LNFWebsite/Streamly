@@ -85,6 +85,10 @@ function appendPlaylist(playlist) {
     }
     videos = videos.concat(playlist);
     
+    for (var i = 1; i < videos.length; i++) {
+      restoreHighlight(i);
+    }
+    
     setPlaylist();
     makeSortable();
     videoPreviews();
