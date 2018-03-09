@@ -80,15 +80,18 @@ function appendPlaylist(playlist) {
     }
     
     //don't splice off playlist[0] if videos array is uninitialized (use value from appended playlist)
+    //and highlight & cue up the first video
     if (videos.length !== 0) {
       playlist.splice(0, 1);
+      videos = videos.concat(playlist);
+    }
+    else {
+      videos = videos.concat(playlist);
+      for (var i = 1; i < videos.length; i++) {
+        restoreHighlight(i);
+      }
       videoPaused = true;
       loopVideo();
-    }
-    videos = videos.concat(playlist);
-    
-    for (var i = 1; i < videos.length; i++) {
-      restoreHighlight(i);
     }
     
     setPlaylist();
