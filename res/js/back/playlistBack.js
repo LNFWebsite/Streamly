@@ -78,8 +78,11 @@ function appendPlaylist(playlist) {
       var printTime = msConversion(playlist[i][1] * 1000);
       addVideoToList(playlist[i][0], printTime, videoCounter, true);
     }
-
-    playlist.splice(0, 1);
+    
+    //don't splice off playlist[0] if videos array is uninitialized (use value from appended playlist)
+    if (videos.length !== 0) {
+      playlist.splice(0, 1);
+    }
     videos = videos.concat(playlist);
     
     setPlaylist();
