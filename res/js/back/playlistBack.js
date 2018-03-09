@@ -89,6 +89,15 @@ function appendPlaylist(playlist) {
     makeSortable();
     videoPreviews();
     addAutoplayVideo();
+    
+    //if playlist hasn't been initialized, highlight & cue up the first video
+    if (videoIteration === 0) {
+      for (var i = 1; i < videos.length; i++) {
+        restoreHighlight(i);
+      }
+      videoPaused = true;
+      loopVideo();
+    }
   }
   catch(err) {
     alert("Uh oh... It looks like this playlist URL is broken, however, you may still be able to retrieve your data.\n\n" +

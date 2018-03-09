@@ -25,7 +25,7 @@ function changeIteration(which) {
     return videoCounter - 1;
   }
   else {
-    return videoIteration + which;
+    return sum;
   }
 }
 
