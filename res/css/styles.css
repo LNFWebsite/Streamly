@@ -52,6 +52,7 @@ body,
 #blurBackground {
   filter: blur(5px);
   -webkit-filter: blur(5px);
+  will-change: transform;
   position: absolute;
   top: 0;
   bottom: 0;
