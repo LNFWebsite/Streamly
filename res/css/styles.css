@@ -50,11 +50,8 @@ body,
   background-size: cover;
 }
 #blurBackground {
-  /**
   filter: blur(5px);
   -webkit-filter: blur(5px);
-  **/
-  filter: url("data:image/svg+xml;utf8,<svg style=\"position: absolute; top: -99999px\" xmlns=\"http://www.w3.org/2000/svg\"><filter id=\"svgBlur\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\"><feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"5\"/></filter></svg>#svgBlur");
   position: absolute;
   top: 0;
   bottom: 0;
