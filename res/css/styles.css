@@ -148,7 +148,7 @@ footer {
   text-align: left;
   padding: 10px;
   color: #ccc;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: none;
 }
 #floatingMenuShadow {
