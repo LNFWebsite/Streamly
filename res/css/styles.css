@@ -526,7 +526,7 @@ tr.placeholder:before {
     width: 85%;
   }
   #inputBox {
-    width: calc(100% - 190px) !important;
+    width: calc(100% - 195px) !important;
   }
   #forkme, #blurBackground {
     display: none;
