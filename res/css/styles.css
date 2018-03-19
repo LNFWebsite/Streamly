@@ -400,12 +400,14 @@ td {
   top: 50%;
   transform: translateY(-50%);
 }
+.icon {
+  background: 0 0;
+  border: none;
+}
 .tableButton:hover {
   opacity: 1
 }
 .tableButton {
-  background: 0 0;
-  border: none;
   float: right;
   opacity: .1;
 }
@@ -443,8 +445,7 @@ td {
 #videosTable tr {
   cursor: pointer
 }
-.tableButton,
-#videosTable tr {
+.tableButton {
   cursor: pointer;
 }
 tr.placeholder {
