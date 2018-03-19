@@ -400,20 +400,18 @@ td {
   top: 50%;
   transform: translateY(-50%);
 }
-.icon {
-  background: 0 0;
-  border: none;
-  cursor: pointer;
-}
 .tableButton:hover {
   opacity: 1
 }
 .tableButton {
+  background: 0 0;
+  border: none;
   float: right;
   opacity: .1;
 }
 #settings * {
   font-size: 1.5em;
+  cursor: pointer;
   padding: 2px;
 }
 .fa-cog {
@@ -445,7 +443,8 @@ td {
 #videosTable tr {
   cursor: pointer
 }
-.tableButton {
+.tableButton,
+#videosTable tr {
   cursor: pointer;
 }
 tr.placeholder {
