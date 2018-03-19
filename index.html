@@ -43,7 +43,7 @@
       <input type="text" id="inputBox" title="Search, drag and drop video, or paste its URL here" autofocus>
     </form>
     <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();" title="Copy your playlist to clipboard"></button>
-    <button class="icon" onclick="toggleMenu('settings');" title="Settings"><span class="fas fa-cog" id="settingsButton"></span></button>
+    <span class="fas fa-cog" id="settingsButton" onclick="toggleMenu('settings');" title="Settings"></span>
     <span class="fas fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
   </header>
   <div id="main">
@@ -139,21 +139,11 @@
       </div>
     </div>
     <div id="settings">
-      <button class="icon" onclick="playlistFeatures.playNext();" title="Added videos will play next">
-        <span class="fas fa-arrow-circle-right"></span>
-      </button>
-      <button class="icon" onclick="playlistFeatures.shuffle();" title="Playlist shuffle">
-        <span class="fas fa-random"></span>
-      </button>
-      <button class="icon" onclick="playlistFeatures.repeat();" title="Playlist repeat">
-        <span class="fas fa-redo-alt"></span>
-      </button>
-      <button class="icon" onclick="playlistFeatures.autoplay();" title="Streamly Radio">
-        <span class="fas fa-rss"></span>
-      </button>
-      <button class="icon" onclick="shareOnReddit();" title="Share playlist on Reddit">
-        <span class="fab fa-reddit" id="ad"></span>
-      </button>
+      <span class="fas fa-arrow-circle-right" onclick="playlistFeatures.playNext();" title="Added videos will play next"></span>
+      <span class="fas fa-random" onclick="playlistFeatures.shuffle();" title="Playlist shuffle"></span>
+      <span class="fas fa-redo-alt" onclick="playlistFeatures.repeat();" title="Playlist repeat"></span>
+      <span class="fas fa-rss" onclick="playlistFeatures.autoplay();" title="Streamly Radio"></span>
+      <span class="fab fa-reddit" id="ad" onclick="shareOnReddit();" title="Share playlist on Reddit"></span>
     </div>
   </footer>
   <!--
