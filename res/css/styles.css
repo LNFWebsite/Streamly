@@ -403,6 +403,7 @@ td {
 .icon {
   background: 0 0;
   border: none;
+  cursor: pointer;
 }
 .tableButton:hover {
   opacity: 1
@@ -413,7 +414,6 @@ td {
 }
 #settings * {
   font-size: 1.5em;
-  cursor: pointer;
   padding: 2px;
 }
 .fa-cog {
