@@ -15,7 +15,7 @@ This differs from YouTube's normal playlist functionality by allowing you to man
 
 Features:
 
-- Puts you in charge of your playlist by saving all video information necessarry to play (name, time, video_id) with the playlist. To save your playlist, simply bookmark the open tab of Streamly or click "Save Playlist" to copy a link to your clipboard. Additionally, your playlists should be automatically saved within your browsing history.
+- Puts you in charge of your playlist by saving all video information necessary to play (name, time, video_id) with the playlist. To save your playlist, simply bookmark the open tab of Streamly or click "Save Playlist" to copy a link to your clipboard. Additionally, your playlists should be automatically saved within your browsing history.
 
 - Runs independently from any server and requires no association with YouTube (API keys, etc...).
   
