@@ -88,9 +88,11 @@ window.addEventListener("keydown", function(e) {
           input(0);
         }
         break;
+        /*** This is redundant since it runs on form submit
       case "Enter":
         input(0);
         break;
+        ***/
     }
   }
   if (!$("#inputBox").is(":focus") && !$("#playlistNameBox").is(":focus")) {
