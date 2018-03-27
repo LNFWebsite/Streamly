@@ -88,9 +88,6 @@ window.addEventListener("keydown", function(e) {
           input(0);
         }
         break;
-      case "Enter":
-        input(0);
-        break;
     }
   }
   if (!$("#inputBox").is(":focus") && !$("#playlistNameBox").is(":focus")) {
