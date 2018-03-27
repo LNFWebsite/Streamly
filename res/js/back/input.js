@@ -133,6 +133,7 @@ function input(type) {
         var checkIfClosedTimer = setInterval(checkIfClosed, 500);
         ***/
         inBoxSearch = true;
+        console.log("here");
         quickSearch(inputBox);
         //$("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
         $("#inputBox").blur().focus();
@@ -142,6 +143,7 @@ function input(type) {
         if (inputBox.slice(-2) === " l") {
           inputBox = inputBox + "yric";
         }
+        console.log("or here");
         quickSearch(inputBox);
       }
     }
