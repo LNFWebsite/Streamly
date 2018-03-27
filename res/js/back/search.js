@@ -37,6 +37,7 @@ function loadSearchResult(element) {
 // * This function loads the video for the Quick Search functionality
 
 function quickSearch(query) {
+  console.log("debug: quickSearch(\"" + query + "\")");
   if (!inBoxSearch) {
     $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
   }
