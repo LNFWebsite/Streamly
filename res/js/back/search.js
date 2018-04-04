@@ -15,7 +15,7 @@
 
 function addSearchResult(name, id) {
   searchResultsNameStorage.push(name);
-  $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
+  $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + decodeURIComponent(name) + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
 }
 
 function loadSearchResult(element) {
@@ -106,7 +106,7 @@ function onSearchDataPlayerStateChange(event) {
         $(".searchResult").remove();
         searchResultsIteration = 0;
         searchResultsNameStorage = [];
-        addSearchResult(decodeURIComponent(videoName), id);
+        addSearchResult(videoName, id);
         quickSearch("");
         //as long as not open already (trying to search twice will close on second)
         if ($("#searchResultsWindow").css("display") !== "block") {
