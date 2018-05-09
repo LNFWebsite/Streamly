@@ -19,15 +19,15 @@
   <title>Streamly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Portable, independent, web-based, simple streaming YouTube video queues and playlists for music videos, audiobooks, etc." />
-  
+
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico|Roboto" type="text/css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" type="text/css" />
   <link rel="shortcut icon" id="favicon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAABDlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxUYW9AAAAWXRSTlMAAQIDBAUGCAkRFBUZGhscHiAhJyorLzI0ODo7PUZMTlBVVldYWVtcXV5hZHB1foKDiIuPlZiboKKlpqirr7CytcDDyMrMzs/R09Xa3N7g4ubp7e/x9/n7/Ud7aO4AAAE3SURBVBgZlcFpOxtRAIbhZ8YgltBaopZEHanamtKgtYaSklJ0xPL+/z8iGedMZq5MPrhv3mlgslzZ2aksT/aTbfpQsYMpun24UMr5OGneN3XZ9EjoO1KGA5+Yd6pMxx5OVT1sY31STwUifqg3jaF8TWn/fdo+y1oFCv+UUqLtXpahxSs/KeGOlrwcQ2TwhxJGgWU5Bit/ptgSsCfHEJu9l7ULXMkxdPgbL4r8AR7kGJLmFQmBphxD0pQiTeCvHEPC/IMiV8C+HENs7LesX8CaHIOVqyr2FZiQY4j4K8/q+Ah4TVmGtplbJYQeLRuyvgAjp0pZp63/SW/Ogtx3pT0GRErqqYh1oh6OcIKGMl0GxHKXylAfJCHYV5effaQthEoJ5+jiL94odl3yyTRc3KrV67Wt4jDv8wr7Zt73xzlZAQAAAABJRU5ErkJggg==" type="image/x-icon" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" type="text/css" />
-  
+
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="res/css/styles.css" type="text/css" />
-  
+
   <!-- External scripts -->
   <script src="//code.jquery.com/jquery-3.1.0.min.js" crossorigin="anonymous"></script>
   <script src="//code.jquery.com/ui/1.12.0/jquery-ui.min.js" crossorigin="anonymous"></script>
@@ -36,12 +36,21 @@
 </head>
 <body>
   <div id="dataFramesContainer"></div>
-  <a id="forkme" href="https://github.com/LNFWebsite/Streamly" target="_blank"><img id="forkmeImage" style="position: absolute; top: 65px; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <a id="forkme" href="https://github.com/LNFWebsite/Streamly" target="_blank"><img id="forkmeImage" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
   <header>
     <h1 id="title"><a href="#" style="color:white;text-decoration:none;">Streamly <span style="color:blue;">Beta</span></a></h1>
-    <form action="javascript:input(0);" method="get" id="searchForm">
-      <input type="text" id="inputBox" title="Search, drag and drop video, or paste its URL here" autofocus>
-    </form>
+    <div id="inputBoxContainer">
+      <form action="javascript:input(0);" method="get" id="searchForm">
+        <input type="text" id="inputBox" title="Search, drag and drop video, or paste its URL here" autofocus>
+      </form>
+      <div id="searchProgress">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+    </div>
     <button id="saveButton" data-clipboard-text="https://lnfwebsite.github.io/Streamly/" onclick="saveButton();" title="Copy your playlist to clipboard"></button>
     <span class="fas fa-cog" id="settingsButton" onclick="toggleMenu('settings');" title="Settings"></span>
     <span class="fas fa-exchange" id="stationIcon" onclick="disconnectStation();" title="Streamly Station is connected. Click to disconnect..."></span>
@@ -153,13 +162,13 @@
   $("#dialog").dialog();
   </script>
   -->
-  
+
   <!-- JS Frontend -->
   <script src="res/js/front/initialize.js"></script>
   <script src="res/js/front/youtube.js"></script>
   <script src="res/js/front/share.js"></script>
   <script src="res/js/front/events.js"></script>
-  
+
   <!-- JS Backend -->
   <script src="res/js/back/global.js"></script>
   <script src="res/js/back/base.js"></script>
@@ -172,12 +181,12 @@
   <script src="res/js/back/radio.js"></script>
   <script src="res/js/back/station.js"></script>
   <script src="res/js/back/toggles.js"></script>
-  
+
   <!-- Start of StatCounter Code for Default Guide -->
   <script type="text/javascript">
-  var sc_project=10543623; 
-  var sc_invisible=1; 
-  var sc_security="4c623aaf"; 
+  var sc_project=10543623;
+  var sc_invisible=1;
+  var sc_security="4c623aaf";
   </script>
   <script type="text/javascript"
   src="https://www.statcounter.com/counter/counter.js"
