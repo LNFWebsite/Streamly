@@ -574,24 +574,27 @@ tr.placeholder:before {
     font-size: 1em;
   }
   #inputBox, #saveButton {
-    position: initial;
-    margin-bottom: 5px;
     font-size: 0.8em;
   }
   #settingsButton,
   #stationIcon {
     font-size: 1.5em;
-    top: 4px;
-    left: auto;
   }
   #settingsWindow {
     width: 85%;
   }
   #inputBox {
-    width: calc(100% - 195px) !important;
+    margin-left: 5px !important;
+    width: calc(100% - 205px) !important;
+  }
+  #saveButton {
+    margin-left: 15px !important;
+  }
+  #settingsButton {
+    margin-left: 5px !important;
   }
   #forkme, #blurBackground {
-    display: none;
+    display: none !important;
   }
   body, #main {
     background: none;
