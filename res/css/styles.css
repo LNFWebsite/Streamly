@@ -585,7 +585,7 @@ tr.placeholder:before {
   }
   #inputBoxContainer {
     margin-left: 5px !important;
-    width: calc(100% - 205px) !important;
+    width: calc(100% - 195px) !important;
   }
   #saveButton {
     margin-left: 15px !important;
