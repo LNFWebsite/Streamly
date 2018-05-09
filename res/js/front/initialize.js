@@ -19,7 +19,7 @@ window.onload = function() {
   $("footer").addClass("animated slideInUp").css("display", "initial");
   $("#links").addClass("animated fadeIn").css("display", "initial");
 
-  $("#searchProgress").css("display", "none");
+  $("inputBox").focus();
 
   $("#inputBox").autocomplete({
     delay: 100,
