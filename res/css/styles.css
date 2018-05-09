@@ -637,7 +637,7 @@ tr.placeholder:before {
   }
   #playlistInterface {
     height: 100%;
-    width: 100%;
+    width: 99%;
     position: relative;
     top: auto;
     left: auto;
