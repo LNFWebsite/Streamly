@@ -116,9 +116,8 @@ function onSearchDataPlayerStateChange(event) {
         if ($("#searchResultsWindow").css("display") !== "block") {
           toggleMenu("searchResults");
         }
-
-        $("#searchProgress").css("display", "none");
       }
+      $("#searchProgress").css("display", "none");
     });
   }
 }
