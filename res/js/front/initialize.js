@@ -11,31 +11,38 @@
   limitations under the License.
 **/
 
-$("header, #forkmeImage").addClass("animated slideInDown");
-$("footer").addClass("animated fadeIn");
-$("#links").addClass("animated fadeIn");
+window.onload = function() {
+  $("header, #forkme").addClass("animated slideInDown");
+  $("header").css("display", "flex");
+  $("#forkme").css("display", "initial");
 
-$("#inputBox").autocomplete({
-  delay: 100,
-  source: function (request, response) {
-    var suggestURL = "//suggestqueries.google.com/complete/search?hl=en&ds=yt&q=" + request.term + "&client=chrome";
-    $.ajax({
-      method: 'GET',
-      dataType: 'jsonp',
-      jsonpCallback: 'jsonCallback',
-      url: suggestURL
-    })
-    .done(function(data){
-      suggestions = data[1];
-      if (suggestions.length > 10) {
-        suggestions.length = 10;
-      }
-      for (var i = suggestions.length - 1; i > -1; i--) {
-        if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
-          suggestions.splice(i, 1);
+  $("footer").addClass("animated slideInUp").css("display", "initial");
+  $("#links").addClass("animated fadeIn").css("display", "initial");
+
+  $("#searchProgress").css("display", "none");
+
+  $("#inputBox").autocomplete({
+    delay: 100,
+    source: function (request, response) {
+      var suggestURL = "//suggestqueries.google.com/complete/search?hl=en&ds=yt&q=" + request.term + "&client=chrome";
+      $.ajax({
+        method: 'GET',
+        dataType: 'jsonp',
+        jsonpCallback: 'jsonCallback',
+        url: suggestURL
+      })
+      .done(function(data){
+        suggestions = data[1];
+        if (suggestions.length > 10) {
+          suggestions.length = 10;
         }
-      }
-      response(suggestions);
-    });
-  }
-});
+        for (var i = suggestions.length - 1; i > -1; i--) {
+          if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
+            suggestions.splice(i, 1);
+          }
+        }
+        response(suggestions);
+      });
+    }
+  });
+}

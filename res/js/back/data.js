@@ -46,7 +46,7 @@ function getVideoData(id) {
       addVideo(videoName, videoTime, videoId);
     }
     else {
-      addSearchResult(decodeURIComponent(videoName), id);
+      addSearchResult(videoName, id);
       searchResultsIteration++;
       if (searchResultsIteration < quickSearchVideos.length - 1) {
         quickSearch("");

@@ -15,7 +15,8 @@
 
 function addSearchResult(name, id) {
   searchResultsNameStorage.push(name);
-  $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + decodeURIComponent(name) + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
+  name = decodeURIComponent(name);
+  $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
 }
 
 function loadSearchResult(element) {
@@ -37,11 +38,14 @@ function loadSearchResult(element) {
 // * This function loads the video for the Quick Search functionality
 
 function quickSearch(query) {
-  console.log("debug: quickSearch(\"" + query + "\")");
+  //console.log("debug: quickSearch(\"" + query + "\")");
+
   if (!inBoxSearch) {
     $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
   }
   if (query !== "") {
+    $("#searchProgress").css("display", "flex");
+
     quickSearchQuery = query;
     var searchDataFrame = document.createElement("iframe");
     searchDataFrame.setAttribute("id", "searchDataFrame");
@@ -112,6 +116,8 @@ function onSearchDataPlayerStateChange(event) {
         if ($("#searchResultsWindow").css("display") !== "block") {
           toggleMenu("searchResults");
         }
+
+        $("#searchProgress").css("display", "none");
       }
     });
   }
