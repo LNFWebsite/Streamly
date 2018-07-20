@@ -50,6 +50,8 @@ function toggleSideBySide() {
     "#currentVideoTiming",
     "#progressContainer",
     "#settings",
+    "#previousVideo",
+    "#nextVideo",
     "footer"
   ];
   if (sideBySide) {
