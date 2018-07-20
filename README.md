@@ -48,7 +48,7 @@ Or clone into your web server...
   
 - Does Streamly work on Mac/iPhone?
 
-  Yes/Maybe. Streamly should work just fine on Mac; however, I'm not sure it will work on iOS devices. Back when Streamly started, iOS did not allow some functionalities of the YouTube iFrame API. I'm not sure whether they are compatible now as I don't have a newer iOS device to test on, so your milage may vary. (If you have a newer iOS device, please let me know whether anything has changed)
+  Yes/Maybe. Streamly should work just fine on Mac; however, I'm not sure it will work on iOS devices. Back when Streamly started, iOS did not allow some functionalities of the YouTube iFrame API. I'm not sure whether they are compatible now as I don't have a newer iOS device to test on, so your mileage may vary. (If you have a newer iOS device, please let me know whether anything has changed)
 
 Thanks for taking the time to read! I hope that you will find Streamly as useful as I have. Happy Streaming!
 

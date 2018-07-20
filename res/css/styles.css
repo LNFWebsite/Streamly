@@ -366,7 +366,7 @@ td {
 #youtubeContainer,
 #progressContainer {
   display: inline-block;
-  z-index: 999;
+  z-index: 2;
 }
 #previousVideo,
 #nextVideo {
@@ -667,7 +667,6 @@ tr.placeholder:before {
 .playlistInterfaceSBS {
   position: fixed !important;
   top: 75px !important;
-  left: auto !important;
   width: calc(50% - 10px) !important;
   height: calc(100% - 145px) !important;
   margin-right: initial !important;
@@ -691,6 +690,9 @@ tr.placeholder:before {
   right: calc(25% - 80px) !important;
   background-color: rgba(0,0,0,0.8);
 }
+.previousVideoSBS, .nextVideoSBS {
+  display: none !important;
+}
 .footerSBS {
-  bottom: -35% !important;
+  position: initial !important;
 }
