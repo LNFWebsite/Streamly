@@ -366,7 +366,7 @@ td {
 #youtubeContainer,
 #progressContainer {
   display: inline-block;
-  z-index: 999;
+  z-index: 2;
 }
 #previousVideo,
 #nextVideo {
@@ -689,6 +689,9 @@ tr.placeholder:before {
   position: fixed !important;
   right: calc(25% - 80px) !important;
   background-color: rgba(0,0,0,0.8);
+}
+.videoPreviewsSBS {
+  display: none !important;
 }
 .footerSBS {
   position: initial !important;
