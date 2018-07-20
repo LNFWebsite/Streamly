@@ -667,7 +667,6 @@ tr.placeholder:before {
 .playlistInterfaceSBS {
   position: fixed !important;
   top: 75px !important;
-  left: auto !important;
   width: calc(50% - 10px) !important;
   height: calc(100% - 145px) !important;
   margin-right: initial !important;
@@ -692,5 +691,5 @@ tr.placeholder:before {
   background-color: rgba(0,0,0,0.8);
 }
 .footerSBS {
-  bottom: -35% !important;
+  position: initial !important;
 }
