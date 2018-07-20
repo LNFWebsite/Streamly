@@ -690,7 +690,7 @@ tr.placeholder:before {
   right: calc(25% - 80px) !important;
   background-color: rgba(0,0,0,0.8);
 }
-.videoPreviewsSBS {
+.previousVideoSBS, .nextVideoSBS {
   display: none !important;
 }
 .footerSBS {
