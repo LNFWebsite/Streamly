@@ -1,4 +1,5 @@
-# Streamly
+<img src="https://github.com/Pelikens/Streamly/blob/master/New_logo/logo_streamly_color/logo_streamly_color_low_res.png?raw=true"/>
+
 Open-source, web-based, YouTube video queues.
 
 Streamly on Desktop        | Streamly on Android
