@@ -1,4 +1,4 @@
-<img src="https://github.com/Pelikens/Streamly/blob/master/New_logo/logo_streamly_color/logo_streamly_color_low_res.png?raw=true"/>
+![Streamly Logo](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/res/img/logo/logo_streamly_color/logo_streamly_color_low_res.png)
 
 Open-source, web-based, YouTube video queues.
 
