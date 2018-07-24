@@ -569,11 +569,15 @@ tr.placeholder:before {
 
 /** Mobile Interface **/
 @media (max-width: 600px) {
+  #logo {
+    height: 25px;
+    margin: none;
+  }
   header {
     height: auto !important;
   }
   #title {
-    font-size: 1em;
+    font-size: 0em;
   }
   #inputBox, #saveButton {
     font-size: 0.8em;
