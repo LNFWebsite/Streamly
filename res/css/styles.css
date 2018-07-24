@@ -16,7 +16,11 @@
 
 /** Header **/
 h1 {
-  margin: 0
+  margin: 0;
+}
+#logo {
+  height: 45px;
+  margin: 10px 0px 0px 5px;
 }
 header {
   background-color: #000;
@@ -31,9 +35,6 @@ header {
 header,
 .ui-autocomplete {
   z-index: 1;
-}
-#title {
-  font-family: 'Pacifico', sans-serif;
 }
 #inputBoxContainer {
   margin-left: 15px;
@@ -568,11 +569,15 @@ tr.placeholder:before {
 
 /** Mobile Interface **/
 @media (max-width: 600px) {
+  #logo {
+    height: 25px;
+    margin: 0px;
+  }
   header {
     height: auto !important;
   }
   #title {
-    font-size: 1em;
+    font-size: 0em;
   }
   #inputBox, #saveButton {
     font-size: 0.8em;
