@@ -571,7 +571,7 @@ tr.placeholder:before {
 @media (max-width: 600px) {
   #logo {
     height: 25px;
-    margin: none;
+    margin: 0px;
   }
   header {
     height: auto !important;
