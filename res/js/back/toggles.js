@@ -16,14 +16,14 @@
 function toggleZen() {
   if (zenMode) {
     zenMode = false;
-    $("header, #forkmeImage").removeClass("slideOutUp").addClass("slideInDown");
+    $("header, #forkme").removeClass("slideOutUp").addClass("slideInDown");
     $("footer").removeClass("slideOutDown").addClass("slideInUp");
     $("#links").off().css("display", "block").removeClass("fadeOut").addClass("fadeIn");
     $("#zenModeToggle").prop("checked", false);
   }
   else {
     zenMode = true;
-    $("header, #forkmeImage").removeClass("slideInDown").addClass("slideOutUp");
+    $("header, #forkme").removeClass("slideInDown").addClass("slideOutUp");
     $("footer").removeClass("slideInUp").addClass("slideOutDown");
     $("#links").removeClass("fadeIn").addClass("fadeOut");
     $("#links").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
