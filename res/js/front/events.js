@@ -88,6 +88,10 @@ window.addEventListener("keydown", function(e) {
           input(0);
         }
         break;
+      //fixes having to double-hit enter when using autocomplete value
+      case "Enter":
+        e.preventDefault();
+        input(0);
     }
   }
   if (!$("#inputBox").is(":focus") && !$("#playlistNameBox").is(":focus")) {
