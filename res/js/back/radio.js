@@ -77,6 +77,7 @@ function onRadioDataPlayerStateChange(event) {
     if (autoplayVideos.length > 1) {
       //autoplayListOverride is for utilizing YouTube Mix stations without loading all videos
       if (autoplayListOverride) {
+        autoplayListOverride = false;
         autoplayList = false;
       }
       if (autoplayList) {
