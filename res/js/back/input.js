@@ -116,6 +116,8 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
         else if (isUrl[0] === "playlist") {
+          //turn on pause so that getVideoData doesn't try to play each video while loop-loading
+          videoPaused = true;
           if (playlistAutoplay) {
             playlistFeatures.autoplay();
           }
