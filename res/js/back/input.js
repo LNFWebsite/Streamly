@@ -92,6 +92,7 @@ function input(type) {
           default:
             alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
         }
+        $("#inputBox").val("").attr("placeholder", placeholder);
       }
       else if (isUrl) {
         if (isUrl[0] === "youtube") {
