@@ -42,7 +42,7 @@ var videoErrorIds = [];
 var videosBeforeShuffle = [];
 var addedVideosWhileShuffled = [];
 
-var baseAutoplayVideoId;
+var baseAutoplayVideoId = false;
 var autoplayList = false;
 var autoplayVideos = [];
 var autoplayVideoIteration = -1;
