@@ -43,6 +43,7 @@ var videosBeforeShuffle = [];
 var addedVideosWhileShuffled = [];
 
 var baseAutoplayVideoId;
+var autoplayList = false;
 var autoplayVideos = [];
 var autoplayVideoIteration = -1;
 
@@ -51,7 +52,6 @@ var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
 var inBoxSearch = false;
-//var searchResultsCount = 10;
 var searchResultsIteration = 0;
 var searchResultsNameStorage = [];
 
