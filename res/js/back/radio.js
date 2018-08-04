@@ -20,7 +20,12 @@ function loadAutoplayData(iteration) {
   autoplayVideoIteration = -1;
 
   highlight(iteration, "radio", false);
-  baseAutoplayVideoId = videos[iteration][2];
+  if (autoplayList) {
+    baseAutoplayVideoId = autoplayList[0];
+  }
+  else {
+    baseAutoplayVideoId = videos[iteration][2];
+  }
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "radioDataFrame");
   dataFrame.setAttribute("src", "");
@@ -37,8 +42,14 @@ function loadAutoplayData(iteration) {
 // * This function cues the playlist for use in the next function
 
 function onRadioDataPlayerReady() {
-  var autoplayUrl = "RD" + baseAutoplayVideoId;
+  if (autoplayList) {
+    var autoplayUrl = autoplayList[1];
+  }
+  else {
+    var autoplayUrl = "RD" + baseAutoplayVideoId;
+  }
   radioDataPlayer.cuePlaylist({list:autoplayUrl});
+  autoplayList = false;
 }
 
 // * This function compiles an array of videos for Streamly Radio
