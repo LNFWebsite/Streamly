@@ -43,7 +43,8 @@ function getVideoData(id) {
 
     if (!inBoxSearch) {
       $("#inputBox").val("").attr("placeholder", placeholder);
-      addVideo(videoName, videoTime, videoId);
+      console.log("debuggy: " + id + "," + videoId);
+      addVideo(videoName, videoTime, id);
     }
     else {
       addSearchResult(videoName, id);
