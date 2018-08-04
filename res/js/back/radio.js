@@ -58,20 +58,22 @@ function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
-
-    for (var i = 0; i < autoplayVideos.length; i++) {
-      var notInPlaylist = true;
-      var autoplayVideo = autoplayVideos[i];
-      for (var x = 1; x < videos.length; x++) {
-        if (videos[x][2] === autoplayVideo) {
-          notInPlaylist = false;
+    
+    if (!autoplayList && !autoplayListOverride) {
+      for (var i = 0; i < autoplayVideos.length; i++) {
+        var notInPlaylist = true;
+        var autoplayVideo = autoplayVideos[i];
+        for (var x = 1; x < videos.length; x++) {
+          if (videos[x][2] === autoplayVideo) {
+            notInPlaylist = false;
+          }
+        }
+        if (notInPlaylist) {
+          autoplayVideosSpare.push(autoplayVideo);
         }
       }
-      if (notInPlaylist) {
-        autoplayVideosSpare.push(autoplayVideo);
-      }
+      autoplayVideos = autoplayVideosSpare;
     }
-    autoplayVideos = autoplayVideosSpare;
 
     radioDataPlayer.destroy();
     if (autoplayVideos.length > 1) {
