@@ -59,7 +59,7 @@ function onRadioDataPlayerStateChange(event) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
 
-    for (var i = 0; i <= 25; i++) {
+    for (var i = 0; i < autoplayVideos.length; i++) {
       var notInPlaylist = true;
       var autoplayVideo = autoplayVideos[i];
       for (var x = 1; x < videos.length; x++) {
