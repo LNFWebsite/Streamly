@@ -19,7 +19,7 @@ if ($(window).width() <= 600) {
   var loadingPlaceholder = "Loading...";
 }
 else {
-  var placeholder = "Search, drag&drop video/playlist, or paste URL...";
+  var placeholder = "Search, drag and drop video/playlist, or paste URL...";
   var loadingPlaceholder = "Loading video data from YouTube...";
 }
 $("#inputBox").attr("placeholder", placeholder);
