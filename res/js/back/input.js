@@ -15,30 +15,30 @@
 // * It then specifies how to interpret this URL in the function below
 
 function urlValidate(url) {
-  var youtubeRegex = /(?:youtube\.com\/watch.+?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
+  var output = false;
+  
+  var youtubeRegex = /(?:youtube\..+\/watch.+?v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)(&list=[^?&]+)?/i;
   var streamlyRegex = /.*#(.+)/i;
-
-  function checkMatch(url, regex) {
-    var doesMatch = url.match(regex);
-    if (doesMatch !== null && doesMatch[1] !== null) {
-      return doesMatch[1];
+  
+  var youtubeMatch = url.match(youtubeRegex);
+  if (youtubeMatch) {
+    if (youtubeMatch[1]) {
+      output = youtubeMatch[1];
+      output = ["youtube", output];
     }
-    else {
-      return false;
+    if (youtubeMatch[2]) {
+      output = youtubeMatch[2].replace("&list=", "");
+      output = ["playlist", output];
     }
   }
-
-  var checkoutYoutube = checkMatch(url, youtubeRegex);
-  var checkoutStreamly = checkMatch(url, streamlyRegex);
-  if (checkoutYoutube) {
-    return ["youtube", checkoutYoutube];
+  
+  var streamlyMatch = url.match(streamlyRegex);
+  if (streamlyMatch && streamlyMatch[1]) {
+    output = streamlyMatch[1];
+    output = ["streamly", output];
   }
-  else if (checkoutStreamly) {
-    return ["streamly", checkoutStreamly];
-  }
-  else {
-    return false;
-  }
+  
+  return output;
 }
 
 // * This function handles all user inputs
@@ -113,6 +113,10 @@ function input(type) {
         }
         else if (isUrl[0] === "streamly") {
           appendPlaylist(isUrl[1]);
+          $("#inputBox").val("").attr("placeholder", placeholder);
+        }
+        else if (isUrl[0] === "playlist") {
+          addAutoplayVideo(isUrl[1]);
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
       }
