@@ -19,8 +19,13 @@ function loadAutoplayData(iteration) {
   autoplayVideos = [];
   autoplayVideoIteration = -1;
 
-  highlight(iteration, "radio", false);
-  baseAutoplayVideoId = videos[iteration][2];
+  if (autoplayList) {
+    baseAutoplayVideoId = autoplayList[0];
+  }
+  else {
+    highlight(iteration, "radio", false);
+    baseAutoplayVideoId = videos[iteration][2];
+  }
   var dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "radioDataFrame");
   dataFrame.setAttribute("src", "");
@@ -37,7 +42,12 @@ function loadAutoplayData(iteration) {
 // * This function cues the playlist for use in the next function
 
 function onRadioDataPlayerReady() {
-  var autoplayUrl = "RD" + baseAutoplayVideoId;
+  if (autoplayList) {
+    var autoplayUrl = autoplayList[1];
+  }
+  else {
+    var autoplayUrl = "RD" + baseAutoplayVideoId;
+  }
   radioDataPlayer.cuePlaylist({list:autoplayUrl});
 }
 
@@ -48,20 +58,22 @@ function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
     var autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
-
-    for (var i = 0; i <= 25; i++) {
-      var notInPlaylist = true;
-      var autoplayVideo = autoplayVideos[i];
-      for (var x = 1; x < videos.length; x++) {
-        if (videos[x][2] === autoplayVideo) {
-          notInPlaylist = false;
+    
+    if (!autoplayList && !autoplayListOverride) {
+      for (var i = 0; i < autoplayVideos.length; i++) {
+        var notInPlaylist = true;
+        var autoplayVideo = autoplayVideos[i];
+        for (var x = 1; x < videos.length; x++) {
+          if (videos[x][2] === autoplayVideo) {
+            notInPlaylist = false;
+          }
+        }
+        if (notInPlaylist) {
+          autoplayVideosSpare.push(autoplayVideo);
         }
       }
-      if (notInPlaylist) {
-        autoplayVideosSpare.push(autoplayVideo);
-      }
+      autoplayVideos = autoplayVideosSpare;
     }
-    autoplayVideos = autoplayVideosSpare;
 
     radioDataPlayer.destroy();
     if (autoplayVideos.length > 1) {
@@ -73,18 +85,22 @@ function onRadioDataPlayerStateChange(event) {
 // * This function loads the latest Streamly Radio video into the playlist
 
 function addAutoplayVideo() {
-  if (playlistAutoplay && videos.length > 0) {
+  if (playlistAutoplay && (videos.length > 0 || autoplayList)) {
     if (!autoplayVideos.length > 0) {
       loadAutoplayData(videoIteration);
     }
-    else if (videoIteration === videoCounter) {
+    else if (videoIteration === videoCounter || autoplayList) {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
         autoplayVideoIteration++;
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
         getVideoData(autoplayVideos[autoplayVideoIteration]);
       }
-      else {
+      else if (!autoplayList && !autoplayListOverride) {
         loadAutoplayData(videoIteration);
+      }
+      else {
+        //kill Streamly Radio after the playlist is loaded
+        playlistFeatures.autoplay();
       }
     }
   }

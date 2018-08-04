@@ -15,30 +15,30 @@
 // * It then specifies how to interpret this URL in the function below
 
 function urlValidate(url) {
-  var youtubeRegex = /(?:youtube\.com\/watch.+?v=|youtu\.be\/|youtube.com\/embed\/)([^?&]+)/i;
+  var output = false;
+  
+  var youtubeRegex = /(?:youtube\..+\/watch.+?v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)(&list=[^?&]+)?/i;
   var streamlyRegex = /.*#(.+)/i;
-
-  function checkMatch(url, regex) {
-    var doesMatch = url.match(regex);
-    if (doesMatch !== null && doesMatch[1] !== null) {
-      return doesMatch[1];
+  
+  var youtubeMatch = url.match(youtubeRegex);
+  if (youtubeMatch) {
+    if (youtubeMatch[1] && youtubeMatch[2]) {
+      output = [youtubeMatch[1], youtubeMatch[2].replace("&list=", "")];
+      output = ["playlist", output];
     }
-    else {
-      return false;
+    else if (youtubeMatch[1]) {
+      output = youtubeMatch[1];
+      output = ["youtube", output];
     }
   }
-
-  var checkoutYoutube = checkMatch(url, youtubeRegex);
-  var checkoutStreamly = checkMatch(url, streamlyRegex);
-  if (checkoutYoutube) {
-    return ["youtube", checkoutYoutube];
+  
+  var streamlyMatch = url.match(streamlyRegex);
+  if (streamlyMatch && streamlyMatch[1]) {
+    output = streamlyMatch[1];
+    output = ["streamly", output];
   }
-  else if (checkoutStreamly) {
-    return ["streamly", checkoutStreamly];
-  }
-  else {
-    return false;
-  }
+  
+  return output;
 }
 
 // * This function handles all user inputs
@@ -86,9 +86,13 @@ function input(type) {
               alert("No background color or image specified");
             }
             break;
+          case "radio":
+            autoplayListOverride = true;
+            break;
           default:
             alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
         }
+        $("#inputBox").val("").attr("placeholder", placeholder);
       }
       else if (isUrl) {
         if (isUrl[0] === "youtube") {
@@ -113,6 +117,16 @@ function input(type) {
         }
         else if (isUrl[0] === "streamly") {
           appendPlaylist(isUrl[1]);
+          $("#inputBox").val("").attr("placeholder", placeholder);
+        }
+        else if (isUrl[0] === "playlist") {
+          //turn on pause so that getVideoData doesn't try to play each video while loop-loading
+          videoPaused = true;
+          if (playlistAutoplay) {
+            playlistFeatures.autoplay();
+          }
+          autoplayList = isUrl[1];
+          playlistFeatures.autoplay();
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
       }

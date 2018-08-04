@@ -116,3 +116,14 @@ var DropOverlay = function() {
   }
 }
 var dropOverlay = new DropOverlay();
+
+function toggleAutoplayListOverride() {
+  if (autoplayListOverride) {
+    autoplayListOverride = false;
+    $("#autoplayListOverrideToggle").prop("checked", false);
+  }
+  else {
+    autoplayListOverride = true;
+    $("#autoplayListOverrideToggle").prop("checked", true);
+  }
+}

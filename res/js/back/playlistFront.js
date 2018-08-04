@@ -142,7 +142,8 @@ var PlaylistFeatures = function() {
     if (playlistAutoplay === false) {
       autoplayVideos = [];
       autoplayVideoIteration = 0;
-      baseAutoplayVideoId = null;
+      baseAutoplayVideoId = false;
+      autoplayList = false;
       $("tr").removeClass("radio");
     }
     else {

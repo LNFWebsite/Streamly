@@ -19,7 +19,7 @@ if ($(window).width() <= 600) {
   var loadingPlaceholder = "Loading...";
 }
 else {
-  var placeholder = "Search, drag and drop video, or paste its URL...";
+  var placeholder = "Search, drag and drop video/playlist, or paste URL...";
   var loadingPlaceholder = "Loading video data from YouTube...";
 }
 $("#inputBox").attr("placeholder", placeholder);
@@ -31,8 +31,6 @@ var popup;
 var searchClose = false;
 var hotkeySearchClose = false;
 
-var videoId;
-
 var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
@@ -42,7 +40,10 @@ var videoErrorIds = [];
 var videosBeforeShuffle = [];
 var addedVideosWhileShuffled = [];
 
-var baseAutoplayVideoId;
+var baseAutoplayVideoId = false;
+var autoplayList = false;
+//override autoplayList for entering YouTube Mix stations (not to load all of them)
+var autoplayListOverride = false;
 var autoplayVideos = [];
 var autoplayVideoIteration = -1;
 
@@ -51,7 +52,6 @@ var quickSearchVideos = [];
 var quickSearchVideosIteration = 0;
 
 var inBoxSearch = false;
-//var searchResultsCount = 10;
 var searchResultsIteration = 0;
 var searchResultsNameStorage = [];
 

@@ -25,9 +25,9 @@ function loadSearchResult(element) {
   console.log("i:" + iteration + ",id:" + id);
 
   //getVideoData function equivalent without reloading video names
-  videoId = id;
-  videoTime = 0;
-  videoName = searchResultsNameStorage[iteration];
+  var videoId = id;
+  var videoTime = 0;
+  var videoName = searchResultsNameStorage[iteration];
   addVideo(videoName, videoTime, videoId);
 
   if (searchClose) {
