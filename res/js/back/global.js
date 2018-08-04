@@ -31,8 +31,6 @@ var popup;
 var searchClose = false;
 var hotkeySearchClose = false;
 
-var videoId;
-
 var videos = [];
 var videoCounter = 0;
 var videoIteration = 0;
