@@ -42,6 +42,8 @@ var addedVideosWhileShuffled = [];
 
 var baseAutoplayVideoId = false;
 var autoplayList = false;
+//override autoplayList for entering YouTube Mix stations (not to load all of them)
+var autoplayListOverride = false;
 var autoplayVideos = [];
 var autoplayVideoIteration = -1;
 
