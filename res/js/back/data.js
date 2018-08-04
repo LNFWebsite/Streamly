@@ -44,6 +44,12 @@ function getVideoData(id) {
     if (!inBoxSearch) {
       $("#inputBox").val("").attr("placeholder", placeholder);
       addVideo(videoName, videoTime, videoId);
+      
+      //loop addAutoplayVideo for YouTube playlist import
+      //autoplayListOverride is for utilizing YouTube Mix stations without loading all videos
+      if (autoplayList && !autoplayListOverride) {
+        addAutoplayVideo();
+      }
     }
     else {
       addSearchResult(videoName, id);
