@@ -19,11 +19,11 @@ function loadAutoplayData(iteration) {
   autoplayVideos = [];
   autoplayVideoIteration = -1;
 
-  highlight(iteration, "radio", false);
   if (autoplayList) {
     baseAutoplayVideoId = autoplayList[0];
   }
   else {
+    highlight(iteration, "radio", false);
     baseAutoplayVideoId = videos[iteration][2];
   }
   var dataFrame = document.createElement("iframe");
@@ -77,6 +77,11 @@ function onRadioDataPlayerStateChange(event) {
     if (autoplayVideos.length > 1) {
       addAutoplayVideo();
     }
+    else if (autoplayList) {
+      for (var i = 0; i < autoplayVideos.length; i++) {
+        addAutoplayVideo();
+      }
+    }
   }
 }
 
@@ -87,14 +92,18 @@ function addAutoplayVideo() {
     if (!autoplayVideos.length > 0) {
       loadAutoplayData(videoIteration);
     }
-    else if (videoIteration === videoCounter) {
+    else if (videoIteration === videoCounter || autoplayList) {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
         autoplayVideoIteration++;
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
         getVideoData(autoplayVideos[autoplayVideoIteration]);
       }
-      else {
+      else if (!autoplayList) {
         loadAutoplayData(videoIteration);
+      }
+      else {
+        //kill Streamly Radio after the playlist is loaded
+        playlistFeatures.autoplay();
       }
     }
   }
