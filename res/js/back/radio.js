@@ -49,7 +49,6 @@ function onRadioDataPlayerReady() {
     var autoplayUrl = "RD" + baseAutoplayVideoId;
   }
   radioDataPlayer.cuePlaylist({list:autoplayUrl});
-  autoplayList = false;
 }
 
 // * This function compiles an array of videos for Streamly Radio
@@ -84,7 +83,7 @@ function onRadioDataPlayerStateChange(event) {
 // * This function loads the latest Streamly Radio video into the playlist
 
 function addAutoplayVideo() {
-  if (playlistAutoplay && videos.length > 0) {
+  if (playlistAutoplay && (videos.length > 0 || autoplayList)) {
     if (!autoplayVideos.length > 0) {
       loadAutoplayData(videoIteration);
     }
