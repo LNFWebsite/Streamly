@@ -94,12 +94,6 @@ function addAutoplayVideo() {
         autoplayVideoIteration++;
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
         getVideoData(autoplayVideos[autoplayVideoIteration]);
-        
-        //loop addAutoplayVideo for YouTube playlist import
-        //autoplayListOverride is for utilizing YouTube Mix stations without loading all videos
-        if (autoplayList && !autoplayListOverride) {
-          addAutoplayVideo();
-        }
       }
       else if (!autoplayList && !autoplayListOverride) {
         loadAutoplayData(videoIteration);
