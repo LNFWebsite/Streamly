@@ -22,13 +22,13 @@ function urlValidate(url) {
   
   var youtubeMatch = url.match(youtubeRegex);
   if (youtubeMatch) {
-    if (youtubeMatch[1]) {
+    if (youtubeMatch[1] && youtubeMatch[2]) {
+      output = [youtubeMatch[1], youtubeMatch[2].replace("&list=", "")];
+      output = ["playlist", output];
+    }
+    else if (youtubeMatch[1]) {
       output = youtubeMatch[1];
       output = ["youtube", output];
-    }
-    if (youtubeMatch[2]) {
-      output = youtubeMatch[2].replace("&list=", "");
-      output = ["playlist", output];
     }
   }
   
@@ -116,7 +116,11 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
         else if (isUrl[0] === "playlist") {
-          addAutoplayVideo(isUrl[1]);
+          if (playlistAutoplay) {
+            playlistFeatures.autoplay();
+          }
+          autoplayList = isUrl[1];
+          playlistFeatures.autoplay();
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
       }
