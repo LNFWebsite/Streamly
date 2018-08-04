@@ -75,10 +75,12 @@ function onRadioDataPlayerStateChange(event) {
 
     radioDataPlayer.destroy();
     if (autoplayVideos.length > 1) {
-      addAutoplayVideo();
-    }
-    else if (autoplayList) {
-      for (var i = 0; i < autoplayVideos.length; i++) {
+      if (autoplayList) {
+        for (var i = 0; i < autoplayVideos.length; i++) {
+          addAutoplayVideo();
+        }
+      }
+      else {
         addAutoplayVideo();
       }
     }
