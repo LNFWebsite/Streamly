@@ -86,6 +86,9 @@ function input(type) {
               alert("No background color or image specified");
             }
             break;
+          case "radio":
+            autoplayListOverride = true;
+            break;
           default:
             alert("Sorry, but that option does not exist\n\nCheck with the list of Streamly options on GitHub");
         }
