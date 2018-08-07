@@ -129,8 +129,10 @@ document.addEventListener("drop", function(event) {
 
   $("#inputBox").val(data);
   input(1);
+  
+  $("#dropShadow, #dropOverlay").css("display", "none");
 });
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
-  alert("here");
+  $("#dropShadow, #dropOverlay").css("display", "initial");
 });
