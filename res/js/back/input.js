@@ -61,6 +61,7 @@ function input(type) {
       videos[0] = undefined;
     }
     setPlaylist();
+    $("#ogTitle").attr("content", "Streamly - " + playlistNameBox);
   }
   else {
     if (inputBox !== "") {
