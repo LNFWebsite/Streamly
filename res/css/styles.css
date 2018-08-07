@@ -639,7 +639,7 @@ tr.placeholder:before {
   .videoImageContainer {
     width: 100%;
   }
-  .fas {
+  .fa-backward, .fa-forward, .fa-cog, #settings * {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
