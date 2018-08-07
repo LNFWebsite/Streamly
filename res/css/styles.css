@@ -226,7 +226,7 @@ footer {
   overflow-y: auto;
   display: none;
 }
-#floatingMenuShadow {
+#dropShadow {
   position: fixed;
   top: 0;
   left: 0;
@@ -240,10 +240,13 @@ footer {
 #dropOverlay {
   position: fixed;
   color: white;
+  font-size: 1.2em;
   z-index: 3;
   top: 50%;
-  right: 25px;
+  left: 50%;
   transform: translate(0, -50%);
+  width: 50%;
+  margin-left: -25%;
   display: none;
 }
 #connectStationBox {
