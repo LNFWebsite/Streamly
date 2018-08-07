@@ -38,7 +38,9 @@ function getPlaylist() {
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
-        $("#playlistNameBox").val(decodeURIComponent(videos[0]));
+        var playlistTitle = decodeURIComponent(videos[0]);
+        $("#playlistNameBox").val(playlistTitle);
+        $("#ogTitle").attr("content", "Streamly - " + playlistTitle);
       }
 
       for (var i = 1; i < videos.length; i++) {
