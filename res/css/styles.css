@@ -639,10 +639,10 @@ tr.placeholder:before {
   .videoImageContainer {
     width: 100%;
   }
-  .fas {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
+  .fa-forward, .fa-backward {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
