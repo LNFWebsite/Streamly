@@ -226,7 +226,7 @@ footer {
   overflow-y: auto;
   display: none;
 }
-#floatingMenuShadow {
+#dropShadow {
   position: fixed;
   top: 0;
   left: 0;
