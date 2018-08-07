@@ -132,4 +132,5 @@ document.addEventListener("drop", function(event) {
 });
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
+  alert("here");
 });
