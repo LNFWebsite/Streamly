@@ -49,7 +49,7 @@ function shareOnReddit() {
     playlistName = $("#playlistNameBox").attr("placeholder");
   }
   if (window.location.hash.substr(1).length <= 10000) {
-    window.open("https://old.reddit.com/r/StreamlyReddit/submit?resubmit=true&title=Playlist%20-%20" + playlistName + "&url=https://lnfwebsite.github.io/Streamly/%23" + window.location.hash.substr(1), "_blank");
+    window.open("https://www.reddit.com/r/StreamlyReddit/submit?resubmit=true&title=Playlist%20-%20" + playlistName + "&url=https://lnfwebsite.github.io/Streamly/%23" + window.location.hash.substr(1), "_blank");
   }
   else {
     alert("The playlist you are sharing is too long to automatically post, so please copy your Streamly Playlist URL and paste it into the open Reddit tab (you can copy by clicking the \"Save Playlist\" button).\n\nSorry for this inconvenience.");
