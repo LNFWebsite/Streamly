@@ -19,9 +19,6 @@ window.onload = function() {
   $("footer").addClass("animated slideInUp").css("display", "initial");
   $("#links").addClass("animated fadeIn").css("display", "initial");
   
-  //empty the playlistNameBox because Firefox Quantum saves this value over page re-loads
-  $("#playlistNameBox").val("");
-  
   $("#inputBox").focus();
 
   $("#inputBox").autocomplete({
