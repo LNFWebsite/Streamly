@@ -17,19 +17,19 @@
 function urlValidate(url) {
   var output = false;
   
-  var youtubeRegex = /(?:youtube\..+\/watch.+?v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)(&list=[^?&]+)?/i;
+  var youtubeRegex = /(?:v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)/i;
+  var youtubeListRegex = /list=([^?&]+)/i;
   var streamlyRegex = /.*#(.+)/i;
   
   var youtubeMatch = url.match(youtubeRegex);
-  if (youtubeMatch) {
-    if (youtubeMatch[1] && youtubeMatch[2]) {
-      output = [youtubeMatch[1], youtubeMatch[2].replace("&list=", "")];
-      output = ["playlist", output];
-    }
-    else if (youtubeMatch[1]) {
-      output = youtubeMatch[1];
-      output = ["youtube", output];
-    }
+  var youtubeListMatch = url.match(youtubeListRegex);
+  if (youtubeMatch && youtubeListMatch) {
+    output = [youtubeMatch[1], youtubeListMatch[1]];
+    output = ["playlist", output];
+  }
+  else if (youtubeMatch) {
+    output = youtubeMatch[1];
+    output = ["youtube", output];
   }
   
   var streamlyMatch = url.match(streamlyRegex);
