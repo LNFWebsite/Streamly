@@ -52,6 +52,8 @@ function toggleSideBySide() {
     "#settings",
     "#previousVideo",
     "#nextVideo",
+    ".videoImage",
+    ".videoNameContainer"
     "footer"
   ];
   if (sideBySide) {
