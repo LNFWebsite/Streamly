@@ -24,11 +24,11 @@ function urlValidate(url) {
   var youtubeMatch = url.match(youtubeRegex);
   var youtubeListMatch = url.match(youtubeListRegex);
   if (youtubeMatch) {
-    if (youtubeMatch[1] && youtubeListMatch[1]) {
+    if (youtubeMatch && youtubeListMatch) {
       output = [youtubeMatch[1], youtubeListMatch[1]];
       output = ["playlist", output];
     }
-    else if (youtubeMatch[1]) {
+    else if (youtubeMatch) {
       output = youtubeMatch[1];
       output = ["youtube", output];
     }
