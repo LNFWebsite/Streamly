@@ -708,6 +708,24 @@ tr.placeholder:before {
 }
 .previousVideoSBS, .nextVideoSBS {
   display: none !important;
+  width: 100px;
+  height: 25px;
+  bottom: 5px;
+  transform: none;
+}
+.previousVideoSBS {
+  left: 50%;
+}
+.nextVideoSBS {
+  right: 9px;
+}
+.videoImageSBS {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.videoNameContainerSBS {
+  display: none;
 }
 .footerSBS {
   position: initial !important;
