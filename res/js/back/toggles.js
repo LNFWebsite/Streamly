@@ -54,6 +54,8 @@ function toggleSideBySide() {
     "#nextVideo",
     ".videoImageContainer",
     ".videoNameContainer",
+    ".videoImage",
+    ".videoTime",
     "footer"
   ];
   if (sideBySide) {
