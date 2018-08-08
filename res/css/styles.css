@@ -693,7 +693,7 @@ tr.placeholder:before {
   height: 100% !important;
 }
 .currentVideoTimingSBS {
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(25,25,25,0.8);
   border-radius: 5px;
   padding: 2px;
   width: calc(100% - 2px);
@@ -701,7 +701,7 @@ tr.placeholder:before {
 .settingsSBS {
   position: fixed !important;
   right: calc(25% - 80px) !important;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(25,25,25,0.8);
 }
 .previousVideoSBS, .nextVideoSBS {
   position: fixed !important;
