@@ -35,7 +35,7 @@ function toggleZen() {
 
 function toggleSideBySide() {
   function changeSBS(which, add) {
-    var className = which.replace("#", "");
+    var className = which.replace("#", "").replace(".", "");
     if (add) {
       $(which).addClass(className + "SBS");
     }
