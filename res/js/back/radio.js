@@ -89,7 +89,7 @@ function addAutoplayVideo() {
     if (!autoplayVideos.length > 0) {
       loadAutoplayData(videoIteration);
     }
-    else if (videoIteration === videoCounter || autoplayList) {
+    else if (videoIteration === videoCounter || (autoplayList && !autoplayListOverride)) {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
         autoplayVideoIteration++;
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");
