@@ -708,7 +708,7 @@ tr.placeholder:before {
   width: 100px !important;
   height: 25px !important;
   top: auto !important;
-  bottom: 5px !important;
+  bottom: 4px !important;
   transform: none !important;
   background-color: grey !important;
 }
