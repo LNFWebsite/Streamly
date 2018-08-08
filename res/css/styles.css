@@ -723,7 +723,7 @@ tr.placeholder:before {
 .videoImageContainerSBS {
   width: 100% !important;
 }
-.videoNameContainer, .videoImageSBS, .videoTimeSBS {
+.videoNameContainerSBS, .videoImageSBS, .videoTimeSBS {
   display: none !important;
 }
 .footerSBS {
