@@ -712,6 +712,7 @@ tr.placeholder:before {
   top: auto !important;
   bottom: 5px !important;
   transform: none !important;
+  background-color: grey !important;
 }
 .previousVideoSBS {
   left: 50% !important;
@@ -722,7 +723,7 @@ tr.placeholder:before {
 .videoImageContainerSBS {
   width: 100% !important;
 }
-.videoNameContainerSBS {
+.videoNameContainer, .videoImageSBS, .videoTimeSBS {
   display: none !important;
 }
 .footerSBS {
