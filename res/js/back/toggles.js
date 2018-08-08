@@ -48,7 +48,6 @@ function toggleSideBySide() {
     "#playlistInterface",
     "#youtubeContainer",
     "#currentVideoTiming",
-    "#progressContainer",
     "#settings",
     "#previousVideo",
     "#nextVideo",
