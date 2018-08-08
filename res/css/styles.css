@@ -707,7 +707,6 @@ tr.placeholder:before {
   background-color: rgba(0,0,0,0.8);
 }
 .previousVideoSBS, .nextVideoSBS {
-  display: none !important;
   width: 100px !important;
   height: 25px !important;
   top: auto !important;
