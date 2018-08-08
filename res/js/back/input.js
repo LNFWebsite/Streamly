@@ -17,13 +17,15 @@
 function urlValidate(url) {
   var output = false;
   
-  var youtubeRegex = /(?:youtube\..+\/watch.+?v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)(&list=[^?&]+)?/i;
+  var youtubeRegex = /(?:v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)/i;
+  var youtubeListRegex = /list=([^?&]+)/i;
   var streamlyRegex = /.*#(.+)/i;
   
   var youtubeMatch = url.match(youtubeRegex);
+  var youtubeListMatch = url.match(youtubeListRegex);
   if (youtubeMatch) {
-    if (youtubeMatch[1] && youtubeMatch[2]) {
-      output = [youtubeMatch[1], youtubeMatch[2].replace("&list=", "")];
+    if (youtubeMatch[1] && youtubeListMatch[1]) {
+      output = [youtubeMatch[1], youtubeListMatch[1]];
       output = ["playlist", output];
     }
     else if (youtubeMatch[1]) {
