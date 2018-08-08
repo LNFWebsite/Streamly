@@ -104,6 +104,10 @@ window.addEventListener("keydown", function(e) {
         e.preventDefault();
         toggleZen();
         break;
+      case "KeyV":
+        e.preventDefault();
+        toggleSideBySide();
+        break;
     }
   }
 });

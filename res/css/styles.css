@@ -707,6 +707,24 @@ tr.placeholder:before {
   background-color: rgba(0,0,0,0.8);
 }
 .previousVideoSBS, .nextVideoSBS {
+  position: fixed !important;
+  width: 100px !important;
+  height: 25px !important;
+  top: auto !important;
+  bottom: 5px !important;
+  transform: none !important;
+  background-color: grey !important;
+}
+.previousVideoSBS {
+  left: 50% !important;
+}
+.nextVideoSBS {
+  right: 9px !important;
+}
+.videoImageContainerSBS {
+  width: 100% !important;
+}
+.videoNameContainerSBS, .videoImageSBS, .videoTimeSBS {
   display: none !important;
 }
 .footerSBS {
