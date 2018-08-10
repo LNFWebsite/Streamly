@@ -107,12 +107,6 @@ function onSearchDataPlayerStateChange(event) {
       }
     }
     
-    
-    
-    
-    
-    
-    
     searchDataPlayer.destroy();
     if (inBoxSearch) {
       $(".searchResult").remove();
@@ -123,41 +117,9 @@ function onSearchDataPlayerStateChange(event) {
         toggleMenu("searchResults");
       }
     }
-    
     getVideoData(id);
+    
     $("#searchProgress").css("display", "none");
-    
-    
-    
-    
-    
-    
-    
-    
-    
-/**
-    getVideoName(id, function(name) {
-      videoName = name;
-      videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
-      videoTime = 0;
-      searchDataPlayer.destroy();
-      if (!inBoxSearch) {
-        addVideo(videoName, videoTime, id);
-      }
-      else {
-        $(".searchResult").remove();
-        searchResultsIteration = 0;
-        searchResultsNameStorage = [];
-        addSearchResult(videoName, id);
-        quickSearch("");
-        //as long as not open already (trying to search twice will close on second)
-        if ($("#searchResultsWindow").css("display") !== "block") {
-          toggleMenu("searchResults");
-        }
-      }
-      $("#searchProgress").css("display", "none");
-    });
-    **/
   }
 }
 
