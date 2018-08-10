@@ -132,6 +132,7 @@ function backVideo() {
 // * It also plays the video if it is the first video loaded
 
 function addVideo(name, time, id) {
+  console.log("debugAddVideo: " + name + "," + time + "," + id);
   videoCounter++;
   var iteration;
   if (playlistPlayNext) {
