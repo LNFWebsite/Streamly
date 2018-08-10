@@ -38,6 +38,7 @@ function getVideoData(id) {
   var videoTime = 0;
 
   getVideoName(id, function(name) {
+    console.log("getVideoData probe: " + autoplayVideoIteration);
     var videoName = name;
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
 
