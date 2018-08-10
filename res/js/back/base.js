@@ -35,7 +35,10 @@ function playVideo() {
   videoPlaying = true;
   highlight(videoIteration, "selected", false);
   videoPreviews();
-  addAutoplayVideo();
+  //only load next radio video if not loading playlist (interferes)
+  if (!autoplayList) {
+    addAutoplayVideo();
+  }
 
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
 
@@ -160,7 +163,7 @@ function addVideo(name, time, id) {
   var printTime = msConversion(time * 1000);
 
   addVideoToList(name, printTime, iteration, true);
-
+  
   setPlaylist();
   makeSortable();
   videoPreviews();
