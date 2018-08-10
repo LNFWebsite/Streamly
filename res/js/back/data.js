@@ -25,6 +25,7 @@ function getVideoName(id, callback) {
     url: "https://noembed.com/embed",
     data: get,
     success: function(result) {
+      console.log("getVideoName:debug: " + result.title);
       callback(result.title);
     }
   });
