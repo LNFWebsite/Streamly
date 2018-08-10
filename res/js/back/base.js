@@ -36,7 +36,7 @@ function playVideo() {
   highlight(videoIteration, "selected", false);
   videoPreviews();
   //only load next radio video if not loading playlist (interferes)
-  if (!autoplayList) {
+  if (!autoplayList || autoplayListOverride) {
     addAutoplayVideo();
   }
 
