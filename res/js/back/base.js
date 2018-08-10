@@ -32,11 +32,13 @@ function changeIteration(which) {
 // * This function loads videos from the playlist into the YouTube iFrame
 
 function playVideo() {
-  console.log("hereprobe");
   videoPlaying = true;
   highlight(videoIteration, "selected", false);
   videoPreviews();
-  addAutoplayVideo();
+  //only load next radio video if not loading playlist (interferes)
+  if (!autoplayList) {
+    addAutoplayVideo();
+  }
 
   document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
 
