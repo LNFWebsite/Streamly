@@ -106,7 +106,36 @@ function onSearchDataPlayerStateChange(event) {
         id = id[1];
       }
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    if (inBoxSearch) {
+      $(".searchResult").remove();
+      searchResultsIteration = 0;
+      searchResultsNameStorage = [];
+      //as long as not open already (trying to search twice will close on second)
+      if ($("#searchResultsWindow").css("display") !== "block") {
+        toggleMenu("searchResults");
+      }
+    }
+    
+    getVideoData(id);
+    $("#searchProgress").css("display", "none");
+    
+    
+    
+    
+    
+    
+    
+    
+    
+/**
     getVideoName(id, function(name) {
       videoName = name;
       videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
@@ -128,6 +157,7 @@ function onSearchDataPlayerStateChange(event) {
       }
       $("#searchProgress").css("display", "none");
     });
+    **/
   }
 }
 
