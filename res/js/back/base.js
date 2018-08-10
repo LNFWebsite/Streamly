@@ -164,6 +164,7 @@ function addVideo(name, time, id) {
   //if playlist, loop addAutoplayVideo for YouTube playlist import
   //autoplayListOverride is for utilizing YouTube Mix stations without loading all videos
   if (autoplayList && !autoplayListOverride) {
+    console.log(autoplayVideoIteration);
     addAutoplayVideo();
   }
   
