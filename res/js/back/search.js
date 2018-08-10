@@ -113,7 +113,7 @@ function onSearchDataPlayerStateChange(event) {
     
     
     
-    
+    searchDataPlayer.destroy();
     if (inBoxSearch) {
       $(".searchResult").remove();
       searchResultsIteration = 0;
