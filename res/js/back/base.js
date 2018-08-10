@@ -32,6 +32,7 @@ function changeIteration(which) {
 // * This function loads videos from the playlist into the YouTube iFrame
 
 function playVideo() {
+  console.log("hereprobe");
   videoPlaying = true;
   highlight(videoIteration, "selected", false);
   videoPreviews();
