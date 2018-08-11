@@ -139,4 +139,8 @@ document.addEventListener("drop", function(event) {
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
   $("#dropShadow, #dropOverlay").css("display", "initial");
+  //auto-remove drop shadow after 5 seconds, if user dragged over and decided against dropping
+  setTimeout(function() {
+    $("#dropShadow, #dropOverlay").css("display", "none");
+  }, 5000);
 });
