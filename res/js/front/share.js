@@ -44,9 +44,11 @@ function shareOnRedditAd() {
 }
 
 function shareOnReddit() {
-  var playlistName = $("#playlistNameBox").val();
-  if (playlistName === "") {
-    playlistName = $("#playlistNameBox").attr("placeholder");
+  if (videos[0]) {
+    var playlistName = videos[0];
+  }
+  else {
+    var playlistName = $("#playlistNameBox").attr("placeholder");
   }
   if (window.location.hash.substr(1).length <= 10000) {
     window.open("https://www.reddit.com/r/StreamlyReddit/submit?resubmit=true&title=Playlist%20-%20" + playlistName + "&url=https://lnfwebsite.github.io/Streamly/%23" + window.location.hash.substr(1), "_blank");
