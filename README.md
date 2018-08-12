@@ -1,10 +1,10 @@
-![Streamly Logo](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/res/img/logo/logo_streamly_color/logo_streamly_color_low_res.png?raw=1)
+![Streamly Logo](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/res/img/logo/logo_streamly_color/logo_streamly_color_low_res.png)
 
 Open-source, web-based, YouTube video queues.
 
 Streamly on Desktop        | Streamly on Android
 :-------------------------:|:-------------------------:
-![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/07242018/streamly.jpg?raw=1)  |  ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/07242018/streamlymobile.jpg?raw=1)
+![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/07242018/streamly.jpg)  |  ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/07242018/streamlymobile.jpg)
 
 ## What is Streamly?
 
