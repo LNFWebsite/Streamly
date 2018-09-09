@@ -175,7 +175,8 @@ body,
   /** Return To Space 2018! https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Veil_Nebula_-_NGC6960.jpg/1280px-Veil_Nebula_-_NGC6960.jpg **/
   /** Winter-like Spring 2018 https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Willow_Flats_area_and_Teton_Range_in_Grand_Teton_National_Park.jpg/1280px-Willow_Flats_area_and_Teton_Range_in_Grand_Teton_National_Park.jpg **/
   /** Spring 2018 https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Crocus%28loz%29.JPG/1024px-Crocus%28loz%29.JPG **/
-  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Port_and_lighthouse_overnight_storm_with_lightning_in_Port-la-Nouvelle.jpg/1280px-Port_and_lighthouse_overnight_storm_with_lightning_in_Port-la-Nouvelle.jpg") no-repeat center center fixed;
+  /** Lightning 2018 https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Port_and_lighthouse_overnight_storm_with_lightning_in_Port-la-Nouvelle.jpg/1280px-Port_and_lighthouse_overnight_storm_with_lightning_in_Port-la-Nouvelle.jpg **/
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Storm.jpg/1280px-Storm.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 #blurBackground {
