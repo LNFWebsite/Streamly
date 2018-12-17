@@ -16,7 +16,7 @@
 function addSearchResult(name, id) {
   searchResultsNameStorage.push(name);
   name = decodeURIComponent(name);
-  $("#searchResultsWindow").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
+  $("#searchResults").append("<div class=\"searchResult\" onclick=\"loadSearchResult(this);\"><div class=\"left\"><p>" + name + "</p></div><div class=\"right\"><img src=\"https://i.ytimg.com/vi/" + id + "/default.jpg\" /></div></div>");
 }
 
 function loadSearchResult(element) {
@@ -40,7 +40,7 @@ function loadSearchResult(element) {
 function quickSearch(query) {
   //console.log("debug: quickSearch(\"" + query + "\")");
 
-  if (!inBoxSearch) {
+  if (!inBoxSearch && quickSearchVideosIteration + 1 < quickSearchVideos.length) {
     $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
   }
   if (query !== "") {
@@ -59,9 +59,7 @@ function quickSearch(query) {
     });
     searchDataFrame.setAttribute("src", "https://www.youtube.com/embed/?enablejsapi=1");
   }
-  else if (quickSearchVideos[quickSearchVideosIteration] !== undefined &&
-           quickSearchVideos[quickSearchVideosIteration] !== null &&
-           quickSearchVideosIteration + 1 < quickSearchVideos.length) {
+  else if (quickSearchVideosIteration + 1 < quickSearchVideos.length) {
     quickSearchVideosIteration++;
     getVideoData(quickSearchVideos[quickSearchVideosIteration]);
   }
