@@ -55,8 +55,8 @@ function getVideoData(id) {
         }
       }
       else {
-        searchResultsIteration++;
-        getVideoData(quickSearchVideos[searchResultsIteration]);
+        quickSearchVideosIteration++;
+        getVideoData(quickSearchVideos[quickSearchVideosIteration]);
       }
     }
     else {
