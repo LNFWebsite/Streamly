@@ -72,9 +72,9 @@ function getVideoData(id) {
         quickSearchVideosIteration--;
       }
       
-      //if (searchResultsIteration < quickSearchVideos.length - 1) {
+      if (searchResultsIteration < quickSearchVideos.length - 1) {
         quickSearch("");
-      //}
+      }
       else {
         inBoxSearch = false;
       }
