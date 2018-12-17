@@ -60,8 +60,15 @@ function getVideoData(id) {
       }
     }
     else {
-      addSearchResult(videoName, id);
-      searchResultsIteration++;
+      //skip and remove 'undefined' videos from quickSearchVideos
+      if (videoName !== "undefined") {
+        addSearchResult(videoName, id);
+        searchResultsIteration++;
+      }
+      else {
+        quickSearchVideos.splice(searchResultsIteration, 1);
+      }
+      
       if (searchResultsIteration < quickSearchVideos.length - 1) {
         quickSearch("");
       }
