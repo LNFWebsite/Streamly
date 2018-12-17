@@ -60,15 +60,13 @@ function getVideoData(id) {
       }
     }
     else {
-      //skip and remove 'undefined' videos from quickSearchVideos
+      //skip and remove 'undefined' videos from quickSearchVideos on inBoxSearch
       if (videoName !== "undefined") {
         addSearchResult(videoName, id);
         searchResultsIteration++;
       }
       else {
-        console.log("deleting " + quickSearchVideosIteration);
         quickSearchVideos.splice(quickSearchVideosIteration, 1);
-        //searchResultsIteration--;
         quickSearchVideosIteration--;
       }
       
