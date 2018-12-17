@@ -40,7 +40,7 @@ function loadSearchResult(element) {
 function quickSearch(query) {
   //console.log("debug: quickSearch(\"" + query + "\")");
 
-  if (!inBoxSearch) {
+  if (!inBoxSearch && quickSearchVideosIteration + 1 < quickSearchVideos.length) {
     $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
   }
   if (query !== "") {
