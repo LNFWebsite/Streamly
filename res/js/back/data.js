@@ -52,7 +52,7 @@ function getVideoData(id) {
         addAutoplayVideo();
       }
     }
-    else {
+    else if (videoName !== "undefined") {
       addSearchResult(videoName, id);
       searchResultsIteration++;
       if (searchResultsIteration < quickSearchVideos.length - 1) {
