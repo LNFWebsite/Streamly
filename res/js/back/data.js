@@ -42,14 +42,21 @@ function getVideoData(id) {
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
 
     if (!inBoxSearch) {
-      $("#inputBox").val("").attr("placeholder", placeholder);
-      addVideo(videoName, videoTime, videoId);
-      
-      //if playlist, loop addAutoplayVideo for YouTube playlist import
-      //autoplayListOverride is for utilizing YouTube Mix stations without loading all videos
-      if (autoplayList && !autoplayListOverride) {
-        console.log(autoplayVideoIteration);
-        addAutoplayVideo();
+      //skip videos with 'undefined' title
+      if (videoName !== "undefined") {
+        $("#inputBox").val("").attr("placeholder", placeholder);
+        addVideo(videoName, videoTime, videoId);
+        
+        //if playlist, loop addAutoplayVideo for YouTube playlist import
+        //autoplayListOverride is for utilizing YouTube Mix stations without loading all videos
+        if (autoplayList && !autoplayListOverride) {
+          console.log(autoplayVideoIteration);
+          addAutoplayVideo();
+        }
+      }
+      else {
+        searchResultsIteration++;
+        getVideoData(quickSearchVideos[searchResultsIteration]);
       }
     }
     else {
