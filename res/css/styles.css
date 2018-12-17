@@ -220,7 +220,7 @@ footer {
   position: fixed;
   background: grey;
   height: 400px;
-  z-index: 3;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
