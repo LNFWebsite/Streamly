@@ -59,9 +59,7 @@ function quickSearch(query) {
     });
     searchDataFrame.setAttribute("src", "https://www.youtube.com/embed/?enablejsapi=1");
   }
-  else if (quickSearchVideos[quickSearchVideosIteration] !== undefined &&
-           quickSearchVideos[quickSearchVideosIteration] !== null &&
-           quickSearchVideosIteration + 1 < quickSearchVideos.length) {
+  else if (quickSearchVideosIteration + 1 < quickSearchVideos.length) {
     quickSearchVideosIteration++;
     getVideoData(quickSearchVideos[quickSearchVideosIteration]);
   }
