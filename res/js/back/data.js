@@ -67,8 +67,8 @@ function getVideoData(id) {
       }
       else {
         console.log("deleting " + searchResultsIteration);
-        quickSearchVideos.splice(searchResultsIteration, 1);
-        searchResultsIteration--;
+        quickSearchVideos.splice(quickSearchVideosIteration, 1);
+        //searchResultsIteration--;
         quickSearchVideosIteration--;
       }
       
