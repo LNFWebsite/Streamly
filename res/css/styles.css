@@ -200,7 +200,7 @@ footer {
   width: 100%;
   display: none;
 }
-.floatingMenuHeader {
+.floatingMenu h2 {
   margin: 0;
   height: 40px;
 }
@@ -231,7 +231,7 @@ footer {
   color: #ccc;
   display: none;
 }
-.floatingMenuContent {
+.floatingMenuContents {
   overflow-y: auto;
   height: calc(100% - 40px);
 }
