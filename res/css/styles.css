@@ -200,8 +200,12 @@ footer {
   width: 100%;
   display: none;
 }
+.floatingMenuHeader {
+  margin: 0;
+  height: 40px;
+}
 .floatingMenuCloseButton {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   cursor: pointer;
@@ -225,8 +229,11 @@ footer {
   text-align: left;
   padding: 10px;
   color: #ccc;
-  overflow-y: auto;
   display: none;
+}
+.floatingMenuContent {
+  overflow-y: auto;
+  height: calc(100% - 40px);
 }
 #dropShadow {
   position: fixed;
@@ -535,9 +542,6 @@ tr.placeholder:before {
 }
 
 /** In-box Search Results **/
-#searchResultsWindow h2 {
-  margin-top: 0;
-}
 .searchResult {
   display: flex;
   padding: 5px;
