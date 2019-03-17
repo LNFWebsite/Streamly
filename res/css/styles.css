@@ -639,6 +639,7 @@ tr.placeholder:before {
     z-index: 1;
     top: 30%;
     transform: translateY(-30%);
+    background: none;
   }
   #previousVideo {
     left: 0 !important;
@@ -646,11 +647,11 @@ tr.placeholder:before {
   #nextVideo {
     right: 0 !important;
   }
-  .videoNameContainer {
+  .videoNameContainer, .videoImage {
     display: none;
   }
   .videoImageContainer {
-    width: 100%;
+    background: none;
   }
   .fa-backward, .fa-forward, .fa-cog, #settings * {
     -webkit-touch-callout: none;
