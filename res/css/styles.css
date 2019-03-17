@@ -281,6 +281,9 @@ table {
   font-size: 1.2em;
   margin: 10px auto;
 }
+#links a {
+  color: black;
+}
 #playlistNameBox {
   border: none;
   font-size: 2em;
