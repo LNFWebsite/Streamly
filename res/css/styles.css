@@ -424,6 +424,7 @@ td {
   display: flex;
   position: relative;
   justify-content: center;
+  overflow: hidden;
 }
 .videoImage {
   height: 100%;
