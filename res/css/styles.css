@@ -651,6 +651,7 @@ tr.placeholder:before {
     display: none;
   }
   .videoImageContainer {
+    width: 100%;
     background: none;
   }
   .fa-backward, .fa-forward, .fa-cog, #settings * {
