@@ -635,6 +635,9 @@ tr.placeholder:before {
   body {
     margin: 0;
   }
+  #previousVideo, #nextVideo, .videoImageContainer {
+    background: none !important;
+  }
   #previousVideo, #nextVideo {
     z-index: 1;
     top: 30%;
@@ -646,11 +649,12 @@ tr.placeholder:before {
   #nextVideo {
     right: 0 !important;
   }
-  .videoNameContainer {
+  .videoNameContainer, .videoImage, .videoTime {
     display: none;
   }
   .videoImageContainer {
     width: 100%;
+    background: none;
   }
   .fa-backward, .fa-forward, .fa-cog, #settings * {
     -webkit-touch-callout: none;

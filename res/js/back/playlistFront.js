@@ -169,6 +169,10 @@ function videoPreviews() {
   }
   function greyOut(which, color) {
     $("#" + which + "Video").css("background-color", color);
+    if (color === "white") {
+      color = "black";
+    }
+    $("#" + which + "Video .videoImageContainer").css("background-color", color);
   }
 
   if (changeIteration(1) <= videoCounter) {
