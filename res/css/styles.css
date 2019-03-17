@@ -639,7 +639,7 @@ tr.placeholder:before {
     z-index: 1;
     top: 30%;
     transform: translateY(-30%);
-    background: none;
+    background: none !important;
   }
   #previousVideo {
     left: 0 !important;
@@ -647,7 +647,7 @@ tr.placeholder:before {
   #nextVideo {
     right: 0 !important;
   }
-  .videoNameContainer, .videoImage {
+  .videoNameContainer, .videoImage, .videoTime {
     display: none;
   }
   .videoImageContainer {
