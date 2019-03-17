@@ -635,11 +635,13 @@ tr.placeholder:before {
   body {
     margin: 0;
   }
+  #previousVideo, #nextVideo, .videoImageContainer {
+    background: none !important;
+  }
   #previousVideo, #nextVideo {
     z-index: 1;
     top: 30%;
     transform: translateY(-30%);
-    background: none !important;
   }
   #previousVideo {
     left: 0 !important;
