@@ -140,7 +140,8 @@ td,
 #previousVideo *,
 #nextVideo,
 #nextVideo *,
-#settings {
+#settings,
+.floatingMenu {
   border-radius: 5px
 }
 
