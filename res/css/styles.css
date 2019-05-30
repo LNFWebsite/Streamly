@@ -558,8 +558,6 @@ tr.placeholder:before {
   padding: 5px;
   cursor: pointer;
   height: 25%;
-  border: 1px solid;
-  border-radius: 5px;
 }
 .searchResult:hover {
   background-color: #4B4B4B;
