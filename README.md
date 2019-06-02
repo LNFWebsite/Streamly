@@ -73,6 +73,8 @@ And, you don't have to worry about losing anything because Streamly requires not
 
 If you'd like to know why Streamly was made, head over to the [About](https://github.com/LNFWebsite/Streamly/wiki/About) page in the wiki!
 
+[Dev-testing quick access link](https://cdn.jsdelivr.net/gh/LNFWebsite/Streamly/index.html)
+
 ## License
 
 ```
