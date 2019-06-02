@@ -34,8 +34,16 @@ function addVideoToList(name, time, spot, smooth) {
     smooth = "";
   }
 
-  let trElement = "<tr" + smooth + "><td class=\"tableLeft\">" + name + "<div class=\"tableButtonDiv\"><button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
-  "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></div></td><td>" + time + "</td></tr>";
+  //let trElement = "<tr" + smooth + "><td class=\"tableLeft\">" + name + "<div class=\"tableButtonDiv\"><button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  //"<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></div></td><td>" + time + "</td></tr>";
+
+  let trElement = "<tr" + smooth + "><td class=\"tableLeft\">" + name +
+  "<div class=\"tableButtons\">" +
+  "<span class=\"fa fa-rss autoplayButton\" onclick=\"playlistButtons.autoplay(this);\" title=\"Start Radio\"></span>" +
+  "<span class=\"fa fa-play playButton\" onclick=\"playlistButtons.play(this);\" title=\"Play\"></span>" +
+  "<span class=\"fa fa-times removeButton\" onclick=\"playlistButtons.remove(this);\" title=\"Remove\"></span>" +
+  "</div></td><td>" + time + "</td></tr>";
+  
   if ($("#videosTable > tr").length > 0) {
     if (spot > 1) {
       $("#videosTable > tr").eq(spot-2).after(trElement);
@@ -91,14 +99,27 @@ function refreshVideoList() {
 
 // * These functions are called when the play/remove video buttons in the playlist viewer are clicked
 
-function buttonPlayVideo(element) {
-  let index = $(".playButton").index(element);
-  actionPlayVideo(index);
+let PlaylistButtons = function() {
+  this.play = function(element) {
+    let index = $(".playButton").index(element);
+    actionPlayVideo(index);
+  }
+  this.remove = function(element) {
+    let index = $(".removeButton").index(element) + 1;
+    actionRemoveVideo(index);
+  }
+  this.autoplay = function(element) {
+    let index = $(".autoplayButton").index(element) + 1;
+    console.log("here: " + index);
+    if (playlistAutoplay) {
+      autoplayOff();
+    }
+    playlistAutoplay = true;
+    addAutoplayVideo(index);
+    playlistFeatures.toggleSelected(playlistAutoplay, ".fa-rss");
+  }
 }
-function buttonRemoveVideo(element) {
-  let index = $(".removeButton").index(element) + 1;
-  actionRemoveVideo(index);
-}
+let playlistButtons = new PlaylistButtons;
 
 // * This function makes the entire playlist viewer sortable by dragging&dropping
 // * It calls the actionMoveVideo function above
@@ -149,15 +170,10 @@ let PlaylistFeatures = function() {
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (playlistAutoplay === false) {
-      autoplayVideos = [];
-      autoplayVideoIteration = 0;
-      baseAutoplayVideoId = false;
-      autoplayList = false;
-      $("tr").removeClass("radio");
+      autoplayOff();
     }
     else {
       addAutoplayVideo();
-      videoPreviews();
     }
     self.toggleSelected(playlistAutoplay, ".fa-rss");
   }

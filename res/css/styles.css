@@ -312,7 +312,7 @@ td {
   cursor: move;
 }
 .tableLeft {
-  padding-right: 70px;
+  padding-right: 100px;
 }
 .selected td {
   background: rgba(255, 131, 0, 0.4) !important
@@ -466,6 +466,10 @@ td {
   right: calc(30% - 162px);
   border: 1px solid white;
   cursor: default;
+  color: grey;
+}
+#settings .selected {
+  color: #f77f00;
 }
 #progress {
   background-color: #f77f00;
@@ -474,27 +478,41 @@ td {
   height: 100%;
 }
 #progress,
-.tableButton {
+.tableButtons * {
   -moz-transition: .2s;
   -ms-transition: .2s;
   -o-transition: .2s;
   -webkit-transition: .2s;
   transition: .2s;
 }
-.tableButtonDiv {
+.tableButtons {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  width: 100px;
+  text-align: right;
 }
-.tableButton:hover {
-  opacity: 1
-}
-.tableButton {
-  background: 0 0;
-  border: none;
-  float: right;
+.tableButtons * {
   opacity: .1;
+  cursor: pointer;
+}
+.tableButtons *:not(:last-child) {
+  margin-right: 10px;
+}
+.tableButtons *:last-child {
+  margin-right: 5px;
+}
+.tableButtons *:hover {
+  opacity: 1;
+}
+.tableButtons .fa-play, .tableButtons .fa-rss {
+  font-size: 1.1em;
+  position: relative;
+  top: -3px;
+}
+.tableButtons .fa-times {
+  font-size: 1.5em;
 }
 #settings * {
   font-size: 1.5em;
@@ -504,21 +522,8 @@ td {
 .fa-cog {
   font-size: 2em;
 }
-.fa-arrow-circle-right, .fa-random, .fa-redo-alt, .fa-rss {
-  color: grey;
-}
-#settings .selected {
-  color: #f77f00;
-}
 .fa-reddit {
   color: lightblue;
-}
-.fa-play {
-  font-size: 1.5em;
-  margin-top: 3px;
-}
-.fa-times {
-  font-size: 2em;
 }
 .fa-backward, .fa-forward {
   position: absolute;

@@ -85,10 +85,10 @@ function onRadioDataPlayerStateChange(event) {
 
 // * This function loads the latest Streamly Radio video into the playlist
 
-function addAutoplayVideo() {
+function addAutoplayVideo(base = videoIteration) {
   if (playlistAutoplay && (videos.length > 0 || autoplayList)) {
     if (!autoplayVideos.length > 0) {
-      loadAutoplayData(videoIteration);
+      loadAutoplayData(base);
     }
     else if (videoIteration === videoCounter || (autoplayList && !autoplayListOverride)) {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
@@ -97,7 +97,7 @@ function addAutoplayVideo() {
         getVideoData(autoplayVideos[autoplayVideoIteration]);
       }
       else if (!autoplayList && !autoplayListOverride) {
-        loadAutoplayData(videoIteration);
+        loadAutoplayData(base);
       }
       else {
         //kill Streamly Radio after the playlist is loaded
@@ -105,6 +105,16 @@ function addAutoplayVideo() {
       }
     }
   }
+}
+
+// * This function turns off and resets Streamly Radio
+
+function autoplayOff() {
+  autoplayVideos = [];
+  autoplayVideoIteration = 0;
+  baseAutoplayVideoId = false;
+  autoplayList = false;
+  $("tr").removeClass("radio");
 }
 
 // End Streamly Radio
