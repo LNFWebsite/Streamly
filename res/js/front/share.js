@@ -11,7 +11,7 @@
   limitations under the License.
 **/
 
-new Clipboard("#saveButton");
+new ClipboardJS("#saveButton");
 function saveButton() {
   $("#saveButton").text("Playlist copied!");
   setTimeout(function() {
