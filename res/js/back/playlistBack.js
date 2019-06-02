@@ -14,8 +14,9 @@
 // * This function sets the playlist in the hash parameter of the URL
 
 function setPlaylist() {
+  let playlist;
   if (videos.length > 1) {
-    var playlist = JSON.stringify(videos);
+    playlist = JSON.stringify(videos);
     playlist = window.btoa(playlist);
     window.location.hash = playlist;
   }
@@ -30,7 +31,7 @@ function setPlaylist() {
 
 function getPlaylist() {
   if (window.location.hash.substr(1) !== "") {
-    var playlist = window.location.hash.substr(1);
+    let playlist = window.location.hash.substr(1);
     $("#saveButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
     try {
       playlist = window.atob(playlist);
@@ -38,14 +39,14 @@ function getPlaylist() {
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
-        var playlistTitle = decodeURIComponent(videos[0]);
+        let playlistTitle = decodeURIComponent(videos[0]);
         $("#playlistNameBox").val(playlistTitle);
         $("#ogTitle").attr("content", "Streamly - " + playlistTitle);
       }
 
-      for (var i = 1; i < videos.length; i++) {
+      for (let i = 1; i < videos.length; i++) {
         videoCounter = i;
-        var printTime = msConversion(videos[videoCounter][1] * 1000);
+        let printTime = msConversion(videos[videoCounter][1] * 1000);
         addVideoToList(videos[videoCounter][0], printTime, videoCounter, true);
       }
       // -- Need to update the playlist with non-encoded stuff 10/04/2016
@@ -75,9 +76,9 @@ function appendPlaylist(playlist) {
       }
     }
 
-    for (var i = 1; i < playlist.length; i++) {
+    for (let i = 1; i < playlist.length; i++) {
       videoCounter++;
-      var printTime = msConversion(playlist[i][1] * 1000);
+      let printTime = msConversion(playlist[i][1] * 1000);
       addVideoToList(playlist[i][0], printTime, videoCounter, true);
     }
     
@@ -94,7 +95,7 @@ function appendPlaylist(playlist) {
     
     //if playlist hasn't been initialized, highlight & cue up the first video
     if (videoIteration === 0) {
-      for (var i = 1; i < videos.length; i++) {
+      for (let i = 1; i < videos.length; i++) {
         restoreHighlight(i);
       }
       videoPaused = true;
@@ -111,9 +112,9 @@ function appendPlaylist(playlist) {
 // * This function shuffles the videos array for playlist shuffling
 
 function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = array[i];
     array[i] = array[j];
     array[j] = temp;
   }
@@ -124,9 +125,9 @@ function shuffleArray(array) {
 // * It's primary use is adding videos that were added during shuffle to the original playlist when un-shuffling
 
 function shufflePlaylist() {
-  var playlistName = videos[0];
-  var videoIterationId = videos[videoIteration][2];
-  var videosBeforeThisShuffle = [];
+  let playlistName = videos[0];
+  let videoIterationId = videos[videoIteration][2];
+  let videosBeforeThisShuffle = [];
   if (playlistShuffle) {
     if (videosBeforeShuffle.length < 1) {
       videosBeforeShuffle = JSON.parse(JSON.stringify(videos));

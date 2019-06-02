@@ -26,7 +26,7 @@ function loadAutoplayData(iteration) {
     highlight(iteration, "radio", false);
     baseAutoplayVideoId = videos[iteration][2];
   }
-  var dataFrame = document.createElement("iframe");
+  let dataFrame = document.createElement("iframe");
   dataFrame.setAttribute("id", "radioDataFrame");
   dataFrame.setAttribute("src", "");
   document.getElementById("dataFramesContainer").appendChild(dataFrame);
@@ -42,11 +42,12 @@ function loadAutoplayData(iteration) {
 // * This function cues the playlist for use in the next function
 
 function onRadioDataPlayerReady() {
+  let autoplayUrl;
   if (autoplayList) {
-    var autoplayUrl = autoplayList[1];
+    autoplayUrl = autoplayList[1];
   }
   else {
-    var autoplayUrl = "RD" + baseAutoplayVideoId;
+    autoplayUrl = "RD" + baseAutoplayVideoId;
   }
   radioDataPlayer.cuePlaylist({list:autoplayUrl});
 }
@@ -56,14 +57,14 @@ function onRadioDataPlayerReady() {
 
 function onRadioDataPlayerStateChange(event) {
   if (event.data === 5) {
-    var autoplayVideosSpare = [];
+    let autoplayVideosSpare = [];
     autoplayVideos = radioDataPlayer.getPlaylist();
     
     if (!autoplayList || autoplayListOverride) {
-      for (var i = 0; i < autoplayVideos.length; i++) {
-        var notInPlaylist = true;
-        var autoplayVideo = autoplayVideos[i];
-        for (var x = 1; x < videos.length; x++) {
+      for (let i = 0; i < autoplayVideos.length; i++) {
+        let notInPlaylist = true;
+        let autoplayVideo = autoplayVideos[i];
+        for (let x = 1; x < videos.length; x++) {
           if (videos[x][2] === autoplayVideo) {
             notInPlaylist = false;
           }

@@ -74,7 +74,7 @@ window.addEventListener("keydown", function(e) {
       case "Backslash":
         e.preventDefault();
         if (e.key !== "|") {
-          var query = $("#inputBox").val();
+          let query = $("#inputBox").val();
           query = query.replace("\\", "");
           if (query.slice(-2) === " l") {
             query = query + "yric";
@@ -129,7 +129,7 @@ $("#youtubeContainer").click(function() {
 
 document.addEventListener("drop", function(event) {
   event.preventDefault();
-  var data = event.dataTransfer.getData("URL");
+  let data = event.dataTransfer.getData("URL");
 
   $("#inputBox").val(data);
   input(1);
@@ -137,7 +137,7 @@ document.addEventListener("drop", function(event) {
   $("#dropShadow, #dropOverlay").css("display", "none");
 });
 
-var dropOverlayAutoRemove;
+let dropOverlayAutoRemove;
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
   $("#dropShadow, #dropOverlay").css("display", "initial");

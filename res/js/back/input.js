@@ -15,14 +15,14 @@
 // * It then specifies how to interpret this URL in the function below
 
 function urlValidate(url) {
-  var output = false;
+  let output = false;
   
-  var youtubeRegex = /(?:v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)/i;
-  var youtubeListRegex = /list=([^?&]+)/i;
-  var streamlyRegex = /.*#(.+)/i;
+  let youtubeRegex = /(?:v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)/i;
+  let youtubeListRegex = /list=([^?&]+)/i;
+  let streamlyRegex = /.*#(.+)/i;
   
-  var youtubeMatch = url.match(youtubeRegex);
-  var youtubeListMatch = url.match(youtubeListRegex);
+  let youtubeMatch = url.match(youtubeRegex);
+  let youtubeListMatch = url.match(youtubeListRegex);
   if (youtubeMatch && youtubeListMatch) {
     output = [youtubeMatch[1], youtubeListMatch[1]];
     output = ["playlist", output];
@@ -32,7 +32,7 @@ function urlValidate(url) {
     output = ["youtube", output];
   }
   
-  var streamlyMatch = url.match(streamlyRegex);
+  let streamlyMatch = url.match(streamlyRegex);
   if (streamlyMatch && streamlyMatch[1]) {
     output = streamlyMatch[1];
     output = ["streamly", output];
@@ -49,10 +49,10 @@ function urlValidate(url) {
 // * If a YouTube video URL load video to playlist, if a Streamly playlist append it to the current one, if none of the above load search
 
 function input(type) {
-  var inputBox = $("#inputBox").val();
+  let inputBox = $("#inputBox").val();
   //if playlist input
   if (type === 2) {
-    var playlistNameBox = $("#playlistNameBox").val();
+    let playlistNameBox = $("#playlistNameBox").val();
     sendStation("playlistnamechange," + playlistNameBox);
     if (playlistNameBox !== "") {
       videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
@@ -64,11 +64,11 @@ function input(type) {
   }
   else {
     if (inputBox !== "") {
-      var isUrl = urlValidate(inputBox);
-      var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
+      let isUrl = urlValidate(inputBox);
+      let option = inputBox.match(/^-option (.+?)( .+?)?$/i);
 
-      //var ua = navigator.userAgent.toLowerCase();
-      //var isAndroid = ua.indexOf("android") > -1;
+      //let ua = navigator.userAgent.toLowerCase();
+      //let isAndroid = ua.indexOf("android") > -1;
 
       if (option) {
         switch (option[1]) {
@@ -144,7 +144,7 @@ function input(type) {
               clearInterval(checkIfClosedTimer);
             }
         }
-        var checkIfClosedTimer = setInterval(checkIfClosed, 500);
+        let checkIfClosedTimer = setInterval(checkIfClosed, 500);
         ***/
         inBoxSearch = true;
         quickSearch(inputBox);

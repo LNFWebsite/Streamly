@@ -15,8 +15,8 @@
 // * Updated video data capture method because of deprecation of player.getVideoData() in API (11/15/2017)
 
 function getVideoName(id, callback) {
-  var url = "https://www.youtube.com/watch?v=" + id;
-  var get = {
+  let url = "https://www.youtube.com/watch?v=" + id;
+  let get = {
     url: url
   };
 
@@ -34,11 +34,11 @@ function getVideoName(id, callback) {
 // * It used to handle data gathering on it's own, but stands as a wrapper to the async ajax above
 
 function getVideoData(id) {
-  var videoId = id;
-  var videoTime = 0;
+  let videoId = id;
+  let videoTime = 0;
 
   getVideoName(id, function(name) {
-    var videoName = name;
+    let videoName = name;
     videoName = encodeURIComponent(videoName).replace(/%20/g, " ");
 
     if (!inBoxSearch) {
@@ -85,10 +85,10 @@ function getVideoData(id) {
 
 function setVideoTime() {
   if (videos[videoIteration][1] === 0) {
-    var name = videos[videoIteration][0];
-    var time = player.getDuration();
+    let name = videos[videoIteration][0];
+    let time = player.getDuration();
     time = Math.round(time);
-    var printTime = msConversion(time * 1000);
+    let printTime = msConversion(time * 1000);
 
     videos[videoIteration][1] = time;
     removeVideoFromList(videoIteration, false);

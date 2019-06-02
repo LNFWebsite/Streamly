@@ -34,7 +34,7 @@ function addVideoToList(name, time, spot, smooth) {
     smooth = "";
   }
 
-  var trElement = "<tr" + smooth + "><td class=\"tableLeft\">" + name + "<div class=\"tableButtonDiv\"><button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
+  let trElement = "<tr" + smooth + "><td class=\"tableLeft\">" + name + "<div class=\"tableButtonDiv\"><button class=\"tableButton removeButton\" onclick=\"buttonRemoveVideo(this);\" title=\"Remove\"><span class=\"fa fa-times\"></span></button>" +
   "<button class=\"tableButton playButton\" onclick=\"buttonPlayVideo(this);\" title=\"Play\"><span class=\"fa fa-play\"></span></button></div></td><td>" + time + "</td></tr>";
   if ($("#videosTable > tr").length > 0) {
     if (spot > 1) {
@@ -81,9 +81,9 @@ function restoreHighlight(which) {
 // * It's primary use is for playlist shuffling
 
 function refreshVideoList() {
-  for (var i = 1; i < videos.length; i++) {
+  for (let i = 1; i < videos.length; i++) {
     removeVideoFromList(i, false);
-    var printTime = msConversion(videos[i][1] * 1000);
+    let printTime = msConversion(videos[i][1] * 1000);
     addVideoToList(videos[i][0], printTime, i, false);
     restoreHighlight(i);
   }
@@ -92,11 +92,11 @@ function refreshVideoList() {
 // * These functions are called when the play/remove video buttons in the playlist viewer are clicked
 
 function buttonPlayVideo(element) {
-  var index = $(".playButton").index(element);
+  let index = $(".playButton").index(element);
   actionPlayVideo(index);
 }
 function buttonRemoveVideo(element) {
-  var index = $(".removeButton").index(element) + 1;
+  let index = $(".removeButton").index(element) + 1;
   actionRemoveVideo(index);
 }
 
@@ -119,7 +119,7 @@ function makeSortable() {
 // * This object is for the settings available in the playlist manipulation footer
 // * Those buttons call their corresponding functionality here
 
-var PlaylistFeatures = function() {
+let PlaylistFeatures = function() {
   this.playNext = function() {
     sendStation("playlistfeaturesplaynext");
     playlistPlayNext = (playlistPlayNext ? false : true);
@@ -153,7 +153,7 @@ var PlaylistFeatures = function() {
     $(".fa-rss").css("color", (playlistAutoplay ? "#F77F00" : "grey"));
   }
 }
-var playlistFeatures = new PlaylistFeatures;
+let playlistFeatures = new PlaylistFeatures;
 
 // * This function loads the previous and next video button's data in the playlist manipulation footer
 // * It is called whenever anything changes in the playlist or the currently playing video changes
@@ -172,7 +172,10 @@ function videoPreviews() {
     if (color === "white") {
       color = "black";
     }
-    $("#" + which + "Video .videoImageContainer").css("background-color", color);
+    else {
+      color = "inherit";
+    }
+    $("#" + which + "Video .videoImageContainer").css("background", color);
   }
 
   if (changeIteration(1) <= videoCounter) {

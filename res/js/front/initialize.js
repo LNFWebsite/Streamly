@@ -24,7 +24,7 @@ window.onload = function() {
   $("#inputBox").autocomplete({
     delay: 100,
     source: function (request, response) {
-      var suggestURL = "//suggestqueries.google.com/complete/search?hl=en&ds=yt&q=" + request.term + "&client=chrome";
+      let suggestURL = "//suggestqueries.google.com/complete/search?hl=en&ds=yt&q=" + request.term + "&client=chrome";
       $.ajax({
         method: 'GET',
         dataType: 'jsonp',
@@ -36,7 +36,7 @@ window.onload = function() {
         if (suggestions.length > 10) {
           suggestions.length = 10;
         }
-        for (var i = suggestions.length - 1; i > -1; i--) {
+        for (let i = suggestions.length - 1; i > -1; i--) {
           if (suggestions[i].search(/htt(p|s):\/\//i) > -1) {
             suggestions.splice(i, 1);
           }

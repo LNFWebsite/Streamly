@@ -6,7 +6,7 @@
 
 jQuery.ajax = (function(_ajax){
     
-    var protocol = location.protocol,
+    let protocol = location.protocol,
         hostname = location.hostname,
         exRegex = RegExp(protocol + '//' + hostname),
         YQL = 'http' + (/^https/.test(protocol)?'s':'') + '://query.yahooapis.com/v1/public/yql?callback=?',
@@ -18,7 +18,7 @@ jQuery.ajax = (function(_ajax){
     
     return function(o) {
         
-        var url = o.url;
+        let url = o.url;
         
         if ( /get/i.test(o.type) && !/json/i.test(o.dataType) && isExternal(url) ) {
             

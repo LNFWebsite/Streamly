@@ -14,10 +14,10 @@
 // * This function is for user identification in Streamly Station
 
 function makeId() {
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let text = "";
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  for (var i=0; i < 10; i++) {
+  for (let i=0; i < 10; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
 
@@ -62,7 +62,7 @@ function loadStation() {
   stationSocket.on("msg", function(msg) {
     console.log("Station Rx: " + msg);
 
-    var msgData = msg.split(",");
+    let msgData = msg.split(",");
     if (msgData[0] !== stationUserId) {
       stationTxQuiet = true;
       flashStationIcon();
@@ -147,9 +147,9 @@ function disconnectStation() {
 
 // * This function handles user input and runs connectStation on being called by user
 
-var securityWarning = false;
+let securityWarning = false;
 function actionConnectStation() {
-  var station = $("#connectStationBox").val();
+  let station = $("#connectStationBox").val();
   if (window.location.protocol === "https:" && securityWarning === false) {
     securityWarning = true;
     alert("Note: Due to security protections, scripts on secured pages with 'https://' cannot make unsecured connections. " +

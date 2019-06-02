@@ -19,6 +19,7 @@ function toggleZen() {
     $("header, #forkme").removeClass("slideOutUp").addClass("slideInDown");
     $("footer").removeClass("slideOutDown").addClass("slideInUp");
     $("#links").off().css("display", "block").removeClass("fadeOut").addClass("fadeIn");
+    $("#main").removeClass("zen");
     $("#zenModeToggle").prop("checked", false);
   }
   else {
@@ -29,13 +30,14 @@ function toggleZen() {
     $("#links").on('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
       $(this).css("display", "none");
     });
+    $("#main").addClass("zen");
     $("#zenModeToggle").prop("checked", true);
   }
 }
 
 function toggleSideBySide() {
   function changeSBS(which, add) {
-    var className = which.replace("#", "").replace(".", "");
+    let className = which.replace("#", "").replace(".", "");
     if (add) {
       $(which).addClass(className + "SBS");
     }
@@ -43,7 +45,7 @@ function toggleSideBySide() {
       $(which).removeClass(className + "SBS");
     }
   }
-  var sbsElements = [
+  let sbsElements = [
     "#main",
     "#playlistInterface",
     "#youtubeContainer",
@@ -85,8 +87,8 @@ function toggleSearchClose() {
 }
 
 function toggleMenu(which) {
-  var menu = "#" + which + "Window";
-  var shadow = "#" + which + "Shadow";
+  let menu = "#" + which + "Window";
+  let shadow = "#" + which + "Shadow";
   if ($(menu).css("display") !== "none") {
     state = "none";
   }
@@ -108,7 +110,7 @@ function toggleMenu(which) {
 // * This object loads the drop overlay over Streamly
 // * It is used primarily for when the settings window is toggled and when drag&drop searching is activated
 
-var DropOverlay = function() {
+let DropOverlay = function() {
   this.open = function() {
     $("#settingsShadow").css("display", "block");
     $("#dropOverlay").css("display", "block");
@@ -118,7 +120,7 @@ var DropOverlay = function() {
     $("#dropOverlay").css("display", "none");
   }
 }
-var dropOverlay = new DropOverlay();
+let dropOverlay = new DropOverlay();
 
 function toggleAutoplayListOverride() {
   if (autoplayListOverride) {
