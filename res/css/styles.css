@@ -139,7 +139,8 @@ button,
 #nextVideo:hover {
   background: lightgrey !important;
 }
-#settingsButton:hover {
+#settingsButton:hover,
+#settings *:hover {
   color: lightgrey;
 }
 
@@ -304,20 +305,6 @@ table {
   font-size: 2em;
   text-align: center;
   background: none;
-}
-#playlistNameBox::-webkit-input-placeholder {
-  color: black;
-}
-#playlistNameBox:-moz-placeholder {
-  color: black;
-  opacity: 1;
-}
-#playlistNameBox::-moz-placeholder {
-  color: black;
-  opacity: 1;
-}
-#playlistNameBox:-ms-input-placeholder {
-  color: black;
 }
 td {
   position: relative;
@@ -519,6 +506,9 @@ td {
 }
 .fa-arrow-circle-right, .fa-random, .fa-redo-alt, .fa-rss {
   color: grey;
+}
+#settings .selected {
+  color: #f77f00;
 }
 .fa-reddit {
   color: lightblue;

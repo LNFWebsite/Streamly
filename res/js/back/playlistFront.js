@@ -120,22 +120,31 @@ function makeSortable() {
 // * Those buttons call their corresponding functionality here
 
 let PlaylistFeatures = function() {
+  let self = this;
+  this.toggleSelected = function(doit, which) {
+    if (doit) {
+      $(which).addClass("selected");
+    }
+    else {
+      $(which).removeClass("selected");
+    }
+  }
   this.playNext = function() {
     sendStation("playlistfeaturesplaynext");
     playlistPlayNext = (playlistPlayNext ? false : true);
-    $(".fa-arrow-circle-right").css("color", (playlistPlayNext ? "#F77F00" : "grey"));
+    self.toggleSelected(playlistPlayNext, ".fa-arrow-circle-right");
   }
   this.repeat = function() {
     sendStation("playlistfeaturesrepeat");
     playlistRepeat = (playlistRepeat ? false : true);
     videoPreviews();
-    $(".fa-redo-alt").css("color", (playlistRepeat ? "#F77F00" : "grey"));
+    self.toggleSelected(playlistRepeat, ".fa-redo-alt");
   }
   this.shuffle = function() {
     sendStation("playlistfeaturesshuffle");
     playlistShuffle = (playlistShuffle ? false : true);
     shufflePlaylist();
-    $(".fa-random").css("color", (playlistShuffle ? "#F77F00" : "grey"));
+    self.toggleSelected(playlistShuffle, ".fa-random");
   }
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
@@ -150,7 +159,7 @@ let PlaylistFeatures = function() {
       addAutoplayVideo();
       videoPreviews();
     }
-    $(".fa-rss").css("color", (playlistAutoplay ? "#F77F00" : "grey"));
+    self.toggleSelected(playlistAutoplay, ".fa-rss");
   }
 }
 let playlistFeatures = new PlaylistFeatures;

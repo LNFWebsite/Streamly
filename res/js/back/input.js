@@ -49,10 +49,10 @@ function urlValidate(url) {
 // * If a YouTube video URL load video to playlist, if a Streamly playlist append it to the current one, if none of the above load search
 
 function input(type) {
-  let inputBox = $("#inputBox").val();
   //if playlist input
   if (type === 2) {
     let playlistNameBox = $("#playlistNameBox").val();
+    $("#inputBox").focus();
     sendStation("playlistnamechange," + playlistNameBox);
     if (playlistNameBox !== "") {
       videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
@@ -63,6 +63,7 @@ function input(type) {
     setPlaylist();
   }
   else {
+    let inputBox = $("#inputBox").val();
     if (inputBox !== "") {
       let isUrl = urlValidate(inputBox);
       let option = inputBox.match(/^-option (.+?)( .+?)?$/i);
