@@ -111,11 +111,8 @@ let PlaylistButtons = function() {
   this.autoplay = function(element) {
     let index = $(".autoplayButton").index(element) + 1;
     console.log("here: " + index);
-    if (playlistAutoplay) {
-      autoplayOff();
-    }
     playlistAutoplay = true;
-    addAutoplayVideo(index);
+    addAutoplayVideo(index, true);
     playlistFeatures.toggleSelected(playlistAutoplay, ".fa-rss");
   }
 }
@@ -170,7 +167,11 @@ let PlaylistFeatures = function() {
   this.autoplay = function() {
     playlistAutoplay = (playlistAutoplay ? false : true);
     if (playlistAutoplay === false) {
-      autoplayOff();
+      autoplayVideos = [];
+      autoplayVideoIteration = 0;
+      baseAutoplayVideoId = false;
+      autoplayList = false;
+      $("tr").removeClass("radio");
     }
     else {
       addAutoplayVideo();
