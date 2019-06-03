@@ -16,6 +16,8 @@
 // * This function loads the video for the Streamly Radio function
 
 function loadAutoplayData(iteration) {
+  autoplayLoading = true;
+
   autoplayVideos = [];
   autoplayVideoIteration = -1;
 
@@ -79,6 +81,7 @@ function onRadioDataPlayerStateChange(event) {
 
     radioDataPlayer.destroy();
     if (autoplayVideos.length > 1) {
+      autoplayLoading = false;
       addAutoplayVideo();
     }
   }
@@ -86,12 +89,13 @@ function onRadioDataPlayerStateChange(event) {
 
 // * This function loads the latest Streamly Radio video into the playlist
 
-function addAutoplayVideo(base = videoIteration, reset = false) {
-  if (playlistAutoplay && (videos.length > 0 || autoplayList)) {
-    if (!autoplayVideos.length > 0 || reset) {
+function addAutoplayVideo(base = videoIteration, option = '') {
+  if (!base) { base = videoIteration; } //conditional for uses that need option, yet not setting base
+  if (playlistAutoplay && !autoplayLoading && (videos.length > 0 || autoplayList)) {
+    if (!(autoplayVideos.length > 0) || option == 'reset') {
       loadAutoplayData(base);
     }
-    else if (videoIteration === videoCounter || (autoplayList && !autoplayListOverride)) {
+    else if (videoIteration === videoCounter || (autoplayList && !autoplayListOverride) || option == 'override') {
       if (autoplayVideoIteration < autoplayVideos.length - 1) {
         autoplayVideoIteration++;
         console.log("Getting new video: " + autoplayVideos[autoplayVideoIteration] + " data");

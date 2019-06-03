@@ -46,6 +46,8 @@ let autoplayList = false;
 let autoplayListOverride = false;
 let autoplayVideos = [];
 let autoplayVideoIteration = -1;
+//block repeated tasks while autoplay is still loading
+let autoplayLoading = false;
 
 let quickSearchQuery;
 let quickSearchVideos = [];

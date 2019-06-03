@@ -112,7 +112,7 @@ let PlaylistButtons = function() {
     let index = $(".autoplayButton").index(element) + 1;
     console.log("here: " + index);
     playlistAutoplay = true;
-    addAutoplayVideo(index, true);
+    addAutoplayVideo(index, 'reset');
     playlistFeatures.toggleSelected(playlistAutoplay, ".fa-rss");
   }
 }
@@ -171,6 +171,7 @@ let PlaylistFeatures = function() {
       autoplayVideoIteration = 0;
       baseAutoplayVideoId = false;
       autoplayList = false;
+      autoplayLoading = false;
       $("tr").removeClass("radio");
     }
     else {

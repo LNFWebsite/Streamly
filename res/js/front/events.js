@@ -98,7 +98,13 @@ window.addEventListener("keydown", function(e) {
     switch (e.code) {
       case "KeyR":
         e.preventDefault();
-        playlistFeatures.autoplay();
+        //add new videos on subsequent hits of 'r'
+        if (!playlistAutoplay) {
+          playlistFeatures.autoplay();
+        }
+        else {
+          addAutoplayVideo(false, 'override');
+        }
         break;
       case "KeyZ":
         e.preventDefault();
