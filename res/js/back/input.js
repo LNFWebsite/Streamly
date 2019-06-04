@@ -135,7 +135,7 @@ function input(type) {
         }
         else if (url[0] === "image") {
           console.log("here: " + url[1]);
-          $("body, #blurBackground").css("background", url[1]);
+          $("body, #blurBackground").css("background", "url('" + url[1] + "') no-repeat center center fixed;");
         }
       }
       else if (inputBox.indexOf("\\") === -1) {
