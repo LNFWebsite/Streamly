@@ -31,10 +31,12 @@ let cookie = new Cookie;
 // * These are global variables that are utilized in the rest of the script
 // * They exist for data that must persist for the script to work
 
+let isMobile = false;
 let background = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Veil_Nebula_-_NGC6960.jpg/1280px-Veil_Nebula_-_NGC6960.jpg";
 let placeholder, loadingPlaceholder;
 
 if ($(window).width() <= 600) {
+  isMobile = true;
   placeholder = "Search, Paste link...";
   loadingPlaceholder = "Loading...";
   background = "none";

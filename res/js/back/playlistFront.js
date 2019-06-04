@@ -194,42 +194,44 @@ let playlistFeatures = new PlaylistFeatures;
 // * It is called whenever anything changes in the playlist or the currently playing video changes
 
 function videoPreviews() {
-  function addData(which, iteration) {
-    $("#" + which + "Video .videoName").text(decodeURIComponent(videos[iteration][0]));
-    $("#" + which + "Video .videoTime").text(msConversion(videos[iteration][1] * 1000));
-    $("#" + which + "Video .videoImage").attr("src", "https://i.ytimg.com/vi/" + videos[iteration][2] + "/default.jpg");
-  }
-  function changeOpacity(which, amount) {
-    $("#" + which + "Video .videoName, #" + which + "Video .videoImage, #" + which + "Video .videoTime").css("opacity", amount);
-  }
-  function greyOut(which, color) {
-    $("#" + which + "Video").css("background-color", color);
-    if (color === "white") {
-      color = "black";
+  if (!isMobile) {
+    function addData(which, iteration) {
+      $("#" + which + "Video .videoName").text(decodeURIComponent(videos[iteration][0]));
+      $("#" + which + "Video .videoTime").text(msConversion(videos[iteration][1] * 1000));
+      $("#" + which + "Video .videoImage").attr("src", "https://i.ytimg.com/vi/" + videos[iteration][2] + "/default.jpg");
+    }
+    function changeOpacity(which, amount) {
+      $("#" + which + "Video .videoName, #" + which + "Video .videoImage, #" + which + "Video .videoTime").css("opacity", amount);
+    }
+    function greyOut(which, color) {
+      $("#" + which + "Video").css("background-color", color);
+      if (color === "white") {
+        color = "black";
+      }
+      else {
+        color = "inherit";
+      }
+      $("#" + which + "Video .videoImageContainer").css("background", color);
+    }
+
+    if (changeIteration(1) <= videoCounter) {
+      changeOpacity("next", "1");
+      greyOut("next", "white");
+      addData("next", changeIteration(1));
     }
     else {
-      color = "inherit";
+      changeOpacity("next", "0");
+      greyOut("next", "grey");
     }
-    $("#" + which + "Video .videoImageContainer").css("background", color);
-  }
 
-  if (changeIteration(1) <= videoCounter) {
-    changeOpacity("next", "1");
-    greyOut("next", "white");
-    addData("next", changeIteration(1));
-  }
-  else {
-    changeOpacity("next", "0");
-    greyOut("next", "grey");
-  }
-
-  if (changeIteration(-1) > 0 || (playlistRepeat && videoIteration == 1)) {
-    changeOpacity("previous", "1");
-    greyOut("previous", "white");
-    addData("previous", (playlistRepeat && videoIteration == 1 ? changeIteration(-2) + 1 : changeIteration(-1)));
-  }
-  else {
-    changeOpacity("previous", "0");
-    greyOut("previous", "grey");
+    if (changeIteration(-1) > 0 || (playlistRepeat && videoIteration == 1)) {
+      changeOpacity("previous", "1");
+      greyOut("previous", "white");
+      addData("previous", (playlistRepeat && videoIteration == 1 ? changeIteration(-2) + 1 : changeIteration(-1)));
+    }
+    else {
+      changeOpacity("previous", "0");
+      greyOut("previous", "grey");
+    }
   }
 }
