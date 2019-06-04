@@ -106,11 +106,11 @@ let Cookie = function() {
     document.cookie = key + "=" + value;
   }
   this.get = function(key) {
-    let regex = new RegExp("/(?:(?:^|.*;\s*)" + key + "\s*\=\s*([^;]*).*$)|^.*$/","g");
+    let regex = new RegExp("(?:(?:^|.*;\\s*)" + key + "\\s*\\=\\s*([^;]*).*$)|^.*$","ig");
     return document.cookie.replace(regex, "$1");
   }
   this.del = function(key) {
-    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   }
 }
 let cookie = new Cookie;

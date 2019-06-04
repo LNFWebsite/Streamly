@@ -134,9 +134,10 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
         else if (url[0] === "image") {
-          console.log("here: " + url[1]);
           $("body, #blurBackground").css("background", "url(\"" + url[1] + "\") no-repeat center center fixed");
           $("body, #blurBackground").css("background-size", "cover");
+          $("#inputBox").val("").attr("placeholder", placeholder);
+          cookie.set("background", url[1]);
         }
       }
       else if (inputBox.indexOf("\\") === -1) {
