@@ -137,7 +137,8 @@ function makeSortable() {
     },
     start: function(event, ui) {
       oldIndex = ui.item.index();
-    }
+    },
+    cancel: "span"
   });
 }
 
