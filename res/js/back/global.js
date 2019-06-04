@@ -13,16 +13,29 @@
 
 // * These are global variables that are utilized in the rest of the script
 // * They exist for data that must persist for the script to work
+
+let background = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Veil_Nebula_-_NGC6960.jpg/1280px-Veil_Nebula_-_NGC6960.jpg";
 let placeholder, loadingPlaceholder;
+
 if ($(window).width() <= 600) {
   placeholder = "Search, Paste link...";
   loadingPlaceholder = "Loading...";
+  background = "none";
 }
 else {
   placeholder = "Search, drag/drop or paste link to video/playlist...";
   loadingPlaceholder = "Loading video data from YouTube...";
+  let c = cookie.get("background");
+  if (c !== "") {
+    background = "url(\"" + c + "\") no-repeat center center fixed";
+  }
+  else {
+    background = "url(\"" + background + "\") no-repeat center center fixed";
+  }
+  $("body, #blurBackground").css("background-size", "cover");
 }
 $("#inputBox").attr("placeholder", placeholder);
+$("body, #blurBackground").css("background", background);
 
 let radioMessage = "Clicking on this will start <a href=\"https://github.com/LNFWebsite/Streamly/wiki/Getting-Started#streamly-radio\" target=\"_blank\">Streamly Radio</a> based on this video. Suggestions will not be loaded until you reach the end of the playlist unless you'd like to manually load them by hitting the 'R' key";
 
