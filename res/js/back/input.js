@@ -134,7 +134,7 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
         else if (url[0] === "image") {
-          console.log("here: " + url[0]);
+          console.log("here: " + url[1]);
           $("body, #blurBackground").css("background", url[1]);
         }
       }
