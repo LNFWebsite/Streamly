@@ -40,7 +40,7 @@ function urlValidate(url) {
     output = ["streamly", output];
   }
   else if (imageMatch) {
-    output = imageMatch[1];
+    output = imageMatch[0];
     output = ["image", output];
   }
   
@@ -135,10 +135,7 @@ function input(type) {
         }
         else if (url[0] === "image") {
           console.log("here");
-          if (typeof url[1] != 'undefined') {
-            console.log("also here");
-            $("body, #blurBackground").css("background", url[1]);
-          }
+          $("body, #blurBackground").css("background", url[1]);
         }
       }
       else if (inputBox.indexOf("\\") === -1) {
