@@ -20,9 +20,13 @@ function urlValidate(url) {
   let youtubeRegex = /(?:v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)/i;
   let youtubeListRegex = /list=([^?&]+)/i;
   let streamlyRegex = /.*#(.+)/i;
+  let imageRegex = /.+?\.(jpeg|jpg|gif|png)/i;
   
   let youtubeMatch = url.match(youtubeRegex);
   let youtubeListMatch = url.match(youtubeListRegex);
+  let streamlyMatch = url.match(streamlyRegex);
+  let imageMatch = url.match(imageRegex);
+
   if (youtubeMatch && youtubeListMatch) {
     output = [youtubeMatch[1], youtubeListMatch[1]];
     output = ["playlist", output];
@@ -31,11 +35,13 @@ function urlValidate(url) {
     output = youtubeMatch[1];
     output = ["youtube", output];
   }
-  
-  let streamlyMatch = url.match(streamlyRegex);
-  if (streamlyMatch && streamlyMatch[1]) {
+  else if (streamlyMatch) {
     output = streamlyMatch[1];
     output = ["streamly", output];
+  }
+  else if (imageMatch) {
+    output = imageMatch[1];
+    output = ["image", output];
   }
   
   return output;
@@ -65,7 +71,7 @@ function input(type) {
   else {
     let inputBox = $("#inputBox").val();
     if (inputBox !== "") {
-      let isUrl = urlValidate(inputBox);
+      let url = urlValidate(inputBox);
       let option = inputBox.match(/^-option (.+?)( .+?)?$/i);
 
       //let ua = navigator.userAgent.toLowerCase();
@@ -95,9 +101,9 @@ function input(type) {
         }
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
-      else if (isUrl) {
-        if (isUrl[0] === "youtube") {
-          inputBox = isUrl[1];
+      else if (url) {
+        if (url[0] === "youtube") {
+          inputBox = url[1];
           getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
           /***
@@ -116,19 +122,21 @@ function input(type) {
           }
           ***/
         }
-        else if (isUrl[0] === "streamly") {
-          appendPlaylist(isUrl[1]);
+        else if (url[0] === "streamly") {
+          appendPlaylist(url[1]);
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
-        else if (isUrl[0] === "playlist") {
+        else if (url[0] === "playlist") {
           //turn on pause so that getVideoData doesn't try to play each video while loop-loading
           videoPaused = true;
-          if (playlistAutoplay) {
-            playlistFeatures.autoplay();
-          }
-          autoplayList = isUrl[1];
-          playlistFeatures.autoplay();
+          autoplayList = url[1];
+          addAutoplayVideo(false, 'reset');
           $("#inputBox").val("").attr("placeholder", placeholder);
+        }
+        else if (url[0] === "image") {
+          if (typeof url[1] != 'undefined') {
+            $("body, #blurBackground").css("background", url[1]);
+          }
         }
       }
       else if (inputBox.indexOf("\\") === -1) {
