@@ -132,6 +132,18 @@ button,
 #stationIcon {
   cursor: pointer;
 }
+
+/** Hover shading rules **/
+#saveButton:hover,
+#previousVideo:hover,
+#nextVideo:hover {
+  background: lightgrey !important;
+}
+#settingsButton:hover,
+#settings *:hover {
+  color: lightgrey;
+}
+
 td,
 #main,
 #saveButton,
@@ -182,8 +194,8 @@ body,
   /** Christmas 2018 https://www.publicdomainpictures.net/pictures/240000/velka/christmas-background-1512410173MML.jpg **/
   /** Winter 2019 https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Moravskoslezsk%C3%A9_Beskydy_-_zima_2014_%28by_Pudelek%29_01.JPG/1280px-Moravskoslezsk%C3%A9_Beskydy_-_zima_2014_%28by_Pudelek%29_01.JPG **/
   /** Study room (not used yet) https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Abbotsford_House_Study_Room.jpg/1280px-Abbotsford_House_Study_Room.jpg **/
-  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Veil_Nebula_-_NGC6960.jpg/1280px-Veil_Nebula_-_NGC6960.jpg") no-repeat center center fixed;
-  background-size: cover;
+  /**background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Veil_Nebula_-_NGC6960.jpg/1280px-Veil_Nebula_-_NGC6960.jpg") no-repeat center center fixed;
+  background-size: cover;**/
 }
 #blurBackground {
   filter: blur(5px);
@@ -274,6 +286,9 @@ footer {
   position: relative;
   background: rgba(255,255,255,0.55);
 }
+#main.zen {
+  margin-bottom: 100vh !important;
+}
 table,
 #playlistNameBox {
   width: 95%
@@ -291,27 +306,13 @@ table {
   text-align: center;
   background: none;
 }
-#playlistNameBox::-webkit-input-placeholder {
-  color: black;
-}
-#playlistNameBox:-moz-placeholder {
-  color: black;
-  opacity: 1;
-}
-#playlistNameBox::-moz-placeholder {
-  color: black;
-  opacity: 1;
-}
-#playlistNameBox:-ms-input-placeholder {
-  color: black;
-}
 td {
   position: relative;
   padding: 5px;
   cursor: move;
 }
 .tableLeft {
-  padding-right: 70px;
+  padding-right: 100px;
 }
 .selected td {
   background: rgba(255, 131, 0, 0.4) !important
@@ -438,7 +439,6 @@ td {
   margin: 0;
   max-height: 100%;
   overflow: hidden;
-  background-color: white;
 }
 .videoTime {
   position: absolute;
@@ -466,6 +466,10 @@ td {
   right: calc(30% - 162px);
   border: 1px solid white;
   cursor: default;
+  color: grey;
+}
+#settings .selected {
+  color: #f77f00;
 }
 #progress {
   background-color: #f77f00;
@@ -474,27 +478,44 @@ td {
   height: 100%;
 }
 #progress,
-.tableButton {
+.tableButtons * {
   -moz-transition: .2s;
   -ms-transition: .2s;
   -o-transition: .2s;
   -webkit-transition: .2s;
   transition: .2s;
 }
-.tableButtonDiv {
+.tableButtons {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  width: 100px;
+  text-align: right;
 }
-.tableButton:hover {
-  opacity: 1
-}
-.tableButton {
-  background: 0 0;
-  border: none;
-  float: right;
+.tableButtons * {
   opacity: .1;
+  cursor: pointer;
+}
+.tableButtons *:not(:last-child) {
+  padding-right: 10px;
+}
+.tableButtons *:first-child {
+  padding-left: 5px;
+}
+.tableButtons *:last-child {
+  padding-right: 5px;
+}
+.tableButtons *:hover {
+  opacity: 1;
+}
+.tableButtons .fa-play, .tableButtons .fa-rss {
+  font-size: 1.1em;
+  position: relative;
+  top: -3px;
+}
+.tableButtons .fa-times {
+  font-size: 1.5em;
 }
 #settings * {
   font-size: 1.5em;
@@ -504,18 +525,8 @@ td {
 .fa-cog {
   font-size: 2em;
 }
-.fa-arrow-circle-right, .fa-random, .fa-redo-alt, .fa-rss {
-  color: grey;
-}
 .fa-reddit {
   color: lightblue;
-}
-.fa-play {
-  font-size: 1.5em;
-  margin-top: 3px;
-}
-.fa-times {
-  font-size: 2em;
 }
 .fa-backward, .fa-forward {
   position: absolute;
@@ -563,7 +574,7 @@ tr.placeholder:before {
   background-color: #4B4B4B;
 }
 .searchResult .left, .searchResult .right {
-  height 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -656,7 +667,6 @@ tr.placeholder:before {
   }
   .videoImageContainer {
     width: 100%;
-    background: none;
   }
   .fa-backward, .fa-forward, .fa-cog, #settings * {
     -webkit-touch-callout: none;

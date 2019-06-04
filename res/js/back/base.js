@@ -17,7 +17,7 @@
 // * This function is for iteration order changes such as playlistRepeat
 
 function changeIteration(which) {
-  var sum = videoIteration + which;
+  let sum = videoIteration + which;
   if (playlistRepeat && sum > videoCounter) {
     return 1;
   }
@@ -86,7 +86,7 @@ function loopVideo() {
 // * This object does the extra stuff that occurs on pausing and playing videos
 // * Such as pausing the progress bar loop
 
-var VideoFunctions = function() {
+let VideoFunctions = function() {
   this.play = function() {
     setVideoTime();
     sendStation("videofunctionsplay");
@@ -104,7 +104,7 @@ var VideoFunctions = function() {
     actionTimers.pause();
   }
 }
-var videoFunctions = new VideoFunctions();
+let videoFunctions = new VideoFunctions();
 
 // * This function skips to the next video in the playlist
 
@@ -136,14 +136,14 @@ function backVideo() {
 
 function addVideo(name, time, id) {
   videoCounter++;
-  var iteration;
+  let iteration;
   if (playlistPlayNext) {
     iteration = videoIteration + 1;
   }
   else {
     iteration = videoCounter;
   }
-  var video = [];
+  let video = [];
   video[0] = name;
   video[1] = time;
   video[2] = id;
@@ -160,7 +160,7 @@ function addVideo(name, time, id) {
     addedVideosWhileShuffled.push(video);
   }
 
-  var printTime = msConversion(time * 1000);
+  let printTime = msConversion(time * 1000);
 
   addVideoToList(name, printTime, iteration, true);
   

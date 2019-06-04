@@ -4,7 +4,7 @@ Open-source, web-based, YouTube video queues.
 
 Streamly on Desktop        | Streamly on Android
 :-------------------------:|:-------------------------:
-![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/07242018/streamly.jpg)  |  ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/07242018/streamlymobile.jpg)
+![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/05302019/streamly.jpg)  |  ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/05302019/streamlymobile.jpg)
 
 ## What is Streamly?
 
@@ -16,11 +16,11 @@ This differs from YouTube's normal playlist functionality by allowing you to man
 
 Features:
 
-- Puts you in charge of your playlist by saving all video information necessary to play (name, time, video_id) with the playlist. To save your playlist, simply bookmark the open tab of Streamly or click "Save Playlist" to copy a link to your clipboard. Additionally, your playlists should be automatically saved within your browsing history.
+- Puts you in charge of your playlist by saving all video information necessary to play (name, time, video id) with the playlist. To save your playlist, simply bookmark the open tab of Streamly or click "Save Playlist" to copy a link to your clipboard. Additionally, your playlists should be automatically saved within your browsing history.
 
 - Runs independently from any server and requires no association with YouTube (API keys, etc...).
   
-  <sub>Note: You may even use Streamly just stored on your computer, but likely YouTube will give you an error stating that the video creator did not allow the video to play on this site. The same will occur if you try to open a YouTube embed on your computer, as they don't recognize the `file://` site location as a valid website. You may resolve this easily by placing Streamly on a file hosting service that allows you to access the file without downloading (ie. forking on GitHub), or your own web server.<sub>
+  <sub>Note: You may even use Streamly just stored on your computer, but likely YouTube will prevent many videos from playing. This is because those content creators have blocked their videos from being loaded on a non-website page. You may resolve this easily by placing Streamly on a file hosting service that allows you to access the file without downloading (ie. forking on GitHub), or your own web server.<sub>
 
 - Works on all modern browsers (Firefox, Chrome, more...) as well as browsers on Android phones/tablets. (Latest Firefox is recommended on PC, Chrome is recommended on Android, IE is not supported)
 
@@ -72,6 +72,9 @@ The playlist you create is stored in the URL (or web address) of Streamly. This 
 And, you don't have to worry about losing anything because Streamly requires nothing other than the playlist you create.
 
 If you'd like to know why Streamly was made, head over to the [About](https://github.com/LNFWebsite/Streamly/wiki/About) page in the wiki!
+
+[Dev-testing quick access link](https://raw.githack.com/LNFWebsite/Streamly/master/index.html)
+[CDN purge for testing](https://purge.jsdelivr.net/LNFWebsite/Streamly@latest)
 
 ## License
 

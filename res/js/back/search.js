@@ -20,14 +20,14 @@ function addSearchResult(name, id) {
 }
 
 function loadSearchResult(element) {
-  var iteration = $(".searchResult").index(element);
-  var id = quickSearchVideos[iteration];
+  let iteration = $(".searchResult").index(element);
+  let id = quickSearchVideos[iteration];
   console.log("i:" + iteration + ",id:" + id);
 
   //getVideoData function equivalent without reloading video names
-  var videoId = id;
-  var videoTime = 0;
-  var videoName = searchResultsNameStorage[iteration];
+  let videoId = id;
+  let videoTime = 0;
+  let videoName = searchResultsNameStorage[iteration];
   addVideo(videoName, videoTime, videoId);
 
   if (searchClose) {
@@ -47,7 +47,7 @@ function quickSearch(query) {
     $("#searchProgress").css("display", "flex");
 
     quickSearchQuery = query;
-    var searchDataFrame = document.createElement("iframe");
+    let searchDataFrame = document.createElement("iframe");
     searchDataFrame.setAttribute("id", "searchDataFrame");
     searchDataFrame.setAttribute("src", "");
     document.getElementById("dataFramesContainer").appendChild(searchDataFrame);
@@ -67,7 +67,7 @@ function quickSearch(query) {
 
 // * This function cues the search results for use in the next function
 
-var searchDataPlayerErrors = 0;
+let searchDataPlayerErrors = 0;
 function onSearchDataPlayerReady() {
   try {
     searchDataPlayer.cuePlaylist({listType: "search", list: quickSearchQuery});
@@ -93,9 +93,9 @@ function onSearchDataPlayerStateChange(event) {
     }
     quickSearchVideosIteration = 0;
     quickSearchVideos = searchDataPlayer.getPlaylist();
-    var data = searchDataPlayer.getVideoUrl();
+    let data = searchDataPlayer.getVideoUrl();
     
-    var id = urlValidate(data);
+    let id = urlValidate(data);
     if (id) {
       if (id[0] === "playlist") {
         id = id[1][0];

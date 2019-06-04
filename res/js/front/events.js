@@ -74,7 +74,7 @@ window.addEventListener("keydown", function(e) {
       case "Backslash":
         e.preventDefault();
         if (e.key !== "|") {
-          var query = $("#inputBox").val();
+          let query = $("#inputBox").val();
           query = query.replace("\\", "");
           if (query.slice(-2) === " l") {
             query = query + "yric";
@@ -98,7 +98,13 @@ window.addEventListener("keydown", function(e) {
     switch (e.code) {
       case "KeyR":
         e.preventDefault();
-        playlistFeatures.autoplay();
+        //add new videos on subsequent hits of 'r'
+        if (!playlistAutoplay) {
+          playlistFeatures.autoplay();
+        }
+        else {
+          addAutoplayVideo(false, 'override');
+        }
         break;
       case "KeyZ":
         e.preventDefault();
@@ -129,7 +135,7 @@ $("#youtubeContainer").click(function() {
 
 document.addEventListener("drop", function(event) {
   event.preventDefault();
-  var data = event.dataTransfer.getData("URL");
+  let data = event.dataTransfer.getData("URL");
 
   $("#inputBox").val(data);
   input(1);
@@ -137,7 +143,7 @@ document.addEventListener("drop", function(event) {
   $("#dropShadow, #dropOverlay").css("display", "none");
 });
 
-var dropOverlayAutoRemove;
+let dropOverlayAutoRemove;
 document.addEventListener("dragover", function(event) {
   event.preventDefault();
   $("#dropShadow, #dropOverlay").css("display", "initial");
@@ -147,4 +153,21 @@ document.addEventListener("dragover", function(event) {
   dropOverlayAutoRemove = setTimeout(function() {
     $("#dropShadow, #dropOverlay").css("display", "none");
   }, 5000);
+});
+
+let Message = function() {
+  this.send = function(contents) {
+    $("#dialog").empty();
+    $("#dialog").append(contents);
+    $("#dialog").dialog();
+  }
+}
+let message = new Message;
+
+$("header *").balloon({
+  delay: 500,
+  position: "bottom"
+});
+$("[title]:not(header *)").balloon({
+  delay: 500
 });

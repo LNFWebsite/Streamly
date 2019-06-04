@@ -15,7 +15,7 @@
 // * It used to be used for video change timing in Streamly w/o YouTube API
 
 function Timer(callback, delay) {
-  var id, started, remaining = delay, running;
+  let id, started, remaining = delay, running;
   this.resume = function() {
     running = true;
     started = new Date();
@@ -39,13 +39,33 @@ function Timer(callback, delay) {
   this.resume();
 }
 
-// * This function converts milliseconds to "0:00" format
+// * This function converts milliseconds to "0:00" AND "0:00:00" format
 // * It is used primarily in the videoProgress timer
 
 function msConversion(millis) {
-  var minutes = Math.floor(millis / 60000);
-  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  let sec = Math.floor(millis / 1000);
+  let hrs = Math.floor(sec / 3600);
+  sec -= hrs * 3600;
+  let min = Math.floor(sec / 60);
+  sec -= min * 60;
+
+  sec = '' + sec;
+  sec = ('00' + sec).substring(sec.length);
+
+  if (hrs > 0) {
+    min = '' + min;
+    min = ('00' + min).substring(min.length);
+    return hrs + ":" + min + ":" + sec;
+  }
+  else {
+    return min + ":" + sec;
+  }
+
+  /**
+  let minutes = Math.floor(millis / 60000);
+  let seconds = ((millis % 60000) / 1000).toFixed(0);
   return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
+  **/
 }
 
 // * This function resets timers
@@ -63,7 +83,7 @@ function resetTimer(which) {
 // * This object manipulates existing timers
 // * It was primarily used in video timing before the YouTube API, but is also used in the progress bar
 
-var ActionTimers = function() {
+let ActionTimers = function() {
   this.pause = function() {
     progressTimer.pause();
   }
@@ -77,7 +97,7 @@ var ActionTimers = function() {
     $("#videoTime").text("0:00");
   }
 }
-var actionTimers = new ActionTimers();
+let actionTimers = new ActionTimers();
 
 // * This function updates the video progress bar with new data
 // * It is run on an interval, using the YouTube API for video timing
@@ -85,12 +105,12 @@ var actionTimers = new ActionTimers();
 function videoProgress() {
   if (videos[videoIteration] !== undefined && videos[videoIteration] !== null) {
     //initial load
-    var time = videos[videoIteration][1];
-    var currentTime = Math.round(player.getCurrentTime());
-    var currentPercent = (currentTime / time) * 100;
+    let time = videos[videoIteration][1];
+    let currentTime = Math.round(player.getCurrentTime());
+    let currentPercent = (currentTime / time) * 100;
     $("#videoTime").text(msConversion(time * 1000));
     $("#progress").css("width", currentPercent + "%");
-    var currentTimeFormatted = msConversion(currentTime * 1000);
+    let currentTimeFormatted = msConversion(currentTime * 1000);
     if (currentTimeFormatted !== "NaN:NaN") {
       $("#currentTime").text(currentTimeFormatted);
     }

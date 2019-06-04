@@ -15,14 +15,18 @@
 // * It then specifies how to interpret this URL in the function below
 
 function urlValidate(url) {
-  var output = false;
+  let output = false;
   
-  var youtubeRegex = /(?:v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)/i;
-  var youtubeListRegex = /list=([^?&]+)/i;
-  var streamlyRegex = /.*#(.+)/i;
+  let youtubeRegex = /(?:v=|youtu\.be\/|youtube\..+\/embed\/)([^?&]+)/i;
+  let youtubeListRegex = /list=([^?&]+)/i;
+  let streamlyRegex = /.*#(.+)/i;
+  let imageRegex = /.+?\.(jpeg|jpg|gif|png)/i;
   
-  var youtubeMatch = url.match(youtubeRegex);
-  var youtubeListMatch = url.match(youtubeListRegex);
+  let youtubeMatch = url.match(youtubeRegex);
+  let youtubeListMatch = url.match(youtubeListRegex);
+  let streamlyMatch = url.match(streamlyRegex);
+  let imageMatch = url.match(imageRegex);
+
   if (youtubeMatch && youtubeListMatch) {
     output = [youtubeMatch[1], youtubeListMatch[1]];
     output = ["playlist", output];
@@ -31,11 +35,13 @@ function urlValidate(url) {
     output = youtubeMatch[1];
     output = ["youtube", output];
   }
-  
-  var streamlyMatch = url.match(streamlyRegex);
-  if (streamlyMatch && streamlyMatch[1]) {
+  else if (streamlyMatch) {
     output = streamlyMatch[1];
     output = ["streamly", output];
+  }
+  else if (imageMatch) {
+    output = imageMatch[0];
+    output = ["image", output];
   }
   
   return output;
@@ -49,10 +55,10 @@ function urlValidate(url) {
 // * If a YouTube video URL load video to playlist, if a Streamly playlist append it to the current one, if none of the above load search
 
 function input(type) {
-  var inputBox = $("#inputBox").val();
   //if playlist input
   if (type === 2) {
-    var playlistNameBox = $("#playlistNameBox").val();
+    let playlistNameBox = $("#playlistNameBox").val();
+    $("#inputBox").focus();
     sendStation("playlistnamechange," + playlistNameBox);
     if (playlistNameBox !== "") {
       videos[0] = encodeURIComponent(playlistNameBox).replace(/%20/g, " ");
@@ -63,12 +69,13 @@ function input(type) {
     setPlaylist();
   }
   else {
+    let inputBox = $("#inputBox").val();
     if (inputBox !== "") {
-      var isUrl = urlValidate(inputBox);
-      var option = inputBox.match(/^-option (.+?)( .+?)?$/i);
+      let url = urlValidate(inputBox);
+      let option = inputBox.match(/^-option (.+?)( .+?)?$/i);
 
-      //var ua = navigator.userAgent.toLowerCase();
-      //var isAndroid = ua.indexOf("android") > -1;
+      //let ua = navigator.userAgent.toLowerCase();
+      //let isAndroid = ua.indexOf("android") > -1;
 
       if (option) {
         switch (option[1]) {
@@ -94,9 +101,9 @@ function input(type) {
         }
         $("#inputBox").val("").attr("placeholder", placeholder);
       }
-      else if (isUrl) {
-        if (isUrl[0] === "youtube") {
-          inputBox = isUrl[1];
+      else if (url) {
+        if (url[0] === "youtube") {
+          inputBox = url[1];
           getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
           /***
@@ -115,19 +122,22 @@ function input(type) {
           }
           ***/
         }
-        else if (isUrl[0] === "streamly") {
-          appendPlaylist(isUrl[1]);
+        else if (url[0] === "streamly") {
+          appendPlaylist(url[1]);
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
-        else if (isUrl[0] === "playlist") {
+        else if (url[0] === "playlist") {
           //turn on pause so that getVideoData doesn't try to play each video while loop-loading
           videoPaused = true;
-          if (playlistAutoplay) {
-            playlistFeatures.autoplay();
-          }
-          autoplayList = isUrl[1];
-          playlistFeatures.autoplay();
+          autoplayList = url[1];
+          addAutoplayVideo(false, 'reset');
           $("#inputBox").val("").attr("placeholder", placeholder);
+        }
+        else if (url[0] === "image") {
+          $("body, #blurBackground").css("background", "url(\"" + url[1] + "\") no-repeat center center fixed");
+          $("body, #blurBackground").css("background-size", "cover");
+          $("#inputBox").val("").attr("placeholder", placeholder);
+          cookie.set("background", url[1]);
         }
       }
       else if (inputBox.indexOf("\\") === -1) {
@@ -144,7 +154,7 @@ function input(type) {
               clearInterval(checkIfClosedTimer);
             }
         }
-        var checkIfClosedTimer = setInterval(checkIfClosed, 500);
+        let checkIfClosedTimer = setInterval(checkIfClosed, 500);
         ***/
         inBoxSearch = true;
         quickSearch(inputBox);
