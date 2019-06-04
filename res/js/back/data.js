@@ -97,3 +97,20 @@ function setVideoTime() {
     setPlaylist();
   }
 }
+
+// * This object handles cookies
+// * It handles cookies this way because it does
+
+let Cookie = function() {
+  this.set = function(key, value) {
+    document.cookie = key + "=" + value;
+  }
+  this.get = function(key) {
+    let regex = new RegExp("/(?:(?:^|.*;\s*)" + key + "\s*\=\s*([^;]*).*$)|^.*$/","g");
+    return document.cookie.replace(regex, "$1");
+  }
+  this.del = function(key) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+}
+let cookie = new Cookie;

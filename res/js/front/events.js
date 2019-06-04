@@ -154,3 +154,20 @@ document.addEventListener("dragover", function(event) {
     $("#dropShadow, #dropOverlay").css("display", "none");
   }, 5000);
 });
+
+let Message = function() {
+  this.send = function(contents) {
+    $("#dialog").empty();
+    $("#dialog").append(contents);
+    $("#dialog").dialog();
+  }
+}
+let message = new Message;
+
+$("header *").balloon({
+  delay: 500,
+  position: "bottom"
+});
+$("[title]:not(header *)").balloon({
+  delay: 500
+});
