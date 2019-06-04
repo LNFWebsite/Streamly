@@ -62,6 +62,9 @@ function addVideoToList(name, time, spot, smooth) {
     html: true,
     contents: 'Start Radio <a style="color:lightblue;text-decoration:underline;cursor:pointer;" onclick="message.send(radioMessage);">Help</a>'
   });
+  $('.tableButtons *:not(.autoplayButton)').balloon({
+    delay: 500
+  });
 }
 
 // * This function removes video elements from the playlist
