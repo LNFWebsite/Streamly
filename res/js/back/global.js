@@ -11,6 +11,23 @@
   limitations under the License.
 **/
 
+// * This object handles cookies (technically global)
+// * It handles cookies this way because it does
+
+let Cookie = function() {
+  this.set = function(key, value) {
+    document.cookie = key + "=" + value;
+  }
+  this.get = function(key) {
+    let regex = new RegExp("(?:(?:^|.*;\\s*)" + key + "\\s*\\=\\s*([^;]*).*$)|^.*$","ig");
+    return document.cookie.replace(regex, "$1");
+  }
+  this.del = function(key) {
+    document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
+}
+let cookie = new Cookie;
+
 // * These are global variables that are utilized in the rest of the script
 // * They exist for data that must persist for the script to work
 
