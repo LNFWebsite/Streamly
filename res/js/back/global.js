@@ -51,8 +51,7 @@ else {
   }
 }
 $("#inputBox").attr("placeholder", placeholder);
-$("body, #blurBackground").css("background", background);
-$("body, #blurBackground").css("background-size", "cover");
+$("body, #blurBackground").css("background", background).css("background-size", "cover");
 
 let radioMessage = "Clicking on this will start <a href=\"https://github.com/LNFWebsite/Streamly/wiki/Getting-Started#streamly-radio\" target=\"_blank\">Streamly Radio</a> based on this video. Suggestions will not be loaded until you reach the end of the playlist unless you'd like to manually load them by hitting the 'R' key";
 
