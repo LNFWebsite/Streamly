@@ -55,17 +55,6 @@ function addVideoToList(name, time, spot, smooth) {
   else {
     $("#videosTable").append(trElement);
   }
-  /*** This is having all sorts of errors due to multiple balloon handlers EMERGENCY DISABLE
-  $('.autoplayButton').balloon({
-    minLifetime: 1000,
-    delay: 500,
-    html: true,
-    contents: 'Start Radio <a style="color:lightblue;text-decoration:underline;cursor:pointer;" onclick="message.send(radioMessage);">Help</a>'
-  });
-  $('.tableButtons *:not(.autoplayButton)').balloon({
-    delay: 500
-  });
-  ***/
 }
 
 // * This function removes video elements from the playlist
