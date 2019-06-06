@@ -163,11 +163,3 @@ let Message = function() {
   }
 }
 let message = new Message;
-
-$("header *").balloon({
-  delay: 500,
-  position: "bottom"
-});
-$("[title]:not(header *)").balloon({
-  delay: 500
-});
