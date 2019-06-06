@@ -703,6 +703,15 @@ tr.placeholder:before {
     font-size: 0.8em;
     background: rgba(0,0,0,0.5);
   }
+  #saveButton:hover,
+  #previousVideo:hover,
+  #nextVideo:hover {
+    background: initial !important;
+  }
+  #settingsButton:hover,
+  #settings *:hover {
+    color: white !important;
+  }
 }
 
 /*** Side by side classes ***/
