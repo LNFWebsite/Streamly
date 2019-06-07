@@ -106,9 +106,9 @@ function toggleAutoplayListOverride() {
 }
 
 function setBackground(url = false) {
+  let b;
   if (!url) {
     let c = cookie.get("background");
-    let b;
     if (!cookie.get("sbs")) {
       if (c !== "") {
         b = "url(\"" + c + "\") no-repeat center center fixed";
