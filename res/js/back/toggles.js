@@ -123,6 +123,7 @@ function setBackground(url = false) {
   }
   else {
     b = "url(\"" + url + "\") no-repeat center center fixed";
+    cookie.set("background", url[1]);
   }
   $("body, #blurBackground").css("background", b).css("background-size", "cover");
 }

@@ -137,7 +137,6 @@ function input(type) {
         else if (url[0] === "image") {
           setBackground(url[1]);
           $("#inputBox").val("").attr("placeholder", placeholder);
-          cookie.set("background", url[1]);
         }
       }
       else if (inputBox.indexOf("\\") === -1) {
