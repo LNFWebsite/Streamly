@@ -12,6 +12,8 @@
 **/
 
 window.onload = function() {
+  setBackground();
+
   $("header, #forkme").addClass("animated slideInDown");
   $("header").css("display", "flex");
   $("#forkme").css("display", "initial");
@@ -45,4 +47,8 @@ window.onload = function() {
       });
     }
   });
+
+  if (cookie.get("sbs")) {
+    toggleSBS();
+  }
 }
