@@ -87,7 +87,6 @@ let stationTxQuiet = false;
 let stationUserId;
 
 let zenMode = false;
-let sideBySide = false;
 
 let videoPaused;
 //this is for addVideo knowing whether to loop to next video or not
