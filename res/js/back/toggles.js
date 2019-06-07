@@ -105,19 +105,24 @@ function toggleAutoplayListOverride() {
   }
 }
 
-function setBackground() {
-  let c = cookie.get("background");
-  let b;
-  if (!cookie.get("sbs")) {
-    if (c !== "") {
-      b = "url(\"" + c + "\") no-repeat center center fixed";
+function setBackground(url = false) {
+  if (!url) {
+    let c = cookie.get("background");
+    let b;
+    if (!cookie.get("sbs")) {
+      if (c !== "") {
+        b = "url(\"" + c + "\") no-repeat center center fixed";
+      }
+      else {
+        b = "url(\"" + background + "\") no-repeat center center fixed";
+      }
     }
     else {
-      b = "url(\"" + background + "\") no-repeat center center fixed";
+      b = "none";
     }
   }
   else {
-    b = "none";
+    b = "url(\"" + url + "\") no-repeat center center fixed";
   }
   $("body, #blurBackground").css("background", b).css("background-size", "cover");
 }

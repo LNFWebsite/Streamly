@@ -135,8 +135,7 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
         else if (url[0] === "image") {
-          $("body, #blurBackground").css("background", "url(\"" + url[1] + "\") no-repeat center center fixed");
-          $("body, #blurBackground").css("background-size", "cover");
+          setBackground(url[1]);
           $("#inputBox").val("").attr("placeholder", placeholder);
           cookie.set("background", url[1]);
         }
