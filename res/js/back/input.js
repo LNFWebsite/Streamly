@@ -130,6 +130,7 @@ function input(type) {
           //turn on pause so that getVideoData doesn't try to play each video while loop-loading
           videoPaused = true;
           autoplayList = url[1];
+          playlistAutoplay = true;
           addAutoplayVideo(false, 'reset');
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
