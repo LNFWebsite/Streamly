@@ -1,0 +1,77 @@
+body {
+  background: none !important;
+  overflow-x: hidden;
+}
+#forkme, #blurBackground {
+  display: none !important;
+}
+footer {
+  background: none !important;
+  position: initial !important;
+  width:0;
+  height:0;
+}
+#main {
+  margin: 75px 10px 10px 60% !important;
+  padding: 5px 0 !important;
+}
+#videosTable, #links {
+  font-size: 1em !important;
+}
+#playlistNameBox {
+  font-size: 1.1em !important;
+}
+.tableLeft {
+  padding-right: 80px !important;
+}
+#playlistInterface {
+  height: 80% !important;
+  width: calc(60vw - 45px) !important;
+  position: fixed !important;
+  top: 75px !important;
+  left: 20px !important;
+  margin-right: none !important;
+  transform: none !important;
+}
+#currentTime, #videoTime {
+  color: black !important;
+}
+#settings {
+  position: fixed;
+  left: calc(30vw - 90px) !important;
+  background: white;
+}
+.tableButtons {
+  width: auto !important;
+}
+#main, #youtubeContainer, #previousVideo, #nextVideo, #settings {
+  box-shadow: 0px 0px 15px 1px gray !important;
+}
+#previousVideo, #nextVideo {
+  position: fixed !important;
+  top: auto !important;
+  transform: none !important;
+  bottom: 10px !important;
+  z-index: 3 !important;
+  width: 20% !important;
+  height: 9.6% !important;
+}
+#previousVideo {
+  left: 20px !important;
+}
+#nextVideo {
+  /** This clusterf*** has to do with the scrollbar: https://stackoverflow.com/a/34884924 **/
+  right: calc(40vw + 25px - (100vw - 100%)) !important;
+}
+.videoName {
+  font-size: 0.85em !important;
+}
+#youtubeContainer {
+  border-radius: 5px;
+}
+td {
+  border-bottom: 1px dotted grey;
+}
+#dropShadow, #dropOverlay {
+  z-index: 4;
+}

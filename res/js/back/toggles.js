@@ -35,43 +35,15 @@ function toggleZen() {
   }
 }
 
-function toggleSideBySide() {
-  function changeSBS(which, add) {
-    let className = which.replace("#", "").replace(".", "");
-    if (add) {
-      $(which).addClass(className + "SBS");
-    }
-    else {
-      $(which).removeClass(className + "SBS");
-    }
-  }
-  let sbsElements = [
-    "#main",
-    "#playlistInterface",
-    "#youtubeContainer",
-    "#currentVideoTiming",
-    "#settings",
-    "#previousVideo",
-    "#nextVideo",
-    ".videoImageContainer",
-    ".videoNameContainer",
-    ".videoImage",
-    ".videoTime",
-    "footer"
-  ];
-  if (sideBySide) {
-    sideBySide = false;
-    sbsElements.forEach(function(element) {
-      changeSBS(element, false);
-    });
-    $("#sideBySideToggle").prop("checked", false);
+function toggleSBS() {
+  if ($("#sbs").length) {
+    $("#sbs").remove();
+    cookie.del("sbs");
+    setBackground();
   }
   else {
-    sideBySide = true;
-    sbsElements.forEach(function(element) {
-      changeSBS(element, true);
-    });
-    $("#sideBySideToggle").prop("checked", true);
+    $("head").append("<link id=\"sbs\" rel=\"stylesheet\" href=\"res/css/sbs.css\" type=\"text/css\" />");
+    cookie.set("sbs", "1");
   }
 }
 
@@ -131,4 +103,21 @@ function toggleAutoplayListOverride() {
     autoplayListOverride = true;
     $("#autoplayListOverrideToggle").prop("checked", true);
   }
+}
+
+function setBackground() {
+  let c = cookie.get("background");
+  let b;
+  if (!cookie.get("sbs")) {
+    if (c !== "") {
+      b = "url(\"" + c + "\") no-repeat center center fixed";
+    }
+    else {
+      b = "url(\"" + background + "\") no-repeat center center fixed";
+    }
+  }
+  else {
+    b = "none";
+  }
+  $("body, #blurBackground").css("background", b).css("background-size", "cover");
 }

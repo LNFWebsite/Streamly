@@ -53,7 +53,7 @@ header,
   padding: 5px 7px;
   background-color: #fff;
 }
-#settingsButton {
+.headerButton {
   margin-left: 15px;
   color: #fff;
 }
@@ -128,7 +128,7 @@ button,
   font-size: 1em;
 }
 #saveButton,
-#settingsButton,
+.headerButton,
 #stationIcon {
   cursor: pointer;
 }
@@ -139,7 +139,7 @@ button,
 #nextVideo:hover {
   background: lightgrey !important;
 }
-#settingsButton:hover,
+.headerButton:hover,
 #settings *:hover {
   color: lightgrey;
 }
@@ -522,7 +522,7 @@ td {
   cursor: pointer;
   padding: 2px;
 }
-.fa-cog {
+.headerButton {
   font-size: 2em;
 }
 .fa-reddit {
@@ -611,7 +611,7 @@ tr.placeholder:before {
   #inputBox, #saveButton {
     font-size: 0.8em;
   }
-  #settingsButton,
+  .headerButton,
   #stationIcon {
     font-size: 1.5em;
   }
@@ -625,7 +625,7 @@ tr.placeholder:before {
   #saveButton {
     margin-left: 15px !important;
   }
-  #settingsButton {
+  .headerButton {
     margin-left: 5px !important;
   }
   #forkme, #blurBackground {
@@ -708,60 +708,11 @@ tr.placeholder:before {
   #nextVideo:hover {
     background: initial !important;
   }
-  #settingsButton:hover,
+  .headerButton:hover,
   #settings *:hover {
     color: white !important;
   }
-}
-
-/*** Side by side classes ***/
-.mainSBS {
-  margin: 75px 50% 0px 0px !important;
-}
-.playlistInterfaceSBS {
-  position: fixed !important;
-  top: 75px !important;
-  width: calc(50% - 10px) !important;
-  height: calc(100% - 145px) !important;
-  margin-right: initial !important;
-  transform: initial !important;
-}
-.youtubeContainerSBS {
-  width: 100% !important;
-  height: 100% !important;
-}
-.currentVideoTimingSBS {
-  background-color: rgba(25,25,25,0.8);
-  border-radius: 5px;
-  padding: 2px;
-  width: calc(100% - 2px);
-}
-.settingsSBS {
-  position: fixed !important;
-  right: calc(25% - 80px) !important;
-  background-color: rgba(25,25,25,0.8);
-}
-.previousVideoSBS, .nextVideoSBS {
-  position: fixed !important;
-  width: 100px !important;
-  height: 25px !important;
-  top: auto !important;
-  bottom: 4px !important;
-  transform: none !important;
-  background-color: grey !important;
-}
-.previousVideoSBS {
-  left: 50% !important;
-}
-.nextVideoSBS {
-  right: 9px !important;
-}
-.videoImageContainerSBS {
-  width: 100% !important;
-}
-.videoNameContainerSBS, .videoImageSBS, .videoTimeSBS {
-  display: none !important;
-}
-.footerSBS {
-  position: initial !important;
+  #sbsButton {
+    display: none;
+  }
 }
