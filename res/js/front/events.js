@@ -112,7 +112,7 @@ window.addEventListener("keydown", function(e) {
         break;
       case "KeyV":
         e.preventDefault();
-        toggleSideBySide();
+        toggleSBS();
         break;
     }
   }
