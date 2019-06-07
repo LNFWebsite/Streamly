@@ -40,6 +40,7 @@ footer {
   position: fixed;
   left: calc(30vw - 90px) !important;
   background: white;
+  z-index: 3 !important;
 }
 .tableButtons {
   width: auto !important;
