@@ -55,7 +55,7 @@ footer {
   bottom: 10px !important;
   z-index: 3 !important;
   width: 20% !important;
-  height: 9.6% !important;
+  height: calc(20% - 70px) !important;
 }
 #previousVideo {
   left: 20px !important;
