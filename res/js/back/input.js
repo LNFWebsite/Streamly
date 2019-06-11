@@ -129,9 +129,11 @@ function input(type) {
         else if (url[0] === "playlist") {
           //turn on pause so that getVideoData doesn't try to play each video while loop-loading
           videoPaused = true;
+          if (playlistAutoplay) {
+            playlistFeatures.autoplay();
+          }
           autoplayList = url[1];
-          playlistAutoplay = true;
-          addAutoplayVideo(false, 'reset');
+          playlistFeatures.autoplay();
           $("#inputBox").val("").attr("placeholder", placeholder);
         }
         else if (url[0] === "image") {
