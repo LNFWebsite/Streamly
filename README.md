@@ -24,7 +24,7 @@ Features:
   
   <sub>Note: You may even use Streamly just stored on your computer, but likely YouTube will prevent many videos from playing. This is because those content creators have blocked their videos from being loaded on a non-website page. You may resolve this easily by placing Streamly on a file hosting service that allows you to access the file without downloading (ie. forking on GitHub), or your own web server.<sub>
 
-- Works on all modern browsers (Firefox, Chrome, more...) as well as browsers on Android phones/tablets. (Latest Firefox is recommended on PC, Chrome is recommended on Android, IE is not supported)
+- Works on all modern browsers (Firefox, Chrome, more...) as well as browsers on phones/tablets. (Latest Firefox is recommended on PC, IE is not supported)
 
 ### *[Subscribe to Streamly on Reddit for updates.](https://www.reddit.com/r/StreamlyReddit/)*
 
@@ -49,9 +49,9 @@ Or clone into your web server...
 
   This is important because it requires nothing special to operate Streamly. It is currently hosted on GitHub Pages, but may be cloned to any server and will still work the same. The safety of your playlist is achieved by knowing that you may easily run the script on your own without relying on me, GitHub, or anyone else.
   
-- Does Streamly work on Mac/iPhone?
+- Does Streamly work on Mac/iPhone/iPad?
 
-  Yes/Maybe. Streamly should work just fine on Mac; however, I'm not sure it will work on iOS devices. Back when Streamly started, iOS did not allow some functionalities of the YouTube iFrame API. I'm not sure whether they are compatible now as I don't have a newer iOS device to test on, so your mileage may vary. (If you have a newer iOS device, please let me know whether anything has changed)
+  Yes, Streamly should work just fine on Apple devices as well.
 
 Thanks for taking the time to read! I hope that you will find Streamly as useful as I have. Happy Streaming!
 
