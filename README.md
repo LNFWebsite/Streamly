@@ -2,7 +2,7 @@
 
 Open-source, web-based, YouTube video queues.
 
-Streamly on Desktop        | Streamly on Android
+Streamly on Desktop        | Streamly on Mobile
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/05302019/streamly.jpg) | ![](https://raw.githubusercontent.com/LNFWebsite/Streamly/master/examples/05302019/streamlymobile.jpg)
 **Side-by-side view**
