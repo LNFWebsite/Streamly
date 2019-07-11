@@ -38,6 +38,11 @@ footer {
   color: black !important;
 }
 **/
+#currentVideoTiming {
+  background: rgba(0,0,0,0.5) !important;
+  border-radius: 999px !important;
+  padding: 0px 5px !important;
+}
 #settings {
   position: fixed;
   left: calc(30vw - 90px) !important;
