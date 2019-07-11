@@ -46,7 +46,7 @@ footer {
 #settings {
   position: fixed;
   left: calc(30vw - 90px) !important;
-  background: black;
+  background: rgba(0,0,0,0.8) !important;
   z-index: 3 !important;
 }
 .tableButtons {
