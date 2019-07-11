@@ -1,8 +1,8 @@
 body {
-  background: none !important;
+  /**background: none !important;**/
   overflow-x: hidden;
 }
-#forkme, #blurBackground {
+#forkme/**, #blurBackground**/ {
   display: none !important;
 }
 footer {
@@ -33,21 +33,25 @@ footer {
   margin-right: none !important;
   transform: none !important;
 }
+/**
 #currentTime, #videoTime {
   color: black !important;
 }
+**/
 #settings {
   position: fixed;
   left: calc(30vw - 90px) !important;
-  background: white;
+  background: black;
   z-index: 3 !important;
 }
 .tableButtons {
   width: auto !important;
 }
+/**
 #main, #youtubeContainer, #previousVideo, #nextVideo, #settings {
   box-shadow: 0px 0px 15px 1px gray !important;
 }
+**/
 #previousVideo, #nextVideo {
   position: fixed !important;
   top: auto !important;
