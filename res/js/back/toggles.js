@@ -109,17 +109,17 @@ function setBackground(url = false) {
   let b;
   if (!url) {
     let c = cookie.get("background");
-    if (!cookie.get("sbs")) {
-      if (c !== "") {
-        b = "url(\"" + c + "\") no-repeat center center fixed";
-      }
-      else {
-        b = "url(\"" + background + "\") no-repeat center center fixed";
-      }
+    //if (!cookie.get("sbs")) { THIS USED TO SET SBS BACKGROUND TO NONE
+    if (c !== "") {
+      b = "url(\"" + c + "\") no-repeat center center fixed";
     }
     else {
-      b = "none";
+      b = "url(\"" + background + "\") no-repeat center center fixed";
     }
+    //}
+    //else {
+    //  b = "none";
+    //}
   }
   else {
     b = "url(\"" + url + "\") no-repeat center center fixed";
