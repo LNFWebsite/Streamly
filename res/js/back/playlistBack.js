@@ -68,9 +68,6 @@ function getPlaylist() {
 function appendPlaylist(playlist) {
   try {
     playlist = window.atob(playlist);
-    
-    playlist = $("<div#escape>").text(playlist).html();
-    
     playlist = JSON.parse(playlist);
 
     if (playlist[0] !== undefined && playlist[0] !== null) {
