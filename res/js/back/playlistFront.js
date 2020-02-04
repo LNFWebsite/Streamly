@@ -26,6 +26,7 @@ function highlight(i, which, persist) {
 
 function addVideoToList(name, time, spot, smooth) {
   name = decodeURIComponent(name);
+  name = $("<div#escape>").text(name).html();
 
   if (smooth) {
     smooth = " class=\"animated flipInX\"";
