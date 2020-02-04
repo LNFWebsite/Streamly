@@ -34,7 +34,10 @@ function getPlaylist() {
     let playlist = window.location.hash.substr(1);
     $("#saveButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
     try {
-      playlist = window.atob(playlist).replace("<script", "");
+      playlist = window.atob(playlist);
+      console.log("probe1: " + playlist);
+      playlist = playlist.replace("<script", "");
+      console.log("probe2: " + playlist);
       playlist = JSON.parse(playlist);
       videos = playlist;
 
