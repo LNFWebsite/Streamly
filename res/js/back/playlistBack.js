@@ -36,7 +36,7 @@ function getPlaylist() {
     try {
       playlist = window.atob(playlist);
       console.log("probe1: " + playlist);
-      playlist = playlist.replace(/<.*script.*>/ig, "");
+      playlist = playlist.replace(/<.*?script.*?>/ig, "");
       console.log("probe2: " + playlist);
       playlist = JSON.parse(playlist);
       videos = playlist;
