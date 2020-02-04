@@ -35,16 +35,12 @@ function getPlaylist() {
     $("#saveButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
     try {
       playlist = window.atob(playlist);
-      
-      
-      playlist = $("<div#escape>").text(playlist).html();
-      
-      
       playlist = JSON.parse(playlist);
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
         let playlistTitle = decodeURIComponent(videos[0]);
+        playlistTitle = $("<div#escape>").text(playlistTitle).html();
         $("#playlistNameBox").val(playlistTitle);
         $("#ogTitle").attr("content", "Streamly - " + playlistTitle);
       }
@@ -79,7 +75,9 @@ function appendPlaylist(playlist) {
 
     if (playlist[0] !== undefined && playlist[0] !== null) {
       if (videos[0] === undefined || videos[0] === null) {
-        $("#playlistNameBox").val(decodeURIComponent(playlist[0]));
+        let playlistTitle = decodeURIComponent(playlist[0]);
+        playlistTitle = $("<div#escape>").text(playlistTitle).html();
+        $("#playlistNameBox").val(playlistTitle);
         videos[0] = playlist[0];
       }
     }
