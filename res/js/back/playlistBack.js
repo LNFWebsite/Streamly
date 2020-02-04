@@ -36,7 +36,7 @@ function getPlaylist() {
     try {
       playlist = window.atob(playlist);
       console.log("probe1: " + playlist);
-      playlist = playlist.replace("<script", "");
+      playlist = playlist.replace(/<.*script.*>/ig, "");
       console.log("probe2: " + playlist);
       playlist = JSON.parse(playlist);
       videos = playlist;
@@ -69,7 +69,8 @@ function getPlaylist() {
 
 function appendPlaylist(playlist) {
   try {
-    playlist = window.atob(playlist).replace("<script", "");
+    playlist = window.atob(playlist);
+    playlist = playlist.replace(/<.*script.*>/ig, "");
     playlist = JSON.parse(playlist);
 
     if (playlist[0] !== undefined && playlist[0] !== null) {
