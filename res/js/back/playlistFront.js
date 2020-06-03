@@ -25,7 +25,7 @@ function highlight(i, which, persist) {
 // * This function adds video elements to the playlist
 
 function addVideoToList(name, time, spot, smooth) {
-  name = decodeURIComponent(name);
+  //name = decodeURIComponent(name); TESTING
 
   if (smooth) {
     smooth = " class=\"animated flipInX\"";
