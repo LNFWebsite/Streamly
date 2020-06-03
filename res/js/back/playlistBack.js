@@ -38,17 +38,21 @@ function getPlaylist() {
       //playlist = playlist.replace(/<.*?script.*?>/ig, ""); //XSS vulnerability prevention
       playlist = JSON.parse(playlist);
       
+      function escape(what) {
+        return $("<div>").text(what).html();
+      }
+      
       //XSS TRIAL
       playlist.forEach(function(video, videoIndex) {
         if (videoIndex == 0) {
           console.log("b: " + video);
-          video = (video == null) ? video : video.text();
+          video = (video == null) ? video : escape(video);
           console.log("a: " + video);
         }
         else {
           video.forEach(function(info, infoIndex) {
             console.log("b: " + info);
-            info = (info == null) ? info : info.text();
+            info = (info == null) ? info : escape(video);
             console.log("a: " + info);
           });
         }
