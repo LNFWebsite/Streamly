@@ -38,11 +38,12 @@ function getPlaylist() {
       //playlist = playlist.replace(/<.*?script.*?>/ig, ""); //XSS vulnerability prevention
       playlist = JSON.parse(playlist);
       
-      function escape(what) {
-        return $("<div>").text(what).html();
-      }
+      //function escape(what) {
+      //  return $("<div>").text(what).html();
+      //}
       
       //XSS TRIAL
+      /***
       playlist.forEach(function(video, videoIndex) {
         if (videoIndex == 0) {
           console.log("b: " + video);
@@ -57,6 +58,7 @@ function getPlaylist() {
           });
         }
       });
+      ***/
       
       videos = playlist;
 
