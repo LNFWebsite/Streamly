@@ -40,7 +40,8 @@ function getPlaylist() {
 
       if (videos[0] !== undefined && videos[0] !== null) {
         let playlistTitle = escape(videos[0]);
-        $("#playlistNameBox").val(playlistTitle);
+        //$("#playlistNameBox").val(playlistTitle); DEBUGGGGGGGGG
+        $("#playlistNameBox").value = playlistTitle;
         $("#ogTitle").attr("content", "Streamly - " + playlistTitle);
       }
 
