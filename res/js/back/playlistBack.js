@@ -42,13 +42,13 @@ function getPlaylist() {
       playlist.forEach(function(video, videoIndex) {
         if (videoIndex == 0) {
           console.log("b: " + video);
-          video = video.text();
+          video = (video == null) ? video : video.text();
           console.log("a: " + video);
         }
         else {
           value.forEach(function(info, infoIndex) {
             console.log("b: " + info);
-            info = info.text();
+            info = (info == null) ? info : info.text();
             console.log("a: " + info);
           });
         }
