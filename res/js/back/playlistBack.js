@@ -40,7 +40,7 @@ function getPlaylist() {
 
       if (videos[0] !== undefined && videos[0] !== null) {
         console.log("DEEBUGY: " + videos[0]);
-        let playlistTitle = escape(videos[0]);
+        let playlistTitle = decodeURIComponent(videos[0]);
         console.log("DEEBUGY: " + playlistTitle);
         $("#playlistNameBox").val(playlistTitle);
         $("#ogTitle").attr("content", "Streamly - " + playlistTitle);
