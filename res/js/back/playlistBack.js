@@ -39,7 +39,7 @@ function getPlaylist() {
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
-        console.log("DEEBUGY: " + playlistTitle);
+        console.log("DEEBUGY: " + videos[0]);
         let playlistTitle = escape(videos[0]);
         console.log("DEEBUGY: " + playlistTitle);
         $("#playlistNameBox").val(playlistTitle);
