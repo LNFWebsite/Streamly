@@ -221,6 +221,11 @@ function actionRemoveVideo(iteration) {
   }
 }
 
+// * This function escapes the html characters in a string in order to prevent XSS attacks
+function escape(what) {
+  return $("<div>").text(what).html();
+}
+
 // * Congrats! You've made it to the bottom of the code! While you're here I should mention that I'm an amateur
 // * web developer with literally zero formal education on the subject. If you see how something could be better,
 // * please change it! Fork and submit a pull request. This is your project as much as it is mine!
