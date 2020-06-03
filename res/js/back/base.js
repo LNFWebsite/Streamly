@@ -221,9 +221,9 @@ function actionRemoveVideo(iteration) {
   }
 }
 
-// * This function escapes the html characters in a string in order to prevent XSS attacks
+// * This function decodes URI encoded characters and escapes html characters in a string in order to prevent XSS attacks
 function escape(what) {
-  return $("<div>").text(what).html();
+  return $("<div>").text(decodeURIComponent(what)).html();
 }
 
 // * Congrats! You've made it to the bottom of the code! While you're here I should mention that I'm an amateur
