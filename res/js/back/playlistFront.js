@@ -189,7 +189,7 @@ let playlistFeatures = new PlaylistFeatures;
 function videoPreviews() {
   if (!isMobile) {
     function addData(which, iteration) {
-      $("#" + which + "Video .videoName").text(decodeURIComponent(videos[iteration][0]));
+      $("#" + which + "Video .videoName").text(escape(videos[iteration][0]));
       $("#" + which + "Video .videoTime").text(msConversion(videos[iteration][1] * 1000));
       $("#" + which + "Video .videoImage").attr("src", "https://i.ytimg.com/vi/" + videos[iteration][2] + "/default.jpg");
     }
