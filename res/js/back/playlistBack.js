@@ -39,9 +39,7 @@ function getPlaylist() {
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
-        console.log("DEEBUGY: " + videos[0]);
-        let playlistTitle = decodeURIComponent(videos[0]);
-        console.log("DEEBUGY: " + playlistTitle);
+        let playlistTitle = decodeURIComponent(videos[0]); //this is okay for XSS because its fed to an input element
         $("#playlistNameBox").val(playlistTitle);
         $("#ogTitle").attr("content", "Streamly - " + playlistTitle);
       }
