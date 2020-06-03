@@ -46,7 +46,7 @@ function getPlaylist() {
           console.log("a: " + video);
         }
         else {
-          value.forEach(function(info, infoIndex) {
+          video.forEach(function(info, infoIndex) {
             console.log("b: " + info);
             info = (info == null) ? info : info.text();
             console.log("a: " + info);
