@@ -25,7 +25,6 @@ function highlight(i, which, persist) {
 // * This function adds video elements to the playlist
 
 function addVideoToList(name, time, spot, smooth) {
-  //name = decodeURIComponent(name); TESTING
   name = escape(name);
 
   if (smooth) {
