@@ -14,6 +14,11 @@
   limitations under the License.
 **/
 
+// * This function decodes URI encoded characters and escapes html characters in a string in order to prevent XSS attacks
+function escape(what) {
+  return $("<div>").text(decodeURIComponent(what)).html();
+}
+
 // * This function is for iteration order changes such as playlistRepeat
 
 function changeIteration(which) {
@@ -40,7 +45,7 @@ function playVideo() {
     addAutoplayVideo();
   }
 
-  document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
+  document.title = "Streamly - " + escape(videos[videoIteration][0]);
 
   if (!stationRemote) {
     $("#youtube").css("display", "block");
@@ -75,7 +80,7 @@ function loopVideo() {
     actionTimers.clear();
     $("#youtube").css("display", "none");
     if (videos[0] !== undefined && videos[0] !== null) {
-      document.title = "Streamly - " + decodeURIComponent(videos[0]);
+      document.title = "Streamly - " + escape(videos[0]);
     }
     else {
       document.title = "Streamly";
@@ -91,14 +96,14 @@ let VideoFunctions = function() {
     setVideoTime();
     sendStation("videofunctionsplay");
     videoPaused = false;
-    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
+    document.title = "Streamly - " + escape(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
   }
   this.pause = function() {
     sendStation("videofunctionspause");
     videoPaused = true;
     if (videos[0] !== undefined && videos[0] !== null) {
-      document.title = "Streamly - " + decodeURIComponent(videos[0]);
+      document.title = "Streamly - " + escape(videos[0]);
     }
     $("#favicon").attr("href", faviconPause);
     actionTimers.pause();
@@ -219,11 +224,6 @@ function actionRemoveVideo(iteration) {
   if ((iteration - 1) === videoCounter) {
     addAutoplayVideo();
   }
-}
-
-// * This function decodes URI encoded characters and escapes html characters in a string in order to prevent XSS attacks
-function escape(what) {
-  return $("<div>").text(decodeURIComponent(what)).html();
 }
 
 // * Congrats! You've made it to the bottom of the code! While you're here I should mention that I'm an amateur
