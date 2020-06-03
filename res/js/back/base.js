@@ -45,7 +45,7 @@ function playVideo() {
     addAutoplayVideo();
   }
 
-  document.title = "Streamly - " + escape(videos[videoIteration][0]);
+  document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
 
   if (!stationRemote) {
     $("#youtube").css("display", "block");
@@ -80,7 +80,7 @@ function loopVideo() {
     actionTimers.clear();
     $("#youtube").css("display", "none");
     if (videos[0] !== undefined && videos[0] !== null) {
-      document.title = "Streamly - " + escape(videos[0]);
+      document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
     else {
       document.title = "Streamly";
@@ -96,14 +96,14 @@ let VideoFunctions = function() {
     setVideoTime();
     sendStation("videofunctionsplay");
     videoPaused = false;
-    document.title = "Streamly - " + escape(videos[videoIteration][0]);
+    document.title = "Streamly - " + decodeURIComponent(videos[videoIteration][0]);
     $("#favicon").attr("href", faviconPlay);
   }
   this.pause = function() {
     sendStation("videofunctionspause");
     videoPaused = true;
     if (videos[0] !== undefined && videos[0] !== null) {
-      document.title = "Streamly - " + escape(videos[0]);
+      document.title = "Streamly - " + decodeURIComponent(videos[0]);
     }
     $("#favicon").attr("href", faviconPause);
     actionTimers.pause();
