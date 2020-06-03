@@ -39,9 +39,10 @@ function getPlaylist() {
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
+        console.log("DEEBUGY: " + playlistTitle);
         let playlistTitle = escape(videos[0]);
-        //$("#playlistNameBox").val(playlistTitle); DEBUGGGGGGGGG
-        $("#playlistNameBox").value = playlistTitle;
+        console.log("DEEBUGY: " + playlistTitle);
+        $("#playlistNameBox").val(playlistTitle);
         $("#ogTitle").attr("content", "Streamly - " + playlistTitle);
       }
 
