@@ -35,8 +35,25 @@ function getPlaylist() {
     $("#saveButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
     try {
       playlist = window.atob(playlist);
-      playlist = playlist.replace(/<.*?script.*?>/ig, ""); //XSS vulnerability prevention
+      //playlist = playlist.replace(/<.*?script.*?>/ig, ""); //XSS vulnerability prevention
       playlist = JSON.parse(playlist);
+      
+      //XSS TRIAL
+      playlist.forEach(function(video, videoIndex) {
+        if (videoIndex == 0) {
+          console.log("b: " + video);
+          video = video.text();
+          console.log("a: " + video);
+        }
+        else {
+          value.forEach(function(info, infoIndex) {
+            console.log("b: " + info);
+            info = info.text();
+            console.log("a: " + info);
+          });
+        }
+      });
+      
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
