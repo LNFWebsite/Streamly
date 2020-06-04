@@ -35,12 +35,11 @@ function getPlaylist() {
     $("#saveButton").attr("data-clipboard-text", "https://lnfwebsite.github.io/Streamly/#" + playlist);
     try {
       playlist = window.atob(playlist);
-      playlist = playlist.replace(/<.*?script.*?>/ig, ""); //XSS vulnerability prevention
       playlist = JSON.parse(playlist);
       videos = playlist;
 
       if (videos[0] !== undefined && videos[0] !== null) {
-        let playlistTitle = decodeURIComponent(videos[0]);
+        let playlistTitle = decodeURIComponent(videos[0]); //this is okay for XSS because its fed to an input element
         $("#playlistNameBox").val(playlistTitle);
         $("#ogTitle").attr("content", "Streamly - " + playlistTitle);
       }
@@ -73,7 +72,7 @@ function appendPlaylist(playlist) {
 
     if (playlist[0] !== undefined && playlist[0] !== null) {
       if (videos[0] === undefined || videos[0] === null) {
-        $("#playlistNameBox").val(decodeURIComponent(playlist[0]));
+        $("#playlistNameBox").val(escape(playlist[0]));
         videos[0] = playlist[0];
       }
     }

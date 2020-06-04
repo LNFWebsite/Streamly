@@ -14,6 +14,11 @@
   limitations under the License.
 **/
 
+// * This function decodes URI encoded characters and escapes html characters in a string in order to prevent XSS attacks
+function escape(what) {
+  return $("<div>").text(decodeURIComponent(what)).html();
+}
+
 // * This function is for iteration order changes such as playlistRepeat
 
 function changeIteration(which) {
