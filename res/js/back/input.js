@@ -108,17 +108,17 @@ function input(type) {
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
           /***REVERT TO POPUP DUE TO YOUTUBE***/
           if (typeof popup !== "undefined") {
-            if (popupClose === true) {
+            //if (popupClose === true) {
               dropOverlay.close();
               popup.close();
-              if (hotkeyPopupClose) {
-                hotkeyPopupClose = false;
-                togglePopupClose();
-              }
-            }
-            else {
-              popup.focus();
-            }
+              //if (hotkeyPopupClose) {
+              //  hotkeyPopupClose = false;
+              //  togglePopupClose();
+              //}
+            //}
+            //else {
+            //  popup.focus();
+            //}
           }
           /******/
         }
