@@ -84,12 +84,10 @@ function toggleMenu(which) {
 
 let DropOverlay = function() {
   this.open = function() {
-    $("#settingsShadow").css("display", "block");
-    $("#dropOverlay").css("display", "block");
+    $("#dropShadow, #dropOverlay").css("display", "initial");
   }
   this.close = function() {
-    $("#settingsShadow").css("display", "none");
-    $("#dropOverlay").css("display", "none");
+    $("#dropShadow, #dropOverlay").css("display", "none");
   }
 }
 let dropOverlay = new DropOverlay();

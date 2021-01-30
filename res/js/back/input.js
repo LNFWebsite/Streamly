@@ -106,21 +106,21 @@ function input(type) {
           inputBox = url[1];
           getVideoData(inputBox);
           $("#inputBox").val("").attr("placeholder", loadingPlaceholder);
-          /***
+          /***REVERT TO POPUP DUE TO YOUTUBE***/
           if (typeof popup !== "undefined") {
-            if (popupClose === true) {
+            if (searchClose === true) {
               dropOverlay.close();
               popup.close();
-              if (hotkeyPopupClose) {
-                hotkeyPopupClose = false;
-                togglePopupClose();
+              if (hotkeySearchClose) {
+                hotkeySearchClose = false;
+                toggleSearchClose();
               }
             }
             else {
               popup.focus();
             }
           }
-          ***/
+          /******/
         }
         else if (url[0] === "streamly") {
           appendPlaylist(url[1]);
@@ -145,7 +145,7 @@ function input(type) {
         if (inputBox.slice(-2) === " l") {
           inputBox = inputBox + "yric";
         }
-        /***
+        /***REVERT TO POPUP***/
         popup = window.open("https://www.youtube.com/results?search_query=" + inputBox.replace(/ /g, "+"), "YouTube", "height=500,width=800");
         dropOverlay.open();
 
@@ -156,9 +156,9 @@ function input(type) {
             }
         }
         let checkIfClosedTimer = setInterval(checkIfClosed, 500);
-        ***/
-        inBoxSearch = true;
-        quickSearch(inputBox);
+        /******/
+        //REVERT TO POPUP inBoxSearch = true;
+        //REVERT TO POPUP quickSearch(inputBox);
         //$("#inputBox").val("").attr("placeholder", loadingPlaceholder).blur();
         $("#inputBox").blur().focus();
       }
