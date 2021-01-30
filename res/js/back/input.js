@@ -111,10 +111,10 @@ function input(type) {
             if (searchClose === true) {
               dropOverlay.close();
               popup.close();
-              //if (hotkeyPopupClose) {
-              //  hotkeyPopupClose = false;
-              //  togglePopupClose();
-              //}
+              if (hotkeySearchClose) {
+                hotkeySearchClose = false;
+                toggleSearchClose();
+              }
             }
             else {
               popup.focus();
